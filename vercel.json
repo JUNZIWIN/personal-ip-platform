@@ -1,1 +1,4 @@
-{"rewrites": [{"source": "/(.*)", "has": [{"type": "host", "value": "aiipower.me"}], "destination": "/bowen.html"}, {"source": "/(.*)", "has": [{"type": "host", "value": "www.aiipower.me"}], "destination": "/bowen.html"}, {"source": "/(.*)", "has": [{"type": "host", "value": "bowentian.aiipower.me"}], "destination": "/bowen.html"}, {"source": "/(.*)", "has": [{"type": "host", "value": "bowentian.com"}], "destination": "/bowen.html"}, {"source": "/(.*)", "has": [{"type": "host", "value": "www.bowentian.com"}], "destination": "/bowen.html"}, {"source": "/(.*)", "has": [{"type": "host", "value": "bizatom.ai"}], "destination": "/index.html"}]}
+{
+  "cleanUrls": false,
+  "trailingSlash": false
+}
