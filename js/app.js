@@ -117,7 +117,7 @@ function loadTemplate(professionId) {
   updateCourseSection(tpl);
 
   // 更新文档标题
-  document.title = `${tpl.hero.name} - ${tpl.name}个人IP | IP Studio`;
+  document.title = `${tpl.hero.name} - ${tpl.name}个人IP | AIP Studio`;
 }
 
 function updateHero(tpl) {

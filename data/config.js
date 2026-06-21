@@ -3,9 +3,9 @@
  * 知识产权归平台所有
  */
 const SITE_CONFIG = {
-  platformName: 'IP Studio',
+  platformName: 'AIP Studio',
   platformVersion: '1.0.0',
-  copyright: '© 2026 IP Studio SaaS Platform. All rights reserved.',
+  copyright: '© 2026 AIP Studio SaaS Platform. All rights reserved.',
 };
 
 const PROFESSION_TEMPLATES = {
