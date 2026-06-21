@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>品牌展示配置 - AIIPOWER Studio</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    body { background: #0a0a1a; color: #fff; font-family: 'Segoe UI', sans-serif; }
+
+    .config-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .config-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .config-header p {
+      opacity: 0.9;
+      font-size: 1rem;
+    }
+
+    .config-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .config-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .config-panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #667eea;
+      border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .color-picker-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .color-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+    }
+
+    .color-input-wrapper input[type="color"] {
+      width: 50px;
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .color-input-wrapper input[type="text"] {
+      flex: 1;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      color: #fff;
+      font-family: monospace;
+    }
+
+    .preview-panel {
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+    }
+
+    .preview-frame {
+      width: 100%;
+      height: 600px;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .preview-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .btn-action {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary-action {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }
+
+    .btn-primary-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary-action {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary-action:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .preset-card {
+      padding: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .preset-card:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    .preset-card.active {
+      border-color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .preset-color {
+      width: 100%;
+      height: 40px;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .preset-name {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .url-preview {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #667eea;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(46, 204, 113, 0.95);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+
+    .toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 968px) {
+      .config-container {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-panel {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="config-header">
+    <h1>🎨 品牌展示配置中心</h1>
+    <p>自定义您的品牌展示页面，实时预览效果，一键生成分享链接</p>
+  </div>
+
+  <div class="config-container">
+    <!-- 左侧：配置面板 -->
+    <div class="config-panel">
+      <h2>📝 基本信息</h2>
+
+      <div class="form-group">
+        <label>品牌名称（英文）</label>
+        <input type="text" id="cfg-brand-en" placeholder="Vanessa TIAN" value="Vanessa TIAN">
+      </div>
+
+      <div class="form-group">
+        <label>品牌名称（中文）</label>
+        <input type="text" id="cfg-brand-cn" placeholder="田卜文" value="田卜文">
+      </div>
+
+      <div class="form-group">
+        <label>个人标签 / 头衔</label>
+        <input type="text" id="cfg-title" placeholder="AI Investor & Entrepreneur" value="AI Investor & Entrepreneur">
+      </div>
+
+      <div class="form-group">
+        <label>品牌简介</label>
+        <textarea id="cfg-bio" placeholder="用一句话介绍您的品牌...">AI reshapes your brand. AIIPOWER®️ helps you build AI-empowered personal IP.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>子域名前缀</label>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="text" id="cfg-subdomain" placeholder="vanessa" value="vanessa" style="flex: 1;">
+          <span style="color: rgba(255, 255, 255, 0.6);">.aiipower.me</span>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 2rem;">🎨 视觉设计</h2>
+
+      <div class="color-picker-group">
+        <div class="form-group">
+          <label>主色调</label>
+          <div class="color-input-wrapper">
+            <input type="color" id="cfg-primary-color" value="#667eea">
+            <input type="text" id="cfg-primary-text" value="#667eea" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>背景色</label>
+          <div class="color-input-wrapper">
+            <input type="color" id="cfg-bg-color" value="#0a0a1a">
+            <input type="text" id="cfg-bg-text" value="#0a0a1a" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>文字颜色</label>
+          <div class="color-input-wrapper">
+            <input type="color" id="cfg-text-color" value="#ffffff">
+            <input type="text" id="cfg-text-text" value="#ffffff" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>强调色</label>
+          <div class="color-input-wrapper">
+            <input type="color" id="cfg-accent-color" value="#764ba2">
+            <input type="text" id="cfg-accent-text" value="#764ba2" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>预设配色方案</label>
+        <div class="preset-grid">
+          <div class="preset-card active" data-preset="default" onclick="applyPreset('default')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+            <div class="preset-name">经典紫蓝</div>
+          </div>
+          <div class="preset-card" data-preset="ocean" onclick="applyPreset('ocean')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);"></div>
+            <div class="preset-name">海洋蓝</div>
+          </div>
+          <div class="preset-card" data-preset="sunset" onclick="applyPreset('sunset')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);"></div>
+            <div class="preset-name">日落紫</div>
+          </div>
+          <div class="preset-card" data-preset="forest" onclick="applyPreset('forest')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #2ec4b6 0%, #20a39e 100%);"></div>
+            <div class="preset-name">森林绿</div>
+          </div>
+          <div class="preset-card" data-preset="golden" onclick="applyPreset('golden')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);"></div>
+            <div class="preset-name">金色暖阳</div>
+          </div>
+          <div class="preset-card" data-preset="dark" onclick="applyPreset('dark')">
+            <div class="preset-color" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);"></div>
+            <div class="preset-name">深邃黑</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>字体风格</label>
+        <select id="cfg-font">
+          <option value="modern">现代简约 (Segoe UI)</option>
+          <option value="classic">经典优雅 (Georgia)</option>
+          <option value="tech">科技感 (Consolas)</option>
+          <option value="friendly">亲和友好 (Comic Sans MS)</option>
+        </select>
+      </div>
+
+      <h2 style="margin-top: 2rem;">🔗 分享链接预览</h2>
+      <div class="url-preview" id="url-preview">
+        https://vanessa.aiipower.me
+      </div>
+    </div>
+
+    <!-- 右侧：实时预览 -->
+    <div class="config-panel preview-panel">
+      <h2>👁️ 实时预览</h2>
+      <div class="preview-frame">
+        <iframe id="preview-iframe" src="showcase.html"></iframe>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-action btn-primary-action" onclick="generateShowcase()">
+          <span>🚀</span>
+          <span>生成展示页面</span>
+        </button>
+        <button class="btn-action btn-secondary-action" onclick="copyShareLink()">
+          <span>📋</span>
+          <span>复制分享链接</span>
+        </button>
+        <button class="btn-action btn-secondary-action" onclick="openFullPreview()">
+          <span>🔍</span>
+          <span>全屏预览</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // 配色预设
+    const colorPresets = {
+      default: { primary: '#667eea', bg: '#0a0a1a', text: '#ffffff', accent: '#764ba2' },
+      ocean: { primary: '#00b4d8', bg: '#001845', text: '#ffffff', accent: '#0077b6' },
+      sunset: { primary: '#f72585', bg: '#1a1a2e', text: '#ffffff', accent: '#7209b7' },
+      forest: { primary: '#2ec4b6', bg: '#0a0a0a', text: '#ffffff', accent: '#20a39e' },
+      golden: { primary: '#f4a261', bg: '#1a0a0a', text: '#ffffff', accent: '#e76f51' },
+      dark: { primary: '#7c6df0', bg: '#0a0a0a', text: '#ffffff', accent: '#2ec4b6' }
+    };
+
+    // 初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      loadConfig();
+      bindEvents();
+      updatePreview();
+    });
+
+    // 绑定所有输入事件
+    function bindEvents() {
+      const inputs = document.querySelectorAll('.config-panel input, .config-panel textarea, .config-panel select');
+      inputs.forEach(input => {
+        input.addEventListener('input', () => {
+          updatePreview();
+          saveConfig();
+        });
+      });
+
+      // 颜色选择器同步
+      document.getElementById('cfg-primary-color').addEventListener('input', (e) => {
+        document.getElementById('cfg-primary-text').value = e.target.value;
+        updatePreview();
+      });
+      document.getElementById('cfg-bg-color').addEventListener('input', (e) => {
+        document.getElementById('cfg-bg-text').value = e.target.value;
+        updatePreview();
+      });
+      document.getElementById('cfg-text-color').addEventListener('input', (e) => {
+        document.getElementById('cfg-text-text').value = e.target.value;
+        updatePreview();
+      });
+      document.getElementById('cfg-accent-color').addEventListener('input', (e) => {
+        document.getElementById('cfg-accent-text').value = e.target.value;
+        updatePreview();
+      });
+    }
+
+    // 应用预设
+    function applyPreset(presetName) {
+      const preset = colorPresets[presetName];
+      if (!preset) return;
+
+      document.getElementById('cfg-primary-color').value = preset.primary;
+      document.getElementById('cfg-primary-text').value = preset.primary;
+      document.getElementById('cfg-bg-color').value = preset.bg;
+      document.getElementById('cfg-bg-text').value = preset.bg;
+      document.getElementById('cfg-text-color').value = preset.text;
+      document.getElementById('cfg-text-text').value = preset.text;
+      document.getElementById('cfg-accent-color').value = preset.accent;
+      document.getElementById('cfg-accent-text').value = preset.accent;
+
+      // 更新预设卡片状态
+      document.querySelectorAll('.preset-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.preset === presetName);
+      });
+
+      updatePreview();
+      saveConfig();
+    }
+
+    // 更新预览
+    function updatePreview() {
+      const config = getConfig();
+      
+      // 更新 URL 预览
+      document.getElementById('url-preview').textContent = 
+        `https://${config.subdomain}.aiipower.me`;
+
+      // 更新 iframe 预览
+      const iframe = document.getElementById('preview-iframe');
+      const previewDoc = iframe.contentDocument || iframe.contentWindow.document;
+      
+      if (previewDoc) {
+        // 构建带参数的预览 URL
+        const params = new URLSearchParams({
+          brandEn: config.brandEn,
+          brandCn: config.brandCn,
+          title: config.title,
+          bio: config.bio,
+          primary: config.primary,
+          bg: config.bg,
+          text: config.text,
+          accent: config.accent,
+          font: config.font
+        });
+
+        iframe.src = `showcase.html?${params.toString()}`;
+      }
+    }
+
+    // 获取当前配置
+    function getConfig() {
+      return {
+        brandEn: document.getElementById('cfg-brand-en').value,
+        brandCn: document.getElementById('cfg-brand-cn').value,
+        title: document.getElementById('cfg-title').value,
+        bio: document.getElementById('cfg-bio').value,
+        subdomain: document.getElementById('cfg-subdomain').value,
+        primary: document.getElementById('cfg-primary-color').value,
+        bg: document.getElementById('cfg-bg-color').value,
+        text: document.getElementById('cfg-text-color').value,
+        accent: document.getElementById('cfg-accent-color').value,
+        font: document.getElementById('cfg-font').value
+      };
+    }
+
+    // 保存配置到 localStorage
+    function saveConfig() {
+      const config = getConfig();
+      localStorage.setItem('showcase-config', JSON.stringify(config));
+    }
+
+    // 从 localStorage 加载配置
+    function loadConfig() {
+      const saved = localStorage.getItem('showcase-config');
+      if (!saved) return;
+
+      try {
+        const config = JSON.parse(saved);
+        document.getElementById('cfg-brand-en').value = config.brandEn || 'Vanessa TIAN';
+        document.getElementById('cfg-brand-cn').value = config.brandCn || '田卜文';
+        document.getElementById('cfg-title').value = config.title || 'AI Investor & Entrepreneur';
+        document.getElementById('cfg-bio').value = config.bio || '';
+        document.getElementById('cfg-subdomain').value = config.subdomain || 'vanessa';
+        document.getElementById('cfg-primary-color').value = config.primary || '#667eea';
+        document.getElementById('cfg-primary-text').value = config.primary || '#667eea';
+        document.getElementById('cfg-bg-color').value = config.bg || '#0a0a1a';
+        document.getElementById('cfg-bg-text').value = config.bg || '#0a0a1a';
+        document.getElementById('cfg-text-color').value = config.text || '#ffffff';
+        document.getElementById('cfg-text-text').value = config.text || '#ffffff';
+        document.getElementById('cfg-accent-color').value = config.accent || '#764ba2';
+        document.getElementById('cfg-accent-text').value = config.accent || '#764ba2';
+        document.getElementById('cfg-font').value = config.font || 'modern';
+      } catch (e) {
+        console.error('Failed to load config:', e);
+      }
+    }
+
+    // 生成展示页面
+    function generateShowcase() {
+      const config = getConfig();
+      
+      // 保存到 localStorage（供 showcase.html 读取）
+      localStorage.setItem('showcase-config', JSON.stringify(config));
+      
+      // 构建分享 URL（使用 hash 方式传递配置）
+      const configStr = btoa(encodeURIComponent(JSON.stringify(config)));
+      const shareUrl = `${window.location.origin}/personal-ip-platform/showcase.html#${configStr}`;
+      
+      showToast('✅ 展示页面已生成！点击下方按钮复制分享链接');
+      
+      // 自动打开预览
+      window.open(`showcase.html#${configStr}`, '_blank');
+    }
+
+    // 复制分享链接
+    function copyShareLink() {
+      const config = getConfig();
+      const configStr = btoa(encodeURIComponent(JSON.stringify(config)));
+      const shareUrl = `${window.location.origin}/personal-ip-platform/showcase.html#${configStr}`;
+      
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast('📋 分享链接已复制到剪贴板！');
+      }).catch(() => {
+        // 降级方案
+        const textarea = document.createElement('textarea');
+        textarea.value = shareUrl;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('📋 分享链接已复制！');
+      });
+    }
+
+    // 全屏预览
+    function openFullPreview() {
+      const config = getConfig();
+      const configStr = btoa(encodeURIComponent(JSON.stringify(config)));
+      window.open(`showcase.html#${configStr}`, '_blank', 'width=1200,height=800');
+    }
+
+    // Toast 提示
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 3000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP Studio · BIZATOM.AI · AIRankRocket | AIIPOWER LIMITED 企业服务</title>
+<meta name="description" content="AIIPOWER LIMITED 旗下产品：IP Studio (个人IP SaaS平台 · aiipower.me)、BIZATOM.AI (AI商业管理知识平台)、AIRankRocket (AI驱动GEO工具)。To B 企业服务：AI打造企业品牌 + AI企业培训 (aiipower.ai)。AIIPOWER®️ = 人工智能重塑、赋能个人与企业品牌。">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/content.css">
+<link rel="stylesheet" href="css/ai-social.css">
+<link rel="stylesheet" href="css/social-footer.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ===== 导航栏 ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+      <a href="#" class="nav-logo">IP<span>Studio</span></a>
+      <div class="nav-links">
+        <a href="#home" class="nav-link active">首页</a>
+        <a href="#about" class="nav-link">关于</a>
+        <a href="#videos" class="nav-link">视频</a>
+        <a href="#ai" class="nav-link">AI数字人</a>
+        <a href="#products" class="nav-link">作品/产品</a>
+        <a href="#bizatom" class="nav-link">BIZATOM.AI</a>
+        <a href="#airankrocket" class="nav-link">AIRankRocket</a>
+        <a href="#social" class="nav-link">社交媒体</a>
+    </div>
+    <select class="profession-switch" id="professionSwitch">
+      <option value="investor">📈 投资人</option>
+      <option value="painter">🎨 画家</option>
+      <option value="calligrapher">✒️ 书法家</option>
+      <option value="doctor">🏥 医生</option>
+      <option value="lawyer">⚖️ 律师</option>
+      <option value="founder">🚀 创始人</option>
+      <option value="freelancer">💼 自由职业者</option>
+    </select>
+    <button class="mobile-toggle" id="mobileToggle">☰</button>
+  </div>
+</nav>
+
+<!-- 移动端菜单 -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">首页</a>
+  <a href="#about">关于</a>
+  <a href="#videos">视频</a>
+  <a href="#ai">AI数字人</a>
+  <a href="#products">作品/产品</a>
+  <a href="#social">社交媒体</a>
+</div>
+
+<!-- ===== Hero区域 ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <canvas class="hero-particles" id="particlesCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-text fade-in">
+      <div class="profession-badge" id="heroBadge">📈 投资人</div>
+      <h1 id="heroName">张明远</h1>
+      <p class="hero-title" id="heroTitle">独立投资人 / 财经博主</p>
+      <p class="hero-subtitle" id="heroSubtitle">专注科技赛道 · 10年投资经验 · 年化回报35%+</p>
+      <p class="hero-bio" id="heroBio">前高盛分析师，现为独立投资人。专注于AI、新能源、生物科技等前沿领域的早期投资与研究。</p>
+      <div class="hero-cta">
+        <a href="#ai" class="btn-primary">🤖 体验AI数字人</a>
+        <a href="#videos" class="btn-outline">🎬 观看视频</a>
+        <a href="#products" class="btn-outline">💎 查看产品</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">10+</div><div class="label">年经验</div></div>
+        <div class="hero-stat"><div class="num">200+</div><div class="label">期视频</div></div>
+        <div class="hero-stat"><div class="num">50万+</div><div class="label">粉丝</div></div>
+        <div class="hero-stat"><div class="num">35%</div><div class="label">年化回报</div></div>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar-inner" id="heroAvatar">📈</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 关于我 ===== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">About</p>
+      <h2 class="section-title">关于我</h2>
+      <p class="section-desc">专业背景、经历与核心能力</p>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-image" id="aboutIcon" style="display:flex;align-items:center;justify-content:center;font-size:6rem;background:var(--bg-card);">📈</div>
+      <div class="about-content">
+        <h3 id="aboutName">张明远</h3>
+        <p id="aboutBio">前高盛分析师，现为独立投资人。专注于AI、新能源、生物科技等前沿领域的早期投资与研究。通过深度行业分析，为投资者提供独到的市场洞察。</p>
+        <p>拥有CFA、FRM双证，曾主导超过$500M的科技投资组合。目前在各大平台分享投资心得，致力于让更多人掌握科学的投资方法。</p>
+        <div class="skills" id="aboutSkills">
+          <span class="skill-tag">投资分析</span>
+          <span class="skill-tag">行业研究</span>
+          <span class="skill-tag">资产配置</span>
+          <span class="skill-tag">风险控制</span>
+          <span class="skill-tag">量化分析</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 作品集/画廊 ===== -->
+<section class="section" id="gallery" style="background:var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">作品展示</h2>
+      <p class="section-desc">精选作品与创作成果</p>
+    </div>
+    <div class="gallery-grid fade-in" id="galleryContainer"></div>
+  </div>
+</section>
+
+<!-- ===== 短视频 ===== -->
+<section class="section" id="videos">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Videos</p>
+      <h2 class="section-title">系列短视频</h2>
+      <p class="section-desc">深度内容，持续输出价值</p>
+    </div>
+    <div class="video-grid fade-in" id="videoContainer"></div>
+  </div>
+</section>
+
+<!-- ===== AI数字人 ===== -->
+<section class="section ai-section" id="ai">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">AI Digital Human</p>
+      <h2 class="section-title">AI数字人 🤖</h2>
+      <p class="section-desc">刻录您的形象和声音，用AI生成系列短视频讲解内容</p>
+    </div>
+    <div class="ai-demo-wrap fade-in">
+      <div class="ai-screen">
+        <div class="ai-avatar-placeholder" id="aiAvatarIcon">🤖</div>
+        <div class="ai-status">AI数字人在线</div>
+      </div>
+      <div>
+        <p style="font-size:1rem;margin-bottom:24px;color:var(--text-secondary);" id="aiDemoTitle">
+          用我的AI数字人讲解：如何分析投资热点
+        </p>
+        <div class="ai-topics" id="aiTopics"></div>
+      </div>
+    </div>
+    <div class="ai-features fade-in">
+      <div class="ai-feature">
+        <div class="ai-feature-icon">🎙️</div>
+        <h4>声音克隆</h4>
+        <p>上传5分钟语音样本，AI精准克隆您的声音特征，还原度高</p>
+      </div>
+      <div class="ai-feature">
+        <div class="ai-feature-icon">📸</div>
+        <h4>形象生成</h4>
+        <p>上传照片或短视频，生成您的专属数字人形象，表情自然流畅</p>
+      </div>
+      <div class="ai-feature">
+        <div class="ai-feature-icon">🎬</div>
+        <h4>视频生成</h4>
+        <p>输入文案即可自动生成讲解视频，一键分发至各大短视频平台</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 产品/作品销售 ===== -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Products</p>
+      <h2 class="section-title">产品与作品</h2>
+      <p class="section-desc">精选产品，明码标价，直接购买，款项直达创作者账户</p>
+    </div>
+    <div class="product-grid fade-in" id="productContainer"></div>
+  </div>
+</section>
+
+<!-- ===== 线上课程 ===== -->
+<section class="section" id="courses" style="background:var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Courses</p>
+      <h2 class="section-title">线上虚拟课程</h2>
+      <p class="section-desc">系统化知识体系，随时随地学习</p>
+    </div>
+    <div class="course-grid fade-in" id="courseContainer"></div>
+  </div>
+</section>
+
+<!-- ===== 社交媒体 ===== -->
+<section class="section social-section" id="social">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Connect</p>
+      <h2 class="section-title">社交媒体链接</h2>
+      <p class="section-desc">一键连接国内外主流平台，拓展你的影响力</p>
+    </div>
+    <div class="social-groups fade-in">
+      <div class="social-group">
+        <h4>🇨🇳 国内平台</h4>
+        <div class="social-links" id="domesticSocial"></div>
+      </div>
+      <div class="social-group">
+        <h4>🌍 国际平台</h4>
+        <div class="social-links" id="internationalSocial"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BIZATOM.AI ===== -->
+<section class="section" id="bizatom" style="background:var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">BIZATOM.AI</p>
+      <h2 class="section-title">BIZATOM.AI · AI商业管理知识平台</h2>
+      <p class="section-desc">AIIPOWER LIMITED 旗下产品 · 针对商业精英的AI驱动学习平台 · bizatom.ai</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;max-width:900px;margin:0 auto;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;">
+        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🎯 目标用户</h3>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+          国际知名商学院学生 · 商业精英 · 自由职业者 · 企业高管/创始人
+        </p>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;">
+        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🤖 AI OS架构</h3>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+          AI驱动的商业管理知识学习平台，提供个性化商业知识学习与企业管理赋能。AI OS架构，智能适配每位用户的学习需求。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AIRankRocket ===== -->
+<section class="section" id="airankrocket" style="background:var(--bg-card);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">🚀 AIRankRocket</p>
+      <h2 class="section-title">AIRankRocket · AI驱动GEO工具</h2>
+      <p class="section-desc">AIIPOWER LIMITED 旗下产品 · 让AI搜索引擎读懂你的品牌 · airankrocket.ai</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;max-width:900px;margin:0 auto;">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:32px;">
+        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🎯 GEO 生成引擎优化</h3>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+          针对ChatGPT、Perplexity、Google AI Overview等AI搜索引擎的品牌内容优化。自动生成结构化数据，提升品牌在AI回答中的权威排名。
+        </p>
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:32px;">
+        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🤖 AI驱动全自动</h3>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+          AIRankRocket 主要面向企业及一人公司（OPC），自动抓取品牌内容、生成Schema.org结构化数据、监控AI搜索排名、提供持续优化建议。让AI成为你的品牌代言人。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>AIIPOWER<span>®️</span></h3>
+        <p>AIIPOWER LIMITED 旗下产品：IP Studio (个人IP SaaS平台 · aiipower.me)、BIZATOM.AI (AI商业管理知识平台 · bizatom.ai)、AIRankRocket (AI驱动GEO工具 · airankrocket.ai)。To B：AI打造企业品牌 + AI企业培训 (aiipower.ai)。<br>AIIPOWER®️ = 人工智能重塑、赋能个人与企业品牌。</p>
+      </div>
+      <div class="footer-col">
+        <h4>功能</h4>
+        <a href="#ai">AI数字人</a>
+        <a href="#videos">短视频</a>
+        <a href="#products">产品销售</a>
+        <a href="#courses">在线课程</a>
+      </div>
+      <div class="footer-col">
+        <h4>模板</h4>
+        <a href="#" onclick="switchProfession('investor')">投资人模板</a>
+        <a href="#" onclick="switchProfession('painter')">画家模板</a>
+        <a href="#" onclick="switchProfession('doctor')">医生模板</a>
+        <a href="#" onclick="switchProfession('lawyer')">律师模板</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于</h4>
+        <a href="#about">关于我们</a>
+        <a href="#">隐私政策</a>
+        <a href="#">服务条款</a>
+        <a href="#">联系我们</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIIPOWER LIMITED. All rights reserved. IP Studio、BIZATOM.AI、AIRankRocket 为旗下产品。</p>
+      <p style="color:var(--text-muted);font-size:0.8rem;">aiipower.me (IP Studio) · aiipower.ai (企业服务) · bizatom.ai · airankrocket.ai · aiipower.com / aiipower.cn (国内市场筹备中)</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== 弹窗 ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3></h3>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== Scripts ===== -->
+<script src="data/config.js"></script>
+<script src="js/app.js"></script>
+<script src="js/utils.js"></script>
+<script>
+// 初始化社交媒体链接
+function initSocialLinks() {
+  document.getElementById('domesticSocial').innerHTML = SOCIAL_PLATFORMS.domestic.map(p =>
+    '<a href="' + p.url + '" class="social-link" target="_blank">' +
+    '<span class="s-icon">' + p.icon + '</span>' +
+    '<span class="s-name">' + p.name + '</span></a>'
+  ).join('');
+  document.getElementById('internationalSocial').innerHTML = SOCIAL_PLATFORMS.international.map(p =>
+    '<a href="' + p.url + '" class="social-link" target="_blank">' +
+    '<span class="s-icon">' + p.icon + '</span>' +
+    '<span class="s-name">' + p.name + '</span></a>'
+  ).join('');
+}
+
+function switchProfession(id) {
+  document.getElementById('professionSwitch').value = id;
+  document.getElementById('professionSwitch').dispatchEvent(new Event('change'));
+}
+
+document.addEventListener('DOMContentLoaded', initSocialLinks);
+</script>
+
+</body>
+</html>

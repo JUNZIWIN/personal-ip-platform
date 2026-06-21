@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>展示页面 - AIIPOWER Studio</title>
+  <style>
+    /* 动态样式 - 会通过 JS 注入 */
+    :root {
+      --primary: #667eea;
+      --bg: #0a0a1a;
+      --text: #ffffff;
+      --accent: #764ba2;
+      --font: 'Segoe UI', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 粒子背景 */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .showcase-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Hero 区域 */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-logo {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-logo span {
+      color: var(--primary);
+      -webkit-text-fill-color: var(--primary);
+    }
+
+    .hero-title {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-bio {
+      font-size: 1.1rem;
+      max-width: 600px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+
+    .btn-hero {
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary-hero {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+    }
+
+    .btn-primary-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary-hero {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary-hero:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* 内容区块 */
+    .content-section {
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .card-desc {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    /* 页脚 */
+    .showcase-footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .showcase-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* 动画 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 加载提示 */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .hero-logo { font-size: 2.5rem; }
+      .hero-title { font-size: 1.2rem; }
+      .hero-cta { flex-direction: column; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 加载遮罩 -->
+  <div class="loading-overlay" id="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- 粒子背景 -->
+  <canvas id="particles"></canvas>
+
+  <div class="showcase-container">
+    <!-- Hero 区域 -->
+    <section class="hero-section">
+      <h1 class="hero-logo" id="hero-logo">AIIPOWER<span>®️</span></h1>
+      <p class="hero-title" id="hero-title">AI Investor & Entrepreneur</p>
+      <p class="hero-bio" id="hero-bio">Loading...</p>
+      <div class="hero-cta">
+        <a href="#about" class="btn-hero btn-primary-hero">了解更多</a>
+        <a href="#contact" class="btn-hero btn-secondary-hero">联系我</a>
+      </div>
+    </section>
+
+    <!-- About 区域 -->
+    <section class="content-section" id="about">
+      <h2 class="section-title">关于我</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <h3 class="card-title">创新者</h3>
+          <p class="card-desc">致力于用 AI 技术重塑个人品牌，帮助每一个创作者实现影响力的指数级增长。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3 class="card-title">思想家</h3>
+          <p class="card-desc">深度思考 AI 与 IP 的结合，探索人工智能时代的个人品牌新范式。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <h3 class="card-title">全球视野</h3>
+          <p class="card-desc">立足中国，面向世界，用科技连接全球创作者与机会。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="showcase-footer">
+      <p>Powered by <a href="https://aiipower.me" target="_blank">AIIPOWER Studio</a></p>
+      <p style="margin-top: 0.5rem; font-size: 0.9rem;">© 2026. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    // 默认配置
+    const defaultConfig = {
+      brandEn: 'AIIPOWER',
+      brandCn: '爱博闻',
+      title: 'AI Investor & Entrepreneur',
+      bio: 'AI reshapes your brand. Building the future of personal IP with artificial intelligence.',
+      primary: '#667eea',
+      bg: '#0a0a1a',
+      text: '#ffffff',
+      accent: '#764ba2',
+      font: 'modern'
+    };
+
+    // 字体映射
+    const fontMap = {
+      modern: "'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+      classic: "Georgia, 'Times New Roman', serif",
+      tech: "'Consolas', 'Monaco', 'Courier New', monospace",
+      friendly: "'Comic Sans MS', 'Segoe UI', cursive"
+    };
+
+    // 读取配置
+    function loadConfig() {
+      let config = { ...defaultConfig };
+
+      // 1. 尝试从 URL hash 读取（分享链接）
+      if (window.location.hash) {
+        try {
+          const decoded = decodeURIComponent(atob(window.location.hash.slice(1)));
+          const hashConfig = JSON.parse(decoded);
+          config = { ...config, ...hashConfig };
+        } catch (e) {
+          console.warn('Failed to parse hash config:', e);
+        }
+      }
+
+      // 2. 尝试从 URL 参数读取
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('brandEn')) {
+        config.brandEn = params.get('brandEn');
+        config.brandCn = params.get('brandCn') || config.brandCn;
+        config.title = params.get('title') || config.title;
+        config.bio = params.get('bio') || config.bio;
+        config.primary = params.get('primary') || config.primary;
+        config.bg = params.get('bg') || config.bg;
+        config.text = params.get('text') || config.text;
+        config.accent = params.get('accent') || config.accent;
+        config.font = params.get('font') || config.font;
+      }
+
+      // 3. 尝试从 localStorage 读取
+      if (!window.location.hash && !window.location.search) {
+        const saved = localStorage.getItem('showcase-config');
+        if (saved) {
+          try {
+            const localConfig = JSON.parse(saved);
+            config = { ...config, ...localConfig };
+          } catch (e) {
+            console.warn('Failed to parse localStorage config:', e);
+          }
+        }
+      }
+
+      return config;
+    }
+
+    // 应用配置
+    function applyConfig(config) {
+      // 更新 CSS 变量
+      document.documentElement.style.setProperty('--primary', config.primary);
+      document.documentElement.style.setProperty('--bg', config.bg);
+      document.documentElement.style.setProperty('--text', config.text);
+      document.documentElement.style.setProperty('--accent', config.accent);
+      document.documentElement.style.setProperty('--font', fontMap[config.font] || fontMap.modern);
+
+      // 更新页面内容
+      document.getElementById('hero-logo').innerHTML = config.brandEn + '<span>®️</span>';
+      document.getElementById('hero-title').textContent = config.title;
+      document.getElementById('hero-bio').textContent = config.bio;
+
+      // 更新页面标题
+      document.title = `${config.brandEn} - Personal IP Showcase`;
+
+      // 更新加载遮罩背景色
+      document.getElementById('loading').style.background = config.bg;
+    }
+
+    // 粒子动画
+    function initParticles() {
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let animationId;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function createParticle() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.5 + 0.2
+        };
+      }
+
+      function init() {
+        resize();
+        particles = Array.from({ length: 50 }, createParticle);
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+
+          if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(102, 126, 234, ${p.opacity})`;
+          ctx.fill();
+        });
+
+        animationId = requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', resize);
+      init();
+      animate();
+    }
+
+    // 初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      const config = loadConfig();
+      applyConfig(config);
+      initParticles();
+
+      // 隐藏加载遮罩
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanessa TIAN (田卜文) · AIIPOWER LIMITED 创始人 | AIIPOWER®️</title>
+
+<!-- GEO / SEO Meta -->
+<meta name="description" content="Vanessa TIAN (田卜文, TIAN,Bowen)，AIIPOWER LIMITED 创始人。AIIPOWER®️ —— AI重塑、赋能个人与企业品牌。旗下产品：IP Studio (aiipower.me)、BIZATOM.AI、AIRankRocket。To B：AI品牌打造+企培 (aiipower.ai)。">
+<meta name="keywords" content="Vanessa TIAN, 田卜文, TIAN,Bowen, AIIPOWER, AI+IP+POWER, 个人IP, IP Studio, BIZATOM.AI, AIRankRocket, GEO, AI企业培训, aiipower.me">
+<meta name="author" content="Vanessa TIAN (田卜文)">
+<meta property="og:title" content="Vanessa TIAN (田卜文) · AIIPOWER LIMITED 创始人">
+<meta property="og:description" content="AIIPOWER LIMITED 创始人 Vanessa TIAN。AIIPOWER®️ = AI重塑、赋能个人与企业品牌。">
+<meta property="og:type" content="profile">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vanessa TIAN",
+  "alternateName": ["田卜文", "TIAN,Bowen"],
+  "description": "AIIPOWER LIMITED 创始人。AIIPOWER®️ = AI重塑、赋能个人与企业品牌。旗下产品：IP Studio (aiipower.me)、BIZATOM.AI、AIRankRocket。To B：AI品牌打造 + AI企业培训 (aiipower.ai)。",
+  "jobTitle": "Founder & CEO / AIIPOWER LIMITED",
+  "brand": {
+    "@type": "Brand",
+    "name": "AIIPOWER®️",
+    "foundingDate": "2018",
+    "slogan": "AI reshapes / empowers your brand"
+  },
+  "knowsAbout": ["AI数字人", "个人IP", "企业品牌赋能", "GEO", "IP Studio"],
+  "sameAs": []
+}
+</script>
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/content.css">
+<link rel="stylesheet" href="css/ai-social.css">
+<link rel="stylesheet" href="css/social-footer.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/i18n.css">
+
+<style>
+/* 田卜文专属主题 — 深邃蓝紫 + 金 */
+:root {
+  --accent: #7c6df0;
+  --accent-hover: #8f80f5;
+  --accent-glow: rgba(124, 109, 240, 0.35);
+  --green: #2ecc71;
+  --green-glow: rgba(46, 204, 113, 0.35);
+}
+
+/* ===== 导航栏 Logo 横向修复 ===== */
+.nav-logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.nav-logo span {
+  color: var(--accent);
+}
+
+/* 展示配置导航链接样式 */
+.showcase-nav-link {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s;
+  animation: pulse-glow 2s infinite;
+}
+
+.showcase-nav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  color: #fff !important;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(102, 126, 234, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.6); }
+}
+
+/* ===== Hero 区优化 ===== */
+.hero-title-strong {
+  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.hero-subtle {
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.hero-bio-compact {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 20px;
+}
+.hero-stats-compact {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+}
+.hero-stat-compact {
+  text-align: center;
+}
+.hero-stat-compact .num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.hero-stat-compact .label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ===== About 区：简介 + 时间线合并 ===== */
+.about-new {
+  padding: 100px 0;
+  background: var(--bg-primary);
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+.about-photo-wrap {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+}
+.about-photo-wrap .pending-badge {
+  font-size: 0.7rem;
+  background: rgba(241,196,15,0.15);
+  color: #f1c40f;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+.about-text h2 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+.about-text .en-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.about-text p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.about-text .brand-slogan {
+  color: var(--accent);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.skills-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.skills-compact .skill-tag {
+  font-size: 0.78rem;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(124,109,240,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(124,109,240,0.2);
+}
+
+/* 时间线 */
+.brand-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.brand-timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.timeline-item {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 36px;
+  padding-left: 52px;
+  position: relative;
+}
+.timeline-dot {
+  position: absolute;
+  left: 10px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.timeline-year {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  margin-top: 4px;
+  min-width: 36px;
+}
+.timeline-body h4 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+.timeline-body p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ===== Products 区：To C + To B 合并 ===== */
+.products-new {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+}
+.products-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 48px;
+}
+.products-col h3 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-card-compact {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+.product-card-compact:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.product-card-compact h4 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.product-card-compact .domain-tag {
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.product-card-compact p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.product-card-compact .p-link {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+/* ===== Domain & IP 合并区 ===== */
+.domain-ip-section {
+  padding: 100px 0;
+  background: var(--bg-primary);
+}
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.domain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  transition: var(--transition);
+}
+.domain-card:hover { border-color: var(--accent); }
+.domain-card .d-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.domain-card .d-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.domain-card.pending {
+  border-style: dashed;
+  opacity: 0.55;
+}
+
+/* IP 卡片 */
+.ip-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 48px;
+}
+.ip-card-compact {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 22px;
+  transition: var(--transition);
+}
+.ip-card-compact:hover { border-color: var(--accent); }
+.ip-card-compact .ip-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(124,109,240,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+.ip-card-compact h4 { font-size: 0.92rem; margin-bottom: 4px; }
+.ip-card-compact .ip-type {
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ip-card-compact p {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 域名替换流程 */
+.domain-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 0;
+  margin: 32px 0;
+}
+.flow-step {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.flow-step.highlight { border-color: var(--accent); }
+.flow-step.success { border-color: var(--green); }
+.flow-arrow {
+  font-size: 1.3rem;
+  color: var(--accent);
+  padding: 0 10px;
+}
+
+/* 注册平台表格 */
+.registrar-table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+.registrar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.registrar-table th {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 0.78rem;
+}
+.registrar-table th:first-child { border-radius: 10px 0 0 0; }
+.registrar-table th:last-child { border-radius: 0 10px 0 0; }
+.registrar-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+.registrar-table tr:last-child td { border-bottom: none; }
+
+/* ===== Contact 合并区 ===== */
+.contact-new {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 48px;
+}
+.social-col h3, .assets-col h3 {
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+.social-links-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.social-link-compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+.social-link-compact:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.social-link-compact .s-icon { font-size: 1.2rem; }
+.social-link-compact .s-name { font-size: 0.9rem; font-weight: 500; }
+
+/* 素材清单精简 */
+.asset-checklist {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+}
+.asset-checklist h4 {
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+.check-item-compact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.check-item-compact:last-child { border-bottom: none; }
+.check-box-compact {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--border-light);
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  transition: var(--transition);
+  background: transparent;
+}
+.check-box-compact.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.check-text-compact { flex: 1; }
+.check-text-compact strong { font-size: 0.88rem; display: block; margin-bottom: 2px; }
+.check-text-compact span { font-size: 0.8rem; color: var(--text-muted); }
+.check-badge-compact {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.check-badge-compact.req { background: rgba(231,76,60,0.12); color: #e74c3c; }
+.check-badge-compact.opt { background: rgba(52,152,219,0.12); color: #3498db; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  .about-top { grid-template-columns: 1fr; }
+  .about-photo-wrap { max-width: 240px; }
+  .products-split { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .domain-flow { grid-template-columns: 1fr; gap: 12px; }
+  .flow-arrow { display: none; }
+}
+@media (max-width: 600px) {
+  .hero-stats-compact { flex-wrap: wrap; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 导航栏（修复：Logo横向） ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">AI<span>IPOWER</span></a>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active" data-i18n="nav.home">主页</a>
+      <a href="#about" class="nav-link" data-i18n="nav.about">关于</a>
+      <a href="#products" class="nav-link" data-i18n="nav.products">产品服务</a>
+      <a href="#ai" class="nav-link" data-i18n="nav.ai">AI数字人</a>
+      <a href="#domain-ip" class="nav-link" data-i18n="nav.domain">域名与IP</a>
+      <a href="showcase-config.html" class="nav-link showcase-nav-link">🎨 展示配置</a>
+      <a href="#videos" class="nav-link">系列内容</a>
+      <a href="#contact" class="nav-link" data-i18n="nav.contact">联系</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://aiipower.ai" target="_blank" class="company-link-nav" title="AIIPOWER LIMITED · aiipower.ai">
+        <span style="width:7px;height:7px;background:#2ecc71;border-radius:50%;display:inline-block;margin-right:3px;"></span>
+        <span data-i18n="nav.company">企业服务</span>
+      </a>
+      <div id="lang-switcher"></div>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- 移动端菜单 -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">主页</a>
+  <a href="#about">关于</a>
+  <a href="#products">产品服务</a>
+  <a href="#ai">AI数字人</a>
+  <a href="#domain-ip">域名与IP</a>
+  <a href="showcase-config.html" style="color: #2ecc71; font-weight: 600;">🎨 展示配置</a>
+  <a href="#videos">系列内容</a>
+  <a href="#contact">联系</a>
+</div>
+
+<!-- ===== 1. Hero 区（精简） ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg" style="background: linear-gradient(135deg, #0f0c29 0%, #1a1245 40%, #0d1b4b 70%, #090c1f 100%);"></div>
+  <canvas class="hero-particles" id="particlesCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-text fade-in">
+      <div class="profession-badge" style="background:rgba(124,109,240,0.12);border-color:rgba(124,109,240,0.3);color:#7c6df0;width:fit-content;">
+        🚀 AIIPOWER LIMITED 创始人
+      </div>
+      <h1 class="hero-title-strong">Vanessa TIAN <span style="font-size:0.55em;color:var(--text-secondary);">(田卜文)</span></h1>
+      <p class="hero-subtle">TIAN, Bowen</p>
+      <p style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;" data-i18n="hero.title">AIIPOWER LIMITED 创始人 · IP Studio、BIZATOM.AI、AIRankRocket</p>
+      <p style="font-size:0.88rem;color:var(--accent);margin-bottom:20px;" data-i18n="hero.subtitle">AIIPOWER®️ · AI reshapes / empowers your brand</p>
+      <p class="hero-bio-compact">
+        AIIPOWER = AI + IP + POWER：人工智能为底座，知识产权与个人品牌为核心，赋能每一位创作者与企业。2017年创办国教华娱，2018年创立 AIIPOWER 品牌理念，2020年商标获批。
+      </p>
+      <div class="hero-cta" style="margin-bottom:20px;">
+        <a href="#products" class="btn-primary">💼 查看产品</a>
+        <a href="#ai" class="btn-outline">🤖 AI数字人</a>
+      </div>
+      <div class="hero-stats-compact">
+        <div class="hero-stat-compact"><div class="num">2017</div><div class="label">公司创办</div></div>
+        <div class="hero-stat-compact"><div class="num">2018</div><div class="label">品牌萌芽</div></div>
+        <div class="hero-stat-compact"><div class="num">2020</div><div class="label">商标获批</div></div>
+        <div class="hero-stat-compact"><div class="num">AIIP</div><div class="label">核心理念</div></div>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="hero-avatar-wrap" id="avatarWrap">
+        <div class="hero-avatar-inner" id="avatarContent">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <span style="font-size:3.5rem;">👤</span>
+            <span style="font-size:0.68rem;color:var(--text-muted);letter-spacing:1px;">上传您的照片</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. About 区（合并个人简介 + 品牌时间线） ===== -->
+<section class="section about-new" id="about">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">About & Brand Story</p>
+      <h2 class="section-title" data-i18n="about.title">关于 Vanessa TIAN</h2>
+      <p class="section-desc" data-i18n="about.desc">AIIPOWER LIMITED 创始人 · AI个人IP与品牌赋能者</p>
+    </div>
+
+    <!-- 上半部分：照片 + 文字 -->
+    <div class="about-top fade-in">
+      <div class="about-photo-wrap">
+        <div class="pending-badge">⏳ 待上传</div>
+        <div style="font-size:2.5rem;">📸</div>
+        <p style="font-size:0.7rem;color:var(--text-muted);text-align:center;line-height:1.5;">个人照片<br>建议 800×1000px 以上</p>
+      </div>
+      <div class="about-text">
+        <h2>Vanessa TIAN <span class="en-name">(田卜文), TIAN,Bowen</span></h2>
+        <p>
+          AIIPOWER LIMITED 创始人。2017年创办国教华娱（深圳）文化发展有限公司，2018年创立 AIIPOWER 品牌理念，2019年递交商标申请，2020年正式获批。
+        </p>
+        <p>
+          品牌中文名「爱博闻」取自对广博学识与远见洞察的追求；AIIPOWER 解码为 <strong>AI + IP + POWER</strong>：人工智能为技术底座，知识产权与个人品牌为战略核心。
+        </p>
+        <p>
+          旗下核心产品：<strong>IP Studio</strong>（个人IP SaaS平台 · aiipower.me）、<strong>BIZATOM.AI</strong>（AI商业管理知识平台）与 <strong>AIRankRocket</strong>（AI驱动GEO工具）。To B 业务聚焦：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong>（aiipower.ai）。
+        </p>
+        <p class="brand-slogan">「AI reshapes / empowers your brand. 人工智能，重塑、赋能你的品牌。」</p>
+        <div class="skills-compact">
+          <span class="skill-tag">AI个人IP</span>
+          <span class="skill-tag">品牌创立</span>
+          <span class="skill-tag">SaaS产品</span>
+          <span class="skill-tag">AI数字人</span>
+          <span class="skill-tag">商标布局</span>
+          <span class="skill-tag">跨界创业</span>
+        </div>
+        <!-- 公司连接 -->
+        <div style="margin-top:24px;background:var(--bg-secondary);border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="width:8px;height:8px;background:#2ecc71;border-radius:50%;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0;"></div>
+          <div style="flex:1;font-size:0.85rem;">
+            <strong style="color:#2ecc71;">AIIPOWER LIMITED</strong>
+            <span style="color:var(--text-muted);margin-left:8px;">企业服务 (aiipower.ai)</span>
+          </div>
+          <a href="https://aiipower.ai" target="_blank" style="font-size:0.8rem;color:var(--accent);text-decoration:none;white-space:nowrap;">访问 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下半部分：品牌时间线 -->
+    <div class="brand-timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2017</div>
+        <div class="timeline-body">
+          <h4>国教华娱成立</h4>
+          <p>Vanessa TIAN 创办国教华娱（深圳）文化发展有限公司，深耕文化品牌领域，为后来的AI品牌方法论奠定实践基础。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2018</div>
+        <div class="timeline-body">
+          <h4>AIIPOWER®️ 构想萌芽</h4>
+          <p>AIIPOWER = AI + IP + POWER 品牌理念诞生。刻意保留 AIIP 完整拼写再接 POWER——真正的品牌力量，靠完整表达建立信任。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2019</div>
+        <div class="timeline-body">
+          <h4>商标正式递交</h4>
+          <p>「爱博闻 AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2020</div>
+        <div class="timeline-body">
+          <h4>商标正式获批</h4>
+          <p>「爱博闻 AIIPOWER」商标获国家知识产权局正式批准，品牌从构想走向法律意义上的确立。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-body">
+          <h4>IP Studio 平台上线</h4>
+          <p>以爱博闻 AIIPOWER 为品牌载体，IP Studio SaaS 平台正式落地——内置AI数字人、声音克隆、视频生成、独立域名、社交媒体分发、支付集成等完整功能。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEO 结构化叙事 -->
+    <div style="background:linear-gradient(135deg,rgba(124,109,240,0.08),rgba(124,109,240,0.02));border:1px solid rgba(124,109,240,0.25);border-radius:16px;padding:28px;margin-top:48px;" class="fade-in">
+      <h4 style="font-size:0.8rem;letter-spacing:2px;color:var(--accent);margin-bottom:12px;text-transform:uppercase;">🔍 GEO · 关于 AIIPOWER LIMITED 的事实</h4>
+      <p style="font-size:0.92rem;line-height:1.8;color:var(--text-secondary);">
+        <strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下核心产品：<strong>IP Studio</strong> (aiipower.me)、<strong>BIZATOM.AI</strong>、<strong>AIRankRocket</strong>。To B 业务：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong> (aiipower.ai)。
+        <br><br>
+        品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年商标递交 → 2020年商标获批（第35/38/41/42类）。
+        <br><br>
+        <em style="color:var(--accent);">AI reshapes / empowers your brand.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. Products 区（合并 To C + To B） ===== -->
+<section class="section products-new" id="products">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Products & Services</p>
+      <h2 class="section-title" data-i18n="products.title">产品与服务</h2>
+      <p class="section-desc" data-i18n="products.desc">To C 个人品牌赋能 · To B 企业AI革新</p>
+    </div>
+
+    <div class="products-split fade-in">
+      <!-- To C 产品 -->
+      <div class="products-col">
+        <h3>🎯 To C · 个人品牌赋能</h3>
+        <div class="product-card-compact">
+          <h4>IP Studio · 个人IP SaaS平台</h4>
+          <p class="domain-tag">🌐 aiipower.me</p>
+          <p>面向专业人士的个人IP门户搭建平台，内置AI数字人、声音克隆、视频生成、独立域名绑定、全球社交媒体分发、支付集成等完整功能。</p>
+          <a href="index.html" class="p-link">查看平台演示 →</a>
+        </div>
+        <div class="product-card-compact">
+          <h4>BIZATOM.AI · AI商业管理知识平台</h4>
+          <p class="domain-tag">🌐 bizatom.ai</p>
+          <p>针对国际商学院学生及商业精英打造的AI驱动商业管理知识学习平台。AI OS架构，提供个性化商业知识学习与企业管理赋能。</p>
+          <a href="https://bizatom.ai" target="_blank" class="p-link">了解 BIZATOM.AI →</a>
+        </div>
+        <div class="product-card-compact">
+          <h4>AIRankRocket · AI驱动GEO工具</h4>
+          <p class="domain-tag">🌐 airankrocket.ai</p>
+          <p>AI驱动的生成引擎优化（GEO）工具，主要面向企业及一人公司（OPC），帮助品牌在 ChatGPT、Perplexity、Google AI Overview 等AI搜索引擎中获得更高可见度与权威度。</p>
+          <a href="#domain-ip" class="p-link">了解 AIRankRocket →</a>
+        </div>
+      </div>
+      <!-- To B 服务 -->
+      <div class="products-col">
+        <h3>🏢 To B · 企业AI革新</h3>
+        <div class="product-card-compact" style="border-color:rgba(46,204,113,0.3);">
+          <h4>AI打造企业品牌</h4>
+          <p class="domain-tag" style="color:#2ecc71;">🌐 aiipower.ai</p>
+          <p>以AI技术为核心，为企业提供从0到1的品牌塑造与升级服务。包括AI品牌定位、AI内容生产、AI数字人形象、AI全渠道品牌传播。</p>
+          <a href="https://aiipower.ai" target="_blank" class="p-link">访问 aiipower.ai →</a>
+        </div>
+        <div class="product-card-compact" style="border-color:rgba(46,204,113,0.3);">
+          <h4>AI企业培训</h4>
+          <p>为企业提供AI技术贯穿全流程的培训，从上层管理到基层执行，实现彻底的数字化战略转型。让AI技术从上而下、从里到外贯穿整个企业。</p>
+        </div>
+        <div style="margin-top:20px;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:12px;padding:20px;">
+          <h4 style="font-size:0.95rem;margin-bottom:10px;color:var(--accent);">💬 预约咨询</h4>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:14px;">
+            所有 To B 服务及 To C 产品均支持定制化咨询。点击下方按钮，安排与 Vanessa 的一对一沟通。
+          </p>
+          <button class="btn-primary" style="font-size:0.85rem;padding:10px 24px;" onclick="showToast('💬 请咨询功能即将上线')">预约咨询</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. AI数字人（保留，精简） ===== -->
+<section class="section ai-section" id="ai">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">AI Digital Human</p>
+      <h2 class="section-title">AI数字人 🤖</h2>
+      <p class="section-desc">刻录声音与形象，让AI数字人代替你讲解每一个话题</p>
+    </div>
+    <div class="ai-demo-wrap fade-in">
+      <div class="ai-screen">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;padding:24px;text-align:center;">
+          <div style="font-size:0.7rem;background:rgba(241,196,15,0.15);color:#f1c40f;padding:3px 10px;border-radius:8px;">素材待录制</div>
+          <div style="font-size:2.5rem;">🎙️</div>
+          <p style="font-size:0.8rem;color:var(--text-muted);">上传声音样本 + 形象视频后，<br>AI数字人将在此展示</p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.95rem;margin-bottom:20px;color:var(--text-secondary);">用AI数字人讲解：AIIPOWER 的品牌故事与产品理念</p>
+        <div class="ai-topics">
+          <div class="ai-topic" onclick="showToast('🎙️ 请先上传声音样本和形象视频')">
+            <span class="ai-topic-icon">💡</span>
+            <span class="ai-topic-text">AIIPOWER 的品牌故事与商标布局</span>
+          </div>
+          <div class="ai-topic" onclick="showToast('🎙️ 请先上传声音样本和形象视频')">
+            <span class="ai-topic-icon">🏗️</span>
+            <span class="ai-topic-text">IP Studio 个人IP SaaS平台介绍</span>
+          </div>
+          <div class="ai-topic" onclick="showToast('🎙️ 请先上传声音样本和形象视频')">
+            <span class="ai-topic-icon">🤖</span>
+            <span class="ai-topic-text">AI数字人在内容创作中的应用</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-features fade-in">
+      <div class="ai-feature">
+        <div class="ai-feature-icon">🎙️</div>
+        <h4>声音克隆</h4>
+        <p>录制5分钟语音 → AI克隆你的声音，所有内容均用本人声音讲述</p>
+      </div>
+      <div class="ai-feature">
+        <div class="ai-feature-icon">📸</div>
+        <h4>形象生成</h4>
+        <p>上传照片/视频 → 生成AI数字人形象，多场景讲解演示</p>
+      </div>
+      <div class="ai-feature">
+        <div class="ai-feature-icon">🎬</div>
+        <h4>批量生产视频</h4>
+        <p>输入文案 → AI自动生成系列短视频，一键同步至多平台</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. Domain & IP 合并区 ===== -->
+<section class="section domain-ip-section" id="domain-ip">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Domains & Intellectual Property</p>
+      <h2 class="section-title" data-i18n="domain.title">域名资产与知识产权</h2>
+      <p class="section-desc" data-i18n="domain.desc">AIIPOWER LIMITED 旗下全部域名与IP展示</p>
+    </div>
+
+    <!-- 5.1 域名资产 -->
+    <div class="fade-in">
+      <h3 style="font-size:1rem;color:var(--accent);margin-bottom:16px;">🌐 域名资产</h3>
+      <div class="domain-grid">
+        <div class="domain-card" style="border-color:var(--accent);">
+          <p class="d-label">To C · IP Studio 正式域名</p>
+          <p class="d-name">aiipower.me</p>
+        </div>
+        <div class="domain-card">
+          <p class="d-label">To C · 商业知识平台</p>
+          <p class="d-name">bizatom.ai</p>
+        </div>
+        <div class="domain-card">
+          <p class="d-label">To C · GEO工具</p>
+          <p class="d-name">airankrocket.ai</p>
+        </div>
+        <div class="domain-card" style="border-color:rgba(46,204,113,0.4);">
+          <p class="d-label">To B · AI品牌+企培</p>
+          <p class="d-name" style="color:#2ecc71;">aiipower.ai</p>
+        </div>
+        <div class="domain-card pending">
+          <p class="d-label">🔒 国内市场筹备中</p>
+          <p class="d-name" style="color:var(--text-muted);">aiipower.com</p>
+        </div>
+        <div class="domain-card pending">
+          <p class="d-label">🔒 国内市场筹备中</p>
+          <p class="d-name" style="color:var(--text-muted);">aiipower.cn</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.2 IP展示 -->
+    <div class="fade-in">
+      <h3 style="font-size:1rem;color:var(--accent);margin-bottom:16px;">📄 知识产权</h3>
+      <div class="ip-cards">
+        <div class="ip-card-compact">
+          <div class="ip-icon">™️</div>
+          <h4>爱博闻 AIIPOWER 注册商标</h4>
+          <p class="ip-type">注册商标 · 第35/38/41/42类</p>
+          <p>2019年递交，2020年获批。覆盖广告商业管理、通讯服务、教育娱乐、科学技术服务四大类别。</p>
+        </div>
+        <div class="ip-card-compact">
+          <div class="ip-icon">💻</div>
+          <h4>IP Studio SaaS平台</h4>
+          <p class="ip-type">软件著作权</p>
+          <p>底层代码、架构设计、多领域模板引擎、AI数字人系统均归运营公司所有。</p>
+        </div>
+        <div class="ip-card-compact">
+          <div class="ip-icon">📖</div>
+          <h4>出版计划</h4>
+          <p class="ip-type">著作权 · 规划中</p>
+          <p>计划出版个人专著，系统阐述 AI + IP + POWER 的方法论与实践体系。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.3 域名自主替换 -->
+    <div class="fade-in">
+      <h3 style="font-size:1rem;color:var(--accent);margin-bottom:12px;" data-i18n="ipstudio_domain.title">IP Studio · 域名自主替换</h3>
+      <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:20px;" data-i18n="ipstudio_domain.desc">使用IP Studio搭建个人IP网站后，可替换为自己注册的个人品牌域名</p>
+      <div class="domain-flow">
+        <div class="flow-step highlight">
+          <div style="font-size:1.8rem;margin-bottom:6px;">🏗️</div>
+          <h4 style="font-size:0.9rem;color:var(--accent);">在IP Studio创建</h4>
+          <p style="font-size:0.75rem;color:var(--text-muted);">aiipower.me</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div style="font-size:1.8rem;margin-bottom:6px;">🌐</div>
+          <h4 style="font-size:0.9rem;color:var(--accent);">注册个人域名</h4>
+          <p style="font-size:0.75rem;color:var(--text-muted);">www.yourbrand.com</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step success">
+          <div style="font-size:1.8rem;margin-bottom:6px;">🚀</div>
+          <h4 style="font-size:0.9rem;color:#2ecc71;">域名绑定上线</h4>
+          <p style="font-size:0.75rem;color:var(--text-muted);">你的品牌 · 你的域名</p>
+        </div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
+        <span style="font-family:monospace;font-size:0.85rem;color:var(--accent);">aiipower.me/user123</span>
+        <span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="font-family:monospace;font-size:0.85rem;color:#2ecc71;font-weight:600;">www.jimrogers.com</span>
+      </div>
+    </div>
+
+    <!-- 5.4 域名注册平台指南 -->
+    <div class="fade-in">
+      <h3 style="font-size:1rem;color:var(--accent);margin-bottom:4px;" data-i18n="registrar.title">国际域名注册平台指南</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;" data-i18n="registrar.desc">选择最适合你的平台，注册个人品牌域名，然后绑定到IP Studio</p>
+      <div class="registrar-table-wrap">
+        <table class="registrar-table">
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th style="text-align:center;">价格参考</th>
+              <th style="text-align:center;">隐私保护</th>
+              <th style="text-align:center;">中文支持</th>
+              <th>特点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">🏪 GoDaddy</td>
+              <td style="text-align:center;color:var(--text-secondary);">~$12-18/年</td>
+              <td style="text-align:center;">🔓 付费</td>
+              <td style="text-align:center;">✅ 有</td>
+              <td style="font-size:0.83rem;color:var(--text-secondary);">全球最大注册商，中文界面完善，附加服务多</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">💰 Namecheap</td>
+              <td style="text-align:center;color:var(--text-secondary);">~$9-14/年</td>
+              <td style="text-align:center;">✅ 免费</td>
+              <td style="text-align:center;">⚠️ 部分</td>
+              <td style="font-size:0.83rem;color:var(--text-secondary);">性价比高，免费WHOIS隐私，适合个人和小企业</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">☁️ Cloudflare</td>
+              <td style="text-align:center;color:#2ecc71;font-weight:600;">~$8-10/年</td>
+              <td style="text-align:center;">✅ 免费</td>
+              <td style="text-align:center;">✅ 有</td>
+              <td style="font-size:0.83rem;color:var(--text-secondary);">成本价出售（业界最低），需使用Cloudflare DNS</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">🐷 Porkbun</td>
+              <td style="text-align:center;color:var(--text-secondary);">~$8-12/年</td>
+              <td style="text-align:center;">✅ 免费</td>
+              <td style="text-align:center;">❌ 暂无</td>
+              <td style="font-size:0.83rem;color:var(--text-secondary);">价格极低，界面简洁有趣，用户口碑好</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 使用步骤 -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:24px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:20px;text-align:center;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 8px;font-size:0.85rem;">1</div>
+          <p style="font-size:0.83rem;color:var(--text-secondary);">选择平台并注册域名</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:20px;text-align:center;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 8px;font-size:0.85rem;">2</div>
+          <p style="font-size:0.83rem;color:var(--text-secondary);">配置DNS指向IP Studio</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:20px;text-align:center;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#2ecc71;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 8px;font-size:0.85rem;">3</div>
+          <p style="font-size:0.83rem;color:var(--text-secondary);">在IP Studio中绑定域名</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:20px;text-align:center;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#2ecc71;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 8px;font-size:0.85rem;">4</div>
+          <p style="font-size:0.83rem;color:var(--text-secondary);">你的品牌官网正式上线</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. Videos 区（保留） ===== -->
+<section class="section" id="videos">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Videos</p>
+      <h2 class="section-title">系列内容</h2>
+      <p class="section-desc">深度输出：AI、创业、个人IP的核心洞察</p>
+    </div>
+    <div class="video-grid fade-in">
+      <div class="video-card" onclick="showToast('🎬 视频即将发布')">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(124,109,240,0.3),rgba(124,109,240,0.05));display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;padding:16px;">
+            <div style="font-size:2rem;margin-bottom:8px;">🎬</div>
+            <div style="font-size:0.7rem;background:rgba(241,196,15,0.15);color:#f1c40f;padding:2px 8px;border-radius:6px;">待上传</div>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>AIIPOWER：我为什么在2018年创立了这个品牌</h4>
+          <div class="video-meta"><span>—:--</span><span>即将发布</span></div>
+        </div>
+      </div>
+      <div class="video-card" onclick="showToast('🎬 视频即将发布')">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(124,109,240,0.3),rgba(124,109,240,0.05));display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;padding:16px;">
+            <div style="font-size:2rem;margin-bottom:8px;">🤖</div>
+            <div style="font-size:0.7rem;background:rgba(241,196,15,0.15);color:#f1c40f;padding:2px 8px;border-radius:6px;">待上传</div>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>什么是AI数字人？它将如何改变内容创作</h4>
+          <div class="video-meta"><span>—:--</span><span>即将发布</span></div>
+        </div>
+      </div>
+      <div class="video-card" onclick="showToast('🎬 视频即将发布')">
+        <div class="video-thumb" style="background:linear-gradient(135deg,rgba(124,109,240,0.3),rgba(124,109,240,0.05));display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;padding:16px;">
+            <div style="font-size:2rem;margin-bottom:8px;">🖥️</div>
+            <div style="font-size:0.7rem;background:rgba(46,204,113,0.15);color:#2ecc71;padding:2px 8px;border-radius:6px;">优先录制</div>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>IP Studio演示：AI数字人如何赋能个人品牌</h4>
+          <div class="video-meta"><span>—:--</span><span>产品演示</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. Contact 合并区（社交媒体 + 素材清单） ===== -->
+<section class="section contact-new" id="contact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Connect &amp; Get Started</p>
+      <h2 class="section-title" data-i18n="contact.title">联系与准备</h2>
+      <p class="section-desc">一键连接 Vanessa · 开始打造你的个人IP</p>
+    </div>
+    <div class="contact-grid fade-in">
+      <!-- 左侧：社交媒体 -->
+      <div class="social-col">
+        <h3>🌍 社交媒体</h3>
+        <div class="social-links-compact" id="domesticSocial"></div>
+        <div style="margin-top:20px;">
+          <h3>🌐 International</h3>
+          <div class="social-links-compact" id="internationalSocial"></div>
+        </div>
+      </div>
+      <!-- 右侧：素材清单 -->
+      <div class="assets-col">
+        <h3>📋 合作前准备清单</h3>
+        <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:16px;">以下素材到位后，您的个人IP网站将完整呈现</p>
+        <div class="asset-checklist">
+          <h4>必需素材</h4>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>个人正式照片（1-3张）</strong>
+              <span>正装或休闲商务风，分辨率800×1000px以上</span>
+            </div>
+            <span class="check-badge-compact req">必须</span>
+          </div>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>个人简介（中英双语）</strong>
+              <span>教育背景、过往经历、核心成就</span>
+            </div>
+            <span class="check-badge-compact req">必须</span>
+          </div>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>IP Studio演示视频（2-5分钟）</strong>
+              <span>自我介绍 + 品牌故事 + 平台演示</span>
+            </div>
+            <span class="check-badge-compact req">必须</span>
+          </div>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>AI数字人素材（声音+形象）</strong>
+              <span>5分钟语音样本 + 1-3分钟形象视频</span>
+            </div>
+            <span class="check-badge-compact req">必须</span>
+          </div>
+          <h4 style="margin-top:16px;">可选素材</h4>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>社交媒体账号链接</strong>
+              <span>小红书、微信视频号、LinkedIn、YouTube等</span>
+            </div>
+            <span class="check-badge-compact opt">可选</span>
+          </div>
+          <div class="check-item-compact">
+            <button class="check-box-compact" onclick="toggleCheckCompact(this)"></button>
+            <div class="check-text-compact">
+              <strong>知识产权证书</strong>
+              <span>商标注册证、软件著作权、域名证书等</span>
+            </div>
+            <span class="check-badge-compact opt">可选</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. Footer（精简） ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>爱博闻&nbsp;<span>AIIPOWER</span></h3>
+        <p>AIIPOWER LIMITED 由 Vanessa TIAN (田卜文) 于2018年创立品牌理念，2020年商标获批。<br>
+        <em>AI + IP + POWER —— AI reshapes / empowers your brand</em></p>
+      </div>
+      <div class="footer-col">
+        <h4>导航</h4>
+        <a href="#home">主页</a>
+        <a href="#about">关于</a>
+        <a href="#products">产品服务</a>
+        <a href="#ai">AI数字人</a>
+        <a href="#domain-ip">域名与IP</a>
+      </div>
+      <div class="footer-col">
+        <h4>产品</h4>
+        <a href="#products">IP Studio</a>
+        <a href="#products">BIZATOM.AI</a>
+        <a href="#products">AIRankRocket</a>
+        <a href="https://aiipower.ai" target="_blank">企业服务</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Vanessa TIAN (田卜文), TIAN,Bowen · AIIPOWER LIMITED · 版权所有</p>
+      <p style="color:var(--text-muted);font-size:0.78rem;margin-top:4px;">
+        aiipower.me · aiipower.ai · bizatom.ai · airankrocket.ai · aiipower.com/cn (筹备中)
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Scripts -->
+<script src="js/i18n.js"></script>
+<script src="js/i18n-core.js"></script>
+<script src="data/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/bowen.js"></script>
+</body>
+</html>

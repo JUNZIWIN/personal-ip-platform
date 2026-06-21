@@ -1,0 +1,29 @@
+/* Section Common */
+.section { padding: 100px 0; position: relative; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 12px; }
+.section-title { font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 800; margin-bottom: 16px; }
+.section-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.95rem; line-height: 1.7; }
+
+/* Cards */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 32px; transition: var(--transition);
+}
+.card:hover { background: var(--bg-card-hover); border-color: var(--border-light); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+/* Grid layouts */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+/* About Section */
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; }
+.about-image { border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); aspect-ratio: 3/4; }
+.about-content h3 { font-size: 1.5rem; margin-bottom: 20px; }
+.about-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+.skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.skill-tag {
+  background: rgba(201,168,76,0.1); color: var(--accent); padding: 6px 16px;
+  border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(201,168,76,0.2);
+}
