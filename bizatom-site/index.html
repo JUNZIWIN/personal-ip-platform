@@ -714,6 +714,7 @@ var BIZKB = [
 
 function kbSearch(q, lang) {
   q = q.toLowerCase().trim();
+  // Step 1: Find best-matching book
   var best = null, bestS = 0;
   for (var i = 0; i < BIZKB.length; i++) {
     var score = 0;
@@ -725,9 +726,53 @@ function kbSearch(q, lang) {
   }
   if (!best || bestS === 0) return null;
   var d = best[lang] || best.en;
-  var out = "📚 **" + d.t + "**\n\n" + d.b + "\n\n";
+
+  // Step 2: Check if the user is asking about a SPECIFIC concept
+  // Bidirectional matching: concept→question AND question→concept
+  var bestConcept = null, bestCS = 0;
   for (var k = 0; k < d.c.length; k++) {
-    out += "• **" + d.c[k][0] + "**：" + d.c[k][1] + "\n";
+    var cname = d.c[k][0].toLowerCase();
+    var cs = 0;
+    // Forward: does question contain concept name parts?
+    var parts = cname.split(/[\s\-:：]+/);
+    for (var p = 0; p < parts.length; p++) {
+      if (parts[p].length >= 2 && q.indexOf(parts[p]) >= 0) cs += parts[p].length * 2;
+    }
+    // Full concept name in question
+    if (cname.length >= 4 && q.indexOf(cname.slice(0,6)) >= 0) cs += 12;
+    if (cname.length >= 8 && q.indexOf(cname) >= 0) cs += cname.length * 4;
+    // Reverse: extract words from question (3+ chars) and check if concept name contains them
+    var qWords = q.split(/\s+/);
+    for (var w = 0; w < qWords.length; w++) {
+      if (qWords[w].length >= 3 && cname.indexOf(qWords[w]) >= 0) cs += qWords[w].length * 3;
+    }
+    // Extract ASCII tokens from concept name (for mixed CN/EN names like "最小可行产品MVP")
+    var asciiMatch = cname.match(/[a-z0-9]+/g);
+    if (asciiMatch) {
+      for (var a = 0; a < asciiMatch.length; a++) {
+        if (asciiMatch[a].length >= 2 && q.indexOf(asciiMatch[a]) >= 0) cs += asciiMatch[a].length * 3;
+      }
+    }
+    if (cs > bestCS) { bestCS = cs; bestConcept = d.c[k]; }
+  }
+
+  // Step 3: PRIORITY OUTPUT — if concept match is strong, answer the concept question directly
+  // Threshold 6: works for short terms like "MVP", "Pivot", "刺猬"
+  if (bestConcept && bestCS >= 6) {
+    var out = "💡 **" + bestConcept[0] + "**\n\n" + bestConcept[1] + "\n\n";
+    out += "📖 *出自：" + d.t + "*\n";
+    return out;
+  }
+
+  // Step 4: Otherwise, give full book overview
+  var out = "📚 **" + d.t + "**\n\n" + d.b + "\n\n";
+  // Show top matched concept first
+  if (bestConcept && bestCS > 3) {
+    out += "💡 **" + bestConcept[0] + "**：" + bestConcept[1] + "\n\n";
+  }
+  out += "📋 **核心概念一览**：\n";
+  for (var k = 0; k < d.c.length; k++) {
+    out += "  • " + d.c[k][0] + "\n";
   }
   return out;
 }
