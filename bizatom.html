@@ -580,11 +580,23 @@ function joinWaitlist(){
     msg.textContent = zh ? '请输入有效的邮箱地址。' : 'Please enter a valid email address.';
     return;
   }
-  msg.style.color = '#7DE3A1';
-  msg.textContent = zh
-    ? '已加入候补名单！上线时我们会第一时间通知你。'
-    : "You're on the list! We'll email you the moment we launch.";
-  input.value = '';
+  fetch('https://script.google.com/macros/s/AKfycbylxYBqmO1t1VUii7B5CkG2ATBrGvKAzXbrdK2u08wctGtCIWiDucCBQtvxE6Kgd5jb1g/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: v, lang: zh ? 'zh' : 'en' })
+  })
+  .then(r => r.json())
+  .then(data => {
+    msg.style.color = '#7DE3A1';
+    msg.textContent = zh
+      ? '已加入候补名单！上线时我们会第一时间通知你。'
+      : "You're on the list! We'll email you the moment we launch.";
+    input.value = '';
+  })
+  .catch(() => {
+    msg.style.color = '#FF9B7A';
+    msg.textContent = zh ? '提交失败，请稍后重试。' : 'Submission failed. Please try again.';
+  });
 }
 </script>
 <!-- ===== AI Chat Widget ===== -->
