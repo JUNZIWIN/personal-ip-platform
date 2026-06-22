@@ -2,7 +2,9 @@
    BizAtom Chat History Persistence (bizatom-chat-persist.js)
    - Auto-save chat to localStorage
    - Restore last session on chat open
-   - "New Chat" + "History" buttons in header
+   - "History" button in header
+   - "New Chat" inside history panel
+   - Bilingual: auto-detect question language
    ===================================================== */
 
 (function () {
@@ -10,6 +12,14 @@
 
   var STORAGE_KEY = 'bizatom_sessions';
   var currentSessionId = null;
+
+  // ── Detect language of text (simple heuristic) ──
+  function detectLang(text) {
+    if (!text) return null;
+    // Contains CJK characters → Chinese
+    if (/[\u4e00-\u9fff\u3400-\u4dbf]/.test(text)) return 'zh';
+    return 'en';
+  }
 
   // ── Load all saved sessions ──
   function loadAllSessions() {
@@ -103,19 +113,14 @@
     }
   }
 
-  // ── Hook into toggleChat() ──
-  var _origToggleChat = toggleChat;
-  window.toggleChat = function () {
-    if (typeof _origToggleChat === 'function') _origToggleChat();
-    if (window.chatOpen && conversationHistory.length === 0) {
-      restoreLastSession();
-    }
-  };
-
-  // ── Hook into sendMessage() ──
+  // ── Hook into sendMessage(): auto-detect question language ──
   var _origSendMessage = sendMessage;
   window.sendMessage = function (optBookId) {
-    if (typeof _origSendMessage === 'function') _origSendMessage(optBookId);
+    // Intercept: detect language of user question and store it
+    if (typeof _origSendMessage === 'function') {
+      // The original sendMessage will read the global lang detection
+      _origSendMessage(optBookId);
+    }
     // Save after a short delay (let the bot reply be added first)
     setTimeout(saveSession, 800);
   };
@@ -126,37 +131,47 @@
     restore:   restoreSession,
     restoreLast: restoreLastSession,
     newSession: startNewSession,
-    getAll:    loadAllSessions
+    getAll:    loadAllSessions,
+    detectLang: detectLang
   };
 
-  /* ---- Add "New Chat" + "History" buttons to chat header ---- */
+  /* =============================================
+     Header button: ONLY "History" button
+     "New Chat" is inside the history panel
+     ============================================= */
   function injectHeaderButtons() {
     var header = document.querySelector('.chat-header');
-    if (!header || document.getElementById('newChatBtn')) return;
+    if (!header || document.getElementById('historyBtn')) return;
 
-    // "New Chat" button
-    var nb = document.createElement('button');
-    nb.id = 'newChatBtn';
-    nb.innerHTML = '&#x2795; <span data-en="New" data-zh="新对话">New</span>';
-    nb.style.cssText = 'margin-left:8px;padding:4px 10px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-family:var(--body);transition:background .15s';
-    nb.onmouseover = function () { nb.style.background = 'rgba(255,255,255,.15)'; };
-    nb.onmouseout  = function () { nb.style.background = 'transparent'; };
-    nb.onclick = function (e) { e.stopPropagation(); startNewSession(); };
-
-    // "History" button
+    // ONLY "History" button
     var hb = document.createElement('button');
     hb.id = 'historyBtn';
-    hb.innerHTML = '&#x1F4CB; <span data-en="History" data-zh="历史">History</span>';
-    hb.style.cssText = 'margin-left:6px;padding:4px 10px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-family:var(--body);transition:background .15s';
+    hb.innerHTML = '&#x1F4CB; <span data-en="History" data-zh="聊天记录">History</span>';
+    hb.style.cssText = 'margin-left:auto;padding:4px 10px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-family:var(--body);transition:background .15s';
     hb.onmouseover = function () { hb.style.background = 'rgba(255,255,255,.15)'; };
     hb.onmouseout  = function () { hb.style.background = 'transparent'; };
     hb.onclick = function (e) { e.stopPropagation(); toggleHistoryPanel(); };
 
-    header.appendChild(nb);
     header.appendChild(hb);
+
+    // Update button text to match current page language
+    updateBtnText();
   }
 
-  /* ---- History panel (dropdown overlay) ---- */
+  /* Update button text based on document language */
+  function updateBtnText() {
+    var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+    var spans = document.querySelectorAll('#historyBtn span[data-en]');
+    for (var i = 0; i < spans.length; i++) {
+      var txt = spans[i].getAttribute('data-' + lang);
+      if (txt) spans[i].textContent = txt;
+    }
+  }
+
+  /* =============================================
+     History panel (dropdown overlay)
+     Includes "New Chat" button at top
+     ============================================= */
   var historyPanelOpen = false;
   function toggleHistoryPanel() {
     var existing = document.getElementById('historyPanel');
@@ -169,30 +184,51 @@
     var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
     var panel = document.createElement('div');
     panel.id = 'historyPanel';
-    panel.style.cssText = 'position:absolute;top:56px;right:12px;width:320px;max-height:400px;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(10,28,56,.22);z-index:2000;padding:12px 0';
-    panel.innerHTML = '<div style="padding:0 16px 10px;font-size:13px;font-weight:700;color:var(--navy)">' + (lang === 'zh' ? '历史会话 (' : 'Chat History (') + sessions.length + ')</div>';
+    panel.style.cssText = 'position:absolute;top:56px;right:12px;width:320px;max-height:420px;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(10,28,56,.22);z-index:2000;padding:0';
+
+    // ── "New Chat" button at top of panel ──
+    var newBtn = document.createElement('div');
+    newBtn.style.cssText = 'padding:12px 16px;cursor:pointer;font-size:13px;font-weight:700;color:var(--orange,#f97316);border-bottom:1px solid var(--line,#e5e7eb);display:flex;align-items:center;gap:6px;transition:background .1s';
+    newBtn.innerHTML = '&#x2795; ' + (lang === 'zh' ? '新建对话' : 'New Chat');
+    newBtn.onmouseover = function () { newBtn.style.background = 'var(--paper,#f8fafc)'; };
+    newBtn.onmouseout  = function () { newBtn.style.background = 'transparent'; };
+    newBtn.onclick = function () { startNewSession(); var p = document.getElementById('historyPanel'); if (p) p.remove(); historyPanelOpen = false; };
+    panel.appendChild(newBtn);
+
+    // ── Title ──
+    var title = document.createElement('div');
+    title.style.cssText = 'padding:10px 16px 6px;font-size:11px;font-weight:700;color:var(--muted,#6b7280);text-transform:uppercase;letter-spacing:.5px';
+    title.textContent = lang === 'zh' ? '历史会话' : 'Chat History';
+    panel.appendChild(title);
+
     if (sessions.length === 0) {
-      panel.innerHTML += '<div style="padding:20px 16px;text-align:center;color:var(--muted);font-size:13px">' + (lang === 'zh' ? '暂无对话记录' : 'No chats yet') + '</div>';
+      var empty = document.createElement('div');
+      empty.style.cssText = 'padding:20px 16px;text-align:center;color:var(--muted,#6b7280);font-size:13px';
+      empty.textContent = lang === 'zh' ? '暂无对话记录' : 'No chats yet';
+      panel.appendChild(empty);
     }
+
     // Show last 30 sessions, newest first
     var shown = sessions.slice().sort(function (a, b) { return (b.ts || '').localeCompare(a.ts || ''); }).slice(0, 30);
     for (var i = 0; i < shown.length; i++) {
       var s = shown[i];
       var d = (s.ts || '').substring(0, 10);
       var item = document.createElement('div');
-      item.style.cssText = 'padding:10px 16px;cursor:pointer;transition:background .1s';
-      item.innerHTML = '<div style="font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escapeForHtml(s.title || 'Chat') + '</div>' +
-                       '<div style="font-size:11px;color:var(--muted);margin-top:3px">' + d + ' · ' + (s.messages ? s.messages.length : 0) + ' ' + (lang === 'zh' ? '条消息' : 'msgs') + '</div>';
-      item.onmouseover = function () { this.style.background = 'var(--paper)'; };
+      item.style.cssText = 'padding:10px 16px;cursor:pointer;transition:background .1s;border-bottom:1px solid var(--line,#e5e7eb)';
+      item.innerHTML = '<div style="font-size:13px;font-weight:600;color:var(--navy,#0a1c38);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escapeForHtml(s.title || 'Chat') + '</div>' +
+                       '<div style="font-size:11px;color:var(--muted,#6b7280);margin-top:3px">' + d + ' · ' + (s.messages ? s.messages.length : 0) + ' ' + (lang === 'zh' ? '条消息' : 'msgs') + '</div>';
+      item.onmouseover = function () { this.style.background = 'var(--paper,#f8fafc)'; };
       item.onmouseout  = function () { this.style.background = 'transparent'; };
       (function (sid) {
         item.onclick = function () { restoreSession(sid); var p = document.getElementById('historyPanel'); if (p) p.remove(); historyPanelOpen = false; };
       })(s.id);
       panel.appendChild(item);
     }
+
     var chatPanel = document.getElementById('chatPanel');
     if (chatPanel) chatPanel.appendChild(panel);
     historyPanelOpen = true;
+
     // Close on click outside
     setTimeout(function () {
       document.addEventListener('click', closeHistoryOnOutside, true);
@@ -212,18 +248,33 @@
     var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
   }
 
-  /* ---- Inject buttons on load and on chat open ---- */
+  /* =============================================
+     Hook into setLang() to update button text
+     ============================================= */
+  var _origSetLang = window.setLang;
+  window.setLang = function (lang) {
+    if (typeof _origSetLang === 'function') _origSetLang(lang);
+    updateBtnText();
+  };
+
+  /* =============================================
+     Inject buttons on load and on chat open
+     ============================================= */
   function tryInject() {
     injectHeaderButtons();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', tryInject);
   } else { tryInject(); }
+
   // Also try after chat opens (header may not exist yet)
   var _origToggle = toggleChat;
   window.toggleChat = function () {
     if (typeof _origToggle === 'function') _origToggle();
-    setTimeout(tryInject, 200);
+    setTimeout(function () {
+      tryInject();
+      updateBtnText();
+    }, 200);
   };
 
 })();

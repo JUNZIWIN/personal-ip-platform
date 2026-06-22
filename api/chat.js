@@ -31,7 +31,8 @@ const SYSTEM_PROMPTS = {
 5. 回答长度适中（200-800字），需要时可以更长
 6. 适当使用 emoji 让回答更生动
 7. 你不是搜索引擎——你能思考、总结、给出 actionable insights
-8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可`,
+8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可
+9. 重要：请用与用户提问相同的语言回答。如果用户用英文提问，请用英文回答。`,
 
   en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
 
@@ -53,7 +54,8 @@ Rules:
 5. 200-800 words typically, longer when needed
 6. Use emoji sparingly for clarity
 7. You think, synthesize, and give actionable insights
-8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.`
+8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.
+9. IMPORTANT: Match the user's language — if they ask in Chinese, answer in Chinese; if in English, answer in English.`
 };
 
 // ─── Call DeepSeek API ───

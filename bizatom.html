@@ -1035,7 +1035,17 @@ async function sendMessage(optBookId) {
   }
 
   showTyping();
-  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+
+  // ── Language detection ──
+  // 1. Detect from user's question text (CJK = Chinese, else default to page lang)
+  // 2. This ensures AI replies in the SAME language the user used
+  var pageLang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var detectedLang = null;
+  if (q) {
+    // Contains CJK Unified Ideographs → treat as Chinese
+    if (/[\u4e00-\u9fff\u3400-\u4dbf]/.test(q)) detectedLang = 'zh';
+  }
+  var lang = detectedLang || pageLang;
 
   var answer = null;
 
