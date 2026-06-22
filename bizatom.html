@@ -52,6 +52,18 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:500;color:var(--muted)}
 .nav-links a:hover{color:var(--navy)}
 .nav-cta{display:flex;align-items:center;gap:14px}
+.nav-user-btn{display:none;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:var(--white);border:1.5px solid var(--line);cursor:pointer;font-family:var(--body);font-size:13.5px;font-weight:600;color:var(--navy);transition:border-color .15s}
+.nav-user-btn:hover{border-color:var(--purple)}
+.nav-avatar{width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.user-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--white);border-radius:14px;box-shadow:0 8px 32px rgba(10,28,56,.18);min-width:220px;z-index:100;overflow:hidden}
+.user-dropdown.open{display:block}
+.ud-header{display:flex;align-items:center;gap:12px;padding:18px 16px;background:var(--paper)}
+.ud-avatar{width:40px;height:40px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
+.ud-name{font-size:13.5px;font-weight:700;color:var(--navy)}
+.ud-email{font-size:11.5px;color:var(--muted)}
+.ud-menu{display:flex;flex-direction:column}
+.ud-menu button{display:flex;align-items:center;gap:8px;padding:12px 16px;border:0;background:transparent;font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--ink);cursor:pointer;text-align:left;transition:background .1s}
+.ud-menu button:hover{background:var(--paper)}
 .lang-toggle{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:var(--white)}
 .lang-toggle button{border:0;background:transparent;padding:7px 14px;font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}
 .lang-toggle button.active{background:var(--navy);color:#fff}
@@ -283,7 +295,26 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
         <button id="btn-zh" onclick="setLang('zh')">中文</button>
       </div>
-      <a href="#waitlist" class="btn btn-primary" data-en="Join waitlist" data-zh="加入候补名单">Join waitlist</a>
+      <a href="#waitlist" class="btn btn-primary" id="navWaitlistBtn" data-en="Join waitlist" data-zh="加入候补名单">Join waitlist</a>
+      <button class="btn btn-primary" id="navLoginBtn" onclick="openLogin()" style="display:none">Sign in</button>
+      <div class="nav-user-btn" id="navUserBtn" style="display:none" onclick="toggleUserMenu()">
+        <div class="nav-avatar" id="navAvatar">U</div>
+        <span id="navUserName">User</span>
+        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="ud-header">
+            <div class="ud-avatar" id="udAvatar">U</div>
+            <div>
+              <div class="ud-name" id="udUserName">User</div>
+              <div class="ud-email" id="udUserEmail">user@email.com</div>
+            </div>
+          </div>
+          <div class="ud-menu">
+            <button onclick="openKbPanel('personal')">📝 My Knowledge Base</button>
+            <button onclick="logoutUser()">Sign out</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -1090,5 +1121,6 @@ function clearChatHistory() {
 }
 </script>
 
+<script src="bizatom-chat-persist.js"></script>
 </body>
 </html>
