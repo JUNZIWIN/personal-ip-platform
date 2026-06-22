@@ -336,6 +336,54 @@ body.sidebar-open .chat-panel{right:28px}
 .login-modal .lm-btn:hover{opacity:.88}
 .login-modal .lm-hint{font-size:11.5px;color:var(--muted);margin-top:14px;text-align:center}
 .login-modal .lm-close{position:absolute;top:14px;right:18px;background:0;border:0;font-size:20px;color:var(--muted);cursor:pointer}
+
+  /* ===== Session & Category styles ===== */
+  .kb-sessions-header{display:flex;justify-content:flex-end;margin-bottom:12px}
+  .kb-session-card{background:var(--white);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .kb-session-card:hover{border-color:var(--purple);box-shadow:0 2px 12px rgba(107,63,160,.08)}
+  .kb-session-card.active{border-color:var(--orange);background:var(--orange-soft)}
+  .ks-title{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ks-meta{font-size:11.5px;color:var(--muted)}
+  .kb-date-header{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:10px 0 6px;margin-top:4px}
+
+  /* Category styles */
+  .kb-cats-header{display:flex;justify-content:flex-end;margin-bottom:12px}
+  .kb-cat-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;cursor:pointer;transition:background .12s;border:1.5px solid transparent}
+  .kb-cat-item:hover{background:var(--paper)}
+  .kb-cat-item.active{background:var(--purple-soft);border-color:var(--purple)}
+  .kci-icon{font-size:20px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--paper);flex-shrink:0}
+  .kci-name{flex:1;font-size:13.5px;font-weight:600;color:var(--navy)}
+  .kci-count{font-size:11.5px;color:var(--muted);background:var(--paper);padding:2px 8px;border-radius:99px}
+
+  /* Category sessions view */
+  .kb-cat-sessions-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .kb-cat-sessions-header span{font-size:13.5px;font-weight:700;color:var(--navy)}
+
+  /* Action buttons */
+  .kb-action-btn{padding:7px 14px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid var(--purple);background:var(--purple-soft);color:var(--purple);font-family:var(--body);transition:all .15s}
+  .kb-action-btn:hover{background:var(--purple);color:#fff}
+  .kb-action-btn.sm{padding:5px 10px;font-size:11.5px}
+
+  /* Session select modal */
+  .ssm-container{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center}
+  .ssm-container.open{display:flex}
+  .ssm-overlay{position:absolute;inset:0;background:rgba(10,28,56,.4);backdrop-filter:blur(3px)}
+  .ssm-panel{position:relative;background:var(--white);border-radius:16px;padding:28px 24px;width:480px;max-width:92vw;max-height:70vh;overflow-y:auto;box-shadow:0 16px 64px rgba(10,28,56,.25)}
+  .ssm-panel h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:16px}
+  .ssm-list{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+  .ssm-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--ink);transition:background .1s}
+  .ssm-item:hover{background:var(--paper)}
+  .ssm-item input[type="checkbox"]{width:16px;height:16px;accent-color:var(--purple);cursor:pointer}
+  .ssm-item span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ssm-item small{color:var(--muted);font-size:11px;flex-shrink:0}
+  .ssm-footer{display:flex;gap:10px;justify-content:flex-end}
+  .ssm-footer button{padding:9px 20px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--body);transition:all .15s}
+  .ssm-footer button:first-child{background:var(--purple);color:#fff;border:0}
+  .ssm-footer button:first-child:hover{opacity:.88}
+  .ssm-footer button:last-child{background:var(--paper);color:var(--muted);border:1.5px solid var(--line)}
+  .ssm-footer button:last-child:hover{background:var(--line)}
+</style>
+
 </head>
 <body>
 
@@ -825,8 +873,11 @@ function joinWaitlist(){
     <button class="kb-close" onclick="closeKbPanel()">&times;</button>
   </div>
   <div class="kb-tabs">
-    <button class="kb-tab active" data-kb="chats" onclick="switchKbTab('chats')">
-      <span data-en="Chats" data-zh="对话记录">Chats</span>
+    <button class="kb-tab active" data-kb="sessions" onclick="switchKbTab('sessions')">
+      <span data-en="History" data-zh="历史会话">History</span>
+    </button>
+    <button class="kb-tab" data-kb="categories" onclick="switchKbTab('categories')">
+      <span data-en="Categories" data-zh="分类管理">Categories</span>
     </button>
     <button class="kb-tab" data-kb="notes" onclick="switchKbTab('notes')">
       <span data-en="Notes" data-zh="读书笔记">Notes</span>
@@ -1114,7 +1165,15 @@ function toggleChat() {
     document.getElementById('chatInput').focus();
     updateChatLang();
     initBookSelect();
+    // Restore last session if exists
+    if (!currentSessionId && chatSessions.length > 0) {
+      // Sort by ts desc, restore most recent
+      chatSessions.sort(function(a,b){ return (b.ts||'').localeCompare(a.ts||''); });
+      restoreSession(chatSessions[0].id);
+    }
+    if (!currentSessionId) startNewSession();
   } else {
+    saveCurrentSession();
     panel.classList.add('collapsed');
     fab.classList.remove('hidden');
   }
@@ -1194,7 +1253,90 @@ function formatAnswer(t) {
 }
 
 // Conversation history for multi-turn dialogue
+// Conversation history for multi-turn dialogue
 var conversationHistory = [];
+var currentSessionId = null;   // Current chat session ID
+var chatSessions = [];         // All saved sessions
+
+// Load sessions from localStorage on page load
+(function loadSessions() {
+  try {
+    var s = localStorage.getItem('bizatom_sessions');
+    if (s) chatSessions = JSON.parse(s);
+  } catch(e) {}
+})();
+
+// Save current session to localStorage
+function saveCurrentSession() {
+  if (conversationHistory.length === 0) return;
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var firstQ = '';
+  for (var i = 0; i < conversationHistory.length; i++) {
+    if (conversationHistory[i].role === 'user') { firstQ = conversationHistory[i].content; break; }
+  }
+  var session = {
+    id: currentSessionId || ('sess_' + Date.now()),
+    title: firstQ.substring(0, 40) || (zh ? '新对话' : 'New Chat'),
+    ts: new Date().toISOString(),
+    messages: conversationHistory.slice(),
+    categories: []
+  };
+  // Update or add
+  var found = false;
+  for (var i = 0; i < chatSessions.length; i++) {
+    if (chatSessions[i].id === session.id) { chatSessions[i] = session; found = true; break; }
+  }
+  if (!found) chatSessions.push(session);
+  // Keep last 100 sessions
+  if (chatSessions.length > 100) chatSessions = chatSessions.slice(-100);
+  localStorage.setItem('bizatom_sessions', JSON.stringify(chatSessions));
+  currentSessionId = session.id;
+  // Also log to bizatom_chats for simple list
+  try {
+    var chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]');
+    chats.push({ q: firstQ, a: (conversationHistory.length > 1 ? conversationHistory[conversationHistory.length-1].content : ''), ts: session.ts, sessionId: session.id });
+    if (chats.length > 200) chats = chats.slice(-200);
+    localStorage.setItem('bizatom_chats', JSON.stringify(chats));
+  } catch(e) {}
+}
+
+// Restore a session by ID
+function restoreSession(sessId) {
+  var sess = null;
+  for (var i = 0; i < chatSessions.length; i++) {
+    if (chatSessions[i].id === sessId) { sess = chatSessions[i]; break; }
+  }
+  if (!sess) return false;
+  currentSessionId = sess.id;
+  conversationHistory = sess.messages ? sess.messages.slice() : [];
+  // Restore DOM
+  var msgs = document.getElementById('chatMessages');
+  if (!msgs) return true;
+  msgs.innerHTML = '';
+  for (var i = 0; i < conversationHistory.length; i++) {
+    var m = conversationHistory[i];
+    var cls = m.role === 'user' ? 'user' : 'bot';
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + cls;
+    var b = document.createElement('div');
+    b.className = 'bubble';
+    b.innerHTML = formatAnswer(stripMarkdown(m.content || ''));
+    div.appendChild(b);
+    msgs.appendChild(div);
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+  return true;
+}
+
+// Start new session
+function startNewSession() {
+  currentSessionId = 'sess_' + Date.now();
+  conversationHistory = [];
+  var msgs = document.getElementById('chatMessages');
+  if (msgs) msgs.innerHTML = '';
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 Ask me anything about business classics, or select a book from the dropdown.', 'bot');
+}
 
 async function sendMessage(optBookId) {
   if (isWaiting) return;
@@ -1268,6 +1410,8 @@ async function sendMessage(optBookId) {
   bubble.innerHTML = formatAnswer(answer);
   // Log chat to backend (fire-and-forget, non-blocking)
   logChat(q || '', answer, optBookId || '');
+  // Save session to localStorage
+  saveCurrentSession();
   isWaiting = false; btn.disabled = false;
 }
 
@@ -1306,6 +1450,8 @@ function clearChatHistory() {
 // ===== User System & Knowledge Base =====
 var currentUser = null;
 var kbCurrentType = 'personal';
+var kbSelectedCategory = null;  // Current selected category in personal KB
+var kbMultiSelectMode = false;
 
 // ─── Check login on page load ───
 (function checkLogin() {
@@ -1329,7 +1475,6 @@ function showLoggedInUI() {
   document.getElementById('sbAvatar').textContent = (currentUser.name || currentUser.email || 'U').charAt(0).toUpperCase();
   document.getElementById('sbUserName').textContent = currentUser.name || 'User';
   document.getElementById('sbUserEmail').textContent = currentUser.email || '';
-  // Show sidebar
   document.getElementById('sidebar').classList.remove('hidden');
   document.body.classList.add('sidebar-open');
   updateSidebarBadges();
@@ -1352,6 +1497,15 @@ function doLogin() {
   }
   currentUser = { email: email, name: name || email.split('@')[0], since: new Date().toISOString() };
   localStorage.setItem('bizatom_user', JSON.stringify(currentUser));
+  // Init categories if not exist
+  if (!localStorage.getItem('bizatom_categories')) {
+    localStorage.setItem('bizatom_categories', JSON.stringify([
+      { id: 'cat_textbook', name: '经典教材', icon: '📚' },
+      { id: 'cat_bestseller', name: '畅销书', icon: '📕' },
+      { id: 'cat_notes', name: '读书笔记', icon: '📝' },
+      { id: 'cat_uncat', name: '未分类', icon: '📦' }
+    ]));
+  }
   localStorage.setItem('bizatom_chats', JSON.stringify([]));
   closeLogin();
   showLoggedInUI();
@@ -1374,7 +1528,6 @@ function toggleUserMenu() {
 function closeUserMenu() {
   document.getElementById('userDropdown').classList.remove('open');
 }
-// Close dropdown on outside click
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.nav-user-btn') && !e.target.closest('.user-dropdown')) {
     closeUserMenu();
@@ -1387,12 +1540,10 @@ function openKbPanel(type) {
   kbCurrentType = type || 'personal';
   var panel = document.getElementById('kbPanel');
   panel.classList.add('open');
-  // Update sidebar active state
   var items = document.querySelectorAll('.sidebar-nav .nav-item[data-kb]');
   for (var i = 0; i < items.length; i++) {
     items[i].classList.toggle('active', items[i].getAttribute('data-kb') === kbCurrentType);
   }
-  // Set panel title
   var zh = (document.documentElement.lang||'').indexOf('zh')===0;
   var titles = {
     textbook:   zh ? '经典教材库' : 'Textbook Library',
@@ -1400,8 +1551,7 @@ function openKbPanel(type) {
     personal:   zh ? '个人知识库' : 'My Knowledge Base'
   };
   document.getElementById('kbPanelTitle').textContent = titles[kbCurrentType] || titles.personal;
-  // Default tab: chats for personal; books for textbook/bestseller
-  var defaultTab = (kbCurrentType === 'personal') ? 'chats' : 'books';
+  var defaultTab = (kbCurrentType === 'personal') ? 'sessions' : 'books';
   switchKbTab(defaultTab);
 }
 function closeKbPanel() {
@@ -1418,42 +1568,173 @@ function switchKbTab(tab) {
   }
   loadKbContent(tab);
 }
-  var tabBtns = document.querySelectorAll('.kb-tab');
-  for (var i = 0; i < tabBtns.length; i++) {
-    tabBtns[i].classList.remove('active');
-    var t = tabBtns[i].getAttribute('data-kb') || '';
-    // data-kb is not on .kb-tab. Let me check HTML...
-    // Actually in HTML I have: <button class="kb-tab active" data-kb="chats"
-    // So it IS there. Good.
-    if (tabBtns[i].getAttribute('data-kb') === tab) {
-      tabBtns[i].classList.add('active');
-    }
-  }
-  loadKbContent(tab);
-}
 
 function loadKbContent(tab) {
   var body = document.getElementById('kbBody');
   if (!currentUser) { body.innerHTML = '<div class="kb-empty"><div class="ke-icon">🔒</div><p>' + (((document.documentElement.lang||'').indexOf('zh')===0) ? '请先登录' : 'Please sign in first') + '</p></div>'; return; }
-  if (tab === 'chats')  loadKbChats(body);
-  else if (tab === 'notes')  loadKbNotes(body);
-  else if (tab === 'books') loadKbBooks(body);
+  if (tab === 'sessions')        loadKbSessions(body);
+  else if (tab === 'categories')  loadKbCategories(body);
+  else if (tab === 'notes')       loadKbNotes(body);
+  else if (tab === 'books')       loadKbBooks(body);
 }
 
-function loadKbChats(body) {
-  var chats = [];
-  try { chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]'); } catch(e) {}
-  if (chats.length === 0) {
-    var zh = (document.documentElement.lang||'').indexOf('zh')===0;
-    body.innerHTML = '<div class="kb-empty"><div class="ke-icon">💬</div><p>' + (zh ? '您的对话记录将显示在这里。开始与 AI 书童对话吧！' : 'Your chat history will appear here. Start chatting with AI 书童!') + '</p></div>';
+// ─── Load chat sessions (history) ───
+function loadKbSessions(body) {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var sessions = chatSessions.slice().sort(function(a,b){ return (b.ts||'').localeCompare(a.ts||''); });
+  if (sessions.length === 0) {
+    body.innerHTML = '<div class="kb-empty"><div class="ke-icon">💬</div><p>' + (zh ? '还没有对话记录。开始与 AI 书童对话吧！' : 'No chat history yet. Start chatting with AI 书童!') + '</p><button class="kb-action-btn" onclick="openChatAndNewSession()" style="margin-top:12px">' + (zh ? '开始新对话' : 'Start New Chat') + '</button></div>';
     return;
   }
-  var html = '';
-  for (var i = chats.length - 1; i >= 0; i--) {
-    var c = chats[i];
-    html += '<div class="kb-card"><div class="kc-meta">' + (c.ts ? new Date(c.ts).toLocaleString() : '') + (c.bookId ? ' · 📖 ' + c.bookId : '') + '</div><div class="kc-title">' + escapeHtml((c.q||'').substring(0,60)) + '</div><div class="kc-snippet">' + escapeHtml((c.a||'').substring(0,120)) + '...</div></div>';
+  // Group by date
+  var groups = {};
+  for (var i = 0; i < sessions.length; i++) {
+    var d = (sessions[i].ts || '').substring(0, 10);
+    if (!groups[d]) groups[d] = [];
+    groups[d].push(sessions[i]);
+  }
+  var html = '<div class="kb-sessions-header"><button class="kb-action-btn" onclick="openChatAndNewSession()">' + (zh ? '➕ 新对话' : '➕ New Chat') + '</button></div>';
+  var dates = Object.keys(groups).sort().reverse();
+  for (var di = 0; di < dates.length; di++) {
+    var d = dates[di];
+    var dLabel = d === new Date().toISOString().substring(0,10) ? (zh ? '今天' : 'Today') : d;
+    html += '<div class="kb-date-header">' + escapeHtml(dLabel) + '</div>';
+    for (var j = 0; j < groups[d].length; j++) {
+      var s = groups[d][j];
+      var active = s.id === currentSessionId ? ' active' : '';
+      html += '<div class="kb-session-card' + active + '" onclick="onSessionClick(\'' + s.id + '\')"><div class="ks-title">' + escapeHtml(s.title || 'Chat') + '</div><div class="ks-meta">' + (s.messages ? s.messages.length : 0) + ' ' + (zh ? '条消息' : 'msgs') + '</div></div>';
+    }
   }
   body.innerHTML = html;
+}
+
+function onSessionClick(sessId) {
+  // Save current session first
+  saveCurrentSession();
+  // Restore clicked session
+  var ok = restoreSession(sessId);
+  if (ok) {
+    // Open chat panel
+    if (!chatOpen) toggleChat();
+    // Re-render sessions to update active state
+    var body = document.getElementById('kbBody');
+    if (body) loadKbSessions(body);
+  }
+}
+
+function openChatAndNewSession() {
+  startNewSession();
+  if (!chatOpen) toggleChat();
+  closeKbPanel();
+}
+
+// ─── Categories management ───
+function loadKbCategories(body) {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var categories = [];
+  try { categories = JSON.parse(localStorage.getItem('bizatom_categories') || '[]'); } catch(e) {}
+  var html = '<div class="kb-cats-header"><button class="kb-action-btn" onclick="addKbCategory()">' + (zh ? '➕ 新建分类' : '➕ New Category') + '</button></div>';
+  if (categories.length === 0) {
+    html += '<div class="kb-empty"><p>' + (zh ? '还没有分类，点击上方按钮创建' : 'No categories yet') + '</p></div>';
+  } else {
+    for (var i = 0; i < categories.length; i++) {
+      var cat = categories[i];
+      var active = kbSelectedCategory === cat.id ? ' active' : '';
+      html += '<div class="kb-cat-item' + active + '" onclick="selectKbCategory(\'' + cat.id + '\')"><span class="kci-icon">' + (cat.icon||'📁') + '</span><span class="kci-name">' + escapeHtml(cat.name || '') + '</span><span class="kci-count">' + (cat.sessionIds ? cat.sessionIds.length : 0) + '</span></div>';
+    }
+  }
+  body.innerHTML = html;
+}
+
+function addKbCategory() {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var name = prompt(zh ? '输入分类名称：' : 'Category name:');
+  if (!name) return;
+  var categories = [];
+  try { categories = JSON.parse(localStorage.getItem('bizatom_categories') || '[]'); } catch(e) {}
+  categories.push({ id: 'cat_' + Date.now(), name: name, icon: '📁', sessionIds: [] });
+  localStorage.setItem('bizatom_categories', JSON.stringify(categories));
+  loadKbCategories(document.getElementById('kbBody'));
+}
+
+function selectKbCategory(catId) {
+  kbSelectedCategory = catId;
+  loadKbCategories(document.getElementById('kbBody'));
+  // Show sessions in this category
+  showCategorySessions(catId);
+}
+
+function showCategorySessions(catId) {
+  var categories = [];
+  try { categories = JSON.parse(localStorage.getItem('bizatom_categories') || '[]'); } catch(e) {}
+  var cat = null;
+  for (var i = 0; i < categories.length; i++) { if (categories[i].id === catId) { cat = categories[i]; break; } }
+  if (!cat) return;
+  // Show sessions in this category
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var html = '<div class="kb-cat-sessions-header"><span>' + escapeHtml((cat.name||'') + ' (' + (cat.sessionIds?cat.sessionIds.length:0) + ')') + '</span><button class="kb-action-btn sm" onclick="addSessionsToCategory(\'' + catId + '\')">' + (zh ? '➕ 添加会话' : '➕ Add Sessions') + '</button></div>';
+  if (!cat.sessionIds || cat.sessionIds.length === 0) {
+    html += '<div class="kb-empty"><p>' + (zh ? '该分类还没有会话，点击"添加会话"导入' : 'No sessions in this category yet') + '</p></div>';
+  } else {
+    for (var i = 0; i < cat.sessionIds.length; i++) {
+      var sess = null;
+      for (var j = 0; j < chatSessions.length; j++) { if (chatSessions[j].id === cat.sessionIds[i]) { sess = chatSessions[j]; break; } }
+      if (sess) {
+        html += '<div class="kb-session-card" onclick="onSessionClick(\'' + sess.id + '\')"><div class="ks-title">' + escapeHtml(sess.title || 'Chat') + '</div><div class="ks-meta">' + (sess.messages?sess.messages.length:0) + ' msgs</div></div>';
+      }
+    }
+  }
+  // Insert after categories list - for now just replace body
+  document.getElementById('kbBody').innerHTML = html;
+}
+
+function addSessionsToCategory(catId) {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  // Show multi-select modal with all sessions
+  var modal = document.getElementById('sessionSelectModal');
+  if (!modal) {
+    // Create modal
+    var mHtml = '<div class="ssm-overlay" onclick="closeSessionSelect()"></div><div class="ssm-panel"><h3>' + (zh ? '选择要添加的会话' : 'Select sessions to add') + '</h3><div class="ssm-list" id="ssmList"></div><div class="ssm-footer"><button onclick="confirmAddToCategory(\'' + catId + '\')">' + (zh ? '确认添加' : 'Confirm') + '</button><button onclick="closeSessionSelect()">' + (zh ? '取消' : 'Cancel') + '</button></div></div>';
+    modal = document.createElement('div');
+    modal.id = 'sessionSelectModal';
+    modal.className = 'ssm-container';
+    modal.innerHTML = mHtml;
+    document.body.appendChild(modal);
+  }
+  // Populate list
+  var list = document.getElementById('ssmList');
+  var html = '';
+  var sessions = chatSessions.slice().sort(function(a,b){ return (b.ts||'').localeCompare(a.ts||''); });
+  for (var i = 0; i < sessions.length; i++) {
+    html += '<label class="ssm-item"><input type="checkbox" value="' + sessions[i].id + '"> <span>' + escapeHtml(sessions[i].title || 'Chat') + '</span> <small>' + (sessions[i].ts||'').substring(0,10) + '</small></label>';
+  }
+  list.innerHTML = html;
+  modal.classList.add('open');
+}
+
+function closeSessionSelect() {
+  var modal = document.getElementById('sessionSelectModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function confirmAddToCategory(catId) {
+  var checkboxes = document.querySelectorAll('#ssmList input[type="checkbox"]:checked');
+  var ids = [];
+  for (var i = 0; i < checkboxes.length; i++) ids.push(checkboxes[i].value);
+  var categories = [];
+  try { categories = JSON.parse(localStorage.getItem('bizatom_categories') || '[]'); } catch(e) {}
+  for (var i = 0; i < categories.length; i++) {
+    if (categories[i].id === catId) {
+      if (!categories[i].sessionIds) categories[i].sessionIds = [];
+      for (var j = 0; j < ids.length; j++) {
+        if (categories[i].sessionIds.indexOf(ids[j]) === -1) categories[i].sessionIds.push(ids[j]);
+      }
+      break;
+    }
+  }
+  localStorage.setItem('bizatom_categories', JSON.stringify(categories));
+  closeSessionSelect();
+  selectKbCategory(catId);  // Refresh view
 }
 
 function loadKbNotes(body) {
@@ -1467,23 +1748,6 @@ function loadKbBooks(body) {
 
 function escapeHtml(s) {
   var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
-}
-
-// ─── Save chat to localStorage ───
-// Override logChat to also save locally
-var _origLogChat = logChat;
-function logChat(question, answer, bookId) {
-  // Save to localStorage
-  if (currentUser && question) {
-    var chats = [];
-    try { chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]'); } catch(e) {}
-    chats.push({ q: question, a: answer, bookId: bookId || '', ts: new Date().toISOString() });
-    if (chats.length > 200) chats = chats.slice(-200); // Keep last 200
-    localStorage.setItem('bizatom_chats', JSON.stringify(chats));
-    updateSidebarBadges();
-  }
-  // Call original (backend log)
-  if (typeof _origLogChat === 'function') _origLogChat(question, answer, bookId);
 }
 
 function updateSidebarBadges() {
