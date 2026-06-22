@@ -59,7 +59,7 @@ async function callDeepSeek(question, lang, history) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     console.log('[Chat] DEEPSEEK_API_KEY not set');
-    return null;
+    return { answer: null, error: 'API_KEY_NOT_SET' };
   }
 
   const messages = [
@@ -80,11 +80,15 @@ async function callDeepSeek(question, lang, history) {
 
   console.log('[Chat] Calling DeepSeek...', {
     hasKey: !!apiKey,
+    keyPrefix: apiKey.substring(0, 12),
     msgCount: messages.length,
     qLen: question.length
   });
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
     const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -98,25 +102,29 @@ async function callDeepSeek(question, lang, history) {
         temperature: 0.7,
         stream: false,
       }),
+      signal: controller.signal,
     });
 
+    clearTimeout(timeout);
     const status = resp.status;
-    const body = await resp.text();
+    const bodyText = await resp.text();
 
     if (!resp.ok) {
-      console.error('[Chat] DeepSeek error:', status, body.substring(0, 200));
-      return null;
+      const errMsg = '[Chat] DeepSeek error: ' + status + ' ' + bodyText.substring(0, 300);
+      console.error(errMsg);
+      return { answer: null, error: 'API_ERROR_' + status, detail: bodyText.substring(0, 200) };
     }
 
-    const data = JSON.parse(body);
+    const data = JSON.parse(bodyText);
     const answer = data.choices && data.choices[0] && data.choices[0].message
       ? data.choices[0].message.content : null;
 
     console.log('[Chat] DeepSeek OK, answer length:', answer ? answer.length : 0);
-    return answer;
+    return { answer: answer, error: null };
   } catch (e) {
-    console.error('[Chat] DeepSeek exception:', e.message);
-    return null;
+    const errMsg = '[Chat] DeepSeek exception: ' + e.message;
+    console.error(errMsg);
+    return { answer: null, error: 'EXCEPTION: ' + e.message };
   }
 }
 
@@ -143,10 +151,10 @@ export default async function handler(req, res) {
     }
 
     // Call DeepSeek AI
-    const aiAnswer = await callDeepSeek(question, lang, history);
+    const aiResult = await callDeepSeek(question, lang, history);
 
-    if (aiAnswer) {
-      return res.status(200).json({ answer: aiAnswer });
+    if (aiResult && aiResult.answer) {
+      return res.status(200).json({ answer: aiResult.answer });
     }
 
     // Fallback if no API key or API failed
