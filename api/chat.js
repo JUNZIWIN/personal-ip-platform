@@ -133,7 +133,7 @@ export default async function handler(req, res) {
   try {
     const body = req.body || {};
     const question = (body.question || '').trim();
-    const lang = (body.lang === 'en' ? 'zh' : 'zh'); // default zh
+    const lang = body.lang === 'en' ? 'en' : 'zh'; // default zh
     const history = Array.isArray(body.history) ? body.history : [];
 
     if (!question) {
@@ -150,8 +150,17 @@ export default async function handler(req, res) {
     }
 
     // Fallback if no API key or API failed
+    const fallbackMsg = lang === 'zh'
+        ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
+        : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel.";
+
     return res.status(200).json({
-      answer: lang === 'zh'
+      answer: fallbackMsg,
+      debug: {
+        hasKey: !!process.env.DEEPSEEK_API_KEY,
+        vercelEnv: process.env.VERCEL_ENV || 'unknown',
+      }
+    });
         ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
         : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel."
     });
