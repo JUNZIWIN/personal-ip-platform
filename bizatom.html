@@ -580,12 +580,15 @@ function joinWaitlist(){
     msg.textContent = zh ? '请输入有效的邮箱地址。' : 'Please enter a valid email address.';
     return;
   }
-  fetch('https://script.google.com/macros/s/AKfycbylxYBqmO1t1VUii7B5CkG2ATBrGvKAzXbrdK2u08wctGtCIWiDucCBQtvxE6Kgd5jb1g/exec', {
+  fetch('https://formspree.io/f/mjgqvlak', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: v, lang: zh ? 'zh' : 'en' })
+    body: JSON.stringify({ email: v, lang: zh ? 'zh' : 'en', source: 'bizatom.html' })
   })
-  .then(r => r.json())
+  .then(r => {
+    if (r.ok) return r.json();
+    throw new Error('Form error');
+  })
   .then(data => {
     msg.style.color = '#7DE3A1';
     msg.textContent = zh
