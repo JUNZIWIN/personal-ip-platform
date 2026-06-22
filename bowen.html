@@ -561,6 +561,16 @@
 @media (max-width: 600px) {
   .hero-stats-compact { flex-wrap: wrap; gap: 16px; }
 }
+
+/* 简历模板卡片 hover */\n.resume-template-card:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+}
+
+/* 简历上传区域 hover */\n#resumeUploadZone:hover {
+  border-color: var(--accent) !important;
+  background: rgba(124,109,240,0.04);
+}
 </style>
 </head>
 <body>
@@ -571,11 +581,11 @@
     <a href="#" class="nav-logo">AI<span>IPOWER</span></a>
     <div class="nav-links">
       <a href="#home" class="nav-link active" data-i18n="nav.home">主页</a>
-      <a href="#about" class="nav-link" data-i18n="nav.about">关于</a>
+      <a href="#about" class="nav-link" data-i18n="nav.about">简介</a>
       <a href="#products" class="nav-link" data-i18n="nav.products">产品</a>
       <a href="#ai" class="nav-link" data-i18n="nav.ai">AI数字人</a>
       <a href="#domain-ip" class="nav-link" data-i18n="nav.domain">域名IP</a>
-      <a href="#videos" class="nav-link" data-i18n="nav.videos">内容</a>
+      <a href="#resume" class="nav-link" data-i18n="nav.resume">个人简历</a>
       <a href="#contact" class="nav-link" data-i18n="nav.contact">联系</a>
       <a href="https://bizatom.ai" target="_blank" class="nav-link nav-link-ext" style="color:rgba(0,201,167,1);">BIZATOM</a>
       <a href="https://airankrocket.ai" target="_blank" class="nav-link nav-link-ext" style="color:rgba(255,107,53,1);">GEO🚀</a>
@@ -595,11 +605,11 @@
 <!-- 移动端菜单 -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#home">🏠 首页</a>
-  <a href="#about">👤 关于</a>
+  <a href="#about">👤 简介</a>
   <a href="#products">💼 产品</a>
   <a href="#ai">🤖 AI数字人</a>
   <a href="#domain-ip">🌐 域名与IP</a>
-  <a href="#videos">🎬 内容</a>
+  <a href="#resume">📄 个人简历</a>
   <a href="#contact">📬 联系</a>
   <div style="height:1px;background:var(--border-color);margin:8px 0;"></div>
   <a href="https://bizatom.ai" target="_blank" style="color:rgba(0,201,167,1);font-weight:600;">📚 BIZATOM.AI — 商业知识平台</a>
@@ -615,15 +625,22 @@
   <div class="hero-content">
     <div class="hero-text fade-in">
       <div class="profession-badge" style="background:rgba(124,109,240,0.12);border-color:rgba(124,109,240,0.3);color:#7c6df0;width:fit-content;" data-i18n="hero.badge">
-        🚀 AIIPOWER LIMITED 创始人
+        🚀 爱博闻&reg;/AIIPOWER&reg; 创始人 · 港中文2026 MBA
       </div>
       <h1 class="hero-title-strong">Vanessa TIAN</h1>
       <p style="font-size:1.35rem;font-weight:600;color:var(--text-secondary);letter-spacing:6px;margin:-6px 0 4px;" data-i18n="hero.chinese_name">田卜文</p>
       <p class="hero-subtle" data-i18n="hero.english_name">TIAN, Bowen</p>
-      <p style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;" data-i18n="hero.title">AIIPOWER LIMITED 创始人 · AIP Studio、BIZATOM.AI、AIRankRocket</p>
-      <p style="font-size:0.88rem;color:var(--accent);margin-bottom:20px;" data-i18n="hero.subtitle">AIIPOWER®️ · AI reshapes / empowers your brand</p>
+      <!-- 身份标签行 -->
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center;">
+        <span style="font-size:0.75rem;padding:4px 12px;border-radius:14px;background:rgba(124,109,240,0.1);color:var(--accent);border:1px solid rgba(124,109,240,0.2);">深圳AI破局行动家</span>
+        <span style="font-size:0.75rem;padding:4px 12px;border-radius:14px;background:rgba(241,196,15,0.1);color:#f1c40f;border:1px solid rgba(241,196,15,0.2);">赴美生子高龄宝妈</span>
+        <span style="font-size:0.75rem;padding:4px 12px;border-radius:14px;background:rgba(46,204,113,0.1);color:#2ecc71;border:1px solid rgba(46,204,113,0.2);">商原子&reg; BizAtom.ai 创始人</span>
+        <span style="font-size:0.75rem;padding:4px 12px;border-radius:14px;background:rgba(0,201,167,0.1);color:#00c9a7;border:1px solid rgba(0,201,167,0.2);">2026 港中文 CUHK MBA</span>
+      </div>
+      <p style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;" data-i18n="hero.title">爱博闻&reg;/AIIPOWER&reg; 创始人 · AIP Studio、BizAtom.ai、AIRankRocket</p>
+      <p style="font-size:0.88rem;color:var(--accent);margin-bottom:20px;" data-i18n="hero.subtitle">AI + IP + POWER —— AI reshapes / empowers your brand</p>
       <p class="hero-bio-compact" data-i18n="hero.bio">
-        AIIPOWER = AI + IP + POWER：人工智能为底座，知识产权与个人品牌为核心，赋能每一位创作者与企业。2017年创办国教华娱，2018年创立 AIIPOWER 品牌理念，2020年商标获批。
+        养老文娱科技金融跨界创业者，致力于用AI、AR、全息等科技打造个人品牌IP，推动家庭全龄智能生活。2026年8月赴港攻读港中文MBA。
       </p>
       <div class="hero-cta" style="margin-bottom:20px;">
         <a href="#products" class="btn-primary" data-i18n="hero.btn.products">💼 查看产品</a>
@@ -649,16 +666,16 @@
   </div>
 </section>
 
-<!-- ===== 2. About 区（合并个人简介 + 品牌时间线） ===== -->
+<!-- ===== 2. About 区（完整个人简介 + 品牌时间线） ===== -->
 <section class="section about-new" id="about">
   <div class="container">
     <div class="section-header fade-in">
       <p class="section-label" data-i18n="about.label">About & Brand Story</p>
-      <h2 class="section-title" data-i18n="about.title">关于 Vanessa TIAN</h2>
-      <p class="section-desc" data-i18n="about.desc">AIIPOWER LIMITED 创始人 · AI个人IP与品牌赋能者</p>
+      <h2 class="section-title" data-i18n="about.title">田卜文 · Vanessa TIAN</h2>
+      <p class="section-desc" data-i18n="about.desc">深圳AI破局行动家 · 赴美生子高龄宝妈 · 爱博闻&reg;/AIIPOWER&reg; 创始人 · 2026港中文CUHK全日制MBA</p>
     </div>
 
-    <!-- 上半部分：照片 + 文字 -->
+    <!-- 上半部分：照片 + 身份摘要 -->
     <div class="about-top fade-in">
       <div class="about-photo-wrap">
         <div class="pending-badge">⏳ 待上传</div>
@@ -666,39 +683,124 @@
         <p style="font-size:0.7rem;color:var(--text-muted);text-align:center;line-height:1.5;">个人照片<br>建议 800×1000px 以上</p>
       </div>
       <div class="about-text">
-        <h2 data-i18n="about.full_name">Vanessa TIAN<br><span class="en-name" data-i18n="about.chinese_name">田卜文 · TIAN, Bowen</span></h2>
-        <p data-i18n="about.p1">
-          AIIPOWER LIMITED 创始人。2017年创办国教华娱（深圳）文化发展有限公司，2018年创立 AIIPOWER 品牌理念，2019年递交商标申请，2020年正式获批。
-        </p>
-        <p data-i18n="about.p2">
-          品牌中文名「爱博闻」取自对广博学识与远见洞察的追求；AIIPOWER 解码为 <strong>AI + IP + POWER</strong>：人工智能为技术底座，知识产权与个人品牌为战略核心。
-        </p>
-        <p data-i18n="about.p3">
-          旗下核心产品：<strong>AIP Studio</strong>（个人IP SaaS平台 · aiipower.me）、<strong>BIZATOM.AI</strong>（AI商业管理知识平台）与 <strong>AIRankRocket</strong>（AI驱动GEO工具）。To B 业务聚焦：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong>（aiipower.ai）。
-        </p>
-        <p class="brand-slogan" data-i18n="about.slogan">「AI reshapes / empowers your brand. 人工智能，重塑、赋能你的品牌。」</p>
-        <div class="skills-compact">
-          <span class="skill-tag" data-i18n="about.skill.1">AI个人IP</span>
-          <span class="skill-tag" data-i18n="about.skill.2">品牌创立</span>
-          <span class="skill-tag" data-i18n="about.skill.3">SaaS产品</span>
-          <span class="skill-tag" data-i18n="about.skill.4">AI数字人</span>
-          <span class="skill-tag" data-i18n="about.skill.5">商标布局</span>
-          <span class="skill-tag" data-i18n="about.skill.6">跨界创业</span>
+        <h2 data-i18n="about.full_name">Vanessa TIAN<br><span class="en-name">田卜文 · TIAN, Bowen</span></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 16px;">
+          <span class="skill-tag">深圳AI破局行动家</span>
+          <span class="skill-tag">赴美生子高龄宝妈</span>
+          <span class="skill-tag">跨界创业</span>
+          <span class="skill-tag">港中文2026 MBA</span>
         </div>
-        <!-- 公司连接 -->
-        <div style="margin-top:24px;background:var(--bg-secondary);border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;">
-          <div style="width:8px;height:8px;background:#2ecc71;border-radius:50%;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0;"></div>
-          <div style="flex:1;font-size:0.85rem;">
-            <strong style="color:#2ecc71;">AIIPOWER LIMITED</strong>
-            <span style="color:var(--text-muted);margin-left:8px;">企业服务 (aiipower.ai)</span>
-          </div>
-          <a href="https://aiipower.ai" target="_blank" style="font-size:0.8rem;color:var(--accent);text-decoration:none;white-space:nowrap;">访问 →</a>
-        </div>
+
+        <!-- 创业经历 -->
+        <h3 style="font-size:1rem;color:var(--accent);margin:20px 0 10px;border-left:3px solid var(--accent);padding-left:10px;">创业经历</h3>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">
+          养老文娱科技金融跨界创业者，创办<strong>国教华娱（2017）</strong>和<strong>君子闻（2019）</strong>俩文化公司。基于2019年注册的<strong>爱博闻&reg;/AIIPOWER&reg;</strong>平台，致力于用AI、AR、全息等科技打造个人品牌IP，推动家庭全龄智能生活。曾获美国著名投资人青睐，但2019年底疫情爆发导致项目搁浅。
+        </p>
+
+        <!-- 职场经历 -->
+        <h3 style="font-size:1rem;color:var(--accent);margin:20px 0 10px;border-left:3px solid var(--accent);padding-left:10px;">职场经历</h3>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">
+          职业涵盖翻译、外贸、健康养老、传媒MCN。曾在<strong>香港上市公司花样年集团</strong>养老板块公司负责研发"五感自然疗法"项目产品，策划养老项目，主导政府项目洽谈与合作，负责福邻养老公寓招投标落地，统筹子悦大学，后创办<strong>爱健乐老年大学</strong>，涉足短视频直播行业。
+        </p>
+
+        <!-- 社会公益 -->
+        <h3 style="font-size:1rem;color:var(--accent);margin:20px 0 10px;border-left:3px solid var(--accent);padding-left:10px;">社会公益</h3>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">
+          曾担任<strong>深圳市福田区民间文艺家协会</strong>秘书长兼副主席。
+        </p>
+
+        <!-- 人脉资源 -->
+        <h3 style="font-size:1rem;color:var(--accent);margin:20px 0 10px;border-left:3px solid var(--accent);padding-left:10px;">人脉资源</h3>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">
+          香港上市公司、著名华尔街投资人、中小企业创始人客户资源、高端政府资源等。
+        </p>
+
+        <!-- 近期规划 -->
+        <h3 style="font-size:1rem;color:var(--accent);margin:20px 0 10px;border-left:3px solid var(--accent);padding-left:10px;">近期规划</h3>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">
+          2026年8月赴港进修<strong>香港中文大学MBA</strong>全日制攻读硕士学位，将多年实战经验结合系统化商科知识，重组创业团队，全面重启<strong>爱博闻&reg;/AIIPOWER&reg;</strong>。
+        </p>
       </div>
     </div>
 
+    <!-- 创业项目详情 -->
+    <div class="fade-in" style="margin-top:48px;">
+      <h3 style="font-size:1.1rem;color:var(--accent);margin-bottom:24px;text-align:center;">🚀 创业项目</h3>
+
+      <!-- AIIPOWER.me -->
+      <div style="background:var(--bg-card);border:1px solid rgba(124,109,240,0.25);border-radius:14px;padding:24px;margin-bottom:16px;">
+        <h4 style="font-size:1rem;color:var(--accent);margin-bottom:8px;">1）AIIPOWER.me</h4>
+        <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.75;margin-bottom:14px;">
+          专为社会精英、各界知名人士、公司创始人及企业家打造个人商业品牌IP的<strong>AI驱动平台</strong>，融合AR、VR、全息等科技，推动全智龄家庭生活。
+        </p>
+        <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:12px;">旗下四大模块项目：</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+          <div style="background:rgba(0,201,167,0.08);border:1px solid rgba(0,201,167,0.2);border-radius:10px;padding:14px;">
+            <strong style="color:#00c9a7;font-size:0.85rem;">🧠 知识管理核</strong>
+            <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:4px;">BizAtom.ai（开发完善中）</p>
+          </div>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;padding:14px;opacity:0.7;">
+            <strong style="color:var(--accent);font-size:0.85rem;">💚 健康养老核</strong>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">TBD</p>
+          </div>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;padding:14px;opacity:0.7;">
+            <strong style="color:var(--accent);font-size:0.85rem;">🎯 品牌形象核</strong>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">TBD</p>
+          </div>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;padding:14px;opacity:0.7;">
+            <strong style="color:var(--accent);font-size:0.85rem;">💰 财富管理核</strong>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">TBD</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AIIPOWER.ai -->
+      <div style="background:var(--bg-card);border:1px solid rgba(46,204,113,0.25);border-radius:14px;padding:24px;margin-bottom:16px;">
+        <h4 style="font-size:1rem;color:#2ecc71;margin-bottom:8px;">2）AIIPOWER.ai</h4>
+        <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.75;">
+          针对<strong>企业高管、自由职业者、OPC/公司创始人</strong>推出的AI原生网站SaaS开发平台，致力于传统企业的<strong>AI原生转型</strong>以及<strong>AI企培服务</strong>。
+        </p>
+      </div>
+
+      <!-- BizAtom.ai -->
+      <div style="background:linear-gradient(135deg,rgba(0,201,167,0.08),rgba(0,201,167,0.02));border:1px solid rgba(0,201,167,0.3);border-radius:14px;padding:24px;margin-bottom:16px;">
+        <h4 style="font-size:1rem;color:#00c9a7;margin-bottom:8px;">3）BizAtom.ai 商原子&reg;</h4>
+        <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.75;margin-bottom:12px;">
+          爱博闻&reg;/AIIPOWER&reg; 公司<strong>核心先驱产品</strong>，国际商学院AI驱动知识管理OS平台。
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(0,201,167,0.06);border-radius:10px;padding:14px;">
+            <p style="font-size:0.78rem;color:#00c9a7;font-weight:700;margin-bottom:4px;">📌 使命</p>
+            <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6;">让商业知识学习从耗时变高效，从碎片变体系。</p>
+          </div>
+          <div style="background:rgba(0,201,167,0.06);border-radius:10px;padding:14px;">
+            <p style="font-size:0.78rem;color:#00c9a7;font-weight:700;margin-bottom:4px;">💎 核心价值</p>
+            <p style="font-size:0.83rem;color:var(--text-secondary);line-height:1.6;">15分钟掌握一本商业经典的核心框架，科学方法支撑的知识管理革命。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AIRankRocket -->
+      <div style="background:var(--bg-card);border:1px solid rgba(255,107,53,0.25);border-radius:14px;padding:24px;margin-bottom:16px;">
+        <h4 style="font-size:1rem;color:#ff6b35;margin-bottom:8px;">4）AIRankRocket</h4>
+        <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.75;">
+          一个<strong>GEO工具</strong>，致力于帮助个人/企业在各大媒体平台及AI模型搜索中，提升用户搜索，建立品牌信任，重塑AI时代的品牌知名度。
+        </p>
+      </div>
+    </div>
+
+    <!-- 公司连接 -->
+    <div style="margin-top:32px;background:var(--bg-secondary);border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;" class="fade-in">
+      <div style="width:8px;height:8px;background:#2ecc71;border-radius:50%;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0;"></div>
+      <div style="flex:1;font-size:0.85rem;">
+        <strong style="color:#2ecc71;">AIIPOWER LIMITED</strong>
+        <span style="color:var(--text-muted);margin-left:8px;">企业服务 (aiipower.ai)</span>
+      </div>
+      <a href="https://aiipower.ai" target="_blank" style="font-size:0.8rem;color:var(--accent);text-decoration:none;white-space:nowrap;">访问 →</a>
+    </div>
+
     <!-- 下半部分：品牌时间线 -->
-    <div class="brand-timeline fade-in">
+    <div class="brand-timeline fade-in" style="margin-top:56px;">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-year">2017</div>
@@ -711,7 +813,7 @@
         <div class="timeline-dot"></div>
         <div class="timeline-year">2018</div>
         <div class="timeline-body">
-          <h4 data-i18n="timeline.2018.title">AIIPOWER®️ 构想萌芽</h4>
+          <h4 data-i18n="timeline.2018.title">AIIPOWER&reg; 构想萌芽</h4>
           <p data-i18n="timeline.2018.desc">AIIPOWER = AI + IP + POWER 品牌理念诞生。刻意保留 AIIP 完整拼写再接 POWER——真正的品牌力量，靠完整表达建立信任。</p>
         </div>
       </div>
@@ -719,8 +821,8 @@
         <div class="timeline-dot"></div>
         <div class="timeline-year">2019</div>
         <div class="timeline-body">
-          <h4 data-i18n="timeline.2019.title">商标正式递交</h4>
-          <p data-i18n="timeline.2019.desc">「爱博闻 AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。</p>
+          <h4 data-i18n="timeline.2019.title">君子闻成立 + 商标递交</h4>
+          <p data-i18n="timeline.2019.desc">创办君子闻文化公司，同时「爱博闻 AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。获美国著名投资人青睐。</p>
         </div>
       </div>
       <div class="timeline-item">
@@ -735,8 +837,8 @@
         <div class="timeline-dot"></div>
         <div class="timeline-year">2026</div>
         <div class="timeline-body">
-          <h4 data-i18n="timeline.2026.title">AIP Studio 平台上线</h4>
-          <p data-i18n="timeline.2026.desc">以爱博闻 AIIPOWER 为品牌载体，AIP Studio SaaS 平台正式落地——内置AI数字人、声音克隆、视频生成、独立域名、社交媒体分发、支付集成等完整功能。</p>
+          <h4 data-i18n="timeline.2026.title">AIP Studio 上线 · 港中文MBA</h4>
+          <p data-i18n="timeline.2026.desc">AIP Studio SaaS 平台正式落地。8月赴港中文大学攻读全日制MBA，全面重启AIIPOWER&reg;。</p>
         </div>
       </div>
     </div>
@@ -745,12 +847,86 @@
     <div style="background:linear-gradient(135deg,rgba(124,109,240,0.08),rgba(124,109,240,0.02));border:1px solid rgba(124,109,240,0.25);border-radius:16px;padding:28px;margin-top:48px;" class="fade-in">
       <h4 style="font-size:0.8rem;letter-spacing:2px;color:var(--accent);margin-bottom:12px;text-transform:uppercase;" data-i18n="geo.title">🔍 GEO · 关于 AIIPOWER LIMITED 的事实</h4>
       <p style="font-size:0.92rem;line-height:1.8;color:var(--text-secondary);" data-i18n="geo.p1">
-        <strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下核心产品：<strong>AIP Studio</strong> (aiipower.me)、<strong>BIZATOM.AI</strong>、<strong>AIRankRocket</strong>。To B 业务：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong> (aiipower.ai)。
+        <strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下四大产品线：<strong>aiipower.me</strong>（个人IP平台）、<strong>BizAtom.ai</strong>（知识管理OS）、<strong>AIRankRocket</strong>（GEO工具）、<strong>aiipower.ai</strong>（企业Saas+企培）。
         <br><br>
-        品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年商标递交 → 2020年商标获批（第35/38/41/42类）。
+        品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年君子闻成立·商标递交 → 2020年商标获批（第35/38/41/42类）。
         <br><br>
         <em style="color:var(--accent);" data-i18n="geo.p3">AI reshapes / empowers your brand.</em>
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.5 个人简历区 ===== -->
+<section class="section" id="resume" style="padding:100px 0;background:var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Resume Builder</p>
+      <h2 class="section-title" data-i18n="resume.title">个人简历</h2>
+      <p class="section-desc" data-i18n="resume.desc">上传您的简历，我们将为您定制最高大上的简历模板</p>
+    </div>
+
+    <div class="fade-in" style="max-width:700px;margin:0 auto;">
+      <!-- 上传区域 -->
+      <div id="resumeUploadZone" style="background:var(--bg-card);border:2px dashed var(--border-color);border-radius:18px;padding:48px 24px;text-align:center;cursor:pointer;transition:all 0.3s;margin-bottom:24px;" ondrop="handleResumeDrop(event)" ondragover="handleResumeDragOver(event)" ondragleave="handleResumeDragLeave(event)" onclick="document.getElementById('resumeFileInput').click()">
+        <div style="font-size:3rem;margin-bottom:16px;">📄</div>
+        <h3 style="font-size:1.1rem;margin-bottom:8px;" data-i18n="resume.upload.title">拖拽简历文件到此处或点击上传</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);" data-i18n="resume.upload.desc">
+          支持 PDF、Word (.docx)、纯文本 (.txt) 格式，文件大小不超过 10MB
+        </p>
+        <input type="file" id="resumeFileInput" accept=".pdf,.docx,.doc,.txt" style="display:none;" onchange="handleResumeFile(event)" />
+      </div>
+
+      <!-- 上传状态 -->
+      <div id="resumeStatus" style="display:none;background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:20px;margin-bottom:24px;text-align:center;">
+        <div id="resumeStatusIcon" style="font-size:2rem;margin-bottom:8px;">⏳</div>
+        <p id="resumeStatusText" style="font-size:0.9rem;color:var(--text-secondary);">正在解析简历...</p>
+        <div id="resumeProgress" style="margin-top:12px;height:4px;background:var(--border-color);border-radius:2px;overflow:hidden;">
+          <div id="resumeProgressBar" style="height:100%;background:linear-gradient(90deg,var(--accent),#00c9a7);width:0%;transition:width 0.3s;"></div>
+        </div>
+      </div>
+
+      <!-- 简历模板预览 -->
+      <div id="resumePreview" style="display:none;">
+        <h3 style="font-size:1rem;color:var(--accent);margin-bottom:16px;text-align:center;" data-i18n="resume.preview.title">✨ 简历模板预览</h3>
+
+        <!-- 模板选择 -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;">
+          <div class="resume-template-card" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;" onclick="selectResumeTemplate('executive')" data-template="executive">
+            <div style="font-size:1.8rem;margin-bottom:8px;">💼</div>
+            <p style="font-size:0.82rem;color:#fff;font-weight:600;">高管精英</p>
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.7);">Executive</p>
+          </div>
+          <div class="resume-template-card" style="background:linear-gradient(135deg,#00c9a7,#00897b);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;" onclick="selectResumeTemplate('modern')" data-template="modern">
+            <div style="font-size:1.8rem;margin-bottom:8px;">🎯</div>
+            <p style="font-size:0.82rem;color:#fff;font-weight:600;">现代简约</p>
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.7);">Modern</p>
+          </div>
+          <div class="resume-template-card" style="background:linear-gradient(135deg,#ff6b35,#e55a00);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;" onclick="selectResumeTemplate('creative')" data-template="creative">
+            <div style="font-size:1.8rem;margin-bottom:8px;">🎨</div>
+            <p style="font-size:0.82rem;color:#fff;font-weight:600;">创意设计</p>
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.7);">Creative</p>
+          </div>
+          <div class="resume-template-card" style="background:linear-gradient(135deg,#7c6df0,#5a4fcf);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent;" onclick="selectResumeTemplate('classic')" data-template="classic">
+            <div style="font-size:1.8rem;margin-bottom:8px;">📜</div>
+            <p style="font-size:0.82rem;color:#fff;font-weight:600;">经典优雅</p>
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.7);">Classic</p>
+          </div>
+        </div>
+
+        <!-- 简历预览区 -->
+        <div id="resumePreviewArea" style="background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:32px;min-height:300px;box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+          <div style="text-align:center;padding:60px 20px;color:var(--text-muted);">
+            <div style="font-size:2.5rem;margin-bottom:12px;">📋</div>
+            <p data-i18n="resume.preview.placeholder">上传简历并选择模板后，此处将展示定制效果</p>
+          </div>
+        </div>
+
+        <!-- 下载按钮 -->
+        <div style="text-align:center;margin-top:24px;">
+          <button id="resumeDownloadBtn" class="btn-primary" style="font-size:0.9rem;padding:12px 32px;" onclick="downloadResume()" disabled data-i18n="resume.download">⬇️ 下载定制简历</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1156,16 +1332,17 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3 data-i18n="footer.brand">爱博闻&nbsp;<span>AIIPOWER</span></h3>
-        <p data-i18n="footer.brand.desc">AIIPOWER LIMITED 由 Vanessa TIAN (田卜文) 于2018年创立品牌理念，2020年商标获批。<br>
+        <h3>爱博闻&nbsp;<span>AIIPOWER</span></h3>
+        <p>AIIPOWER LIMITED 由 Vanessa TIAN (田卜文) 于2018年创立品牌理念，2020年商标获批。<br>
         <em>AI + IP + POWER —— AI reshapes / empowers your brand</em></p>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.nav">导航</h4>
         <a href="#home" data-i18n="nav.home">主页</a>
-        <a href="#about" data-i18n="nav.about">关于</a>
+        <a href="#about" data-i18n="nav.about">简介</a>
         <a href="#products" data-i18n="nav.products">产品服务</a>
         <a href="#ai" data-i18n="nav.ai">AI数字人</a>
+        <a href="#resume" data-i18n="nav.resume">个人简历</a>
         <a href="#domain-ip" data-i18n="nav.domain">域名与IP</a>
       </div>
       <div class="footer-col">

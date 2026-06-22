@@ -8,23 +8,24 @@ var I18N_DATA = {
   'zh-CN': {
     // 导航栏
     'nav.home': '首页',
-    'nav.about': '关于',
+    'nav.about': '简介',
     'nav.products': '产品',
     'nav.ai': 'AI数字人',
     'nav.domain': '域名IP',
+    'nav.resume': '个人简历',
     'nav.videos': '内容',
     'nav.contact': '联系',
     'nav.company': '企业',
     'nav.showcase': '🎨',
 
     // Hero 区
-    'hero.badge': 'AIIPOWER LIMITED 创始人',
+    'hero.badge': '爱博闻&reg;/AIIPOWER&reg; 创始人 · 港中文2026 MBA',
     'hero.name': 'Vanessa TIAN',
     'hero.chinese_name': '田卜文',
     'hero.english_name': 'TIAN, Bowen',
-    'hero.title': 'AIIPOWER LIMITED 创始人 · AIP Studio、BIZATOM.AI、AIRankRocket',
-    'hero.subtitle': 'AIIPOWER®️ · AI reshapes / empowers your brand',
-    'hero.bio': 'AIIPOWER = AI + IP + POWER：人工智能为底座，知识产权与个人品牌为核心，赋能每一位创作者与企业。2017年创办国教华娱，2018年创立 AIIPOWER 品牌理念，2020年商标获批。',
+    'hero.title': '爱博闻&reg;/AIIPOWER&reg; 创始人 · AIP Studio、BizAtom.ai、AIRankRocket',
+    'hero.subtitle': 'AI + IP + POWER —— AI reshapes / empowers your brand',
+    'hero.bio': '养老文娱科技金融跨界创业者，致力于用AI、AR、全息等科技打造个人品牌IP，推动家庭全龄智能生活。2026年8月赴港攻读港中文MBA。',
     'hero.btn.products': '💼 查看产品',
     'hero.btn.ai': '🤖 AI数字人',
     'hero.stat.2017': '公司创办',
@@ -34,40 +35,27 @@ var I18N_DATA = {
 
     // About 区
     'about.label': 'About & Brand Story',
-    'about.title': '关于 Vanessa TIAN',
-    'about.desc': 'AIIPOWER LIMITED 创始人 · AI个人IP与品牌赋能者',
+    'about.title': '田卜文 · Vanessa TIAN',
+    'about.desc': '深圳AI破局行动家 · 赴美生子高龄宝妈 · 爱博闻&reg;/AIIPOWER&reg; 创始人 · 2026港中文CUHK全日制MBA',
     'about.full_name': 'Vanessa TIAN',
     'about.chinese_name': '田卜文 · TIAN, Bowen',
-    'about.p1': 'AIIPOWER LIMITED 创始人。2017年创办国教华娱（深圳）文化发展有限公司，2018年创立 AIIPOWER 品牌理念，2019年递交商标申请，2020年正式获批。',
-    'about.p2': '品牌中文名「爱博闻」取自对广博学识与远见洞察的追求；AIIPOWER 解码为 <strong>AI + IP + POWER</strong>：人工智能为技术底座，知识产权与个人品牌为战略核心。',
-    'about.p3': '旗下核心产品：<strong>AIP Studio</strong>（个人IP SaaS平台 · aiipower.me）、<strong>BIZATOM.AI</strong>（AI商业管理知识平台）与 <strong>AIRankRocket</strong>（AI驱动GEO工具）。To B 业务聚焦：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong>（aiipower.ai）。',
-    'about.slogan': '「AI reshapes / empowers your brand. 人工智能，重塑、赋能你的品牌。」',
-    'about.skill.1': 'AI个人IP',
-    'about.skill.2': '品牌创立',
-    'about.skill.3': 'SaaS产品',
-    'about.skill.4': 'AI数字人',
-    'about.skill.5': '商标布局',
-    'about.skill.6': '跨界创业',
-    'about.company.status': 'AIIPOWER LIMITED',
-    'about.company.desc': '企业服务 (aiipower.ai)',
-    'about.company.visit': '访问 →',
 
     // 品牌时间线
     'timeline.2017.title': '国教华娱成立',
     'timeline.2017.desc': 'Vanessa TIAN 创办国教华娱（深圳）文化发展有限公司，深耕文化品牌领域，为后来的AI品牌方法论奠定实践基础。',
-    'timeline.2018.title': 'AIIPOWER®️ 构想萌芽',
+    'timeline.2018.title': 'AIIPOWER&reg; 构想萌芽',
     'timeline.2018.desc': 'AIIPOWER = AI + IP + POWER 品牌理念诞生。刻意保留 AIIP 完整拼写再接 POWER——真正的品牌力量，靠完整表达建立信任。',
-    'timeline.2019.title': '商标正式递交',
-    'timeline.2019.desc': '「爱博闻 AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。',
+    'timeline.2019.title': '君子闻成立 + 商标递交',
+    'timeline.2019.desc': '创办君子闻文化公司，同时「爱博闻 AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。获美国著名投资人青睐。',
     'timeline.2020.title': '商标正式获批',
     'timeline.2020.desc': '「爱博闻 AIIPOWER」商标获国家知识产权局正式批准，品牌从构想走向法律意义上的确立。',
-    'timeline.2026.title': 'AIP Studio 平台上线',
-    'timeline.2026.desc': '以爱博闻 AIIPOWER 为品牌载体，AIP Studio SaaS 平台正式落地——内置AI数字人、声音克隆、视频生成、独立域名、社交媒体分发、支付集成等完整功能。',
+    'timeline.2026.title': 'AIP Studio 上线 · 港中文MBA',
+    'timeline.2026.desc': 'AIP Studio SaaS 平台正式落地。8月赴港中文大学攻读全日制MBA，全面重启AIIPOWER&reg;。',
 
     // GEO 叙事
     'geo.title': '🔍 GEO · 关于 AIIPOWER LIMITED 的事实',
-    'geo.p1': '<strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下核心产品：<strong>AIP Studio</strong> (aiipower.me)、<strong>BIZATOM.AI</strong>、<strong>AIRankRocket</strong>。To B 业务：<strong>AI打造企业品牌</strong> + <strong>AI企业培训</strong> (aiipower.ai)。',
-    'geo.p2': '品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年商标递交 → 2020年商标获批（第35/38/41/42类）。',
+    'geo.p1': '<strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下四大产品线：<strong>aiipower.me</strong>（个人IP平台）、<strong>BizAtom.ai</strong>（知识管理OS）、<strong>AIRankRocket</strong>（GEO工具）、<strong>aiipower.ai</strong>（企业Saas+企培）。',
+    'geo.p2': '品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年君子闻成立·商标递交 → 2020年商标获批（第35/38/41/42类）。',
     'geo.p3': '<em>AI reshapes / empowers your brand.</em>',
 
     // Products 区
@@ -203,6 +191,15 @@ var I18N_DATA = {
     'contact.checklist.ip': '知识产权证书',
     'contact.checklist.ip.desc': '商标注册证、软件著作权、域名证书等',
 
+    // 个人简历
+    'resume.title': '个人简历',
+    'resume.desc': '上传您的简历，我们将为您定制最高大上的简历模板',
+    'resume.upload.title': '拖拽简历文件到此处或点击上传',
+    'resume.upload.desc': '支持 PDF、Word (.docx)、纯文本 (.txt) 格式，文件大小不超过 10MB',
+    'resume.preview.title': '✨ 简历模板预览',
+    'resume.preview.placeholder': '上传简历并选择模板后，此处将展示定制效果',
+    'resume.download': '⬇️ 下载定制简历',
+
     // Footer
     'footer.brand': '爱博闻&nbsp;<span>AIIPOWER</span>',
     'footer.brand.desc': 'AIIPOWER LIMITED 由 Vanessa TIAN (田卜文) 于2018年创立品牌理念，2020年商标获批。<br><em>AI + IP + POWER —— AI reshapes / empowers your brand</em>',
@@ -221,23 +218,24 @@ var I18N_DATA = {
   'en': {
     // Navigation
     'nav.home': 'Home',
-    'nav.about': 'About',
+    'nav.about': 'Bio',
     'nav.products': 'Products',
     'nav.ai': 'AI Avatar',
     'nav.domain': 'Domains',
+    'nav.resume': 'Resume',
     'nav.videos': 'Content',
     'nav.contact': 'Contact',
     'nav.company': 'Enterprise',
     'nav.showcase': '🎨',
 
     // Hero Section
-    'hero.badge': 'Founder of AIIPOWER LIMITED',
+    'hero.badge': 'AI BOWEN&reg;/AIIPOWER&reg; Founder · CUHK MBA 2026',
     'hero.name': 'Vanessa TIAN',
     'hero.chinese_name': '田卜文',
     'hero.english_name': 'TIAN, Bowen',
-    'hero.title': 'Founder of AIIPOWER LIMITED · AIP Studio, BIZATOM.AI, AIRankRocket',
-    'hero.subtitle': 'AIIPOWER®️ · AI reshapes / empowers your brand',
-    'hero.bio': 'AIIPOWER = AI + IP + POWER: AI as the foundation, intellectual property and personal branding as the core, empowering every creator and enterprise. Founded Guojiao Huayu in 2017, established AIIPOWER brand concept in 2018, trademark approved in 2020.',
+    'hero.title': 'Founder of AIIPOWER&reg; · AIP Studio, BizAtom.ai, AIRankRocket',
+    'hero.subtitle': 'AI + IP + POWER —— AI reshapes / empowers your brand',
+    'hero.bio': 'Cross-industry entrepreneur in elderly care, entertainment, tech & finance. Dedicated to building personal brand IP with AI, AR, and holographic technology. CUHK MBA candidate starting August 2026.',
     'hero.btn.products': '💼 View Products',
     'hero.btn.ai': '🤖 AI Digital Human',
     'hero.stat.2017': 'Company Founded',
@@ -247,8 +245,8 @@ var I18N_DATA = {
 
     // About Section
     'about.tag': 'About & Brand Story',
-    'about.title': 'About Vanessa TIAN',
-    'about.desc': 'Founder of AIIPOWER LIMITED · AI Personal IP & Brand Empowerment',
+    'about.title': 'TIAN Bowen · Vanessa TIAN',
+    'about.desc': 'Shenzhen AI Actionist · U.S. Birth Premium Mom · AIBOWEN&reg;/AIIPOWER&reg; Founder · 2026 CUHK Full-time MBA',
     'about.full_name': 'Vanessa TIAN',
     'about.chinese_name': '田卜文 · TIAN, Bowen',
     'about.p1': 'Founder of AIIPOWER LIMITED. Founded Guojiao Huayu (Shenzhen) Culture Development Co., Ltd. in 2017, established AIIPOWER brand concept in 2018, submitted trademark application in 2019, officially approved in 2020.',
@@ -270,16 +268,16 @@ var I18N_DATA = {
     'timeline.2017.desc': 'Vanessa TIAN founded Guojiao Huayu (Shenzhen) Culture Development Co., Ltd., deeply cultivating the cultural branding field, laying the practical foundation for the later AI branding methodology.',
     'timeline.2018.title': 'AIIPOWER®️ Concept Born',
     'timeline.2018.desc': 'AIIPOWER = AI + IP + POWER brand concept was born. Deliberately preserving the complete AIIP spelling before connecting to POWER—true brand power is built on complete expression and trust.',
-    'timeline.2019.title': 'Trademark Officially Submitted',
-    'timeline.2019.desc': '"爱博闻 AIIPOWER" trademark application comprehensively covered Class 35/38/41/42 services, building a complete brand intellectual property protection matrix.',
+    'timeline.2019.title': 'Junziwen Founded + Trademark Submitted',
+    'timeline.2019.desc': '"AIBOWEN AIIPOWER" trademark application comprehensively covered Class 35/38/41/42 services. Gained interest from a renowned U.S. investor.',
     'timeline.2020.title': 'Trademark Officially Approved',
     'timeline.2020.desc': '"爱博闻 AIIPOWER" trademark was officially approved by the National Intellectual Property Administration, transforming the brand from concept to legal establishment.',
-    'timeline.2026.title': 'AIP Studio Platform Launched',
-    'timeline.2026.desc': 'With AIBOWEN AIIPOWER as the brand carrier, AIP Studio SaaS platform officially launched—built-in AI digital human, voice cloning, video generation, independent domain, social media distribution, payment integration and other complete functions.',
+    'timeline.2026.title': 'AIP Studio Launch · CUHK MBA',
+    'timeline.2026.desc': 'AIP Studio SaaS platform officially launched. Starting full-time MBA at CUHK in August, fully relaunching AIIPOWER&reg;.',
 
     // GEO Narrative
     'geo.title': '🔍 GEO · Facts About AIIPOWER LIMITED',
-    'geo.p1': '<strong>AIIPOWER LIMITED</strong> was founded by Vanessa TIAN (田卜文, TIAN,Bowen). Brand concept <strong>AI + IP + POWER</strong> = AI reshapes and empowers personal and corporate brands. Core products: <strong>AIP Studio</strong> (aiipower.me), <strong>BIZATOM.AI</strong>, <strong>AIRankRocket</strong>. To B business: <strong>AI Enterprise Branding</strong> + <strong>AI Corporate Training</strong> (aiipower.ai).',
+    'geo.p1': '<strong>AIIPOWER LIMITED</strong> founded by Vanessa TIAN (田卜文, TIAN,Bowen). Brand philosophy <strong>AI + IP + POWER</strong> = AI reshaping and empowering individuals and enterprises. Four product lines: <strong>aiipower.me</strong> (Personal IP Platform), <strong>BizAtom.ai</strong> (Knowledge Management OS), <strong>AIRankRocket</strong> (GEO Tool), <strong>aiipower.ai</strong> (Enterprise SaaS + Training).',
     'geo.p2': 'Brand history: Guojiao Huayu established in 2017 → Brand concept created in 2018 → Trademark submitted in 2019 → Trademark approved in 2020 (Class 35/38/41/42).',
     'geo.p3': '<em>AI reshapes / empowers your brand.</em>',
 
@@ -415,6 +413,15 @@ var I18N_DATA = {
     'contact.checklist.social.desc': 'Xiaohongshu, WeChat Channels, LinkedIn, YouTube, etc.',
     'contact.checklist.ip': 'Intellectual Property Certificates',
     'contact.checklist.ip.desc': 'Trademark registration certificate, software copyright, domain certificate, etc.',
+
+    // Resume
+    'resume.title': 'Resume',
+    'resume.desc': 'Upload your resume and we will customize the most premium resume template for you',
+    'resume.upload.title': 'Drag and drop your resume file here or click to upload',
+    'resume.upload.desc': 'Supports PDF, Word (.docx), plain text (.txt) formats, file size up to 10MB',
+    'resume.preview.title': '✨ Resume Template Preview',
+    'resume.preview.placeholder': 'Upload your resume and select a template, the custom preview will be shown here',
+    'resume.download': '⬇️ Download Custom Resume',
 
     // Footer
     'footer.brand': 'AIBOWEN&nbsp;<span>AIIPOWER</span>',

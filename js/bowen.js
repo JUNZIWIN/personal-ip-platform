@@ -165,3 +165,196 @@ function toggleCheckCompact(btn) {
   if (btn.classList.contains('checked')) btn.textContent = '✓';
   else btn.textContent = '';
 }
+
+// ============ 个人简历功能 ============
+let selectedTemplate = null;
+let resumeFileData = null;
+let resumeFileName = '';
+
+function handleResumeDragOver(e) {
+  e.preventDefault();
+  const zone = document.getElementById('resumeUploadZone');
+  if (zone) zone.style.borderColor = 'var(--accent)';
+}
+
+function handleResumeDragLeave(e) {
+  e.preventDefault();
+  const zone = document.getElementById('resumeUploadZone');
+  if (zone) zone.style.borderColor = 'var(--border-color)';
+}
+
+function handleResumeDrop(e) {
+  e.preventDefault();
+  const zone = document.getElementById('resumeUploadZone');
+  if (zone) zone.style.borderColor = 'var(--border-color)';
+  const file = e.dataTransfer.files[0];
+  if (file) processResumeFile(file);
+}
+
+function handleResumeFile(e) {
+  const file = e.target.files[0];
+  if (file) processResumeFile(file);
+}
+
+function processResumeFile(file) {
+  const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'text/plain'];
+  if (!validTypes.includes(file.type) && !file.name.endsWith('.txt') && !file.name.endsWith('.doc')) {
+    showToast('❌ 仅支持 PDF、Word、TXT 格式');
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('❌ 文件大小不能超过 10MB');
+    return;
+  }
+
+  resumeFileData = file;
+  resumeFileName = file.name;
+
+  // 显示上传状态
+  const statusEl = document.getElementById('resumeStatus');
+  const statusText = document.getElementById('resumeStatusText');
+  const statusIcon = document.getElementById('resumeStatusIcon');
+  const progressBar = document.getElementById('resumeProgressBar');
+  const preview = document.getElementById('resumePreview');
+
+  if (statusEl) statusEl.style.display = 'block';
+  if (preview) preview.style.display = 'block';
+
+  // 模拟解析进度
+  let progress = 0;
+  const messages = ['正在读取文件...', '正在解析内容...', '正在生成模板预览...', '完成！'];
+  let msgIdx = 0;
+  const interval = setInterval(() => {
+    progress += 25;
+    if (progressBar) progressBar.style.width = progress + '%';
+    if (statusText) statusText.textContent = messages[msgIdx] || '完成！';
+    if (statusIcon) statusIcon.textContent = progress < 100 ? '⏳' : '✅';
+    msgIdx++;
+    if (progress >= 100) {
+      clearInterval(interval);
+      if (statusEl) setTimeout(() => { statusEl.style.display = 'none'; }, 1500);
+    }
+  }, 500);
+
+  // 更新预览区
+  updateResumePreview(file.name);
+}
+
+function updateResumePreview(fileName) {
+  const previewArea = document.getElementById('resumePreviewArea');
+  if (!previewArea) return;
+
+  const nameOnly = fileName.replace(/\.(pdf|docx?|txt)$/i, '');
+  const template = selectedTemplate || 'executive';
+
+  const templateStyles = {
+    executive: { accent: '#667eea', bg: '#f8f7ff', nameColor: '#764ba2' },
+    modern: { accent: '#00c9a7', bg: '#f0fdfa', nameColor: '#00897b' },
+    creative: { accent: '#ff6b35', bg: '#fff7f0', nameColor: '#e55a00' },
+    classic: { accent: '#7c6df0', bg: '#f9f7ff', nameColor: '#5a4fcf' },
+  };
+
+  const s = templateStyles[template] || templateStyles.executive;
+
+  previewArea.innerHTML = `
+    <div style="background:${s.bg};border-radius:8px;padding:28px;font-family:sans-serif;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid ${s.accent};">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,${s.accent},${s.nameColor});display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;font-weight:700;flex-shrink:0;">👤</div>
+        <div>
+          <h3 style="font-size:1.2rem;color:${s.nameColor};margin:0;">${nameOnly}</h3>
+          <p style="font-size:0.8rem;color:#666;margin:4px 0 0;">创始人 / CEO</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <h4 style="font-size:0.85rem;color:${s.accent};margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">工作经验</h4>
+          <div style="margin-bottom:12px;font-size:0.82rem;color:#333;">
+            <p style="font-weight:600;margin:0;">创始人 & CEO</p>
+            <p style="color:#666;margin:2px 0;font-size:0.75rem;">AIIPOWER LIMITED · 2018 - 至今</p>
+            <p style="color:#555;font-size:0.78rem;">AI + IP + POWER 品牌赋能平台，旗下AIP Studio、BizAtom.ai、AIRankRocket</p>
+          </div>
+          <div style="margin-bottom:12px;font-size:0.82rem;color:#333;">
+            <p style="font-weight:600;margin:0;">创始人</p>
+            <p style="color:#666;margin:2px 0;font-size:0.75rem;">国教华娱 · 2017 - 至今</p>
+            <p style="color:#555;font-size:0.78rem;">文化发展公司，深耕品牌与传媒领域</p>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-size:0.85rem;color:${s.accent};margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">教育背景</h4>
+          <div style="margin-bottom:12px;font-size:0.82rem;color:#333;">
+            <p style="font-weight:600;margin:0;">MBA 全日制硕士</p>
+            <p style="color:#666;margin:2px 0;font-size:0.75rem;">香港中文大学 (CUHK) · 2026 - </p>
+          </div>
+          <h4 style="font-size:0.85rem;color:${s.accent};margin-bottom:8px;margin-top:16px;text-transform:uppercase;letter-spacing:1px;">核心能力</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-size:0.72rem;padding:3px 10px;border-radius:10px;background:${s.accent}18;color:${s.accent};">AI品牌赋能</span>
+            <span style="font-size:0.72rem;padding:3px 10px;border-radius:10px;background:${s.accent}18;color:${s.accent};">跨文化沟通</span>
+            <span style="font-size:0.72rem;padding:3px 10px;border-radius:10px;background:${s.accent}18;color:${s.accent};">团队管理</span>
+            <span style="font-size:0.72rem;padding:3px 10px;border-radius:10px;background:${s.accent}18;color:${s.accent};">创业经验</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // 启用下载按钮
+  const downloadBtn = document.getElementById('resumeDownloadBtn');
+  if (downloadBtn) downloadBtn.disabled = false;
+}
+
+function selectResumeTemplate(type) {
+  selectedTemplate = type;
+
+  // 高亮选中的模板卡片
+  document.querySelectorAll('.resume-template-card').forEach(card => {
+    card.style.border = '2px solid transparent';
+    card.style.transform = 'scale(1)';
+  });
+  const selectedCard = document.querySelector('[data-template="' + type + '"]');
+  if (selectedCard) {
+    selectedCard.style.border = '2px solid #fff';
+    selectedCard.style.transform = 'scale(1.05)';
+  }
+
+  // 如果已有文件数据，刷新预览
+  if (resumeFileName) {
+    updateResumePreview(resumeFileName);
+  }
+}
+
+function downloadResume() {
+  if (!selectedTemplate && !resumeFileName) {
+    showToast('⚠️ 请先上传简历并选择模板');
+    return;
+  }
+
+  // 获取预览区 HTML
+  const previewArea = document.getElementById('resumePreviewArea');
+  if (!previewArea) return;
+
+  const htmlContent = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>个人简历 - ${resumeFileName ? resumeFileName.replace(/\.(pdf|docx?|txt)$/i, '') : 'Resume'}</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+</style>
+</head>
+<body>
+${previewArea.innerHTML}
+</body>
+</html>`;
+
+  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = (resumeFileName ? resumeFileName.replace(/\.(pdf|docx?|txt)$/i, '') : 'resume') + '_custom.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast('✅ 简历模板下载成功！');
+}
