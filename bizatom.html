@@ -190,6 +190,17 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-typing span:nth-child(3){animation-delay:.3s}
 @keyframes bounce{to{transform:translateY(-6px);opacity:.4}}
 
+/* Book Answer Card Styles */
+.book-answer{padding:4px 0}.ba-title{color:var(--purple);font-size:1.05em;margin:0 0 4px 0;font-weight:700}
+.ba-meta{color:var(--muted);font-size:.82em;margin:0 0 8px 0}
+.ba-brief{font-size:.9em;line-height:1.55;color:var(--ink);margin:0 0 10px 0}
+.ba-concepts{background:#F8F7FF;border-radius:10px;padding:10px 14px;margin:8px 0}
+.ba-concepts h4{color:var(--purple);font-size:.88em;margin:0 0 6px 0;font-weight:600}
+.ba-concepts ul{margin:0;padding-left:16px;list-style:none}
+.ba-concepts li{font-size:.85em;line-height:1.6;margin-bottom:5px;color:var(--ink)}
+.ba-concepts li strong{color:var(--purple)}
+.ba-footer{font-size:.8em;color:var(--muted);margin:10px 0 2px 0;font-style:italic}
+
 .chat-suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;flex-shrink:0}
 .chat-suggestions button{font-size:11.5px;padding:7px 13px;border-radius:99px;background:var(--purple-soft);color:var(--purple);border:1px solid rgba(107,63,160,.15);cursor:pointer;transition:all .2s;white-space:nowrap;font-weight:500}
 .chat-suggestions button:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
@@ -714,11 +725,56 @@ function askAboutSelectedBook() {
   if (!sel.value) return;
   var bookId = sel.value;
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
-  var prefix = lang === 'zh' ? '这本书的核心思想是什么？' : 'What are the key ideas of this book?';
+  // Find the book title for display
+  var book = null;
+  for (var i = 0; i < BIZATOM_KB.length; i++) {
+    if (BIZATOM_KB[i].id === bookId) { book = BIZATOM_KB[i]; break; }
+  }
+  var displayText = lang === 'zh'
+    ? '📖 「' + (book ? book.zh.t : '') + '」的核心思想是什么？'
+    : '📖 What are the key ideas of "' + (book ? book.en.t : '') + '"?';
   var input = document.getElementById('chatInput');
-  input.value = prefix;
-  sendMessage();
+  input.value = displayText;
+  sendMessage(bookId);
   sel.value = '';
+}
+
+/* ---- Generate Book-Specific Answer ---- */
+function generateBookAnswer(bookId, lang) {
+  var book = null;
+  for (var i = 0; i < BIZATOM_KB.length; i++) {
+    if (BIZATOM_KB[i].id === bookId) { book = BIZATOM_KB[i]; break; }
+  }
+  if (!book) return null;
+
+  var d = book[lang] || book.en;
+  var typeLabel = '';
+  if (lang === 'zh') {
+    typeLabel = book.type === 'textbook' ? '📚 经典教材'
+      : book.type === 'bestseller' ? '🔥 畅销书' : '📚 经典教材 + 🔥 畅销书';
+  } else {
+    typeLabel = book.type === 'textbook' ? '📚 Textbook'
+      : book.type === 'bestseller' ? '🔥 Bestseller' : '📚 Textbook + 🔥 Bestseller';
+  }
+
+  var html = '<div class="book-answer">';
+  html += '<h3 class="ba-title">' + d.t + '</h3>';
+  html += '<p class="ba-meta">' + d.a + ' &nbsp;|&nbsp; ' + typeLabel + '</p>';
+  html += '<p class="ba-brief">' + d.b + '</p>';
+
+  if (d.c && d.c.length > 0) {
+    html += '<div class="ba-concepts"><h4>' + (lang === 'zh' ? '💡 核心概念' : '💡 Key Concepts') + '</h4><ul>';
+    for (var j = 0; j < d.c.length; j++) {
+      html += '<li><strong>' + d.c[j][0] + '</strong>：' + d.c[j][1] + '</li>';
+    }
+    html += '</ul></div>';
+  }
+
+  html += '<p class="ba-footer">' + (lang === 'zh'
+    ? '💬 你可以继续问我关于这本书的任何细节，或者换一本书。'
+    : '💬 Feel free to ask more details about this book or switch to another.') + '</p>';
+  html += '</div>';
+  return html;
 }
 
 /* ---- Knowledge Base Search ---- */
@@ -857,34 +913,51 @@ function formatAnswer(t) {
   return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 }
 
-async function sendMessage() {
+async function sendMessage(optBookId) {
   if (isWaiting) return;
   var inp = document.getElementById('chatInput');
   var q = inp.value.trim();
-  if (!q) return;
+  if (!q && !optBookId) return;
   var btn = document.getElementById('sendBtn');
   isWaiting = true; btn.disabled = true;
   inp.value = ''; inp.focus();
-  addMsg(q, 'user');
+
+  var displayQ = q || '';
+  addMsg(displayQ, 'user');
   showTyping();
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
 
-  // Try API first, fallback to client-side KB
   var answer = null;
-  try {
-    var resp = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({question:q, lang:lang})
-    });
-    if (resp.ok) {
-      var data = await resp.json();
-      answer = data.answer;
-    }
-  } catch(e) { /* API not available, use client-side KB */ }
 
+  // Priority 1: If a specific book was selected via dropdown → generate rich answer
+  if (optBookId) {
+    answer = generateBookAnswer(optBookId, lang);
+    await new Promise(function(r){setTimeout(r, 500 + Math.random()*500)});
+  }
+
+  // Priority 2: Try API (for free-text questions)
+  if (!answer && q) {
+    try {
+      var resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({question:q, lang:lang})
+      });
+      if (resp.ok) {
+        var data = await resp.json();
+        answer = data.answer;
+      }
+    } catch(e) { /* API not available, use client-side KB */ }
+  }
+
+  // Priority 3: Client-side keyword search
+  if (!answer && q) {
+    answer = kbSearch(q, lang);
+  }
+
+  // Priority 4: Fallback
   if (!answer) {
-    answer = kbSearch(q, lang) || fallbackText(lang);
+    answer = fallbackText(lang);
   }
 
   // simulate a tiny delay for natural feel
