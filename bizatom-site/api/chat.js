@@ -1,127 +1,133 @@
 /**
- * BizAtom AI Book Q&A — Vercel Serverless Function
- * Answers questions about 30+ business classics with built-in knowledge base.
+ * BizAtom AI Chat — Vercel Serverless Function
+ * Connects to DeepSeek API for real AI responses
  *
- * POST /api/chat  { question: string, lang?: 'zh'|'en' }
- * Returns: { answer: string }
+ * POST /api/chat
+ * Body: { question: string, lang?: 'zh'|'en', bookId?: string, history?: Array }
  *
- * Upgrade path: set env var OPENAI_API_KEY for AI-powered answers.
+ * Env: DEEPSEEK_API_KEY
  */
 
-const fs = require('fs');
-const path = require('path');
+// ─── System prompts ───
+const SYSTEM_PROMPTS = {
+  zh: `你是 BizAtom（商原子）的 AI 智能书僮。你是一位博学的商业顾问和阅读导师。
 
-// ─── Load the shared knowledge base ───
-let BIZATOM_KB = [];
-try {
-  const kbPath = path.join(process.cwd(), 'bizatom-kb.js');
-  const kbContent = fs.readFileSync(kbPath, 'utf8');
-  const kbFunc = new Function(kbContent + '\nreturn BIZATOM_KB;');
-  BIZATOM_KB = kbFunc();
-  console.log(`Knowledge base loaded: ${BIZATOM_KB.length} books`);
-} catch (e) {
-  console.error('Failed to load bizatom-kb.js:', e.message);
-}
+你的知识库涵盖 99+ 本商业经典，包括但不限于：
+• 金融与投资：《穷爸爸富爸爸》《聪明的投资者》《随机漫步的傻瓜》等
+• 心理学与行为：《影响力》《思考快与慢》《终身成长》《坚毅》等
+• 创业与创新：《精益创业》《从0到1》《创新者的窘境》等
+• 营销与增长：《定位》《紫牛》《上瘾》《疯传》等
+• 经济学：《魔鬼经济学》《小岛经济学》《国富论》等
+• 传记：《乔布斯传》《马斯克传》《贝佐斯传》等
+• MBA经典教材：会计学、公司金融、投资学、战略管理、组织行为学等
+• 效率与成长：《深度工作》《七个习惯》《原子习惯》等
+• 中国商业：《人情与面子》《阿里传》《创新中国》等
 
-// ─── Match knowledge: concept vs book question ───
-function matchKnowledge(question, lang) {
-  const q = question.toLowerCase().trim();
-  if (!BIZATOM_KB.length) return null;
+回答规则：
+1. 用中文回答，语气专业而亲切，像一位经验丰富的商业导师
+2. 回答要具体、有深度，不要泛泛而谈
+3. 引用书籍核心思想时标注书名
+4. 如果问题超出书籍范围，结合商业常识回答
+5. 回答长度适中（200-800字），需要时可以更长
+6. 适当使用 emoji 让回答更生动
+7. 你不是搜索引擎——你能思考、总结、给出 actionable insights
+8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可`,
 
-  // Step 1: Find best-matching book by keyword score
-  let bestBook = null, bestS = 0;
-  for (const b of BIZATOM_KB) {
-    let score = 0;
-    for (const kw of b.kw) {
-      if (q.includes(kw.toLowerCase())) score += kw.length;
+  en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
+
+Your knowledge base covers 99+ business classics including:
+• Finance & Investing: Rich Dad Poor Dad, The Intelligent Investor, A Random Walk Down Wall Street
+• Psychology: Influence, Thinking Fast and Slow, Mindset, Grit
+• Entrepreneurship: The Lean Startup, Zero to One, Innovator's Dilemma
+• Marketing: Positioning, Purple Cow, Hooked, Contagious
+• Economics: Freakonomics, Naked Economics, The Wealth of Nations
+• Biographies: Steve Jobs, Elon Musk, Jeff Bezos
+• MBA Textbooks: Accounting, Corporate Finance, Investments, Strategy, OB
+• Productivity: Deep Work, 7 Habits, Atomic Habits
+
+Rules:
+1. Professional yet warm tone like a seasoned mentor
+2. Specific, insightful answers — never generic
+3. Cite book titles when referencing ideas
+4. Combine book knowledge with business common sense
+5. 200-800 words typically, longer when needed
+6. Use emoji sparingly for clarity
+7. You think, synthesize, and give actionable insights
+8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.`
+};
+
+// ─── Call DeepSeek API ───
+async function callDeepSeek(question, lang, history) {
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) {
+    console.log('[Chat] DEEPSEEK_API_KEY not set');
+    return { answer: null, error: 'API_KEY_NOT_SET' };
+  }
+
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.zh }
+  ];
+
+  // Add conversation history (last 6 turns)
+  if (history && Array.isArray(history)) {
+    for (const h of history.slice(-6)) {
+      messages.push({
+        role: h.role === 'user' ? 'user' : 'assistant',
+        content: String(h.content || '')
+      });
     }
-    if (score > bestS) { bestS = score; bestBook = b; }
   }
-  if (!bestBook || bestS === 0) return null;
 
-  const d = bestBook[lang] || bestBook.en;
-  if (!d) return null;
+  messages.push({ role: 'user', content: question });
 
-  // Step 2: Find best-matching concept (bidirectional)
-  let bestConcept = null, bestCS = 0;
-  for (const c of d.c) {
-    const cname = c[0].toLowerCase(), cdesc = c[1];
-    let cs = 0;
-    // Forward: question contains concept name parts
-    const parts = cname.split(/[\s\-:：]+/);
-    for (const p of parts) {
-      if (p.length >= 2 && q.includes(p)) cs += p.length * 2;
+  console.log('[Chat] Calling DeepSeek...', {
+    hasKey: !!apiKey,
+    keyPrefix: apiKey.substring(0, 12),
+    msgCount: messages.length,
+    qLen: question.length
+  });
+
+  try {
+    const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey,
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: messages,
+        max_tokens: 1500,
+        temperature: 0.7,
+        stream: false,
+      }),
+    });
+
+    const status = resp.status;
+    const bodyText = await resp.text();
+
+    if (!resp.ok) {
+      const errMsg = '[Chat] DeepSeek error: ' + status + ' ' + bodyText.substring(0, 300);
+      console.error(errMsg);
+      return { answer: null, error: 'API_ERROR_' + status, detail: bodyText.substring(0, 200) };
     }
-    if (cname.length >= 4 && q.includes(cname.slice(0, 6))) cs += 12;
-    if (cname.length >= 8 && q.includes(cname)) cs += cname.length * 4;
-    // Reverse: concept name contains question words
-    const qWords = q.split(/\s+/);
-    for (const qw of qWords) {
-      if (qw.length >= 3 && cname.includes(qw)) cs += qw.length * 3;
-    }
-    // ASCII tokens (for mixed CN/EN like "MVP")
-    const asciiTokens = cname.match(/[a-z0-9]+/g) || [];
-    for (const tok of asciiTokens) {
-      if (tok.length >= 2 && q.includes(tok)) cs += tok.length * 3;
-    }
-    if (cs > bestCS) { bestCS = cs; bestConcept = c; }
+
+    const data = JSON.parse(bodyText);
+    const answer = data.choices && data.choices[0] && data.choices[0].message
+      ? data.choices[0].message.content : null;
+
+    console.log('[Chat] DeepSeek OK, answer length:', answer ? answer.length : 0);
+    return { answer: answer, error: null };
+  } catch (e) {
+    const errMsg = '[Chat] DeepSeek exception: ' + e.message;
+    console.error(errMsg);
+    return { answer: null, error: 'EXCEPTION: ' + e.message };
   }
-
-  // Step 3: PRIORITY OUTPUT
-  const isConceptQ = bestCS >= 6;
-
-  if (isConceptQ && bestConcept) {
-    let answer = `💡 **${bestConcept[0]}**\n\n${bestConcept[1]}\n\n`;
-    answer += `📖 *${lang === 'zh' ? '出自' : 'From'}: ${d.t} — ${d.a}*\n`;
-    return answer;
-  }
-
-  // Step 4: Full book overview
-  let answer = `📚 **${d.t}** — ${d.a}\n\n${d.b}\n\n`;
-  if (bestConcept && bestCS > 3) {
-    answer += `💡 **${bestConcept[0]}**：${bestConcept[1]}\n\n`;
-  }
-  answer += `📋 ${lang === 'zh' ? '核心概念一览' : 'Key Concepts'}：\n`;
-  for (const c of d.c) {
-    answer += `  • ${c[0]}\n`;
-  }
-  return answer;
-}
-
-// ─── Fallback when no match ───
-function fallbackResponse(lang) {
-  const books = BIZATOM_KB.slice(0, 20).map(b => {
-    const d = b[lang] || b.en;
-    return d ? `• ${d.t} — ${d.a}` : `• ${b.id}`;
-  }).join('\n');
-
-  if (lang === 'zh') {
-    return `📚 **我是 BizAtom AI 书僮**，支持 ${BIZATOM_KB.length}+ 本商业经典。
-
-你可以问我任何概念、框架或核心思想。支持的热门书籍包括：
-${books}
-
-💡 试试问我：
-• "什么是蓝海战略？"
-• "解释第一性原理"
-• "从0到1的核心思想"
-• "穷查理宝典的智慧"`;
-  }
-
-  return `📚 **I'm the BizAtom AI Book Assistant**, with ${BIZATOM_KB.length}+ business classics.
-
-Ask me about any concept, framework, or key idea from:
-${books}
-
-💡 Try asking:
-• "What is Blue Ocean Strategy?"
-• "Explain First Principles"
-• "Tell me about Zero to One"
-• "What are Charlie Munger's principles?"`;
 }
 
 // ─── Main handler ───
 export default async function handler(req, res) {
+  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -130,45 +136,42 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
 
   try {
-    const { question, lang = 'en' } = req.body || {};
-    if (!question || typeof question !== 'string' || question.trim().length === 0) {
-      return res.status(400).json({ answer: lang === 'zh' ? '请提出一个问题。' : 'Please ask a question.' });
+    const body = req.body || {};
+    const question = (body.question || '').trim();
+    const lang = body.lang === 'en' ? 'en' : 'zh'; // default zh
+    const history = Array.isArray(body.history) ? body.history : [];
+
+    if (!question) {
+      return res.status(200).json({
+        answer: lang === 'zh' ? '请提出一个问题 😊' : 'Please ask a question 😊'
+      });
     }
 
-    // Step 1: Knowledge base match
-    const kbAnswer = matchKnowledge(question, lang);
-    if (kbAnswer) {
-      return res.status(200).json({ answer: kbAnswer });
+    // Call DeepSeek AI
+    const aiResult = await callDeepSeek(question, lang, history);
+
+    if (aiResult && aiResult.answer) {
+      return res.status(200).json({ answer: aiResult.answer });
     }
 
-    // Step 2: OpenAI fallback (if configured)
-    const apiKey = process.env.OPENAI_API_KEY || process.env.BIZATOM_AI_KEY;
-    if (apiKey) {
-      try {
-        const systemPrompt = lang === 'zh'
-          ? `你是BizAtom商原子的AI书僮，专门回答商业经典书籍的问题。支持${BIZATOM_KB.length}+本书籍。以简洁专业的方式回答，引用相关概念。中文回复。`
-          : `You are BizAtom's AI Book Assistant. Answer concisely and professionally. Keep under 300 words.`;
+    // Fallback if no API key or API failed
+    const fallbackMsg = lang === 'zh'
+      ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
+      : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel.";
 
-        const aiResp = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-          body: JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: question }],
-            max_tokens: 600, temperature: 0.7
-          })
-        });
-        if (aiResp.ok) {
-          const data = await aiResp.json();
-          return res.status(200).json({ answer: data.choices[0].message.content });
-        }
-      } catch (aiErr) { console.error('AI API error:', aiErr.message); }
-    }
+    return res.status(200).json({
+      answer: fallbackMsg,
+      debug: {
+        hasKey: !!process.env.DEEPSEEK_API_KEY,
+        vercelEnv: process.env.VERCEL_ENV || 'unknown',
+        error: aiResult ? aiResult.error : 'UNKNOWN'
+      }
+    });
 
-    // Step 3: Fallback
-    return res.status(200).json({ answer: fallbackResponse(lang) });
   } catch (err) {
-    console.error('Chat error:', err);
-    return res.status(500).json({ answer: '抱歉，处理你的问题时出了错。请稍后再试。' });
+    console.error('[Chat] Handler error:', err);
+    return res.status(500).json({
+      answer: '抱歉，处理请求时出了错，请稍后再试。'
+    });
   }
 }

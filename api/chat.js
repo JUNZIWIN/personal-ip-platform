@@ -30,7 +30,8 @@ const SYSTEM_PROMPTS = {
 4. 如果问题超出书籍范围，结合商业常识回答
 5. 回答长度适中（200-800字），需要时可以更长
 6. 适当使用 emoji 让回答更生动
-7. 你不是搜索引擎——你能思考、总结、给出 actionable insights`,
+7. 你不是搜索引擎——你能思考、总结、给出 actionable insights
+8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可`,
 
   en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
 
@@ -51,7 +52,8 @@ Rules:
 4. Combine book knowledge with business common sense
 5. 200-800 words typically, longer when needed
 6. Use emoji sparingly for clarity
-7. You think, synthesize, and give actionable insights`
+7. You think, synthesize, and give actionable insights
+8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.`
 };
 
 // ─── Call DeepSeek API ───
