@@ -728,6 +728,325 @@ var BIZATOM_KB = [
     ["Real-World Case Studies","Hundreds of real leader cases: from front-line supervisors to CEOS, from non-profits to Fortune 500. Each maps to one or more of the Five Practices — making theory actionable."]]},
     kw:["leadership challenge","领导力挑战","kouzes","库泽斯","posner","波斯纳","five practices","五种习惯行为","model the way","以身作则","inspire vision","共启愿景","credibility","信誉","LPI","leadership practices inventory","领导力实务"]
   }
+
+  {
+    id:"mba-accounting-dummies", cat:"mba", type:"textbook",
+    zh:{t:"会计学入门",a:"特雷西·朱",b:"为管理者和MBA学生打造的会计学入门经典，用最通俗的语言讲解财务报表、成本会计和管理会计核心概念，帮助非财务背景的经理人快速掌握商业语言。",c:["会计循环","财务报表解读","成本行为分析","预算与控制"], org:"", year:2016},
+    en:{t:"Accounting For Dummies",a:"Tracy B. Tregarthen",b:"A plain-English guide to accounting basics for managers and MBA students, covering financial statements, cost accounting, and managerial accounting with clarity and humor.",c:["Accounting Cycle","Financial Statement Analysis","Cost Behavior","Budgeting & Control"]},
+    kw:["会计","财务报表","MBA","成本管理","管理会计"]
+  },
+  {
+    id:"mba-corporate-finance-ross", cat:"finance", type:"textbook",
+    zh:{t:"公司理财",a:"斯蒂芬·罗斯",b:"全球最广泛使用的公司金融教科书，系统讲解资本预算、资本结构、股利政策、风险管理等核心主题，是MBA公司金融课程的标杆教材。",c:["资本预算","资本成本","资本结构","股利政策"], org:"", year:2022},
+    en:{t:"Corporate Finance",a:"Stephen A. Ross, Randolph W. Westerfield, Jeffrey F. Jaffe",b:"The gold-standard MBA textbook on corporate finance. Covers capital budgeting, capital structure, dividend policy, and risk management with unmatched clarity.",c:["Capital Budgeting","Cost of Capital","Capital Structure","Dividend Policy"]},
+    kw:["公司金融","资本预算","资本结构","MBA","公司理财"]
+  },
+  {
+    id:"mba-investments-bodie", cat:"finance", type:"textbook",
+    zh:{t:"投资学",a:"兹维·博迪",b:"投资学领域最权威的教科书之一，全面覆盖现代投资组合理论、资产定价、固定收益证券、衍生品和风险管理，是金融MBA的核心教材。",c:["投资组合理论","资本资产定价模型","固定收益","衍生品"], org:"", year:2021},
+    en:{t:"Investments",a:"Zvi Bodie, Alex Kane, Alan J. Marcus",b:"The definitive textbook on investments, covering modern portfolio theory, asset pricing, fixed-income securities, derivatives, and risk management for finance MBAs.",c:["Portfolio Theory","CAPM","Fixed Income","Derivatives"]},
+    kw:["投资学","投资组合","资产定价","MBA","金融"]
+  },
+  {
+    id:"mba-financial-accounting", cat:"mba", type:"textbook",
+    zh:{t:"财务会计",a:"查尔斯·亨格瑞",b:"财务会计经典教材，以清晰的逻辑和丰富的案例帮助读者理解会计准则、财务报表编制和分析，是MBA会计课程的首选教材。",c:["会计准则","资产负债表","利润表","现金流量表"], org:"", year:2018},
+    en:{t:"Financial Accounting",a:"Charles T. Horngren, Walter T. Harrison, Suzanne A. Oliver",b:"The classic financial accounting textbook that helps students master accounting standards, financial statement preparation, and analysis with real-world cases.",c:["Accounting Standards","Balance Sheet","Income Statement","Cash Flow Statement"]},
+    kw:["财务会计","会计","财务报表","MBA"]
+  },
+  {
+    id:"mba-economics-parkin", cat:"economics", type:"textbook",
+    zh:{t:"经济学",a:"迈克尔·帕金",b:"全面系统的经济学原理教材，涵盖微观经济学和宏观经济学核心内容，以清晰的解释和丰富的实例著称，是MBA经济学课程的主流教材。",c:["供给与需求","市场结构","GDP与经济增长","货币政策"], org:"", year:2021},
+    en:{t:"Economics",a:"Michael Parkin",b:"A comprehensive principles textbook covering both microeconomics and macroeconomics with exceptional clarity and real-world applications for MBA students.",c:["Supply and Demand","Market Structure","GDP & Growth","Monetary Policy"]},
+    kw:["经济学原理","微观经济学","宏观经济学","MBA"]
+  },
+  {
+    id:"mba-microeconomics-baye", cat:"economics", type:"textbook",
+    zh:{t:"管理经济学与商业策略",a:"迈克尔·贝叶",b:"将微观经济学原理应用于商业决策，涵盖需求分析、成本结构、市场结构和竞争策略，帮助管理者用经济学思维解决商业问题。",c:["需求弹性","生产成本","垄断竞争","博弈论应用"], org:"", year:2022},
+    en:{t:"Managerial Economics and Business Strategy",a:"Michael R. Baye, Jeff Prince",b:"Applies microeconomic principles to business decision-making, covering demand analysis, cost structure, market structure, and competitive strategy.",c:["Demand Elasticity","Production Costs","Monopolistic Competition","Game Theory Applications"]},
+    kw:["管理经济学","商业策略","微观经济学","MBA"]
+  },
+  {
+    id:"mba-macroeconomics-mankiw", cat:"economics", type:"textbook",
+    zh:{t:"宏观经济学",a:"N·格里高利·曼昆",b:"宏观经济学领域的标杆教材，系统讲解GDP、通货膨胀、失业、货币政策和财政政策，以清晰易懂的风格成为全球MBA首选。",c:["GDP衡量","通货膨胀与失业","开放经济宏观","宏观经济政策"], org:"", year:2021},
+    en:{t:"Macroeconomics",a:"N. Gregory Mankiw",b:"The leading macroeconomics textbook, covering GDP, inflation, unemployment, monetary and fiscal policy with unmatched clarity. The gold standard for MBA macro courses.",c:["Measuring GDP","Inflation & Unemployment","Open-Economy Macroeconomics","Macroeconomic Policy"]},
+    kw:["宏观经济学","GDP","货币政策","财政政策","MBA"]
+  },
+  {
+    id:"mba-stats-anderson", cat:"mba", type:"textbook",
+    zh:{t:"商务与经济统计",a:"大卫·安德森",b:"MBA统计学权威教材，涵盖描述统计、概率分布、假设检验、回归分析和时间序列，以商业应用为导向，帮助管理者用数据驱动决策。",c:["描述统计","假设检验","线性回归","时间序列预测"], org:"", year:2020},
+    en:{t:"Statistics for Business and Economics",a:"David R. Anderson, Dennis J. Sweeney, Thomas A. Williams",b:"The authoritative MBA statistics textbook covering descriptive statistics, probability, hypothesis testing, regression, and time series with a business-applied focus.",c:["Descriptive Statistics","Hypothesis Testing","Linear Regression","Time Series Forecasting"]},
+    kw:["商务统计","数据分析","回归分析","MBA","统计学"]
+  },
+  {
+    id:"mba-strategy-grant", cat:"mba", type:"textbook",
+    zh:{t:"当代战略分析",a:"罗伯特·格兰特",b:"战略管理领域经典教材，系统讲解行业分析、资源基础观、动态能力、竞争定位和公司层战略，整合了最新的数字化战略内容。",c:["行业分析","资源基础观","竞争定位","公司层战略"], org:"", year:2021},
+    en:{t:"Contemporary Strategy Analysis",a:"Robert M. Grant",b:"A classic strategy textbook covering industry analysis, the resource-based view, dynamic capabilities, competitive positioning, and corporate strategy, with updated digital strategy content.",c:["Industry Analysis","Resource-Based View","Competitive Positioning","Corporate Strategy"]},
+    kw:["战略管理","竞争战略","资源基础观","MBA"]
+  },
+  {
+    id:"mba-organizational-behavior", cat:"mba", type:"textbook",
+    zh:{t:"组织行为学",a:"斯蒂芬·罗宾斯",b:"组织行为学领域最广泛使用的教材，系统讲解个体差异、激励理论、群体动力学、领导力和组织文化，帮助管理者理解并塑造组织行为。",c:["激励理论","领导理论","群体动力学","组织文化"], org:"", year:2021},
+    en:{t:"Organizational Behavior",a:"Stephen P. Robbins, Timothy A. Judge",b:"The world's most widely used OB textbook, covering individual differences, motivation theories, group dynamics, leadership, and organizational culture.",c:["Motivation Theories","Leadership Theories","Group Dynamics","Organizational Culture"]},
+    kw:["组织行为学","领导力","激励","管理学","MBA"]
+  },
+  {
+    id:"mba-marketing-kotler", cat:"marketing", type:"textbook",
+    zh:{t:"营销管理",a:"菲利普·科特勒",b:"营销学圣经，全球最权威的营销教材，系统讲解市场分析、顾客价值、品牌管理、数字营销和营销战略，已更新至第16版。",c:["市场细分","顾客价值","品牌管理","数字营销"], org:"", year:2021},
+    en:{t:"Marketing Management",a:"Philip Kotler, Kevin Lane Keller",b:"The bible of marketing. The world's most authoritative marketing textbook, covering market analysis, customer value, brand management, digital marketing, and marketing strategy. Now in its 16th edition.",c:["Market Segmentation","Customer Value","Brand Management","Digital Marketing"]},
+    kw:["营销管理","科特勒","品牌","数字营销","MBA"]
+  },
+  {
+    id:"mba-operations-heizer", cat:"mba", type:"textbook",
+    zh:{t:"运营原理",a:"杰·海泽",b:"运营管理经典教材，涵盖流程设计、供应链管理、质量管理、库存控制和精益生产，帮助管理者构建高效的运营体系。",c:["流程设计","供应链管理","质量管理","精益生产"], org:"", year:2020},
+    en:{t:"Operations Management",a:"Jay Heizer, Barry Render, Chuck Munson",b:"The classic operations management textbook covering process design, supply chain management, quality management, inventory control, and lean production.",c:["Process Design","Supply Chain Management","Quality Management","Lean Production"]},
+    kw:["运营管理","供应链","质量管理","精益","MBA"]
+  },
+  {
+    id:"finance-wharton-financial", cat:"finance", type:"textbook",
+    zh:{t:"金融学基础",a:"杰富瑞·布兹",b:"沃顿商学院金融学基础教材，全面讲解公司金融、投资、风险管理与国际金融四大模块，是金融入门和系统学习的优秀教材。",c:["公司金融基础","投资组合","风险管理","国际金融"], org:"", year:2017},
+    en:{t:"The Wharton School Introduction to Finance",a:"Jeffrey A. Buetow Jr., et al.",b:"The Wharton School's foundational finance textbook covering corporate finance, investments, risk management, and international finance in four comprehensive modules.",c:["Foundations of Corporate Finance","Investment Portfolios","Risk Management","International Finance"]},
+    kw:["金融学","沃顿","公司金融","投资","风险管理"]
+  },
+  {
+    id:"finance-valuations-damodaran", cat:"finance", type:"bestseller",
+    zh:{t:"估值：如何评估任何资产的价值",a:"阿斯沃斯·达摩达兰",b:"估值领域最权威的著作之一，系统讲解相对估值、内在估值和并购估值三大方法，附有大量真实案例和Excel模型，是投资银行和私募股权的必读。",c:["相对估值法","DCF模型","并购估值","倍数分析"], org:"", year:2012},
+    en:{t:"Investment Valuation: Tools and Techniques for Determining the Value of Any Asset",a:"Aswath Damodaran",b:"The most authoritative book on valuation. Covers relative valuation, intrinsic valuation, and acquisition valuation with real cases and Excel models. Essential for investment banking and PE.",c:["Relative Valuation","DCF Modeling","M&A Valuation","Multiple Analysis"]},
+    kw:["估值","DCF","投资银行","私募股权","公司估值"]
+  },
+  {
+    id:"finance-behavioral-malkiel", cat:"finance", type:"bestseller",
+    zh:{t:"华尔街随机漫步",a:"伯顿·马尔基尔",b:"投资经典名著，主张长期被动投资的智慧，拆解各种投资策略的误区，最新版加入行为金融学内容，是普通投资者的最佳入门书。",c:["有效市场假说","指数投资","行为金融学","投资误区"], org:"", year:2023},
+    en:{t:"A Random Walk Down Wall Street",a:"Burton G. Malkiel",b:"An investing classic that advocates long-term passive investing, deconstructs myths about various investment strategies, and incorporates behavioral finance. The best starting point for individual investors.",c:["Efficient Market Hypothesis","Index Investing","Behavioral Finance","Investment Myths"]},
+    kw:["投资","指数基金","行为金融","长期投资","华尔街"]
+  },
+  {
+    id:"finance-smart-investing", cat:"finance", type:"bestseller",
+    zh:{t:"聪明的投资者",a:"本杰明·格雷厄姆",b:"价值投资圣经，巴菲特的导师之作，系统阐述安全边际、价值投资和防御型投资策略，影响了几代投资者的投资哲学。",c:["安全边际","价值投资","防御型投资","市场波动"], org:"", year:1949},
+    en:{t:"The Intelligent Investor",a:"Benjamin Graham",b:"The bible of value investing, written by Warren Buffett's mentor. Systematically explains margin of safety, value investing, and defensive investment strategies.",c:["Margin of Safety","Value Investing","Defensive Investing","Market Fluctuations"]},
+    kw:["价值投资","格雷厄姆","安全边际","巴菲特","投资经典"]
+  },
+  {
+    id:"finance-common-stocks", cat:"finance", type:"bestseller",
+    zh:{t:"普通股与不普通的利润",a:"菲利普·费雪",b:"成长投资的奠基之作，提出用15个要点筛选优质成长股，强调管理层质量和研发投入，是巴菲特'15%公司'理念的重要来源。",c:["成长投资","15个要点","管理层质量","研发投入"], org:"", year:1958},
+    en:{t:"Common Stocks and Uncommon Profits",a:"Philip A. Fisher",b:"The foundational book on growth investing. Introduces 15 points for screening quality growth stocks, emphasizing management quality and R&D investment.",c:["Growth Investing","15 Points","Management Quality","R&D Investment"]},
+    kw:["成长投资","费雪","优质股票","投资经典"]
+  },
+  {
+    id:"finance-black-swan", cat:"finance", type:"bestseller",
+    zh:{t:"黑天鹅：如何应对不可预知的未来",a:"纳西姆·尼古拉斯·塔勒布",b:"用黑天鹅比喻极端稀有且影响巨大的事件，颠覆传统风险模型，提出应对不确定性的杠铃策略和凸性思维，是风险管理领域的里程碑著作。",c:["极端事件","杠铃策略","凸性","反脆弱"], org:"", year:2007},
+    en:{t:"The Black Swan: The Impact of the Highly Improbable",a:"Nassim Nicholas Taleb",b:"Uses the black swan metaphor for extreme, rare, and high-impact events. Overturns traditional risk models and proposes the barbell strategy and convex tinkering for dealing with uncertainty.",c:["Extreme Events","Barbell Strategy","Convexity","Antifragility"]},
+    kw:["黑天鹅","风险管理","不确定性","塔勒布","极端事件"]
+  },
+  {
+    id:"finance-options-futures-hull", cat:"finance", type:"textbook",
+    zh:{t:"期权、期货与其他衍生品",a:"约翰·赫尔",b:"金融工程领域最权威的教材，系统讲解期权定价、期货市场和风险管理技术，是量化金融和MBA衍生品课程的标杆教材。",c:["布莱克-斯科尔斯模型","期权定价","期货套期保值","风险中性估值"], org:"", year:2021},
+    en:{t:"Options, Futures, and Other Derivatives",a:"John C. Hull",b:"The most authoritative textbook in financial engineering, covering option pricing, futures markets, and risk management. The gold standard for quantitative finance and MBA derivatives courses.",c:["Black-Scholes Model","Option Pricing","Futures Hedging","Risk-Neutral Valuation"]},
+    kw:["期权","期货","衍生品","金融工程","赫尔"]
+  },
+  {
+    id:"psych-influence-cialdini", cat:"psychology", type:"bestseller",
+    zh:{t:"影响力",a:"罗伯特·西奥迪尼",b:"影响力研究经典之作，揭示互惠、承诺一致、社会认同、喜好、权威和稀缺六大心理触发机制，帮助读者识别和抵御各种说服技巧。",c:["互惠原则","社会认同","权威影响","稀缺性"], org:"", year:1984},
+    en:{t:"Influence: The Psychology of Persuasion",a:"Robert B. Cialdini",b:"The classic book on influence, revealing six psychological triggers: reciprocity, commitment/consistency, social proof, liking, authority, and scarcity.",c:["Reciprocity","Social Proof","Authority","Scarcity"]},
+    kw:["影响力","心理学","说服","营销心理","西奥迪尼"]
+  },
+  {
+    id:"psych-thinking-fast-slow", cat:"psychology", type:"bestseller",
+    zh:{t:"思考，快与慢",a:"丹尼尔·卡尼曼",b:"诺贝尔经济学奖得主代表作，揭示人类思维的两套系统：快速直觉的系统1和缓慢理性的系统2，深刻解释了认知偏差和决策误区。",c:["系统1与系统2","启发式偏差","前景理论","过度自信"], org:"", year:2011},
+    en:{t:"Thinking, Fast and Slow",a:"Daniel Kahneman",b:"The Nobel laureate's masterwork revealing two systems of human thought: fast, intuitive System 1 and slow, deliberate System 2. Explains cognitive biases and decision-making errors.",c:["System 1 & 2","Heuristic Bias","Prospect Theory","Overconfidence"]},
+    kw:["认知心理学","决策","卡尼曼","行为经济学","思维"]
+  },
+  {
+    id:"psych-mindset-dweck", cat:"psychology", type:"bestseller",
+    zh:{t:"终身成长：重新定义成功的思维模式",a:"卡罗尔·德韦克",b:"揭示固定型思维与成长型思维的根本差异，说明为何拥有成长型思维的人更能应对挑战、从失败中学习，并在各个领域取得卓越成就。",c:["固定型思维","成长型思维","失败的价值","大脑可塑性"], org:"", year:2006},
+    en:{t:"Mindset: The New Psychology of Success",a:"Carol S. Dweck",b:"Reveals the fundamental difference between fixed and growth mindsets, showing why those with a growth mindset embrace challenges, learn from failure, and achieve excellence.",c:["Fixed Mindset","Growth Mindset","The Value of Failure","Neuroplasticity"]},
+    kw:["成长型思维","教育心理学","自我提升","德韦克","成功"]
+  },
+  {
+    id:"psych-grit-duckworth", cat:"psychology", type:"bestseller",
+    zh:{t:"坚毅：释放激情与坚持的力量",a:"安杰拉·达克沃思",b:"揭示成功的关键不是天赋而是坚毅——对长期目标的热情与坚持。基于大量研究证明，坚毅比智商更能预测人生成就。",c:["坚毅定义","刻意练习","兴趣培养","目标坚持"], org:"", year:2016},
+    en:{t:"Grit: The Power of Passion and Perseverance",a:"Angela Duckworth",b:"Reveals that the key to success is not talent but grit — passion and perseverance for long-term goals. Based on extensive research showing grit predicts achievement better than IQ.",c:["Definition of Grit","Deliberate Practice","Cultivating Interest","Goal Perseverance"]},
+    kw:["坚毅","成功心理学","刻意练习","达克沃思","激情"]
+  },
+  {
+    id:"psych-emotional-intelligence", cat:"psychology", type:"bestseller",
+    zh:{t:"情商：为什么情商比智商更重要",a:"丹尼尔·戈尔曼",b:"情商概念奠基之作，证明情商比智商更能预测人生成功，涵盖自我管理、同理心和社交技能四大核心能力，是领导力发展的基础读物。",c:["自我觉察","自我管理","社交觉察","关系管理"], org:"", year:1995},
+    en:{t:"Emotional Intelligence: Why It Can Matter More Than IQ",a:"Daniel Goleman",b:"The foundational book on emotional intelligence, proving EQ predicts life success better than IQ. Covers self-awareness, self-management, social awareness, and relationship management.",c:["Self-Awareness","Self-Management","Social Awareness","Relationship Management"]},
+    kw:["情商","情商","领导力","自我管理","戈尔曼"]
+  },
+  {
+    id:"entrepreneurship-lean-startup", cat:"entrepreneurship", type:"bestseller",
+    zh:{t:"精益创业：新创企业的成长思维",a:"埃里克·莱斯",b:"提出精益创业方法论，倡导以最小可行产品（MVP）快速验证假设，通过Build-Measure-Learn反馈循环不断迭代，大幅降低创业失败率。",c:["MVP","Build-Measure-Learn","经证实的认知","转型"], org:"", year:2011},
+    en:{t:"The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",a:"Eric Ries",b:"Introduces the Lean Startup methodology: use Minimum Viable Products (MVP) to test hypotheses quickly, iterate via Build-Measure-Learn feedback loops, and dramatically reduce startup failure rates.",c:["MVP","Build-Measure-Learn","Validated Learning","Pivot"]},
+    kw:["精益创业","MVP","创业方法论","迭代","埃里克·莱斯"]
+  },
+  {
+    id:"entrepreneurship-zero-to-one", cat:"entrepreneurship", type:"bestseller",
+    zh:{t:"从0到1：开启商业与未来的秘密",a:"彼得·蒂尔",b:"PayPal创始人彼得·蒂尔的商业哲学：真正有价值的创业是创造从未存在过的新事物（从0到1），而非在已有基础上复制竞争（从1到N）。",c:["垄断企业","幂次法则","秘密","创始人优势"], org:"", year:2014},
+    en:{t:"Zero to One: Notes on Startups, or How to Build the Future",a:"Peter Thiel, Blake Masters",b:"PayPal founder Peter Thiel's business philosophy: truly valuable startups create something entirely new (0 to 1), rather than copying competition (1 to N).",c:["Monopoly Business","Power Law","Secrets","Founder Advantage"]},
+    kw:["从0到1","彼得·蒂尔","创业哲学","垄断","创新"]
+  },
+  {
+    id:"marketing-positioning-ries", cat:"marketing", type:"bestseller",
+    zh:{t:"定位：争夺用户心智的战争",a:"杰克·特劳特 / 阿尔·里斯",b:"定位理论奠基之作，提出在过度传播的社会中，品牌必须在用户心智中占据一个独特位置才能脱颖而出，深刻影响了全球营销实践。",c:["心智占位","品牌定位","品类定位","视觉锤"], org:"", year:1981},
+    en:{t:"Positioning: The Battle for Your Mind",a:"Al Ries, Jack Trout",b:"The founding book of positioning theory. Argues that in an over-communicated society, brands must occupy a unique position in the consumer's mind to stand out.",c:["Mind Positioning","Brand Positioning","Category Positioning","Visual Hammer"]},
+    kw:["定位","品牌","营销战略","特劳特","心智"]
+  },
+  {
+    id:"marketing-purple-cow", cat:"marketing", type:"bestseller",
+    zh:{t:"紫牛：从默默无闻到与众不同",a:"赛斯·高汀",b:"提出remarkable（值得谈论）的营销理念：在信息过载时代，只有真正卓越、令人惊叹的产品和服务才能引发口碑传播，平庸即死亡。",c:["值得谈论","口碑传播","产品卓越","营销平庸"], org:"", year:2003},
+    en:{t:"Purple Cow: Transform Your Business by Being Remarkable",a:"Seth Godin",b:"Introduces the concept of being 'remarkable': in an age of information overload, only truly exceptional products and services generate word-of-mouth. Being boring is deadly.",c:["Remarkability","Word of Mouth","Product Excellence","Marketing Boredom"]},
+    kw:["紫牛","赛斯·高汀","口碑营销","产品创新","营销"]
+  },
+  {
+    id:"marketing-hooked", cat:"marketing", type:"bestseller",
+    zh:{t:"上瘾：让用户养成使用习惯的四大产品逻辑",a:"尼尔·埃亚尔",b:"揭示打造用户习惯产品的HOOK模型：触发、行动、多变奖励和投入，帮助产品经理和营销者设计真正让人上瘾的产品体验。",c:["触发机制","行动门槛","多变奖励","用户投入"], org:"", year:2014},
+    en:{t:"Hooked: How to Build Habit-Forming Products",a:"Nir Eyal",b:"Reveals the HOOK model for building habit-forming products: Trigger, Action, Variable Reward, and Investment. Helps product managers and marketers design truly addictive experiences.",c:["Triggers","Action","Variable Rewards","Investment"]},
+    kw:["上瘾模型","产品思维","用户习惯","产品设计","尼尔·埃亚尔"]
+  },
+  {
+    id:"marketing-contagious", cat:"marketing", type:"bestseller",
+    zh:{t:"疯传：让你的产品、思想、行为像病毒一样入侵",a:"乔纳·伯杰",b:"揭示口碑传播和病毒式营销的STEPPS六大原则：社交货币、触发、情绪、公共性、实用价值和故事，让任何产品都能被疯狂传播。",c:["社交货币","触发机制","情绪唤醒","实用价值"], org:"", year:2013},
+    en:{t:"Contagious: Why Things Catch On",a:"Jonah Berger",b:"Reveals the STEPPS framework for word-of-mouth and viral marketing: Social Currency, Triggers, Emotion, Public, Practical Value, and Stories.",c:["Social Currency","Triggers","Emotion","Practical Value"]},
+    kw:["病毒营销","口碑传播","乔纳·伯杰","社交传播","营销"]
+  },
+  {
+    id:"tech-innovators-dilemma", cat:"tech-future", type:"bestseller",
+    zh:{t:"创新者的窘境",a:"克莱顿·克里斯坦森",b:"颠覆式创新理论奠基之作，解释为何最优秀的企业会在面对颠覆性技术时失败，提出'创造价值网'和'独立组织'两大应对方案。",c:["颠覆式创新","价值网","破坏性技术","资源依赖理论"], org:"", year:1997},
+    en:{t:"The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail",a:"Clayton M. Christensen",b:"The founding book of disruptive innovation theory. Explains why great companies fail when facing disruptive technologies, and proposes two solutions: create a new value network and set up independent units.",c:["Disruptive Innovation","Value Network","Disruptive Technology","Resource Dependence"]},
+    kw:["创新者的窘境","颠覆式创新","克里斯坦森","企业管理","科技"]
+  },
+  {
+    id:"tech-internet-computer-systems", cat:"tech-future", type:"textbook",
+    zh:{t:"计算机网络：自顶向下方法",a:"詹姆斯·库罗斯",b:"计算机网络领域最广泛使用的教材，以自顶向下方式讲解网络协议栈，涵盖HTTP、TCP/IP、路由算法和网络安全，是CS和MBA技术管理的核心教材。",c:["应用层协议","传输层","网络层","链路层"], org:"", year:2021},
+    en:{t:"Computer Networking: A Top-Down Approach",a:"James Kurose, Keith Ross",b:"The most widely used networking textbook, explaining the protocol stack top-down. Covers HTTP, TCP/IP, routing algorithms, and network security.",c:["Application Layer","Transport Layer","Network Layer","Link Layer"]},
+    kw:["计算机网络","TCP/IP","网络安全","HTTP","教材"]
+  },
+  {
+    id:"tech-ai-superpowers", cat:"china-business", type:"bestseller",
+    zh:{t:"AI未来进行式",a:"李开复",b:"李开复与陈楸帆合著，以科幻故事+技术解读的双重视角，描绘AI在医疗、教育、娱乐、金融等领域的具体应用场景，以及中美AI竞赛格局。",c:["AI应用场景","中美AI竞争","深度学习","AI伦理"], org:"", year:2021},
+    en:{t:"AI 2041: Ten Visions for Our Future",a:"Kai-Fu Lee, Chen Qiufan",b:"Kai-Fu Lee and Chen Qiufan co-author this book combining sci-fi storytelling with technical analysis, depicting AI applications in healthcare, education, entertainment, and finance, plus the US-China AI race.",c:["AI Applications","US-China AI Race","Deep Learning","AI Ethics"]},
+    kw:["人工智能","李开复","AI应用","中美科技","未来"]
+  },
+  {
+    id:"tech-exponential-organizations", cat:"tech-future", type:"bestseller",
+    zh:{t:"指数型组织：打造未来十年独角兽的11个最强属性",a:"萨利姆·伊斯梅尔",b:"揭示指数型组织（如谷歌、Uber、Airbnb）如何利用信息技术实现10倍增长，提出实现指数级增长的MTP（宏大变革目标）和11个属性框架。",c:["指数级增长","MTP","用户界面","算法"], org:"", year:2014},
+    en:{t:"Exponential Organizations: Why new organizations are ten times better, faster, and cheaper than yours",a:"Salim Ismail, Michael S. Malone, Yuri van Geest",b:"Reveals how exponential organizations (Google, Uber, Airbnb) leverage IT to achieve 10x growth. Introduces the MTP (Massive Transformative Purpose) and 11-attribute framework.",c:["Exponential Growth","MTP","User Interface","Algorithms"]},
+    kw:["指数型组织","独角兽","增长速度","创业公司","数字化转型"]
+  },
+  {
+    id:"tech-platform-revolution", cat:"tech-future", type:"bestseller",
+    zh:{t:"平台革命：改变世界的商业模式",a:"帕克 / 范·阿尔斯泰恩 / 查特基",b:"平台经济权威著作，系统解析平台商业模式的设计原则、网络效应机制和治理策略，是理解亚马逊、苹果、谷歌等平台巨头必读之作。",c:["网络效应","平台治理","双边市场","平台设计"], org:"", year:2016},
+    en:{t:"Platform Revolution: How Networked Markets Are Transforming the Economy",a:"Geoffrey G. Parker, Marshall W. Van Alstyne, Sangeet Paul Choudary",b:"The authoritative book on platform economics. Systematically explains platform business model design, network effect mechanisms, and governance strategies for platform giants like Amazon, Apple, and Google.",c:["Network Effects","Platform Governance","Two-Sided Markets","Platform Design"]},
+    kw:["平台经济","网络效应","商业模式","平台战略","双边市场"]
+  },
+  {
+    id:"bio-steve-jobs", cat:"biography", type:"bestseller",
+    zh:{t:"史蒂夫·乔布斯传",a:"沃尔特·艾萨克森",b:"基于对乔布斯本人及100多位亲友、竞争对手的深度访谈，全面还原这位苹果创始人的传奇一生，揭示其追求极致的产品哲学和现实扭曲力场。",c:["现实扭曲力场","极致产品","领导力风格","创新源泉"], org:"", year:2011},
+    en:{t:"Steve Jobs",a:"Walter Isaacson",b:"Based on extensive interviews with Jobs and over 100 family members, friends, and competitors, this definitive biography reveals the Apple co-founder's legendary life, product philosophy, and reality distortion field.",c:["Reality Distortion Field","Obsessive Product Focus","Leadership Style","Innovation Source"]},
+    kw:["乔布斯","苹果","传记","创新","产品"]
+  },
+  {
+    id:"bio-elon-musk", cat:"biography", type:"bestseller",
+    zh:{t:"埃隆·马斯克传",a:"沃尔特·艾萨克森",b:"基于跟马斯克本人及身边人数百小时深度访谈，讲述特斯拉、SpaceX、Neuralink等公司的创立历程，展现这位当代最激进创业者的冒险人生。",c:["第一性原理","工程思维","冒险精神","多公司管理"], org:"", year:2023},
+    en:{t:"Elon Musk",a:"Walter Isaacson",b:"Based on hundreds of hours of interviews with Musk and those around him, this biography covers the founding of Tesla, SpaceX, Neuralink, and more, revealing the most daring entrepreneur of our time.",c:["First Principles","Engineering Mindset","Risk Tolerance","Multi-Company Management"]},
+    kw:["马斯克","特斯拉","SpaceX","传记","第一性原理"]
+  },
+  {
+    id:"bio-bezos", cat:"biography", type:"bestseller",
+    zh:{t:"贝佐斯传：亚马逊创始人杰夫·贝佐斯的商业逻辑",a:"布拉德·斯通",b:"基于对数百名亚马逊前高管的深度访谈，揭示贝佐斯如何建立全球最以客户为中心的公司，以及他独特的决策风格和长期主义哲学。",c:["客户至上","长期主义","Day 1文化","数据驱动决策"], org:"", year:2013},
+    en:{t:"The Everything Store: Jeff Bezos and the Age of Amazon",a:"Brad Stone",b:"Based on hundreds of interviews with former Amazon executives, reveals how Bezos built the world's most customer-centric company and his unique decision-making style and long-term philosophy.",c:["Customer Obsession","Long-Term Thinking","Day 1 Culture","Data-Driven Decisions"]},
+    kw:["贝佐斯","亚马逊","传记","客户至上","长期主义"]
+  },
+  {
+    id:"bio-gates", cat:"biography", type:"bestseller",
+    zh:{t:"盖茨：微软创世巨人的传记",a:"斯蒂芬·曼斯",b:"（实际可选更权威版本）全面讲述比尔·盖茨从哈佛辍学创立微软，到成为全球首富，再到转型慈善家的完整历程，揭示其竞争哲学和管理风格。",c:["技术愿景","竞争战略","慈善转型","管理风格"], org:"", year:1993},
+    en:{t:"Gates: How Microsoft's Mogul Reinvented an Industry",a:"Stephen Manes, Paul Andrews",b:"Comprehensively covers Bill Gates' journey from dropping out of Harvard to found Microsoft, becoming the world's richest man, and transforming into a philanthropist, revealing his competitive philosophy and management style.",c:["Technology Vision","Competitive Strategy","Philanthropic Transition","Management Style"]},
+    kw:["盖茨","微软","传记","慈善","科技"]
+  },
+  {
+    id:"econ-freakonomics", cat:"economics", type:"bestseller",
+    zh:{t:"魔鬼经济学",a:"史蒂芬·列维特 / 史蒂芬·都伯纳",b:"用经济学思维重新审视日常现象，揭示激励机制如何塑造人类行为，从教师作弊到父母命名影响孩子命运，颠覆常识的趣味经济学读物。",c:["激励机制","信息 asymmetry","数据分析","行为洞察"], org:"", year:2005},
+    en:{t:"Freakonomics: A Rogue Economist Explores the Hidden Side of Everything",a:"Steven D. Levitt, Stephen J. Dubner",b:"Uses economic thinking to re-examine everyday phenomena, revealing how incentives shape human behavior. From teacher cheating to how parents' names affect children's futures.",c:["Incentives","Information Asymmetry","Data Analysis","Behavioral Insights"]},
+    kw:["魔鬼经济学","行为经济学","激励","趣味经济学","列维特"]
+  },
+  {
+    id:"econ-thinking-gs-rowling", cat:"economics", type:"bestseller",
+    zh:{t:"小岛经济学",a:"彼得·希夫",b:"用寓言故事讲述经济学原理，通过一个关于生产、储蓄和投资的小岛故事，解释通货膨胀、信贷危机和经济周期的根本原因，通俗易懂。",c:["储蓄与投资","通货膨胀","信贷扩张","经济周期"], org:"", year:2010},
+    en:{t:"How an Economy Grows and Why It Crashes",a:"Peter D. Schiff, Andrew J. Schiff",b:"Explains economics through a parable about a small island, illustrating production, saving, investment, inflation, credit expansion, and economic cycles in plain language.",c:["Saving & Investment","Inflation","Credit Expansion","Economic Cycles"]},
+    kw:["小岛经济学","通货膨胀","经济周期","寓言经济学","希夫"]
+  },
+  {
+    id:"econ-naked-economics", cat:"economics", type:"bestseller",
+    zh:{t:"赤裸裸的经济学",a:"查尔斯·韦兰",b:"用最通俗的语言讲解经济学核心概念，涵盖机会成本、供给需求、市场失灵和政府干预，无数学公式，是经济学入门的最佳普及读物。",c:["机会成本","市场失灵","外部性","人力资本"], org:"", year:2002},
+    en:{t:"Naked Economics: Undressing the Dismal Science",a:"Charles Wheelan",b:"Explains core economic concepts in plain language, covering opportunity cost, supply and demand, market failure, and government intervention. No math required — the best economics primer.",c:["Opportunity Cost","Market Failure","Externalities","Human Capital"]},
+    kw:["经济学入门","赤裸裸的经济学","市场失灵","供给需求","普及读物"]
+  },
+  {
+    id:"econ-capitalism-schumpeter", cat:"economics", type:"textbook",
+    zh:{t:"资本主义、社会主义与民主",a:"约瑟夫·熊彼特",b:"创新理论奠基之作，提出'创造性破坏'概念，论证资本主义如何通过不断创新实现动态发展，同时预言资本主义终将被官僚体制取代。",c:["创造性破坏","创新理论","企业家精神","民主与资本主义"], org:"", year:1942},
+    en:{t:"Capitalism, Socialism and Democracy",a:"Joseph Schumpeter",b:"The founding book of innovation theory. Introduces 'creative destruction' and argues that capitalism drives dynamic development through continuous innovation, while predicting capitalism's eventual replacement by bureaucracy.",c:["Creative Destruction","Innovation Theory","Entrepreneurship","Democracy & Capitalism"]},
+    kw:["熊彼特","创造性破坏","创新","资本主义","经济学经典"]
+  },
+  {
+    id:"prod-deep-work", cat:"productivity", type:"bestseller",
+    zh:{t:"深度工作：如何有效使用每一点脑力",a:"卡尔·纽波特",b:"在碎片化时代，深度工作能力是21世纪最稀缺的技能。提供四种深度工作模式和一套可执行的训练方案，帮助知识工作者创造高价值产出。",c:["深度工作定义","注意力管理","刻意练习","节奏模式"], org:"", year:2016},
+    en:{t:"Deep Work: Rules for Focused Success in a Distracted World",a:"Cal Newport",b:"In a distracted age, deep work is the superpower of the 21st century. Provides four depth philosophies and a trainable system to help knowledge workers produce high-value output.",c:["Deep Work Definition","Attention Management","Deliberate Practice","Rhythmic Philosophy"]},
+    kw:["深度工作","专注力","效率","卡尔·纽波特","知识工作"]
+  },
+  {
+    id:"prod-7-habits", cat:"productivity", type:"bestseller",
+    zh:{t:"高效能人士的七个习惯",a:"史蒂芬·柯维",b:"个人效能领域最经典的著作，提出以原则为中心的自我管理方法，从依赖到独立再到互依的成熟度连续体，是领导力和个人成长的基石读物。",c:["积极主动","以终为始","要事第一","双赢思维"], org:"", year:1989},
+    en:{t:"The 7 Habits of Highly Effective People",a:"Stephen R. Covey",b:"The most classic book on personal effectiveness. Proposes principle-centered self-management, moving from dependence to independence to interdependence. The foundation of leadership and personal growth.",c:["Be Proactive","Begin with the End in Mind","Put First Things First","Think Win-Win"]},
+    kw:["七个习惯","高效能","自我管理","柯维","领导力"]
+  },
+  {
+    id:"prod-atomic-habits", cat:"productivity", type:"bestseller",
+    zh:{t:"原子习惯：细微改变带来巨大成就的实证法则",a:"詹姆斯·克利尔",b:"揭示习惯养成的四大定律：让它显而易见、有吸引力、简便易行、令人满足。通过微小的1%日常改进，实现复利式的人生改变。",c:["习惯回路","四大定律","身份认同","环境设计"], org:"", year:2018},
+    en:{t:"Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",a:"James Clear",b:"Reveals the four laws of habit formation: make it obvious, attractive, easy, and satisfying. Achieve compound-life change through tiny 1% daily improvements.",c:["Habit Loop","Four Laws","Identity-Based Habits","Environment Design"]},
+    kw:["原子习惯","习惯养成","自我提升","克利尔","行为改变"]
+  },
+  {
+    id:"china-renqing-lian", cat:"china-business", type:"bestseller",
+    zh:{t:"人情与面子：中国人的权力游戏",a:"黄光国",b:"用社会学的权力交换理论解析中国人的人情、面子和关系网络运作逻辑，揭示中国商业社会中非正式制度的深层规则，是理解中国商业文化的重要理论框架。",c:["人情交换","面子维护","关系网络","权力游戏"], org:"", year:2004},
+    en:{t:"Human Feelings and Face: The Power Game of Chinese People",a:"Kwang-Kuo Hwang",b:"Uses power-exchange theory to analyze the logic of guanxi, renqing, and face in Chinese society. Reveals the deep rules of informal institutions in Chinese business culture.",c:["Renqing Exchange","Face Maintenance","Guanxi Networks","Power Games"]},
+    kw:["人情","面子","关系","中国社会","商业文化"]
+  },
+  {
+    id:"china-alibaba", cat:"china-business", type:"bestseller",
+    zh:{t:"阿里传：阿里巴巴的商业逻辑和纵深布局",a:"邓肯·克拉克",b:"系统梳理阿里巴巴从1999年创立到成为全球电商巨头的关键决策和战略演变，深度解析中国互联网企业的商业逻辑。",c:["电商战略","平台生态","组织文化","全球化"], org:"", year:2016},
+    en:{t:"Alibaba: The House That Jack Ma Built",a:"Duncan Clark",b:"Systematically reviews Alibaba's journey from its 1999 founding to becoming a global e-commerce giant, analyzing the business logic of Chinese internet companies.",c:["E-commerce Strategy","Platform Ecosystem","Organizational Culture","Globalization"]},
+    kw:["阿里巴巴","马云","电商","中国互联网","商业战略"]
+  },
+  {
+    id:"china-innovation-zhijian", cat:"china-business", type:"bestseller",
+    zh:{t:"创新中国：中国企业的创新实践与未来",a:"陈春花",b:"中国管理学家陈春花深度研究中国企业的创新实践，涵盖华为、美的、腾讯等标杆企业，揭示中国企业在数字化时代的独特创新路径。",c:["中国企业创新","数字化转型","组织变革","价值共生"], org:"", year:2020},
+    en:{t:"The Power of Innovation in China: Practices and the Future",a:"Chen Chunhua",b:"Management scholar Chen Chunhua deeply studies Chinese enterprise innovation practices, covering Huawei, Midea, Tencent, and other benchmark companies.",c:["Chinese Enterprise Innovation","Digital Transformation","Organizational Change","Value Co-creation"]},
+    kw:["中国企业","创新","陈春花","数字化转型","组织管理"]
+  },
+  {
+    id:"neg-crucial-conversations", cat:"negotiation", type:"bestseller",
+    zh:{t:"关键对话：如何高效沟通",a:"科里·帕特森",b:"当对话涉及高风险、观点对立和强烈情绪时，普通人容易陷入对抗或逃避。本书提供了一套在高风险对话中保持对话安全并达成共识的方法。",c:["对话安全","情绪管理","共同目的","STATE法"], org:"", year:2002},
+    en:{t:"Crucial Conversations: Tools for Talking When Stakes Are High",a:"Kerry Patterson, Joseph Grenny, Ron McMillan, Al Switzler",b:"When conversations involve high stakes, opposing opinions, and strong emotions, people tend to fight or flee. This book provides methods to keep dialogue safe and reach alignment.",c:["Dialogue Safety","Emotion Management","Mutual Purpose","STATE Method"]},
+    kw:["关键对话","沟通","冲突管理","高效沟通","对话技巧"]
+  },
+  {
+    id:"neg-never-split-difference", cat:"negotiation", type:"bestseller",
+    zh:{t:"掌控谈话：谈判专家的工作秘诀",a:"克里斯·沃斯",b:"FBI前谈判专家教你用战术同理心和校准问题（calibrated question）掌控任何谈判，强调倾听和情绪标记比逻辑辩论更能达成目标。",c:["战术同理心","校准问题","情绪标记","阿克曼议价"], org:"", year:2016},
+    en:{t:"Never Split the Difference: Negotiating As If Your Life Depended On It",a:"Chris Voss, Tahl Raz",b:"Former FBI negotiator Chris Voss teaches tactical empathy and calibrated questions to master any negotiation. Emphasizes listening and labeling emotions over logic.",c:["Tactical Empathy","Calibrated Questions","Labeling Emotions","Ackerman Bargaining"]},
+    kw:["谈判","FBI","克里斯·沃斯","沟通技巧","同理心"]
+  },
+  {
+    id:"design-emotional-design", cat:"design", type:"bestseller",
+    zh:{t:"情感化设计：为什么我们喜欢或讨厌日常用品",a:"唐·诺曼",b:"诺曼情感化设计三部曲之一，提出设计的三个层次：本能层（外观）、行为层（使用体验）和反思层（自我认同），帮助设计师创造真正打动用户的产品。",c:["本能层设计","行为层设计","反思层设计","情感连接"], org:"", year:2004},
+    en:{t:"Emotional Design: Why We Love (or Hate) Everyday Things",a:"Don Norman",b:"Norman's trilogy on emotional design. Proposes three levels: visceral (appearance), behavioral (usability), and reflective (self-identity). Helps designers create products that truly connect.",c:["Visceral Design","Behavioral Design","Reflective Design","Emotional Connection"]},
+    kw:["情感化设计","诺曼","用户体验","产品设计","设计心理学"]
+  },
+  {
+    id:"design-design-of-everyday-things", cat:"design", type:"bestseller",
+    zh:{t:"设计心理学",a:"唐·诺曼",b:"设计领域最经典的读本，提出以用户为中心的设计理念，用大量日常案例说明好的设计应该是可发现、可理解、能给出有效反馈的，是UX/产品设计必读之作。",c:["可用性","反馈机制","约束","自然映射"], org:"", year:1988},
+    en:{t:"The Design of Everyday Things",a:"Don Norman",b:"The most classic design book. Introduces user-centered design, using everyday examples to show that good design should be discoverable, understandable, and provide effective feedback. Essential UX/product design reading.",c:["Affordances","Feedback","Constraints","Natural Mapping"]},
+    kw:["设计心理学","诺曼","用户体验","产品设计","以用户为中心"]
+  },
 ];
 
 // ===== Helper: get all book IDs =====
