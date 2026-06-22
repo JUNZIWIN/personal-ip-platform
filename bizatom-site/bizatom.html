@@ -168,6 +168,21 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-header .h-text span{font-size:11px;color:#B7C5DC;display:block}
 .chat-header .h-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .2s}
 .chat-header .h-close:hover{background:rgba(255,255,255,.22)}
+.chat-header .h-fullscreen{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.chat-header .h-fullscreen:hover{background:rgba(255,255,255,.22)}
+.chat-header .h-fullscreen svg{display:block}
+
+/* Fullscreen chat panel */
+.chat-panel.fullscreen{bottom:20px;right:20px;width:95vw;max-width:95vw;height:92vh;max-height:92vh;border-radius:18px}
+
+/* Fullscreen: larger text & padding for reading comfort */
+.chat-panel.fullscreen .chat-messages{padding:24px 28px;font-size:14.5px}
+.chat-panel.fullscreen .chat-msg .bubble{padding:14px 20px;font-size:14.5px;line-height:1.75}
+.chat-panel.fullscreen .chat-suggestions{padding:12px 24px 16px}
+.chat-panel.fullscreen .chat-input-wrap{padding:18px 24px}
+.chat-panel.fullscreen .chat-input-wrap input{font-size:15px;padding:12px 18px}
+.chat-panel.fullscreen .chat-book-bar{padding:10px 20px}
+.chat-panel.fullscreen .chat-tabs{padding:10px 20px}
 
 .chat-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;background:#F8F9FC;scroll-behavior:smooth}
 .chat-messages::-webkit-scrollbar{width:5px}
@@ -583,11 +598,8 @@ function setLang(lang){
   if (chatOpen) updateChatLang();
 }
 
-/* ---------- Waitlist ----------
-   v1 shows a success state locally.
-   To collect real emails: create a free form at https://formspree.io,
-   then replace the body of joinWaitlist() with a fetch() POST to your
-   Formspree endpoint. (I can wire this up for you in 5 minutes.) */
+/* ---------- Waitlist ---------- */
+var chatUserEmail = ''; // Store email for chat log association
 function joinWaitlist(){
   var input = document.getElementById('wl-email');
   var msg = document.getElementById('wl-msg');
@@ -608,10 +620,11 @@ function joinWaitlist(){
     throw new Error('Form error');
   })
   .then(data => {
+    chatUserEmail = v; // Save email for chat log association
     msg.style.color = '#7DE3A1';
     msg.textContent = zh
       ? '已加入候补名单！上线时我们会第一时间通知你。'
-      : "You're on the list! We'll email you the moment we launch.";
+      : 'You\'re on the list! We\'ll email you the moment we launch.';
     input.value = '';
   })
   .catch(() => {
@@ -649,6 +662,10 @@ function joinWaitlist(){
       <h4 data-chat-en="BizAtom AI Assistant" data-chat-zh="BizAtom AI 书童">BizAtom AI 书童</h4>
       <span data-chat-en="Ask me about any business classic" data-chat-zh="问我任何商业经典的问题">问我任何商业经典的问题</span>
     </div>
+    <button class="h-fullscreen" id="chatFullscreenBtn" onclick="toggleChatFullscreen()" aria-label="Toggle fullscreen">
+      <svg class="icon-max" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg>
+      <svg class="icon-restore" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none"><path d="M5 2v4H1M11 2v4h4M5 14v-4H1M11 14v-4h4"/></svg>
+    </button>
     <button class="h-close" onclick="toggleChat()" aria-label="Close chat">&times;</button>
   </div>
   <!-- Category tabs -->
@@ -893,6 +910,19 @@ function toggleChat() {
   }
 }
 
+function toggleChatFullscreen() {
+  var panel = document.getElementById('chatPanel');
+  var btn = document.getElementById('chatFullscreenBtn');
+  var iconMax = btn.querySelector('.icon-max');
+  var iconRestore = btn.querySelector('.icon-restore');
+  var isFull = panel.classList.toggle('fullscreen');
+  iconMax.style.display = isFull ? 'none' : 'block';
+  iconRestore.style.display = isFull ? 'block' : 'none';
+  // Scroll to bottom after resize
+  var msgs = document.getElementById('chatMessages');
+  if (msgs) msgs.scrollTop = msgs.scrollHeight;
+}
+
 function updateChatLang() {
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
   document.querySelectorAll('[data-chat-en]').forEach(function(el) {
@@ -1026,7 +1056,28 @@ async function sendMessage(optBookId) {
   hideTyping();
   var bubble = addMsg('', 'bot');
   bubble.innerHTML = formatAnswer(answer);
+  // Log chat to backend (fire-and-forget, non-blocking)
+  logChat(q || '', answer, optBookId || '');
   isWaiting = false; btn.disabled = false;
+}
+
+// Log chat message to backend (fire-and-forget, non-blocking)
+function logChat(question, answer, bookId) {
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var payload = {
+    question: question || '',
+    answer: answer || '',
+    lang: lang,
+    bookId: bookId || '',
+    timestamp: new Date().toISOString(),
+    userEmail: chatUserEmail || ''
+  };
+  // Fire and forget - don't block UI, don't show errors
+  fetch('/api/log-chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() { /* silent fail */ });
 }
 
 // Clear conversation history (called when user switches books or clicks "new chat")
