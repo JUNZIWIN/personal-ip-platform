@@ -149,6 +149,61 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .foot .brand{font-size:16px}
 .foot-links{display:flex;gap:18px;align-items:center;font-size:13px}
 .foot-links a:hover{color:var(--orange)}
+
+/* ===== AI Chat Widget ===== */
+.chat-fab{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;border:0;cursor:pointer;box-shadow:0 6px 24px rgba(244,115,31,.38);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s,opacity .25s}
+.chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 30px rgba(244,115,31,.5)}
+.chat-fab svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.chat-fab.hidden{opacity:0;pointer-events:none}
+.chat-fab .pulse{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--orange);animation:pulse-ring 2s ease-out infinite;opacity:0}
+@keyframes pulse-ring{0%{transform:scale(.85);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+
+.chat-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:380px;max-width:calc(100vw - 40px);height:560px;max-height:calc(100vh - 140px);background:var(--white);border-radius:18px;box-shadow:0 12px 48px rgba(10,28,56,.22);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .25s}
+.chat-panel.collapsed{transform:scale(.7);opacity:0;pointer-events:none}
+
+.chat-header{background:linear-gradient(135deg,var(--navy),var(--purple-deep));color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.chat-header .h-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
+.chat-header .h-text{flex:1}
+.chat-header .h-text h4{font-family:var(--display);font-size:15px;font-weight:700;line-height:1.2}
+.chat-header .h-text span{font-size:11px;color:#B7C5DC;display:block}
+.chat-header .h-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .2s}
+.chat-header .h-close:hover{background:rgba(255,255,255,.22)}
+
+.chat-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;background:#F8F9FC;scroll-behavior:smooth}
+.chat-messages::-webkit-scrollbar{width:5px}
+.chat-messages::-webkit-scrollbar-track{background:transparent}
+.chat-messages::-webkit-scrollbar-thumb{background:#DEE4EE;border-radius:99px}
+
+.chat-msg{max-width:88%;animation:msg-in .3s ease-out}
+@keyframes msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.bot{align-self:flex-start}
+.chat-msg.user{align-self:flex-end}
+.chat-msg .bubble{padding:12px 16px;border-radius:16px;font-size:13.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.chat-msg.bot .bubble{background:var(--white);color:var(--ink);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.chat-msg.user .bubble{background:var(--orange);color:#fff;border-bottom-right-radius:4px}
+.chat-msg .bubble strong{color:var(--purple)}
+.chat-msg.user .bubble strong{color:#FFF3E0}
+
+.chat-typing{align-self:flex-start;padding:14px 18px;background:var(--white);border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:5px}
+.chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:bounce .7s infinite alternate}
+.chat-typing span:nth-child(2){animation-delay:.15s}
+.chat-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{to{transform:translateY(-6px);opacity:.4}}
+
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;flex-shrink:0}
+.chat-suggestions button{font-size:11.5px;padding:7px 13px;border-radius:99px;background:var(--purple-soft);color:var(--purple);border:1px solid rgba(107,63,160,.15);cursor:pointer;transition:all .2s;white-space:nowrap;font-weight:500}
+.chat-suggestions button:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+.chat-input-wrap{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--line);flex-shrink:0;background:var(--white)}
+.chat-input-wrap input{flex:1;padding:11px 16px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);font-size:14px;font-family:var(--body);color:var(--ink);outline:0;transition:border-color .2s}
+.chat-input-wrap input:focus{border-color:var(--orange)}
+.chat-input-wrap input::placeholder{color:var(--muted)}
+.chat-input-wrap .send-btn{width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.chat-input-wrap .send-btn:hover{transform:scale(1.06);box-shadow:0 4px 14px rgba(244,115,31,.4)}
+.chat-input-wrap .send-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.chat-input-wrap .send-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+
+@media(max-width:500px){.chat-panel{right:8px;bottom:92px;width:calc(100vw - 16px);height:480px}}
 </style>
 </head>
 <body>
@@ -492,6 +547,8 @@ function setLang(lang){
   document.title = (lang === 'zh')
     ? 'BizAtom 商原子 — 十五分钟读透一本商业经典'
     : 'BizAtom 商原子 — Deep Dive in 15 Minutes';
+  // Also update chat widget language if open
+  if (chatOpen) updateChatLang();
 }
 
 /* ---------- Waitlist ----------
@@ -516,5 +573,273 @@ function joinWaitlist(){
   input.value = '';
 }
 </script>
+<!-- ===== AI Chat Widget ===== -->
+<!-- Floating action button -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open AI book assistant">
+  <span class="pulse"></span>
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+</button>
+
+<!-- Chat panel -->
+<div class="chat-panel collapsed" id="chatPanel">
+  <div class="chat-header">
+    <div class="h-icon">📚</div>
+    <div class="h-text">
+      <h4 data-chat-en="BizAtom AI Assistant" data-chat-zh="BizAtom AI 书僮">BizAtom AI 书僮</h4>
+      <span data-chat-en="Ask me about any business classic" data-chat-zh="问我任何商业经典的问题">问我任何商业经典的问题</span>
+    </div>
+    <button class="h-close" onclick="toggleChat()" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant. Ask me about any business classic — concepts, frameworks, key ideas. What would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书僮，可以回答商业经典的任何问题——核心概念、理论框架、关键思想。今天想了解什么？">👋 你好！我是 BizAtom AI 书僮，可以回答商业经典的任何问题——核心概念、理论框架、关键思想。今天想了解什么？</div>
+    </div>
+  </div>
+  <div class="chat-suggestions" id="chatSuggestions">
+    <button onclick="askSuggested('什么是蓝海战略？')" data-chat-zh="什么是蓝海战略？" data-chat-en="What is Blue Ocean Strategy?">什么是蓝海战略？</button>
+    <button onclick="askSuggested('Explain the Hedgehog Concept')" data-chat-en="Explain the Hedgehog Concept" data-chat-zh="解释刺猬理念">Explain the Hedgehog Concept</button>
+    <button onclick="askSuggested('从0到1的核心思想')" data-chat-zh="从0到1的核心思想" data-chat-en="Zero to One key ideas">从0到1的核心思想</button>
+  </div>
+  <div class="chat-input-wrap">
+    <input type="text" id="chatInput" data-chat-ph-en="Ask about a business book..." data-chat-ph-zh="输入你的问题..." placeholder="输入你的问题..." onkeydown="if(event.key==='Enter')sendMessage()" aria-label="Chat message input">
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()" aria-label="Send message">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ===== BizAtom AI Chat Widget (Client-side Knowledge Base) ===== */
+let chatOpen = false;
+let isWaiting = false;
+
+/* ---- Embedded Knowledge Base ---- */
+var BIZKB = [
+  {kw:"good to great|从优秀到卓越|jim collins|柯林斯|hedgehog|刺猬|level 5|第五级|飞轮|flywheel",
+   zh:{t:"《从优秀到卓越》— 吉姆·柯林斯",b:"为什么有些公司能从优秀跨越到卓越。",
+    c:[["第五级领导力","将极度个人谦逊与强烈职业意志结合，以公司成功为目标。"],
+    ["先人后事","先让合适的人上车，再决定开往何处。"],
+    ["刺猬理念","三个圆的交集：热爱的、能做最好的、驱动经济引擎的。"],
+    ["飞轮效应","可持续转变来自持续推动，而非单一戏剧性事件。"],
+    ["直面残酷现实","保持必胜信念，同时直面最残酷的现实。"]]},
+   en:{t:"Good to Great — Jim Collins",b:"Why some companies make the leap while others don't.",
+    c:[["Level 5 Leadership","Paradoxical blend of personal humility and professional will."],
+    ["First Who, Then What","Get the right people on the bus first."],
+    ["The Hedgehog Concept","Intersection of passion, best-at, and economic driver."],
+    ["The Flywheel Effect","Sustainable transformation from consistent pushes, not one big event."],
+    ["Confront Brutal Facts","Unwavering faith + confronting reality."]]}},
+  {kw:"lean startup|精益创业|eric ries|埃里克·莱斯|mvp|最小可行|pivot|转型|build measure learn|构建衡量学习",
+   zh:{t:"《精益创业》— 埃里克·莱斯",b:"如何用持续创新打造极其成功的企业。",
+    c:[["最小可行产品MVP","以最小努力启动'构建-衡量-学习'循环的最简产品版本。"],
+    ["构建-衡量-学习","核心反馈循环：构建产品→衡量客户反应→学习→转型或坚持。"],
+    ["验证式学习","通过实证证明团队发现的有价值真相的过程。"],
+    ["转型Pivot","结构化的方向修正，测试新的基本假设。"]]},
+   en:{t:"The Lean Startup — Eric Ries",b:"Continuous innovation for radically successful businesses.",
+    c:[["MVP","Simplest version to start the Build-Measure-Learn loop with minimum effort."],
+    ["Build-Measure-Learn","Build product → measure customer response → learn → pivot or persevere."],
+    ["Validated Learning","Empirically demonstrating valuable truths about prospects."],
+    ["Pivot","Structured course correction to test a new fundamental hypothesis."]]}},
+  {kw:"blue ocean|蓝海战略|w. chan kim|金伟灿|red ocean|红海|value innovation|价值创新",
+   zh:{t:"《蓝海战略》— 金伟灿、莫博涅",b:"创造无竞争市场空间，让竞争变得无关紧要。",
+    c:[["红海 vs 蓝海","红海=现有行业（价格战）；蓝海=未知市场（创造需求）。"],
+    ["价值创新","同时追求差异化和低成本，创造价值飞跃。"],
+    ["四步动作框架","剔除、减少、提升、创造——重构价值曲线。"]]},
+   en:{t:"Blue Ocean Strategy — W. Chan Kim",b:"Create uncontested market space.",
+    c:[["Red vs Blue Ocean","Red = existing industries; Blue = unknown market space."],
+    ["Value Innovation","Simultaneous pursuit of differentiation AND low cost."],
+    ["Four Actions Framework","Eliminate, Reduce, Raise, Create — reconstruct value curve."]]}},
+  {kw:"innovator|创新者的窘境|clayton christensen|克里斯坦森|disrupt|颠覆性",
+   zh:{t:"《创新者的窘境》— 克莱顿·克里斯坦森",b:"为什么大公司会失败——正因为他们做对了每件事。",
+    c:[["颠覆性创新","小公司从被忽视的细分市场起步，最终取代既有企业。"],
+    ["延续性创新","沿主流客户看重维度对现有产品的改进。"],
+    ["失败原因","倾听最佳客户+关注高利润+合理分配资源=对颠覆性威胁视而不见。"]]},
+   en:{t:"The Innovator's Dilemma — Clayton Christensen",b:"Why great companies fail by doing everything right.",
+    c:[["Disruptive Innovation","Smaller company targets overlooked segments, then moves upmarket."],
+    ["Sustaining Innovation","Improvements along dimensions mainstream customers value."],
+    ["Why They Fail","Listening to customers + high margins + rational allocation = blind to disruption."]]}},
+  {kw:"zero to one|从0到1|peter thiel|彼得·蒂尔|垄断|monopoly|secret",
+   zh:{t:"《从0到1》— 彼得·蒂尔",b:"关于创业的笔记，或者说如何构建未来。",
+    c:[["从0到1 vs 从1到n","0→1=创造全新事物（创新）；1→n=复制已有（全球化）。"],
+    ["垄断 vs 竞争","垄断推动进步——多年垄断利润提供强大的创新激励。'竞争是失败者的事。'"],
+    ["秘密","'有什么重要真理很少人认同你？'——反主流问题是创新的起点。"],
+    ["明确乐观","通过规划和执行塑造未来，而非只是希望万事顺遂。"]]},
+   en:{t:"Zero to One — Peter Thiel",b:"Notes on startups, or how to build the future.",
+    c:[["0→1 vs 1→n","0→1 = creating something new; 1→n = copying what works."],
+    ["Monopoly vs Competition","Monopolies drive progress. 'Competition is for losers.'"],
+    ["Secrets","'What important truth do very few agree with you on?'"],
+    ["Definite Optimism","Shape the future through planning and execution."]]}},
+  {kw:"thinking fast|思考快与慢|daniel kahneman|卡尼曼|system 1|系统1|system 2|系统2|cognitive bias|认知偏差|prospect|前景|loss aversion|损失厌恶",
+   zh:{t:"《思考，快与慢》— 丹尼尔·卡尼曼",b:"驱动我们思考方式的两种系统。",
+    c:[["系统1","快速、自动、直觉——处理快速判断（高效但容易偏差）。"],
+    ["系统2","缓慢、审慎、分析——用于复杂推理（费努力但更准确）。"],
+    ["损失厌恶","损失带来的痛苦≈等量收益快乐的两倍。这是前景理论的核心发现。"],
+    ["认知偏差","锚定效应、可得性启发、框架效应、过度自信等系统性思维错误。"]]},
+   en:{t:"Thinking, Fast and Slow — Daniel Kahneman",b:"The two systems that drive how we think.",
+    c:[["System 1","Fast, automatic, intuitive — snap judgments (efficient but biased)."],
+    ["System 2","Slow, deliberate, analytical — complex reasoning (effortful but accurate)."],
+    ["Loss Aversion","Losses hurt ~2x more than equivalent gains feel good."],
+    ["Cognitive Biases","Anchoring, availability heuristic, framing, overconfidence."]]}},
+  {kw:"7 habits|七个习惯|stephen covey|史蒂芬·柯维|高效能|proactive|积极主动|以终为始|要事第一",
+   zh:{t:"《高效能人士的七个习惯》— 史蒂芬·柯维",b:"关于个人改变的经典之作。",
+    c:[["习惯1:积极主动","在刺激与反应之间，你有选择的自由。"],
+    ["习惯2:以终为始","从清晰的目的地出发，设想未来目标。"],
+    ["习惯3:要事第一","优先处理重要但不紧急的'第二象限'事项。"],
+    ["习惯4:双赢思维","在所有互动中寻求互惠互利。"],
+    ["习惯5:知彼解己","以理解为目的倾听，非以回复为目的。"],
+    ["习惯6:统合综效","整体大于部分之和——创造性合作。"]]},
+   en:{t:"The 7 Habits — Stephen Covey",b:"Powerful lessons in personal change.",
+    c:[["1: Be Proactive","Between stimulus and response, you have freedom to choose."],
+    ["2: Begin With the End","Start with a clear destination in mind."],
+    ["3: First Things First","Prioritize important but not urgent (Quadrant II)."],
+    ["4: Think Win-Win","Seek mutual benefit in all interactions."],
+    ["5: Seek First to Understand","Listen with intent to understand, not reply."],
+    ["6: Synergize","The whole is greater than the sum of its parts."]]}},
+  {kw:"porter|波特|five forces|五力|competitive strategy|竞争战略|value chain|价值链|generic strategy|通用战略",
+   zh:{t:"《竞争战略》— 迈克尔·波特",b:"分析行业和竞争对手的核心框架。",
+    c:[["五力模型","新进入者威胁、供应商议价能力、买方议价能力、替代品威胁、行业竞争。"],
+    ["通用战略","成本领先、差异化、聚焦——必须选其一，'夹在中间'是失败配方。"],
+    ["价值链","企业交付价值的一系列活动，分析价值链揭示竞争优势来源。"]]},
+   en:{t:"Competitive Strategy — Michael Porter",b:"Techniques for analyzing industries and competitors.",
+    c:[["Five Forces","New entrants, supplier power, buyer power, substitutes, rivalry."],
+    ["Generic Strategies","Cost leadership, differentiation, or focus. Pick one."],
+    ["Value Chain","Activities delivering value — analyzing reveals competitive advantage."]]}},
+  {kw:"start with why|从为什么开始|simon sinek|西蒙·斯涅克|golden circle|黄金圈",
+   zh:{t:"《从为什么开始》— 西蒙·斯涅克",b:"伟大领导者如何激励每个人采取行动。",
+    c:[["黄金圈法则","从内向外沟通：为什么（目的）→ 怎么做（流程）→ 做什么（产品）。"],
+    ["为什么重要","人们买的不是'你做什么'，而是'你为什么做'。"]]},
+   en:{t:"Start With Why — Simon Sinek",b:"How great leaders inspire action.",
+    c:[["The Golden Circle","Communicate inside-out: WHY → HOW → WHAT."],
+    ["Why It Matters","People don't buy WHAT you do; they buy WHY you do it."]]}}
+];
+
+function kbSearch(q, lang) {
+  q = q.toLowerCase().trim();
+  var best = null, bestS = 0;
+  for (var i = 0; i < BIZKB.length; i++) {
+    var score = 0;
+    var kws = BIZKB[i].kw.split("|");
+    for (var j = 0; j < kws.length; j++) {
+      if (q.indexOf(kws[j]) >= 0) score += kws[j].length;
+    }
+    if (score > bestS) { bestS = score; best = BIZKB[i]; }
+  }
+  if (!best || bestS === 0) return null;
+  var d = best[lang] || best.en;
+  var out = "📚 **" + d.t + "**\n\n" + d.b + "\n\n";
+  for (var k = 0; k < d.c.length; k++) {
+    out += "• **" + d.c[k][0] + "**：" + d.c[k][1] + "\n";
+  }
+  return out;
+}
+
+function fallbackText(lang) {
+  return lang === 'zh'
+    ? '📚 我是 BizAtom AI 书僮，可以回答商业经典的问题。试试问我：\n• 什么是蓝海战略？\n• 解释刺猬理念\n• 从0到1的核心思想\n• 五力模型是什么？\n• Explain disruptive innovation'
+    : '📚 I\'m the BizAtom AI Book Assistant. Try asking:\n• What is Blue Ocean Strategy?\n• Explain the Hedgehog Concept\n• Tell me about Zero to One\n• What are Porter\'s Five Forces?\n• 什么是颠覆性创新？';
+}
+
+/* ---- Chat UI ---- */
+function toggleChat() {
+  chatOpen = !chatOpen;
+  var panel = document.getElementById('chatPanel');
+  var fab = document.getElementById('chatFab');
+  if (chatOpen) {
+    panel.classList.remove('collapsed');
+    fab.classList.add('hidden');
+    document.getElementById('chatInput').focus();
+    updateChatLang();
+  } else {
+    panel.classList.add('collapsed');
+    fab.classList.remove('hidden');
+  }
+}
+
+function updateChatLang() {
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  document.querySelectorAll('[data-chat-en]').forEach(function(el) {
+    var txt = el.getAttribute('data-chat-' + lang);
+    if (txt !== null) el.textContent = txt;
+  });
+  var inp = document.getElementById('chatInput');
+  if (inp) inp.placeholder = inp.getAttribute('data-chat-ph-' + lang);
+}
+
+function askSuggested(q) {
+  document.getElementById('chatInput').value = q;
+  sendMessage();
+}
+
+function addMsg(text, type) {
+  var msgs = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  var b = document.createElement('div');
+  b.className = 'bubble';
+  b.textContent = text;
+  div.appendChild(b);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return b;
+}
+
+function showTyping() {
+  var msgs = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chat-typing';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function hideTyping() {
+  var el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+function formatAnswer(t) {
+  return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+}
+
+async function sendMessage() {
+  if (isWaiting) return;
+  var inp = document.getElementById('chatInput');
+  var q = inp.value.trim();
+  if (!q) return;
+  var btn = document.getElementById('sendBtn');
+  isWaiting = true; btn.disabled = true;
+  inp.value = ''; inp.focus();
+  addMsg(q, 'user');
+  showTyping();
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+
+  // Try API first, fallback to client-side KB
+  var answer = null;
+  try {
+    var resp = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({question:q, lang:lang})
+    });
+    if (resp.ok) {
+      var data = await resp.json();
+      answer = data.answer;
+    }
+  } catch(e) { /* API not available, use client-side KB */ }
+
+  if (!answer) {
+    answer = kbSearch(q, lang) || fallbackText(lang);
+  }
+
+  // simulate a tiny delay for natural feel
+  await new Promise(function(r){setTimeout(r, 400 + Math.random()*400)});
+
+  hideTyping();
+  var bubble = addMsg('', 'bot');
+  bubble.innerHTML = formatAnswer(answer);
+  isWaiting = false; btn.disabled = false;
+}
+</script>
+
 </body>
 </html>
