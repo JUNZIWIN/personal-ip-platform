@@ -52,6 +52,24 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:500;color:var(--muted)}
 .nav-links a:hover{color:var(--navy)}
 .nav-cta{display:flex;align-items:center;gap:14px}
+.nav-login-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--white);cursor:pointer;font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--ink);transition:border-color .15s}
+.nav-login-btn:hover{border-color:var(--orange);color:var(--orange)}
+.nav-login-btn svg{color:var(--muted)}
+.nav-user-btn{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 5px;border-radius:99px;border:1.5px solid var(--line);background:var(--white);cursor:pointer;transition:border-color .15s}
+.nav-user-btn:hover{border-color:var(--purple)}
+.nav-user-btn .nav-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--navy));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.nav-user-btn .nav-user-name{font-size:13px;font-weight:500;color:var(--ink);max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-user-btn svg{color:var(--muted);flex-shrink:0}
+
+/* User dropdown */
+.user-dropdown{position:absolute;top:60px;right:0;width:220px;background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(10,28,56,.18);border:1px solid var(--line);z-index:100;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .2s}
+.user-dropdown.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.user-dropdown .ud-header{padding:14px 16px;border-bottom:1px solid var(--line)}
+.user-dropdown .ud-name{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+.user-dropdown .ud-email{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-dropdown .ud-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 16px;border:0;background:transparent;font-family:var(--body);font-size:13px;color:var(--ink);cursor:pointer;transition:background .1s;text-align:left}
+.user-dropdown .ud-item:hover{background:var(--paper)}
+.user-dropdown .ud-divider{height:1px;background:var(--line);margin:4px 0}
 .lang-toggle{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:var(--white)}
 .lang-toggle button{border:0;background:transparent;padding:7px 14px;font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}
 .lang-toggle button.active{background:var(--navy);color:#fff}
@@ -243,8 +261,81 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-book-bar .book-ask-btn{padding:7px 14px;border-radius:8px;background:var(--orange);color:#fff;border:none;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;font-family:var(--body)}
 .chat-book-bar .book-ask-btn:hover{opacity:.85}
 
-@media(max-width:500px){.chat-panel{right:8px;bottom:92px;width:calc(100vw - 16px);height:480px}}
-</style>
+/* ===== Left Sidebar (Knowledge Base Nav) ===== */
+.sidebar{position:fixed;top:68px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--line);z-index:90;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.sidebar.hidden{transform:translateX(-100%)}
+.sidebar-user{padding:20px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.sidebar-user .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--navy));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
+.sidebar-user .u-info{flex:1;min-width:0}
+.sidebar-user .u-name{font-size:13.5px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-user .u-email{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-nav{flex:1;padding:12px 10px}
+.sidebar-nav .nav-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 6px;display:block}
+.sidebar-nav .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:background .15s;border:0;background:transparent;width:100%;text-align:left;font-family:var(--body)}
+.sidebar-nav .nav-item:hover{background:var(--paper)}
+.sidebar-nav .nav-item.active{background:var(--purple-soft);color:var(--purple);font-weight:600}
+.sidebar-nav .nav-item .ni-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.sidebar-nav .nav-item.active .ni-icon{background:rgba(107,63,160,.18)}
+.sidebar-nav .nav-item .ni-badge{margin-left:auto;background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:99px}
+.sidebar-footer{padding:14px 18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.sidebar-footer .sf-link{font-size:12px;color:var(--muted);cursor:pointer;transition:color .15s}
+.sidebar-footer .sf-link:hover{color:var(--orange)}
+
+/* Main content shift when sidebar is visible */
+body.sidebar-open .main-content{margin-left:220px}
+body.sidebar-open .nav{left:220px;width:calc(100% - 220px)}
+body.sidebar-open .chat-fab,
+body.sidebar-open .chat-panel{right:28px}
+
+/* Mobile: sidebar as overlay */
+@media(max-width:840px){
+  .sidebar{width:260px;box-shadow:4px 0 24px rgba(0,0,0,.12)}
+  body.sidebar-open .main-content{margin-left:0}
+  body.sidebar-open .nav{left:0;width:100%}
+}
+
+/* ===== Knowledge Base Panel (overlay on right) ===== */
+.kb-panel{position:fixed;top:68px;right:0;bottom:0;width:420px;max-width:calc(100vw - 220px);background:var(--white);border-left:1px solid var(--line);z-index:91;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow:hidden}
+.kb-panel.open{transform:translateX(0)}
+.kb-panel .kb-header{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);flex-shrink:0}
+.kb-panel .kb-header h3{font-size:15px;font-weight:700;color:var(--navy);flex:1}
+.kb-panel .kb-header .kb-close{width:28px;height:28px;border-radius:50%;background:var(--paper);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px;transition:background .15s}
+.kb-panel .kb-header .kb-close:hover{background:var(--line)}
+.kb-tabs{display:flex;gap:0;border-bottom:1px solid var(--line);flex-shrink:0}
+.kb-tab{flex:1;padding:10px 0;text-align:center;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;border:0;background:transparent;border-bottom:2px solid transparent;transition:all .15s;font-family:var(--body)}
+.kb-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.kb-body{flex:1;overflow-y:auto;padding:16px 20px}
+.kb-body::-webkit-scrollbar{width:5px}
+.kb-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+
+/* KB cards */
+.kb-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;cursor:pointer;transition:border-color .15s,transform .15s}
+.kb-card:hover{border-color:var(--purple);transform:translateY(-1px)}
+.kb-card .kc-title{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.kb-card .kc-meta{font-size:11.5px;color:var(--muted);margin-bottom:8px}
+.kb-card .kc-snippet{font-size:12.5px;color:var(--ink);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.kb-card .kc-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.kb-card .kc-tag{font-size:10.5px;padding:2px 8px;border-radius:99px;background:var(--purple-soft);color:var(--purple);font-weight:500}
+
+/* KB empty state */
+.kb-empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:13.5px}
+.kb-empty .ke-icon{font-size:36px;margin-bottom:12px;opacity:.5}
+
+/* ===== Login Modal ===== */
+.login-overlay{position:fixed;inset:0;z-index:2000;background:rgba(10,28,56,.45);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.login-overlay.open{opacity:1;pointer-events:auto}
+.login-modal{background:var(--white);border-radius:18px;padding:36px 32px;width:400px;max-width:90vw;box-shadow:0 16px 64px rgba(10,28,56,.25);transform:translateY(12px);transition:transform .25s}
+.login-overlay.open .login-modal{transform:translateY(0)}
+.login-modal h2{font-family:var(--display);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.login-modal p{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+.login-modal .lm-field{margin-bottom:16px}
+.login-modal .lm-field label{display:block;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.login-modal .lm-field input{width:100%;padding:11px 15px;border-radius:10px;border:1.5px solid var(--line);font-size:14.5px;font-family:var(--body);color:var(--ink);background:var(--paper);outline:0;transition:border-color .15s}
+.login-modal .lm-field input:focus{border-color:var(--orange)}
+.login-modal .lm-btn{width:100%;padding:13px;border-radius:10px;background:var(--orange);color:#fff;border:0;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--body);transition:opacity .15s;margin-top:6px}
+.login-modal .lm-btn:hover{opacity:.88}
+.login-modal .lm-hint{font-size:11.5px;color:var(--muted);margin-top:14px;text-align:center}
+.login-modal .lm-close{position:absolute;top:14px;right:18px;background:0;border:0;font-size:20px;color:var(--muted);cursor:pointer}
 </head>
 <body>
 
@@ -283,10 +374,80 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
         <button id="btn-zh" onclick="setLang('zh')">中文</button>
       </div>
+      <!-- User menu (logged out) -->
+      <button class="nav-login-btn" id="navLoginBtn" onclick="openLogin()" style="display:flex;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3.5"/><path d="M1.5 15c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/></svg>
+        <span data-en="Sign in" data-zh="登录">Sign in</span>
+      </button>
+      <!-- User menu (logged in) -->
+      <button class="nav-user-btn" id="navUserBtn" onclick="toggleUserMenu()" style="display:none;">
+        <span class="nav-avatar" id="navAvatar">U</span>
+        <span class="nav-user-name" id="navUserName">User</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 0l5 6 5-6z" transform="rotate(180 5 3)"/></svg>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="ud-header">
+          <span class="ud-name" id="udUserName">User</span>
+          <span class="ud-email" id="udUserEmail">user@email.com</span>
+        </div>
+        <button class="ud-item" onclick="openKbPanel('personal')">
+          <span>📝</span> <span data-en="My Knowledge Base" data-zh="我的知识库">My Knowledge Base</span>
+        </button>
+        <button class="ud-item" onclick="openKbPanel('textbook')">
+          <span>📚</span> <span data-en="Textbook Library" data-zh="经典教材库">Textbook Library</span>
+        </button>
+        <button class="ud-item" onclick="openKbPanel('bestseller')">
+          <span>📕</span> <span data-en="Bestseller Library" data-zh="畅销书库">Bestseller Library</span>
+        </button>
+        <div class="ud-divider"></div>
+        <button class="ud-item" onclick="logoutUser()">
+          <span>🚪</span> <span data-en="Sign out" data-zh="退出登录">Sign out</span>
+        </button>
+      </div>
       <a href="#waitlist" class="btn btn-primary" data-en="Join waitlist" data-zh="加入候补名单">Join waitlist</a>
     </div>
   </div>
 </nav>
+
+<!-- ================= LEFT SIDEBAR ================= -->
+<aside class="sidebar hidden" id="sidebar">
+  <div class="sidebar-user">
+    <div class="avatar" id="sbAvatar">U</div>
+    <div class="u-info">
+      <div class="u-name" id="sbUserName">User</div>
+      <div class="u-email" id="sbUserEmail">user@email.com</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label" data-en="Knowledge Base" data-zh="知识库">Knowledge Base</span>
+    <button class="nav-item active" data-kb="textbook" onclick="openKbPanel('textbook')">
+      <span class="ni-icon">📚</span>
+      <span data-en="Textbooks" data-zh="经典教材">Textbooks</span>
+      <span class="ni-badge" id="badgeTextbook">0</span>
+    </button>
+    <button class="nav-item" data-kb="bestseller" onclick="openKbPanel('bestseller')">
+      <span class="ni-icon">📕</span>
+      <span data-en="Bestsellers" data-zh="畅销书">Bestsellers</span>
+      <span class="ni-badge" id="badgeBestseller">0</span>
+    </button>
+    <button class="nav-item" data-kb="personal" onclick="openKbPanel('personal')">
+      <span class="ni-icon">📝</span>
+      <span data-en="My Knowledge" data-zh="个人知识库">My Knowledge</span>
+      <span class="ni-badge" id="badgePersonal">0</span>
+    </button>
+    <span class="nav-label" data-en="Account" data-zh="账户" style="margin-top:18px">Account</span>
+    <button class="nav-item" onclick="logoutUser()">
+      <span class="ni-icon">🚪</span>
+      <span data-en="Sign out" data-zh="退出登录">Sign out</span>
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <span class="sf-link" onclick="openLogin()" data-en="Switch account" data-zh="切换账户">Switch account</span>
+  </div>
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div class="main-content">
 
 <!-- ================= HERO ================= -->
 <header class="hero">
@@ -633,6 +794,55 @@ function joinWaitlist(){
   });
 }
 </script>
+
+</div><!-- /.main-content -->
+
+<!-- ================= LOGIN MODAL ================= -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-modal">
+    <button class="lm-close" onclick="closeLogin()">&times;</button>
+    <h2 data-en="Welcome to BizAtom" data-zh="欢迎来到 BizAtom">Welcome to BizAtom</h2>
+    <p data-en="Enter your email to access your personal knowledge base." data-zh="输入您的邮箱，开启个人知识库。">Enter your email to access your personal knowledge base.</p>
+    <div class="lm-field">
+      <label data-en="Email" data-zh="邮箱">Email</label>
+      <input type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email">
+    </div>
+    <div class="lm-field">
+      <label data-en="Nickname (optional)" data-zh="昵称（可选）">Nickname (optional)</label>
+      <input type="text" id="loginName" placeholder="Book Lover" autocomplete="nickname">
+    </div>
+    <button class="lm-btn" onclick="doLogin()">
+      <span data-en="Enter BizAtom" data-zh="进入 BizAtom">Enter BizAtom</span>
+    </button>
+    <p class="lm-hint" data-en="No password needed — your email is your key." data-zh="无需密码——邮箱即是您的凭证。">No password needed — your email is your key.</p>
+  </div>
+</div>
+
+<!-- ================= KNOWLEDGE BASE PANEL ================= -->
+<div class="kb-panel" id="kbPanel">
+  <div class="kb-header">
+    <h3 id="kbPanelTitle" data-en="My Knowledge Base" data-zh="个人知识库">My Knowledge Base</h3>
+    <button class="kb-close" onclick="closeKbPanel()">&times;</button>
+  </div>
+  <div class="kb-tabs">
+    <button class="kb-tab active" data-kb="chats" onclick="switchKbTab('chats')">
+      <span data-en="Chats" data-zh="对话记录">Chats</span>
+    </button>
+    <button class="kb-tab" data-kb="notes" onclick="switchKbTab('notes')">
+      <span data-en="Notes" data-zh="读书笔记">Notes</span>
+    </button>
+    <button class="kb-tab" data-kb="books" onclick="switchKbTab('books')">
+      <span data-en="Saved Books" data-zh="收藏书籍">Saved Books</span>
+    </button>
+  </div>
+  <div class="kb-body" id="kbBody">
+    <div class="kb-empty">
+      <div class="ke-icon">💬</div>
+      <p data-en="Your chat history will appear here." data-zh="您的对话记录将显示在这里。">Your chat history will appear here.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ===== AI Chat Widget ===== -->
 <!-- Floating action button -->
 <button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open AI book assistant">
@@ -1087,6 +1297,200 @@ function clearChatHistory() {
   if (msgs) msgs.innerHTML = '';
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
   addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 Ask me anything about business classics, or select a book from the dropdown.', 'bot');
+}
+</script>
+
+
+
+<script>
+// ===== User System & Knowledge Base =====
+var currentUser = null;
+var kbCurrentType = 'personal';
+
+// ─── Check login on page load ───
+(function checkLogin() {
+  try {
+    var u = localStorage.getItem('bizatom_user');
+    if (u) {
+      currentUser = JSON.parse(u);
+      showLoggedInUI();
+    }
+  } catch(e) {}
+})();
+
+function showLoggedInUI() {
+  if (!currentUser) return;
+  document.getElementById('navLoginBtn').style.display = 'none';
+  document.getElementById('navUserBtn').style.display = 'flex';
+  document.getElementById('navAvatar').textContent = (currentUser.name || currentUser.email || 'U').charAt(0).toUpperCase();
+  document.getElementById('navUserName').textContent = currentUser.name || currentUser.email || 'User';
+  document.getElementById('udUserName').textContent = currentUser.name || '';
+  document.getElementById('udUserEmail').textContent = currentUser.email || '';
+  document.getElementById('sbAvatar').textContent = (currentUser.name || currentUser.email || 'U').charAt(0).toUpperCase();
+  document.getElementById('sbUserName').textContent = currentUser.name || 'User';
+  document.getElementById('sbUserEmail').textContent = currentUser.email || '';
+  // Show sidebar
+  document.getElementById('sidebar').classList.remove('hidden');
+  document.body.classList.add('sidebar-open');
+  updateSidebarBadges();
+}
+
+function openLogin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('loginEmail').focus(); }, 200);
+}
+function closeLogin() {
+  document.getElementById('loginOverlay').classList.remove('open');
+}
+
+function doLogin() {
+  var email = (document.getElementById('loginEmail').value || '').trim();
+  var name  = (document.getElementById('loginName').value  || '').trim();
+  if (!email || email.indexOf('@') < 1) {
+    alert((document.documentElement.lang||'').indexOf('zh')===0 ? '请输入有效邮箱' : 'Please enter a valid email');
+    return;
+  }
+  currentUser = { email: email, name: name || email.split('@')[0], since: new Date().toISOString() };
+  localStorage.setItem('bizatom_user', JSON.stringify(currentUser));
+  localStorage.setItem('bizatom_chats', JSON.stringify([]));
+  closeLogin();
+  showLoggedInUI();
+}
+
+function logoutUser() {
+  currentUser = null;
+  localStorage.removeItem('bizatom_user');
+  document.getElementById('navLoginBtn').style.display = 'flex';
+  document.getElementById('navUserBtn').style.display = 'none';
+  document.getElementById('sidebar').classList.add('hidden');
+  document.body.classList.remove('sidebar-open');
+  closeKbPanel();
+  closeUserMenu();
+}
+
+function toggleUserMenu() {
+  document.getElementById('userDropdown').classList.toggle('open');
+}
+function closeUserMenu() {
+  document.getElementById('userDropdown').classList.remove('open');
+}
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-user-btn') && !e.target.closest('.user-dropdown')) {
+    closeUserMenu();
+  }
+});
+
+// ─── Knowledge Base Panel ───
+function openKbPanel(type) {
+  if (!currentUser) { openLogin(); return; }
+  kbCurrentType = type || 'personal';
+  var panel = document.getElementById('kbPanel');
+  panel.classList.add('open');
+  // Update sidebar active state
+  var items = document.querySelectorAll('.sidebar-nav .nav-item[data-kb]');
+  for (var i = 0; i < items.length; i++) {
+    items[i].classList.toggle('active', items[i].getAttribute('data-kb') === kbCurrentType);
+  }
+  // Set panel title
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  var titles = {
+    textbook:   zh ? '经典教材库' : 'Textbook Library',
+    bestseller: zh ? '畅销书库'   : 'Bestseller Library',
+    personal:   zh ? '个人知识库' : 'My Knowledge Base'
+  };
+  document.getElementById('kbPanelTitle').textContent = titles[kbCurrentType] || titles.personal;
+  // Default tab: chats for personal; books for textbook/bestseller
+  var defaultTab = (kbCurrentType === 'personal') ? 'chats' : 'books';
+  switchKbTab(defaultTab);
+}
+function closeKbPanel() {
+  document.getElementById('kbPanel').classList.remove('open');
+}
+
+function switchKbTab(tab) {
+  var btns = document.querySelectorAll('.kb-tab');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove('active');
+    if (btns[i].getAttribute('data-kb') === tab) {
+      btns[i].classList.add('active');
+    }
+  }
+  loadKbContent(tab);
+}
+  var tabBtns = document.querySelectorAll('.kb-tab');
+  for (var i = 0; i < tabBtns.length; i++) {
+    tabBtns[i].classList.remove('active');
+    var t = tabBtns[i].getAttribute('data-kb') || '';
+    // data-kb is not on .kb-tab. Let me check HTML...
+    // Actually in HTML I have: <button class="kb-tab active" data-kb="chats"
+    // So it IS there. Good.
+    if (tabBtns[i].getAttribute('data-kb') === tab) {
+      tabBtns[i].classList.add('active');
+    }
+  }
+  loadKbContent(tab);
+}
+
+function loadKbContent(tab) {
+  var body = document.getElementById('kbBody');
+  if (!currentUser) { body.innerHTML = '<div class="kb-empty"><div class="ke-icon">🔒</div><p>' + (((document.documentElement.lang||'').indexOf('zh')===0) ? '请先登录' : 'Please sign in first') + '</p></div>'; return; }
+  if (tab === 'chats')  loadKbChats(body);
+  else if (tab === 'notes')  loadKbNotes(body);
+  else if (tab === 'books') loadKbBooks(body);
+}
+
+function loadKbChats(body) {
+  var chats = [];
+  try { chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]'); } catch(e) {}
+  if (chats.length === 0) {
+    var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+    body.innerHTML = '<div class="kb-empty"><div class="ke-icon">💬</div><p>' + (zh ? '您的对话记录将显示在这里。开始与 AI 书童对话吧！' : 'Your chat history will appear here. Start chatting with AI 书童!') + '</p></div>';
+    return;
+  }
+  var html = '';
+  for (var i = chats.length - 1; i >= 0; i--) {
+    var c = chats[i];
+    html += '<div class="kb-card"><div class="kc-meta">' + (c.ts ? new Date(c.ts).toLocaleString() : '') + (c.bookId ? ' · 📖 ' + c.bookId : '') + '</div><div class="kc-title">' + escapeHtml((c.q||'').substring(0,60)) + '</div><div class="kc-snippet">' + escapeHtml((c.a||'').substring(0,120)) + '...</div></div>';
+  }
+  body.innerHTML = html;
+}
+
+function loadKbNotes(body) {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  body.innerHTML = '<div class="kb-empty"><div class="ke-icon">📝</div><p>' + (zh ? '读书笔记功能即将上线，敬请期待！' : 'Reading notes coming soon!') + '</p></div>';
+}
+function loadKbBooks(body) {
+  var zh = (document.documentElement.lang||'').indexOf('zh')===0;
+  body.innerHTML = '<div class="kb-empty"><div class="ke-icon">📚</div><p>' + (zh ? '您收藏的书籍将显示在这里。' : 'Your saved books will appear here.') + '</p></div>';
+}
+
+function escapeHtml(s) {
+  var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+}
+
+// ─── Save chat to localStorage ───
+// Override logChat to also save locally
+var _origLogChat = logChat;
+function logChat(question, answer, bookId) {
+  // Save to localStorage
+  if (currentUser && question) {
+    var chats = [];
+    try { chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]'); } catch(e) {}
+    chats.push({ q: question, a: answer, bookId: bookId || '', ts: new Date().toISOString() });
+    if (chats.length > 200) chats = chats.slice(-200); // Keep last 200
+    localStorage.setItem('bizatom_chats', JSON.stringify(chats));
+    updateSidebarBadges();
+  }
+  // Call original (backend log)
+  if (typeof _origLogChat === 'function') _origLogChat(question, answer, bookId);
+}
+
+function updateSidebarBadges() {
+  var chats = [];
+  try { chats = JSON.parse(localStorage.getItem('bizatom_chats') || '[]'); } catch(e) {}
+  var badge = document.getElementById('badgePersonal');
+  if (badge) badge.textContent = chats.length;
 }
 </script>
 
