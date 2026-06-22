@@ -25,7 +25,7 @@ var I18N_DATA = {
     'hero.english_name': 'TIAN, Bowen',
     'hero.title': '爱博闻&reg;/AIIPOWER&reg; 创始人 · AIP Studio、BizAtom.ai、AIRankRocket',
     'hero.subtitle': 'AI + IP + POWER —— AI reshapes / empowers your brand',
-    'hero.bio': '养老文娱科技金融跨界创业者，致力于用AI、AR、全息等科技打造个人品牌IP，推动家庭全龄智能生活。2026年8月赴港攻读港中文MBA。',
+    'hero.bio': 'AI全域品牌创业者，深耕智能养老、数字IP文娱。致力于用AI、AR、全息等科技打造个人品牌IP，推动家庭全龄智能生活。2026年8月赴港攻读港中文MBA。',
     'hero.btn.products': '💼 查看产品',
     'hero.btn.ai': '🤖 AI数字人',
     'hero.stat.2017': '公司创办',
@@ -36,7 +36,7 @@ var I18N_DATA = {
     // About 区
     'about.label': 'About & Brand Story',
     'about.title': '田卜文 · Vanessa TIAN',
-    'about.desc': '深圳AI破局行动家 · 赴美生子高龄宝妈 · 爱博闻&reg;/AIIPOWER&reg; 创始人 · 2026港中文CUHK全日制MBA',
+    'about.desc': '深圳AI破局行动家 · 爱博闻&reg;/AIIPOWER&reg; 创始人 · 2026港中文CUHK全日制MBA',
     'about.full_name': 'Vanessa TIAN',
     'about.chinese_name': '田卜文 · TIAN, Bowen',
 
@@ -235,7 +235,7 @@ var I18N_DATA = {
     'hero.english_name': 'TIAN, Bowen',
     'hero.title': 'Founder of AIIPOWER&reg; · AIP Studio, BizAtom.ai, AIRankRocket',
     'hero.subtitle': 'AI + IP + POWER —— AI reshapes / empowers your brand',
-    'hero.bio': 'Cross-industry entrepreneur in elderly care, entertainment, tech & finance. Dedicated to building personal brand IP with AI, AR, and holographic technology. CUHK MBA candidate starting August 2026.',
+    'hero.bio': 'AI-powered global brand entrepreneur, focused on smart elderly care & digital IP entertainment. Building personal brand IPs with AI, AR & holographic tech. CUHK MBA candidate starting Aug 2026.',
     'hero.btn.products': '💼 View Products',
     'hero.btn.ai': '🤖 AI Digital Human',
     'hero.stat.2017': 'Company Founded',
@@ -246,7 +246,7 @@ var I18N_DATA = {
     // About Section
     'about.tag': 'About & Brand Story',
     'about.title': 'TIAN Bowen · Vanessa TIAN',
-    'about.desc': 'Shenzhen AI Actionist · U.S. Birth Premium Mom · AIBOWEN&reg;/AIIPOWER&reg; Founder · 2026 CUHK Full-time MBA',
+    'about.desc': 'Shenzhen AI Actionist · AIBOWEN&reg;/AIIPOWER&reg; Founder · 2026 CUHK Full-time MBA',
     'about.full_name': 'Vanessa TIAN',
     'about.chinese_name': '田卜文 · TIAN, Bowen',
     'about.p1': 'Founder of AIIPOWER LIMITED. Founded Guojiao Huayu (Shenzhen) Culture Development Co., Ltd. in 2017, established AIIPOWER brand concept in 2018, submitted trademark application in 2019, officially approved in 2020.',
