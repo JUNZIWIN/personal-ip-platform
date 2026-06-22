@@ -86,9 +86,6 @@ async function callDeepSeek(question, lang, history) {
   });
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
-
     const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -102,10 +99,8 @@ async function callDeepSeek(question, lang, history) {
         temperature: 0.7,
         stream: false,
       }),
-      signal: controller.signal,
     });
 
-    clearTimeout(timeout);
     const status = resp.status;
     const bodyText = await resp.text();
 
@@ -159,18 +154,16 @@ export default async function handler(req, res) {
 
     // Fallback if no API key or API failed
     const fallbackMsg = lang === 'zh'
-        ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
-        : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel.";
+      ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
+      : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel.";
 
     return res.status(200).json({
       answer: fallbackMsg,
       debug: {
         hasKey: !!process.env.DEEPSEEK_API_KEY,
         vercelEnv: process.env.VERCEL_ENV || 'unknown',
+        error: aiResult ? aiResult.error : 'UNKNOWN'
       }
-    });
-        ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 从下拉菜单选择一本书，点「提问」查看该书的核心内容\n• 问一些关于商业经典的问题，我会尽力基于已有知识回答\n\n💡 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用完整 AI 功能。'
-        : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Select a book from the dropdown and click Ask\n• Ask about business classics from my knowledge base\n\n💡 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel."
     });
 
   } catch (err) {
