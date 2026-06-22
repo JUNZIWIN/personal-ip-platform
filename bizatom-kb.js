@@ -696,6 +696,37 @@ var BIZATOM_KB = [
     ["IS-LM Model","IS: goods market equilibrium (I=S), i↑→I↓→Y↓ (negative slope). LM: money market equilibrium (Md=Ms), Y↑→Md↑→i↑ (positive slope). Intersection = short-run equilibrium. Fiscal/monetary policies shift curves."],
     ["Globalization & Open Economy","Mundell-Fleming model: small open economy under floating rates, fiscal policy offset by capital flows, monetary policy enhanced (exchange rate affects NX). For global managers: monitor both home country and major trading partner monetary policy directions."]]},
     kw:["macroeconomics","宏观经济学","mankiw","曼昆","GDP","inflation","通胀","unemployment","失业","monetary policy","货币政策","fiscal policy","财政政策","IS-LM","Phillips curve","菲利普斯曲线","open economy","开放经济","quantitative easing","QE","central bank","央行","multiplier effect","乘数效应"]
+  },
+  // ═══════════════════════════════════════════
+  // MBA TEXTBOOKS — SUPPLEMENTARY (补充教材)
+  // ═══════════════════════════════════════════
+  {
+    id:"mba-valuation", cat:"mba", type:"textbook",
+    zh:{t:"《Business Analysis & Valuation》", a:"帕利普、希利、伯纳德 (Palepu, Healy & Bernard)", b:"哈佛商学院财务报告课程核心案例教材。以真实公司财报为案例，教授如何运用财务报表进行商业分析与估值。与Penman理论派形成完美互补。",
+    c:[["财报分析四步法","1) 战略分析（行业与竞争分析）→ 2) 会计分析（评估财报质量与偏差）→ 3) 财务分析（比率与现金流分析）→ 4) 前景分析（预测与估值）。四步法构成完整的商业分析框架。"],
+    ["会计质量评估","不是所有财报数字都可信。通过对比应计项目与现金流量、分析管理层薪酬结构、识别盈余管理迹象，判断财报的'水分'程度。"],
+    ["权益估值方法论","三种主流方法：折现现金流(DCF)、乘数法(Comaparables)、资产基础法。每种方法的适用场景不同——成长性公司适合DCF，同行可比公司多适合乘数法。"],
+    ["案例教学法","本书以哈佛案例为基础：每个章节都配有真实公司的完整财报，学生需要像真实分析师一样做出判断和推荐。这种'在做中学'是本书的核心特色。"]]},
+    en:{t:"Business Analysis & Valuation", a:"Palepu, Healy & Bernard", b:"Core case-based textbook for HBS financial reporting. Uses real company financial statements to teach business analysis and valuation. Perfect complement to Penman's theoretical approach.",
+    c:[["4-Step Framework","1) Strategy analysis (industry & competition) → 2) Accounting analysis (evaluate financial reporting quality) → 3) Financial analysis (ratios & cash flow) → 4) Prospects analysis (forecasting & valuation). Complete business analysis framework."],
+    ["Evaluating Accounting Quality","Not all financial statement numbers are trustworthy. Compare accruals vs cash flows, analyze management compensation structure, detect earnings management signals to judge 'water' in reports."],
+    ["Equity Valuation Methods","Three main approaches: DCF (Discounted Cash Flow), Comaparables (Multiples), Asset-based. Each suits different scenarios — growth companies → DCF, many peer companies → multiples."],
+    ["Case Method","Harvard-case-based: each chapter includes complete financials of real companies. Students must make judgments and recommendations like real analysts. 'Learning by doing' is the core feature."]]},
+    kw:["business analysis","valuation","palepu","帕利普","healy","希利","bernard","bernard","财报分析","equity valuation","权益估值","accounting quality","会计质量","DCF","discounted cash flow","4-step framework","四步法","harvard case","哈佛案例"]
+  },
+  {
+    id:"mba-leadership-challenge", cat:"mba", type:"textbook",
+    zh:{t:"《领导力挑战》", a:"詹姆斯·库泽斯、巴里·波斯纳 (Kouzes & Posner)", b:"全球销量超300万册的领导力实务经典。基于40年、数百万份'领导力最佳实践问卷'的实证研究。与Northouse理论教材形成'理论+实务'双璧。",
+    c:[["卓越领导的五种习惯行为","1) 以身作则(Model the Way)：明确价值观并以身作则；2) 共启愿景(Inspire a Shared Vision)：描绘激动人心的未来；3) 挑战现状(Challenge the Process)：勇于冒险、从失败中学习；4) 使众人行(Enable Others to Act)：授权赋能、建立信任；5) 激励人心(Encourage the Heart)：认可贡献、庆祝胜利。"],
+    ["领导力是每个人的事","领导力不是职位或头衔，而是一种关系——一种人们选择是否追随你的关系。'领导力是解锁人们潜能的过程。'任何层级的人都可以展现领导力。"],
+    ["信誉(Credibility)是领导力的基石","研究发现：人们最希望领导者具备的两个特质是'有能力'(Competence)和'值得信赖'(Trustworthiness)。没有信誉，其他一切都无从谈起。"],
+    ["个人最佳实践案例","书中包含数百个真实领导者案例：从一线主管到CEO，从非营利组织到财富500强。每个案例都映射五种行为中的一个或多个——让理论落地为可操作的行动指南。"]]},
+    en:{t:"The Leadership Challenge", a:"James Kouzes & Barry Posner", b:"Best-selling leadership practice classic based on 40 years of research and millions of LPI (Leadership Practices Inventory) surveys. Forms 'theory + practice' duo with Northouse.",
+    c:[["Five Practices of Exemplary Leadership","1) Model the Way: clarify values, set example; 2) Inspire a Shared Vision: envision exciting future; 3) Challenge the Process: take risks, learn from failure; 4) Enable Others to Act: empower, build trust; 5) Encourage the Heart: recognize contributions, celebrate victories."],
+    ["Leadership Is Everyone's Business","Leadership is not a position or title — it's a relationship. 'Leadership is the process of unlocking people's potential.' Anyone at any level can demonstrate leadership."],
+    ["Credibility = Foundation of Leadership","Research finding: the two traits people most want in leaders are 'Competence' and 'Trustworthiness.' Without credibility, nothing else matters."],
+    ["Real-World Case Studies","Hundreds of real leader cases: from front-line supervisors to CEOS, from non-profits to Fortune 500. Each maps to one or more of the Five Practices — making theory actionable."]]},
+    kw:["leadership challenge","领导力挑战","kouzes","库泽斯","posner","波斯纳","five practices","五种习惯行为","model the way","以身作则","inspire vision","共启愿景","credibility","信誉","LPI","leadership practices inventory","领导力实务"]
   }
 ];
 

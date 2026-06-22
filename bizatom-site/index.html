@@ -203,6 +203,20 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-input-wrap .send-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 .chat-input-wrap .send-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 
+/* Category tabs */
+.chat-tabs{display:flex;gap:0;flex-shrink:0;padding:8px 12px;background:#F8F9FC}
+.chat-tab{flex:1;padding:8px 0;text-align:center;font-size:12.5px;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;border-radius:10px;transition:all .2s;font-family:var(--body)}
+.chat-tab.active{background:var(--white);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.chat-tab:hover:not(.active){color:var(--navy)}
+
+/* Book selector list */
+.chat-book-bar{flex-shrink:0;padding:0 12px 8px;background:#F8F9FC;display:flex;align-items:center;gap:8px}
+.chat-book-bar .book-count{font-size:11px;color:var(--muted);white-space:nowrap;min-width:fit-content}
+.chat-book-bar select{flex:1;padding:7px 10px;border-radius:8px;border:1.5px solid var(--line);background:var(--white);font-size:12.5px;font-family:var(--body);color:var(--ink);cursor:pointer;outline:0;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.chat-book-bar select:focus{border-color:var(--orange)}
+.chat-book-bar .book-ask-btn{padding:7px 14px;border-radius:8px;background:var(--orange);color:#fff;border:none;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;font-family:var(--body)}
+.chat-book-bar .book-ask-btn:hover{opacity:.85}
+
 @media(max-width:500px){.chat-panel{right:8px;bottom:92px;width:calc(100vw - 16px);height:480px}}
 </style>
 </head>
@@ -590,15 +604,29 @@ function joinWaitlist(){
     </div>
     <button class="h-close" onclick="toggleChat()" aria-label="Close chat">&times;</button>
   </div>
+  <!-- Category tabs -->
+  <div class="chat-tabs">
+    <button class="chat-tab active" onclick="switchKbTab('bestseller',this)" data-chat-en="Bestsellers" data-chat-zh="畅销书">📙 畅销书</button>
+    <button class="chat-tab" onclick="switchKbTab('textbook',this)" data-chat-en="Textbooks" data-chat-zh="经典教材">📘 经典教材</button>
+  </div>
+  <!-- Book selector -->
+  <div class="chat-book-bar">
+    <span class="book-count" id="bookCount">46本</span>
+    <select id="bookSelect" onchange="onBookSelect()" aria-label="Select a book">
+      <option value="" data-chat-en="— Browse all books —" data-chat-zh="— 浏览全部书籍 —">— 浏览全部书籍 —</option>
+    </select>
+    <button class="book-ask-btn" onclick="askAboutSelectedBook()" data-chat-en="Ask" data-chat-zh="提问">提问</button>
+  </div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-msg bot">
-      <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant. Ask me about any business classic — concepts, frameworks, key ideas. What would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书僮，可以回答商业经典的任何问题——核心概念、理论框架、关键思想。今天想了解什么？">👋 你好！我是 BizAtom AI 书僮，可以回答商业经典的任何问题——核心概念、理论框架、关键思想。今天想了解什么？</div>
+      <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant. Browse 46 business classics above, or ask me anything — concepts, frameworks, key ideas. What would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书僮，支持46本商业经典。选择上方书籍浏览，或直接问我任何概念、框架和思想。今天想了解什么？">👋 你好！我是 BizAtom AI 书僮，支持46本商业经典。选择上方书籍浏览，或直接问我任何概念、框架和思想。今天想了解什么？</div>
     </div>
   </div>
   <div class="chat-suggestions" id="chatSuggestions">
     <button onclick="askSuggested('什么是蓝海战略？')" data-chat-zh="什么是蓝海战略？" data-chat-en="What is Blue Ocean Strategy?">什么是蓝海战略？</button>
-    <button onclick="askSuggested('Explain the Hedgehog Concept')" data-chat-en="Explain the Hedgehog Concept" data-chat-zh="解释刺猬理念">Explain the Hedgehog Concept</button>
+    <button onclick="askSuggested('解释第一性原理')" data-chat-zh="解释第一性原理" data-chat-en="Explain First Principles">解释第一性原理</button>
     <button onclick="askSuggested('从0到1的核心思想')" data-chat-zh="从0到1的核心思想" data-chat-en="Zero to One key ideas">从0到1的核心思想</button>
+    <button onclick="askSuggested('穷查理宝典的智慧')" data-chat-zh="穷查理宝典的智慧" data-chat-en="Poor Charlie insights">穷查理宝典的智慧</button>
   </div>
   <div class="chat-input-wrap">
     <input type="text" id="chatInput" data-chat-ph-en="Ask about a business book..." data-chat-ph-zh="输入你的问题..." placeholder="输入你的问题..." onkeydown="if(event.key==='Enter')sendMessage()" aria-label="Chat message input">
@@ -608,121 +636,88 @@ function joinWaitlist(){
   </div>
 </div>
 
+<script src="bizatom-kb.js"></script>
 <script>
-/* ===== BizAtom AI Chat Widget (Client-side Knowledge Base) ===== */
+/* ===== BizAtom AI Chat Widget ===== */
 let chatOpen = false;
 let isWaiting = false;
+let currentTab = 'bestseller'; // 'bestseller' | 'textbook'
 
-/* ---- Embedded Knowledge Base ---- */
-var BIZKB = [
-  {kw:"good to great|从优秀到卓越|jim collins|柯林斯|hedgehog|刺猬|level 5|第五级|飞轮|flywheel",
-   zh:{t:"《从优秀到卓越》— 吉姆·柯林斯",b:"为什么有些公司能从优秀跨越到卓越。",
-    c:[["第五级领导力","将极度个人谦逊与强烈职业意志结合，以公司成功为目标。"],
-    ["先人后事","先让合适的人上车，再决定开往何处。"],
-    ["刺猬理念","三个圆的交集：热爱的、能做最好的、驱动经济引擎的。"],
-    ["飞轮效应","可持续转变来自持续推动，而非单一戏剧性事件。"],
-    ["直面残酷现实","保持必胜信念，同时直面最残酷的现实。"]]},
-   en:{t:"Good to Great — Jim Collins",b:"Why some companies make the leap while others don't.",
-    c:[["Level 5 Leadership","Paradoxical blend of personal humility and professional will."],
-    ["First Who, Then What","Get the right people on the bus first."],
-    ["The Hedgehog Concept","Intersection of passion, best-at, and economic driver."],
-    ["The Flywheel Effect","Sustainable transformation from consistent pushes, not one big event."],
-    ["Confront Brutal Facts","Unwavering faith + confronting reality."]]}},
-  {kw:"lean startup|精益创业|eric ries|埃里克·莱斯|mvp|最小可行|pivot|转型|build measure learn|构建衡量学习",
-   zh:{t:"《精益创业》— 埃里克·莱斯",b:"如何用持续创新打造极其成功的企业。",
-    c:[["最小可行产品MVP","以最小努力启动'构建-衡量-学习'循环的最简产品版本。"],
-    ["构建-衡量-学习","核心反馈循环：构建产品→衡量客户反应→学习→转型或坚持。"],
-    ["验证式学习","通过实证证明团队发现的有价值真相的过程。"],
-    ["转型Pivot","结构化的方向修正，测试新的基本假设。"]]},
-   en:{t:"The Lean Startup — Eric Ries",b:"Continuous innovation for radically successful businesses.",
-    c:[["MVP","Simplest version to start the Build-Measure-Learn loop with minimum effort."],
-    ["Build-Measure-Learn","Build product → measure customer response → learn → pivot or persevere."],
-    ["Validated Learning","Empirically demonstrating valuable truths about prospects."],
-    ["Pivot","Structured course correction to test a new fundamental hypothesis."]]}},
-  {kw:"blue ocean|蓝海战略|w. chan kim|金伟灿|red ocean|红海|value innovation|价值创新",
-   zh:{t:"《蓝海战略》— 金伟灿、莫博涅",b:"创造无竞争市场空间，让竞争变得无关紧要。",
-    c:[["红海 vs 蓝海","红海=现有行业（价格战）；蓝海=未知市场（创造需求）。"],
-    ["价值创新","同时追求差异化和低成本，创造价值飞跃。"],
-    ["四步动作框架","剔除、减少、提升、创造——重构价值曲线。"]]},
-   en:{t:"Blue Ocean Strategy — W. Chan Kim",b:"Create uncontested market space.",
-    c:[["Red vs Blue Ocean","Red = existing industries; Blue = unknown market space."],
-    ["Value Innovation","Simultaneous pursuit of differentiation AND low cost."],
-    ["Four Actions Framework","Eliminate, Reduce, Raise, Create — reconstruct value curve."]]}},
-  {kw:"innovator|创新者的窘境|clayton christensen|克里斯坦森|disrupt|颠覆性",
-   zh:{t:"《创新者的窘境》— 克莱顿·克里斯坦森",b:"为什么大公司会失败——正因为他们做对了每件事。",
-    c:[["颠覆性创新","小公司从被忽视的细分市场起步，最终取代既有企业。"],
-    ["延续性创新","沿主流客户看重维度对现有产品的改进。"],
-    ["失败原因","倾听最佳客户+关注高利润+合理分配资源=对颠覆性威胁视而不见。"]]},
-   en:{t:"The Innovator's Dilemma — Clayton Christensen",b:"Why great companies fail by doing everything right.",
-    c:[["Disruptive Innovation","Smaller company targets overlooked segments, then moves upmarket."],
-    ["Sustaining Innovation","Improvements along dimensions mainstream customers value."],
-    ["Why They Fail","Listening to customers + high margins + rational allocation = blind to disruption."]]}},
-  {kw:"zero to one|从0到1|peter thiel|彼得·蒂尔|垄断|monopoly|secret",
-   zh:{t:"《从0到1》— 彼得·蒂尔",b:"关于创业的笔记，或者说如何构建未来。",
-    c:[["从0到1 vs 从1到n","0→1=创造全新事物（创新）；1→n=复制已有（全球化）。"],
-    ["垄断 vs 竞争","垄断推动进步——多年垄断利润提供强大的创新激励。'竞争是失败者的事。'"],
-    ["秘密","'有什么重要真理很少人认同你？'——反主流问题是创新的起点。"],
-    ["明确乐观","通过规划和执行塑造未来，而非只是希望万事顺遂。"]]},
-   en:{t:"Zero to One — Peter Thiel",b:"Notes on startups, or how to build the future.",
-    c:[["0→1 vs 1→n","0→1 = creating something new; 1→n = copying what works."],
-    ["Monopoly vs Competition","Monopolies drive progress. 'Competition is for losers.'"],
-    ["Secrets","'What important truth do very few agree with you on?'"],
-    ["Definite Optimism","Shape the future through planning and execution."]]}},
-  {kw:"thinking fast|思考快与慢|daniel kahneman|卡尼曼|system 1|系统1|system 2|系统2|cognitive bias|认知偏差|prospect|前景|loss aversion|损失厌恶",
-   zh:{t:"《思考，快与慢》— 丹尼尔·卡尼曼",b:"驱动我们思考方式的两种系统。",
-    c:[["系统1","快速、自动、直觉——处理快速判断（高效但容易偏差）。"],
-    ["系统2","缓慢、审慎、分析——用于复杂推理（费努力但更准确）。"],
-    ["损失厌恶","损失带来的痛苦≈等量收益快乐的两倍。这是前景理论的核心发现。"],
-    ["认知偏差","锚定效应、可得性启发、框架效应、过度自信等系统性思维错误。"]]},
-   en:{t:"Thinking, Fast and Slow — Daniel Kahneman",b:"The two systems that drive how we think.",
-    c:[["System 1","Fast, automatic, intuitive — snap judgments (efficient but biased)."],
-    ["System 2","Slow, deliberate, analytical — complex reasoning (effortful but accurate)."],
-    ["Loss Aversion","Losses hurt ~2x more than equivalent gains feel good."],
-    ["Cognitive Biases","Anchoring, availability heuristic, framing, overconfidence."]]}},
-  {kw:"7 habits|七个习惯|stephen covey|史蒂芬·柯维|高效能|proactive|积极主动|以终为始|要事第一",
-   zh:{t:"《高效能人士的七个习惯》— 史蒂芬·柯维",b:"关于个人改变的经典之作。",
-    c:[["习惯1:积极主动","在刺激与反应之间，你有选择的自由。"],
-    ["习惯2:以终为始","从清晰的目的地出发，设想未来目标。"],
-    ["习惯3:要事第一","优先处理重要但不紧急的'第二象限'事项。"],
-    ["习惯4:双赢思维","在所有互动中寻求互惠互利。"],
-    ["习惯5:知彼解己","以理解为目的倾听，非以回复为目的。"],
-    ["习惯6:统合综效","整体大于部分之和——创造性合作。"]]},
-   en:{t:"The 7 Habits — Stephen Covey",b:"Powerful lessons in personal change.",
-    c:[["1: Be Proactive","Between stimulus and response, you have freedom to choose."],
-    ["2: Begin With the End","Start with a clear destination in mind."],
-    ["3: First Things First","Prioritize important but not urgent (Quadrant II)."],
-    ["4: Think Win-Win","Seek mutual benefit in all interactions."],
-    ["5: Seek First to Understand","Listen with intent to understand, not reply."],
-    ["6: Synergize","The whole is greater than the sum of its parts."]]}},
-  {kw:"porter|波特|five forces|五力|competitive strategy|竞争战略|value chain|价值链|generic strategy|通用战略",
-   zh:{t:"《竞争战略》— 迈克尔·波特",b:"分析行业和竞争对手的核心框架。",
-    c:[["五力模型","新进入者威胁、供应商议价能力、买方议价能力、替代品威胁、行业竞争。"],
-    ["通用战略","成本领先、差异化、聚焦——必须选其一，'夹在中间'是失败配方。"],
-    ["价值链","企业交付价值的一系列活动，分析价值链揭示竞争优势来源。"]]},
-   en:{t:"Competitive Strategy — Michael Porter",b:"Techniques for analyzing industries and competitors.",
-    c:[["Five Forces","New entrants, supplier power, buyer power, substitutes, rivalry."],
-    ["Generic Strategies","Cost leadership, differentiation, or focus. Pick one."],
-    ["Value Chain","Activities delivering value — analyzing reveals competitive advantage."]]}},
-  {kw:"start with why|从为什么开始|simon sinek|西蒙·斯涅克|golden circle|黄金圈",
-   zh:{t:"《从为什么开始》— 西蒙·斯涅克",b:"伟大领导者如何激励每个人采取行动。",
-    c:[["黄金圈法则","从内向外沟通：为什么（目的）→ 怎么做（流程）→ 做什么（产品）。"],
-    ["为什么重要","人们买的不是'你做什么'，而是'你为什么做'。"]]},
-   en:{t:"Start With Why — Simon Sinek",b:"How great leaders inspire action.",
-    c:[["The Golden Circle","Communicate inside-out: WHY → HOW → WHAT."],
-    ["Why It Matters","People don't buy WHAT you do; they buy WHY you do it."]]}}
-];
+// ---- Initialize book selector on chat open ----
+function initBookSelect() {
+  switchKbTabInternal(currentTab);
+}
 
+function switchKbTab(tab, btn) {
+  currentTab = tab;
+  var tabs = document.querySelectorAll('.chat-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  btn.classList.add('active');
+  switchKbTabInternal(tab);
+}
+
+function switchKbTabInternal(tab) {
+  var filtered;
+  if (tab === 'textbook') {
+    filtered = BIZATOM_KB.filter(function(b) { return b.type === 'textbook' || b.type === 'both'; });
+  } else {
+    filtered = BIZATOM_KB.filter(function(b) { return b.type === 'bestseller' || b.type === 'both'; });
+  }
+  var sel = document.getElementById('bookSelect');
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var opts = '<option value="">' + (lang === 'zh' ? '— 浏览全部书籍 (' + filtered.length + '本) —' : '— Browse all books (' + filtered.length + ') —') + '</option>';
+  for (var i = 0; i < filtered.length; i++) {
+    var b = filtered[i];
+    var title = lang === 'zh' ? b.zh.t : b.en.t;
+    opts += '<option value="' + b.id + '">' + title + '</option>';
+  }
+  sel.innerHTML = opts;
+  document.getElementById('bookCount').textContent = filtered.length + (lang === 'zh' ? '本' : ' books');
+}
+
+function onBookSelect() {
+  var sel = document.getElementById('bookSelect');
+  if (!sel.value) return;
+  // Show book preview in chat
+  for (var i = 0; i < BIZATOM_KB.length; i++) {
+    if (BIZATOM_KB[i].id === sel.value) {
+      var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+      var d = BIZATOM_KB[i][lang] || BIZATOM_KB[i].en;
+      var preview = '📚 **' + d.t + '** — ' + d.a + '\n\n' + d.b + '\n\n📋 **核心概念：**\n';
+      for (var k = 0; k < d.c.length; k++) {
+        preview += '  • ' + d.c[k][0] + '\n';
+      }
+      preview += '\n💡 ' + (lang === 'zh' ? '直接在下方输入你的问题，或点"提问"按钮快捷提问。' : 'Type your question below, or click "Ask" for quick questions.');
+      addMessage(preview, 'bot');
+      break;
+    }
+  }
+}
+
+function askAboutSelectedBook() {
+  var sel = document.getElementById('bookSelect');
+  if (!sel.value) return;
+  var bookId = sel.value;
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var prefix = lang === 'zh' ? '这本书的核心思想是什么？' : 'What are the key ideas of this book?';
+  var input = document.getElementById('chatInput');
+  input.value = prefix;
+  sendMessage();
+  sel.value = '';
+}
+
+/* ---- Knowledge Base Search ---- */
 function kbSearch(q, lang) {
   q = q.toLowerCase().trim();
   // Step 1: Find best-matching book
   var best = null, bestS = 0;
-  for (var i = 0; i < BIZKB.length; i++) {
+  for (var i = 0; i < BIZATOM_KB.length; i++) {
     var score = 0;
-    var kws = BIZKB[i].kw.split("|");
+    var kws = BIZATOM_KB[i].kw;
     for (var j = 0; j < kws.length; j++) {
       if (q.indexOf(kws[j]) >= 0) score += kws[j].length;
     }
-    if (score > bestS) { bestS = score; best = BIZKB[i]; }
+    if (score > bestS) { bestS = score; best = BIZATOM_KB[i]; }
   }
   if (!best || bestS === 0) return null;
   var d = best[lang] || best.en;
@@ -793,6 +788,7 @@ function toggleChat() {
     fab.classList.add('hidden');
     document.getElementById('chatInput').focus();
     updateChatLang();
+    initBookSelect();
   } else {
     panel.classList.add('collapsed');
     fab.classList.remove('hidden');
