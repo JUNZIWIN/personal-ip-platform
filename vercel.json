@@ -1,4 +1,83 @@
 {
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bowentian.com"
+        }
+      ],
+      "destination": "/bowen.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.bowentian.com"
+        }
+      ],
+      "destination": "/bowen.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bowentian.aiipower.me"
+        }
+      ],
+      "destination": "/bowen.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bizatom.ai"
+        }
+      ],
+      "destination": "/bizatom.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.bizatom.ai"
+        }
+      ],
+      "destination": "/bizatom.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "airankrocket.ai"
+        }
+      ],
+      "destination": "/airankrocket.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.airankrocket.ai"
+        }
+      ],
+      "destination": "/airankrocket.html",
+      "permanent": false
+    }
+  ]
 }
