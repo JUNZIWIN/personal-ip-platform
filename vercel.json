@@ -1,7 +1,7 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
-  "redirects": [
+  "rewrites": [
     {
       "source": "/",
       "has": [
@@ -10,8 +10,7 @@
           "value": "bowentian.com"
         }
       ],
-      "destination": "/bowen.html",
-      "permanent": false
+      "destination": "/bowen.html"
     },
     {
       "source": "/",
@@ -21,8 +20,7 @@
           "value": "www.bowentian.com"
         }
       ],
-      "destination": "/bowen.html",
-      "permanent": false
+      "destination": "/bowen.html"
     },
     {
       "source": "/",
@@ -32,8 +30,7 @@
           "value": "bowentian.aiipower.me"
         }
       ],
-      "destination": "/bowen.html",
-      "permanent": false
+      "destination": "/bowen.html"
     },
     {
       "source": "/",
@@ -43,8 +40,7 @@
           "value": "bizatom.ai"
         }
       ],
-      "destination": "/bizatom.html",
-      "permanent": false
+      "destination": "/bizatom.html"
     },
     {
       "source": "/",
@@ -54,8 +50,7 @@
           "value": "www.bizatom.ai"
         }
       ],
-      "destination": "/bizatom.html",
-      "permanent": false
+      "destination": "/bizatom.html"
     },
     {
       "source": "/",
@@ -65,8 +60,7 @@
           "value": "airankrocket.ai"
         }
       ],
-      "destination": "/airankrocket.html",
-      "permanent": false
+      "destination": "/airankrocket.html"
     },
     {
       "source": "/",
@@ -76,8 +70,7 @@
           "value": "www.airankrocket.ai"
         }
       ],
-      "destination": "/airankrocket.html",
-      "permanent": false
+      "destination": "/airankrocket.html"
     }
   ]
 }
