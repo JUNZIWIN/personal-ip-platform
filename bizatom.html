@@ -917,6 +917,9 @@ function formatAnswer(t) {
   return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 }
 
+// Conversation history for multi-turn dialogue
+var conversationHistory = [];
+
 async function sendMessage(optBookId) {
   if (isWaiting) return;
   var inp = document.getElementById('chatInput');
@@ -928,35 +931,55 @@ async function sendMessage(optBookId) {
 
   var displayQ = q || '';
   addMsg(displayQ, 'user');
+
+  // Save user message to history
+  if (q) {
+    conversationHistory.push({ role: 'user', content: q });
+  }
+
   showTyping();
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
 
   var answer = null;
 
-  // Priority 1: If a specific book was selected via dropdown → generate rich answer
+  // Priority 1: If a specific book was selected → generate rich answer ( instant)
   if (optBookId) {
     answer = generateBookAnswer(optBookId, lang);
-    await new Promise(function(r){setTimeout(r, 500 + Math.random()*500)});
+    await new Promise(function(r){setTimeout(r, 300)});
   }
 
-  // Priority 2: Try API (for free-text questions)
+  // Priority 2: Call AI API (supports DeepSeek / OpenAI)
   if (!answer && q) {
     try {
       var resp = await fetch('/api/chat', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({question:q, lang:lang})
+        body: JSON.stringify({
+          question: q,
+          lang: lang,
+          bookId: optBookId || '',
+          history: conversationHistory.slice(-6)  // last 6 messages for context
+        })
       });
       if (resp.ok) {
         var data = await resp.json();
         answer = data.answer;
+        // Save AI response to history
+        if (answer && q) {
+          conversationHistory.push({ role: 'assistant', content: answer });
+        }
       }
-    } catch(e) { /* API not available, use client-side KB */ }
+    } catch(e) {
+      console.log('[Chat] API call failed, falling back to client-side KB');
+    }
   }
 
-  // Priority 3: Client-side keyword search
+  // Priority 3: Client-side keyword search (offline fallback)
   if (!answer && q) {
     answer = kbSearch(q, lang);
+    if (answer) {
+      conversationHistory.push({ role: 'assistant', content: answer });
+    }
   }
 
   // Priority 4: Fallback
@@ -964,13 +987,19 @@ async function sendMessage(optBookId) {
     answer = fallbackText(lang);
   }
 
-  // simulate a tiny delay for natural feel
-  await new Promise(function(r){setTimeout(r, 400 + Math.random()*400)});
-
   hideTyping();
   var bubble = addMsg('', 'bot');
   bubble.innerHTML = formatAnswer(answer);
   isWaiting = false; btn.disabled = false;
+}
+
+// Clear conversation history (called when user switches books or clicks "new chat")
+function clearChatHistory() {
+  conversationHistory = [];
+  var msgs = document.getElementById('chatMessages');
+  if (msgs) msgs.innerHTML = '';
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书僮 📚 你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 Ask me anything about business classics, or select a book from the dropdown.', 'bot');
 }
 </script>
 

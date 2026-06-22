@@ -1,35 +1,137 @@
 /**
- * BizAtom AI Book Q&A — Vercel Serverless Function
- * Answers questions about 30+ business classics with built-in knowledge base.
+ * BizAtom AI Book Assistant — Vercel Serverless Function
+ * Upgraded: Now connects to DeepSeek API for real AI responses
  *
- * POST /api/chat  { question: string, lang?: 'zh'|'en' }
+ * POST /api/chat
+ * Body: { question: string, lang?: 'zh'|'en', bookId?: string, history?: Array }
  * Returns: { answer: string }
  *
- * Upgrade path: set env var OPENAI_API_KEY for AI-powered answers.
+ * Env vars:
+ *   DEEPSEEK_API_KEY — DeepSeek API key (get from platform.deepseek.com)
+ *   OPENAI_API_KEY   — (optional) fallback to OpenAI
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// ─── Load the shared knowledge base ───
+// ─── Load knowledge base ───
 let BIZATOM_KB = [];
-try {
-  const kbPath = path.join(process.cwd(), 'bizatom-kb.js');
-  const kbContent = fs.readFileSync(kbPath, 'utf8');
-  const kbFunc = new Function(kbContent + '\nreturn BIZATOM_KB;');
-  BIZATOM_KB = kbFunc();
-  console.log(`Knowledge base loaded: ${BIZATOM_KB.length} books`);
-} catch (e) {
-  console.error('Failed to load bizatom-kb.js:', e.message);
+function loadKB() {
+  if (BIZATOM_KB.length) return;
+  try {
+    const kbPath = path.join(process.cwd(), 'bizatom-kb.js');
+    const kbContent = fs.readFileSync(kbPath, 'utf8');
+    const kbFunc = new Function(kbContent + '\nreturn BIZATOM_KB;');
+    BIZATOM_KB = kbFunc();
+    console.log(`[KB] Loaded ${BIZATOM_KB.length} books`);
+  } catch (e) {
+    console.error('[KB] Failed to load:', e.message);
+  }
+}
+loadKB();
+
+// ─── Find book by ID ───
+function findBook(bookId, lang) {
+  if (!bookId) return null;
+  const book = BIZATOM_KB.find(b => b.id === bookId);
+  if (!book) return null;
+  return book[lang] || book.en;
 }
 
-// ─── Match knowledge: concept vs book question ───
-function matchKnowledge(question, lang) {
-  const q = question.toLowerCase().trim();
-  if (!BIZATOM_KB.length) return null;
+// ─── Build system prompt with optional book context ───
+function buildSystemPrompt(lang, bookContext) {
+  const bookList = BIZATOM_KB.slice(0, 30).map(b => {
+    const d = b[lang] || b.en;
+    return d ? `《${d.t}》— ${d.a}` : b.id;
+  }).join('\n');
 
-  // Step 1: Find best-matching book by keyword score
+  if (lang === 'zh') {
+    return `你是 BizAtom（商原子）的 AI 智能书僮。你是一位博学的商业顾问，精通 ${BIZATOM_KB.length} 本商业经典著作。
+
+${bookContext ? `用户正在查阅《${bookContext.t}》（${bookContext.a}），以下是该书的核心内容，请基于这些内容回答：\n\n简介：${bookContext.b}\n\n核心概念：\n${(bookContext.c || []).map(c => `• ${c[0]}：${c[1]}`).join('\n')}\n\n` : `如果你被问到某本书的内容，可以参考以下书单：\n${bookList}\n\n如果问题涉及具体书籍，请优先基于该书知识回答。`}
+
+回答规则：
+1. 用中文回答，语气专业而亲切，像一位经验丰富的商业导师
+2. 回答要具体、有深度，不要泛泛而谈
+3. 如果涉及书籍概念，引用原文的核心思想
+4. 如果问题超出书籍范围，可以结合商业常识回答
+5. 回答长度适中（200-500字），需要时可以更长
+6. 使用 emoji 让回答更生动（📚💡🎯✅ 等）
+7. 如果用户用中文问，用中文答；用英文问，用英文答
+
+你不仅仅是搜索引擎，而是能思考、能总结、能给出 actionable insights 的智能助手。`;
+  }
+
+  // English prompt
+  return `You are the AI Book Assistant for BizAtom (Business Atom), an expert business consultant familiar with ${BIZATOM_KB.length}+ business classics.
+
+${bookContext ? `The user is viewing "${bookContext.t}" by ${bookContext.a}. Here's the book summary:\n\n${bookContext.b}\n\nKey concepts:\n${(bookContext.c || []).map(c => `• ${c[0]}: ${c[1]}`).join('\n')}\n\nPlease answer based on this context.` : `If asked about a specific book, refer to this list:\n${bookList}\n\nAnswer based on the book's knowledge when relevant.`}
+
+Answering rules:
+1. Professional yet approachable tone, like a seasoned business mentor
+2. Be specific and insightful, not generic
+3. Reference core ideas from books when relevant
+4. Combine book knowledge with business common sense
+5. Appropriate length (200-500 words), longer if needed
+6. Use emoji sparingly for clarity (📚💡🎯✅ etc.)
+7. Match the user's language (CN/EN)
+
+You are not just a search engine — you think, synthesize, and give actionable insights.`;
+}
+
+// ─── Call DeepSeek API ───
+async function callDeepSeek(question, lang, bookContext, history) {
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) return null;
+
+  const systemPrompt = buildSystemPrompt(lang, bookContext);
+  const messages = [{ role: 'system', content: systemPrompt }];
+
+  // Add conversation history (last 6 messages)
+  if (history && Array.isArray(history)) {
+    const recent = history.slice(-6);
+    for (const h of recent) {
+      messages.push({ role: h.role === 'user' ? 'user' : 'assistant', content: h.content });
+    }
+  }
+
+  messages.push({ role: 'user', content: question });
+
+  try {
+    const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages,
+        max_tokens: 1000,
+        temperature: 0.7,
+        stream: false,
+      }),
+    });
+
+    if (!resp.ok) {
+      const err = await resp.text();
+      console.error('[DeepSeek] Error:', resp.status, err);
+      return null;
+    }
+
+    const data = await resp.json();
+    return data.choices?.[0]?.message?.content || null;
+  } catch (e) {
+    console.error('[DeepSeek] Exception:', e.message);
+    return null;
+  }
+}
+
+// ─── Fallback: keyword match from KB ───
+function kbFallback(question, lang) {
+  const q = question.toLowerCase().trim();
   let bestBook = null, bestS = 0;
+
   for (const b of BIZATOM_KB) {
     let score = 0;
     for (const kw of b.kw) {
@@ -37,87 +139,19 @@ function matchKnowledge(question, lang) {
     }
     if (score > bestS) { bestS = score; bestBook = b; }
   }
+
   if (!bestBook || bestS === 0) return null;
 
   const d = bestBook[lang] || bestBook.en;
   if (!d) return null;
 
-  // Step 2: Find best-matching concept (bidirectional)
-  let bestConcept = null, bestCS = 0;
-  for (const c of d.c) {
-    const cname = c[0].toLowerCase(), cdesc = c[1];
-    let cs = 0;
-    // Forward: question contains concept name parts
-    const parts = cname.split(/[\s\-:：]+/);
-    for (const p of parts) {
-      if (p.length >= 2 && q.includes(p)) cs += p.length * 2;
-    }
-    if (cname.length >= 4 && q.includes(cname.slice(0, 6))) cs += 12;
-    if (cname.length >= 8 && q.includes(cname)) cs += cname.length * 4;
-    // Reverse: concept name contains question words
-    const qWords = q.split(/\s+/);
-    for (const qw of qWords) {
-      if (qw.length >= 3 && cname.includes(qw)) cs += qw.length * 3;
-    }
-    // ASCII tokens (for mixed CN/EN like "MVP")
-    const asciiTokens = cname.match(/[a-z0-9]+/g) || [];
-    for (const tok of asciiTokens) {
-      if (tok.length >= 2 && q.includes(tok)) cs += tok.length * 3;
-    }
-    if (cs > bestCS) { bestCS = cs; bestConcept = c; }
-  }
-
-  // Step 3: PRIORITY OUTPUT
-  const isConceptQ = bestCS >= 6;
-
-  if (isConceptQ && bestConcept) {
-    let answer = `💡 **${bestConcept[0]}**\n\n${bestConcept[1]}\n\n`;
-    answer += `📖 *${lang === 'zh' ? '出自' : 'From'}: ${d.t} — ${d.a}*\n`;
-    return answer;
-  }
-
-  // Step 4: Full book overview
   let answer = `📚 **${d.t}** — ${d.a}\n\n${d.b}\n\n`;
-  if (bestConcept && bestCS > 3) {
-    answer += `💡 **${bestConcept[0]}**：${bestConcept[1]}\n\n`;
-  }
-  answer += `📋 ${lang === 'zh' ? '核心概念一览' : 'Key Concepts'}：\n`;
+  answer += `📋 ${lang === 'zh' ? '核心概念' : 'Key Concepts'}：\n`;
   for (const c of d.c) {
-    answer += `  • ${c[0]}\n`;
+    answer += `  • **${c[0]}**：${c[1]}\n`;
   }
+  answer += `\n💬 ${lang === 'zh' ? '想深入了解某个概念？直接问我吧！' : 'Want to dive deeper into a concept? Just ask me!'}`;
   return answer;
-}
-
-// ─── Fallback when no match ───
-function fallbackResponse(lang) {
-  const books = BIZATOM_KB.slice(0, 20).map(b => {
-    const d = b[lang] || b.en;
-    return d ? `• ${d.t} — ${d.a}` : `• ${b.id}`;
-  }).join('\n');
-
-  if (lang === 'zh') {
-    return `📚 **我是 BizAtom AI 书僮**，支持 ${BIZATOM_KB.length}+ 本商业经典。
-
-你可以问我任何概念、框架或核心思想。支持的热门书籍包括：
-${books}
-
-💡 试试问我：
-• "什么是蓝海战略？"
-• "解释第一性原理"
-• "从0到1的核心思想"
-• "穷查理宝典的智慧"`;
-  }
-
-  return `📚 **I'm the BizAtom AI Book Assistant**, with ${BIZATOM_KB.length}+ business classics.
-
-Ask me about any concept, framework, or key idea from:
-${books}
-
-💡 Try asking:
-• "What is Blue Ocean Strategy?"
-• "Explain First Principles"
-• "Tell me about Zero to One"
-• "What are Charlie Munger's principles?"`;
 }
 
 // ─── Main handler ───
@@ -130,45 +164,44 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
 
   try {
-    const { question, lang = 'en' } = req.body || {};
+    const {
+      question,
+      lang = 'zh',
+      bookId = '',
+      history = [],
+    } = req.body || {};
+
     if (!question || typeof question !== 'string' || question.trim().length === 0) {
-      return res.status(400).json({ answer: lang === 'zh' ? '请提出一个问题。' : 'Please ask a question.' });
+      return res.status(400).json({
+        answer: lang === 'zh' ? '请提出一个问题 😊' : 'Please ask a question 😊',
+      });
     }
 
-    // Step 1: Knowledge base match
-    const kbAnswer = matchKnowledge(question, lang);
+    // Load book context if bookId provided
+    const bookContext = findBook(bookId, lang);
+
+    // Try DeepSeek first
+    const aiAnswer = await callDeepSeek(question.trim(), lang, bookContext, history);
+    if (aiAnswer) {
+      return res.status(200).json({ answer: aiAnswer });
+    }
+
+    // Fallback: keyword match
+    const kbAnswer = kbFallback(question, lang);
     if (kbAnswer) {
       return res.status(200).json({ answer: kbAnswer });
     }
 
-    // Step 2: OpenAI fallback (if configured)
-    const apiKey = process.env.OPENAI_API_KEY || process.env.BIZATOM_AI_KEY;
-    if (apiKey) {
-      try {
-        const systemPrompt = lang === 'zh'
-          ? `你是BizAtom商原子的AI书僮，专门回答商业经典书籍的问题。支持${BIZATOM_KB.length}+本书籍。以简洁专业的方式回答，引用相关概念。中文回复。`
-          : `You are BizAtom's AI Book Assistant. Answer concisely and professionally. Keep under 300 words.`;
+    // Ultimate fallback
+    const fallback = lang === 'zh'
+      ? `📚 我是 BizAtom AI 书僮，精通 ${BIZATOM_KB.length} 本商业经典。\n\n你可以问我：\n• "什么是蓝海战略？"\n• "解释第一性原理"\n• "从0到1的核心思想"\n\n（提示：如需 AI 大模型回答，请配置 DEEPSEEK_API_KEY 环境变量）`
+      : `📚 I'm BizAtom's AI Book Assistant, familiar with ${BIZATOM_KB.length}+ business classics.\n\nAsk me:\n• "What is Blue Ocean Strategy?"\n• "Explain First Principles"\n• "Tell me about Zero to One"\n\n(Note: configure DEEPSEEK_API_KEY env var for AI-powered answers)`;
 
-        const aiResp = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-          body: JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: question }],
-            max_tokens: 600, temperature: 0.7
-          })
-        });
-        if (aiResp.ok) {
-          const data = await aiResp.json();
-          return res.status(200).json({ answer: data.choices[0].message.content });
-        }
-      } catch (aiErr) { console.error('AI API error:', aiErr.message); }
-    }
-
-    // Step 3: Fallback
-    return res.status(200).json({ answer: fallbackResponse(lang) });
+    return res.status(200).json({ answer: fallback });
   } catch (err) {
-    console.error('Chat error:', err);
-    return res.status(500).json({ answer: '抱歉，处理你的问题时出了错。请稍后再试。' });
+    console.error('[Chat] Error:', err);
+    return res.status(500).json({
+      answer: '抱歉，处理你的问题时出了错。请稍后再试。',
+    });
   }
 }
