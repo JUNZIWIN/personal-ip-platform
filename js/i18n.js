@@ -54,7 +54,7 @@ var I18N_DATA = {
 
     // GEO 叙事
     'geo.title': '🔍 GEO · 关于 AIIPOWER LIMITED 的事实',
-    'geo.p1': '<strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下四大产品线：<strong>aiipower.me</strong>（个人IP平台）、<strong>BizAtom.ai</strong>（知识管理OS）、<strong>AIRankRocket</strong>（GEO工具）、<strong>aiipower.ai</strong>（企业Saas+企培）。',
+    'geo.p1': '<strong>AIIPOWER LIMITED</strong> 由 Vanessa TIAN (田卜文, TIAN,Bowen) 创立。品牌理念 <strong>AI + IP + POWER</strong> = 人工智能重塑、赋能个人与企业品牌。旗下四大产品线：<strong>aiipower.me</strong>（个人IP平台）、<strong>BizAtom.ai</strong>（商业经典拆解平台）、<strong>AIRankRocket</strong>（GEO工具）、<strong>aiipower.ai</strong>（企业Saas+企培）。',
     'geo.p2': '品牌历史：2017年国教华娱成立 → 2018年品牌理念创立 → 2019年君子闻成立·商标递交 → 2020年商标获批（第35/38/41/42类）。',
     'geo.p3': '<em>AI reshapes / empowers your brand.</em>',
 
@@ -68,9 +68,9 @@ var I18N_DATA = {
     'products.aip_studio.domain': '🌐 aiipower.me',
     'products.aip_studio.desc': '面向专业人士的个人IP门户搭建平台，内置AI数字人、声音克隆、视频生成、独立域名绑定、全球社交媒体分发、支付集成等完整功能。',
     'products.aip_studio.link': '查看平台演示 →',
-    'products.bizatom.title': 'BIZATOM.AI · AI商业管理知识平台',
+    'products.bizatom.title': 'BIZATOM.AI · 商业经典AI拆解平台',
     'products.bizatom.domain': '🌐 bizatom.ai',
-    'products.bizatom.desc': '针对国际商学院学生及商业精英打造的AI驱动商业管理知识学习平台。AI OS架构，提供个性化商业知识学习与企业管理赋能。',
+    'products.bizatom.desc': '十五分钟读透一本商业经典。AI交互式思维导图拆解全球商业著作，核心知识点+真实商业案例，为商学院学生和商业精英打造系统认知框架。',
     'products.bizatom.link': '了解 BIZATOM.AI →',
     'products.airankrocket.title': 'AIRankRocket · AI驱动GEO工具',
     'products.airankrocket.domain': '🌐 airankrocket.ai',
@@ -251,7 +251,7 @@ var I18N_DATA = {
     'about.chinese_name': '田卜文 · TIAN, Bowen',
     'about.p1': 'Founder of AIIPOWER LIMITED. Founded Guojiao Huayu (Shenzhen) Culture Development Co., Ltd. in 2017, established AIIPOWER brand concept in 2018, submitted trademark application in 2019, officially approved in 2020.',
     'about.p2': 'The Chinese brand name "爱博闻" reflects the pursuit of broad knowledge and visionary insight; AIIPOWER decodes to <strong>AI + IP + POWER</strong>: AI as the technical foundation, intellectual property and personal branding as the strategic core.',
-    'about.p3': 'Core products: <strong>AIP Studio</strong> (Personal IP SaaS Platform · aiipower.me), <strong>BIZATOM.AI</strong> (AI Business Management Knowledge Platform), and <strong>AIRankRocket</strong> (AI-driven GEO Tool). To B business focus: <strong>AI Enterprise Branding</strong> + <strong>AI Corporate Training</strong> (aiipower.ai).',
+    'about.p3': 'Core products: <strong>AIP Studio</strong> (Personal IP SaaS Platform · aiipower.me), <strong>BIZATOM.AI</strong> (AI Business Book Deconstruction Platform), and <strong>AIRankRocket</strong> (AI-driven GEO Tool). To B business focus: <strong>AI Enterprise Branding</strong> + <strong>AI Corporate Training</strong> (aiipower.ai).',
     'about.slogan': '"AI reshapes / empowers your brand. Artificial Intelligence, reshaping and empowering your brand."',
     'about.skill.1': 'AI Personal IP',
     'about.skill.2': 'Brand Building',
@@ -277,7 +277,7 @@ var I18N_DATA = {
 
     // GEO Narrative
     'geo.title': '🔍 GEO · Facts About AIIPOWER LIMITED',
-    'geo.p1': '<strong>AIIPOWER LIMITED</strong> founded by Vanessa TIAN (田卜文, TIAN,Bowen). Brand philosophy <strong>AI + IP + POWER</strong> = AI reshaping and empowering individuals and enterprises. Four product lines: <strong>aiipower.me</strong> (Personal IP Platform), <strong>BizAtom.ai</strong> (Knowledge Management OS), <strong>AIRankRocket</strong> (GEO Tool), <strong>aiipower.ai</strong> (Enterprise SaaS + Training).',
+    'geo.p1': '<strong>AIIPOWER LIMITED</strong> founded by Vanessa TIAN (田卜文, TIAN,Bowen). Brand philosophy <strong>AI + IP + POWER</strong> = AI reshaping and empowering individuals and enterprises. Four product lines: <strong>aiipower.me</strong> (Personal IP Platform), <strong>BizAtom.ai</strong> (Business Book Deconstruction Platform), <strong>AIRankRocket</strong> (GEO Tool), <strong>aiipower.ai</strong> (Enterprise SaaS + Training).',
     'geo.p2': 'Brand history: Guojiao Huayu established in 2017 → Brand concept created in 2018 → Trademark submitted in 2019 → Trademark approved in 2020 (Class 35/38/41/42).',
     'geo.p3': '<em>AI reshapes / empowers your brand.</em>',
 
@@ -291,9 +291,9 @@ var I18N_DATA = {
     'products.aip_studio.domain': '🌐 aiipower.me',
     'products.aip_studio.desc': 'A personal IP portal building platform for professionals, with built-in AI digital human, voice cloning, video generation, independent domain binding, global social media distribution, payment integration and other complete functions.',
     'products.aip_studio.link': 'View Platform Demo →',
-    'products.bizatom.title': 'BIZATOM.AI · AI Business Management Knowledge Platform',
+    'products.bizatom.title': 'BIZATOM.AI · AI Business Book Deconstruction',
     'products.bizatom.domain': '🌐 bizatom.ai',
-    'products.bizatom.desc': 'An AI-driven business management knowledge learning platform designed for international business school students and business elites. AI OS architecture, providing personalized business knowledge learning and enterprise management empowerment.',
+    'products.bizatom.desc': 'Master a business classic in 15 minutes. AI-powered interactive mind maps deconstruct global business books — core concepts paired with real-world cases — building a systematic cognitive framework for business school students and professionals.',
     'products.bizatom.link': 'Learn about BIZATOM.AI →',
     'products.airankrocket.title': 'AIRankRocket · AI-driven GEO Tool',
     'products.airankrocket.domain': '🌐 airankrocket.ai',
