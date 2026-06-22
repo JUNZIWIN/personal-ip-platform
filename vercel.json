@@ -37,6 +37,26 @@
       "has": [
         {
           "type": "host",
+          "value": "bizatom.ai"
+        }
+      ],
+      "destination": "/bizatom.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.bizatom.ai"
+        }
+      ],
+      "destination": "/bizatom.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "airankrocket.ai"
         }
       ],
