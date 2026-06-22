@@ -9,13 +9,13 @@ var I18N_DATA = {
     // 导航栏
     'nav.home': '首页',
     'nav.about': '关于',
-    'nav.products': '产品服务',
+    'nav.products': '产品',
     'nav.ai': 'AI数字人',
-    'nav.domain': '域名与IP',
-    'nav.videos': '系列内容',
+    'nav.domain': '域名IP',
+    'nav.videos': '内容',
     'nav.contact': '联系',
-    'nav.company': '企业服务',
-    'nav.showcase': '展示配置',
+    'nav.company': '企业',
+    'nav.showcase': '🎨',
 
     // Hero 区
     'hero.badge': 'AIIPOWER LIMITED 创始人',
@@ -222,13 +222,13 @@ var I18N_DATA = {
     // Navigation
     'nav.home': 'Home',
     'nav.about': 'About',
-    'nav.products': 'Products & Services',
-    'nav.ai': 'AI Digital Human',
-    'nav.domain': 'Domains & IP',
-    'nav.videos': 'Videos',
+    'nav.products': 'Products',
+    'nav.ai': 'AI Avatar',
+    'nav.domain': 'Domains',
+    'nav.videos': 'Content',
     'nav.contact': 'Contact',
-    'nav.company': 'Enterprise Services',
-    'nav.showcase': 'Showcase Config',
+    'nav.company': 'Enterprise',
+    'nav.showcase': '🎨',
 
     // Hero Section
     'hero.badge': 'Founder of AIIPOWER LIMITED',
