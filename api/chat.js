@@ -1,12 +1,15 @@
 /**
  * BizAtom AI Chat — Vercel Serverless Function
  * Connects to DeepSeek API for real AI responses
+ * + Web Search layer for real-time data queries
  *
  * POST /api/chat
  * Body: { question: string, lang?: 'zh'|'en', bookId?: string, history?: Array }
  *
  * Env: DEEPSEEK_API_KEY
  */
+
+import { classifyQuestion, searchWeb, formatSearchResults } from './search.js';
 
 // ─── System prompts ───
 const SYSTEM_PROMPTS = {
@@ -32,7 +35,8 @@ const SYSTEM_PROMPTS = {
 6. 适当使用 emoji 让回答更生动
 7. 你不是搜索引擎——你能思考、总结、给出 actionable insights
 8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可
-9. 重要：请用与用户提问相同的语言回答。如果用户用英文提问，请用英文回答。`,
+9. 重要：请用与用户提问相同的语言回答。如果用户用英文提问，请用英文回答。
+10. 如果消息中包含「搜索引擎获取的最新信息」，请优先使用这些最新数据，并引用其中的具体数字。在回答末尾标注数据来源。`,
 
   en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
 
@@ -55,19 +59,23 @@ Rules:
 6. Use emoji sparingly for clarity
 7. You think, synthesize, and give actionable insights
 8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.
-9. IMPORTANT: Match the user's language — if they ask in Chinese, answer in Chinese; if in English, answer in English.`
+9. IMPORTANT: Match the user's language — if they ask in Chinese, answer in Chinese; if in English, answer in English.
+10. If your message contains "search engine results" or "latest information from web search", prioritize those data points and cite specific numbers. Note sources at the end.`
 };
 
 // ─── Call DeepSeek API ───
-async function callDeepSeek(question, lang, history) {
+async function callDeepSeek(question, lang, history, searchContext) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     console.log('[Chat] DEEPSEEK_API_KEY not set');
     return { answer: null, error: 'API_KEY_NOT_SET' };
   }
 
+  const systemContent = (SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.zh)
+    + (searchContext || '');
+
   const messages = [
-    { role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.zh }
+    { role: 'system', content: systemContent }
   ];
 
   // Add conversation history (last 6 turns)
@@ -84,7 +92,7 @@ async function callDeepSeek(question, lang, history) {
 
   console.log('[Chat] Calling DeepSeek...', {
     hasKey: !!apiKey,
-    keyPrefix: apiKey.substring(0, 12),
+    hasSearch: !!searchContext,
     msgCount: messages.length,
     qLen: question.length
   });
@@ -99,7 +107,7 @@ async function callDeepSeek(question, lang, history) {
       body: JSON.stringify({
         model: 'deepseek-chat',
         messages: messages,
-        max_tokens: 1500,
+        max_tokens: 2000,
         temperature: 0.7,
         stream: false,
       }),
@@ -149,11 +157,36 @@ export default async function handler(req, res) {
       });
     }
 
-    // Call DeepSeek AI
-    const aiResult = await callDeepSeek(question, lang, history);
+    // ─── Step 1: Classify the question ───
+    const classification = classifyQuestion(question);
+    console.log('[Chat] Question classification:', classification);
+
+    // ─── Step 2: If data-seeking, do web search first ───
+    let searchContext = '';
+    if (classification.needsSearch) {
+      console.log('[Chat] Data-seeking question detected, searching web...');
+      try {
+        const searchResults = await searchWeb(question, 5);
+        if (searchResults && searchResults.length > 0) {
+          searchContext = formatSearchResults(searchResults);
+          console.log('[Chat] Web search found', searchResults.length, 'results');
+        } else {
+          console.log('[Chat] Web search returned no results');
+        }
+      } catch (searchErr) {
+        console.error('[Chat] Web search failed, continuing without:', searchErr.message);
+        // Continue without search results — don't fail the whole request
+      }
+    }
+
+    // ─── Step 3: Call DeepSeek AI (with search context if available) ───
+    const aiResult = await callDeepSeek(question, lang, history, searchContext);
 
     if (aiResult && aiResult.answer) {
-      return res.status(200).json({ answer: aiResult.answer });
+      return res.status(200).json({
+        answer: aiResult.answer,
+        searched: !!searchContext
+      });
     }
 
     // Fallback if no API key or API failed

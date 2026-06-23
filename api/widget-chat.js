@@ -3,10 +3,13 @@
  *
  * POST /api/widget-chat
  * Body: { question, lang, site, kb, history }
+ *
+ * + Web Search layer for real-time data queries
  */
-import { SYSTEM_PROMPTS } from './chat.js';
 
-// Re-use chat.js system prompts
+import { classifyQuestion, searchWeb, formatSearchResults } from './search.js';
+
+// ─── System prompts for embedded widgets ───
 const PROMPTS = {
   zh: `你是 BizAtom（商原子）的 AI 智能书僮。你是一位博学的商业顾问和阅读导师。
 
@@ -30,12 +33,13 @@ const PROMPTS = {
 6. 适当使用 emoji 让回答更生动
 7. 你不是搜索引擎——你能思考、总结、给出 actionable insights
 8. 重要：不要使用 Markdown 格式（如 **粗体**、*斜体**、### 标题等），直接输出纯文本即可
-9. 重要：请用与用户提问相同的语言回答。如果用户用英文提问，请用英文回答。`,
+9. 重要：请用与用户提问相同的语言回答。如果用户用英文提问，请用英文回答。
+10. 如果消息中包含「搜索引擎获取的最新信息」，请优先使用这些最新数据，并引用其中的具体数字。在回答末尾标注数据来源。`,
 
   en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
 
 Your knowledge base covers 99+ business classics including:
-• Finance & Investing: Rich Dad Poor Dad, The Intelligent Investor, A Random Walk Down Wall Street
+• Finance & Investing: Rich Dad Poor Dad, The Intelligent Investor
 • Psychology: Influence, Thinking Fast and Slow, Mindset, Grit
 • Entrepreneurship: The Lean Startup, Zero to One, Innovator's Dilemma
 • Marketing: Positioning, Purple Cow, Hooked, Contagious
@@ -52,18 +56,20 @@ Rules:
 5. 200-800 words typically, longer when needed
 6. Use emoji sparingly for clarity
 7. You think, synthesize, and give actionable insights
-8. IMPORTANT: Do NOT use Markdown formatting (no **bold**, *italic*, ### headers, etc.). Output plain text only.
-9. IMPORTANT: Match the user's language — if they ask in Chinese, answer in Chinese; if in English, answer in English.`
+8. IMPORTANT: Do NOT use Markdown formatting. Output plain text only.
+9. IMPORTANT: Match the user's language.
+10. If your message contains "search engine results" or "latest information from web search", prioritize those data points. Note sources at the end.`
 };
 
-async function callDeepSeek(question, lang, history, site) {
+async function callDeepSeek(question, lang, history, site, searchContext) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
     return { answer: null, error: 'API_KEY_NOT_SET' };
   }
 
   const systemMsg = (PROMPTS[lang] || PROMPTS.zh)
-    + (site ? '\n\n你正在为「' + site + '」的网站提供 AI 助手服务。如果用户问到该机构/学校相关的问题，优先基于该机构已公开的信息回答，不要编造内容。如果不确定，诚实告知并建议用户查阅官网。' : '');
+    + (site ? '\n\n你正在为「' + site + '」的网站提供 AI 助手服务。如果用户问到该机构/学校相关的问题，优先基于该机构已公开的信息回答，不要编造内容。如果不确定，诚实告知并建议用户查阅官网。' : '')
+    + (searchContext || '');
 
   const messages = [
     { role: 'system', content: systemMsg }
@@ -90,7 +96,7 @@ async function callDeepSeek(question, lang, history, site) {
       body: JSON.stringify({
         model: 'deepseek-chat',
         messages: messages,
-        max_tokens: 1500,
+        max_tokens: 2000,
         temperature: 0.7,
         stream: false,
       }),
@@ -132,10 +138,33 @@ export default async function handler(req, res) {
       });
     }
 
-    const aiResult = await callDeepSeek(question, lang, history, site);
+    // ─── Step 1: Classify the question ───
+    const classification = classifyQuestion(question);
+    console.log('[WidgetChat] Question classification:', classification);
+
+    // ─── Step 2: If data-seeking, do web search first ───
+    let searchContext = '';
+    if (classification.needsSearch) {
+      console.log('[WidgetChat] Data-seeking question, searching web...');
+      try {
+        const searchResults = await searchWeb(question, 5);
+        if (searchResults && searchResults.length > 0) {
+          searchContext = formatSearchResults(searchResults);
+          console.log('[WidgetChat] Web search found', searchResults.length, 'results');
+        }
+      } catch (searchErr) {
+        console.error('[WidgetChat] Web search failed:', searchErr.message);
+      }
+    }
+
+    // ─── Step 3: Call DeepSeek AI ───
+    const aiResult = await callDeepSeek(question, lang, history, site, searchContext);
 
     if (aiResult?.answer) {
-      return res.status(200).json({ answer: aiResult.answer });
+      return res.status(200).json({
+        answer: aiResult.answer,
+        searched: !!searchContext
+      });
     }
 
     return res.status(200).json({
