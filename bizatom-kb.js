@@ -74,7 +74,7 @@ var BIZATOM_KB = [
     ["垄断 vs 竞争","垄断推动进步——多年的垄断利润提供强大的创新激励。'竞争是失败者的事。'创造性的垄断对社会有利。"],
     ["秘密","'有什么重要真理很少人认同你？'这个反主流问题是创新的起点。大多数秘密还有待发现。"],
     ["明确乐观","通过规划和执行来塑造未来，而非只是希望会变好。明确的乐观者创造未来。"],
-    ["幂次法则","风险投资回报遵循幂次法则：少数几笔投资带来的回报远超其他所有投资的总和。"]],
+    ["幂次法则","风险投资回报遵循幂次法则：少数几笔投资带来的回报远超其他所有投资的总和。"]]},
     en:{t:"Zero to One", a:"Peter Thiel", b:"Notes on startups — or how to build the future. Contrarian thinking from PayPal's founder.",
     c:[["0→1 vs 1→n","0→1 = creating something new (vertical progress). 1→n = copying what works (horizontal progress)."],
     ["Monopoly vs Competition","Monopolies drive progress. 'Competition is for losers.' Creative monopolies benefit society."],
@@ -500,7 +500,7 @@ var BIZATOM_KB = [
     zh:{t:"《精益思想》", a:"詹姆斯·沃麦克、丹尼尔·琼斯 (Womack & Jones)", b:"从丰田生产系统到全球精益运动。精益的五大核心原则。",
     c:[["精益五大原则","1)定义价值(从客户视角)→2)识别价值流→3)让价值流动→4)客户拉动→5)追求完美(持续改善)。"],
     ["消除浪费(Muda)","八种浪费：缺陷、过量生产、等待、未用人才、运输、库存、动作、过度加工。'能省掉的全是浪费。'"],
-    ["单件流","批量生产方式效率低。让一件产品在各个环节间"流动"，大幅减少在制品库存和生产周期。"]]},
+    ["单件流","批量生产方式效率低。让一件产品在各个环节间「流动」，大幅减少在制品库存和生产周期。"]]},
     en:{t:"Lean Thinking", a:"Womack & Jones", b:"From Toyota Production System to the global lean movement. The five core principles.",
     c:[["Five Lean Principles","Define value (customer perspective) → Map value stream → Create flow → Establish pull → Pursue perfection."],
     ["Eliminate Muda (Waste)","Eight wastes: defects, overproduction, waiting, unused talent, transport, inventory, motion, over-processing."],
@@ -600,7 +600,7 @@ var BIZATOM_KB = [
     [" servant leadership（仆人式领导）","格林里夫提出：领导的终极目的是服务他人。优先考虑追随者需求→培养追随者→最终实现组织目标。与自上而下的权威式领导形成鲜明对比。"]]},
     en:{t:"Leadership: Theory and Practice", a:"Peter G. Northouse", b:"Most influential comprehensive textbook on leadership. Core reference for CUHK MBA 'Leadership Development.'",
     c:[["Leadership vs Management","Kotter: Management = coping with complexity (plan, organize, control). Leadership = coping with change (set direction, align people, inspire). Organizations need both."],
-    ["Trait Theory",'Great Man' perspective: leaders born with traits (confidence, intelligence, integrity, drive). Modern view: traits necessary but not sufficient — context matters. Conscientiousness and Extraversion most correlated."],
+    ["Trait Theory","「Great Man」 perspective: leaders born with traits (confidence, intelligence, integrity, drive). Modern view: traits necessary but not sufficient — context matters. Conscientiousness and Extraversion most correlated."],
     ["Behavioral Theory: Ohio State","Two dimensions: Consideration (care for subordinates) + Initiation of Structure (define tasks, goals). High-high = best style (early conclusion)."],
     ["Situational Leadership (Hersey-Blanchard)","Match 4 styles (Telling S1, Selling S2, Participating S3, Delegating S4) to follower readiness (R1-R4). No one best style — effectiveness depends on followers' ability and willingness."],
     ["Transformational vs Transactional","Transformational (Bass): Idealized influence, inspirational motivation, intellectual stimulation, individualized consideration. Transactional: reward/punishment exchange. Transformational generally more effective."],
@@ -622,7 +622,7 @@ var BIZATOM_KB = [
     ["Quality: Six Sigma","DMAIC: Define → Measure → Analyze → Improve → Control. Target: defect rate ≤ 3.4 per million opportunities (3.4σ)."],
     ["Inventory Management","Two models: EOQ (deterministic demand) vs Reorder Point System (uncertainty). Key trade-off: holding cost vs ordering cost vs stockout cost. JIT pursues 'zero inventory.'"],
     ["Supply Chain Management","End-to-end coordination from supplier's supplier to customer's customer. Bullwhip Effect: demand amplification upstream. Solutions: information sharing, reduced lead times, stable pricing."],
-    ["Lean + TOC Integration","Lean = eliminate waste, pursue flow. TOC = focus bottleneck. Combined: Lean optimizes globally (eliminate non-bottleneck waste), TOC breaks through locally (maximize bottleneck output)."]]}},
+    ["Lean + TOC Integration","Lean = eliminate waste, pursue flow. TOC = focus bottleneck. Combined: Lean optimizes globally (eliminate non-bottleneck waste), TOC breaks through locally (maximize bottleneck output)."]]},
     kw:["operations management","运营管理","stevenson","史蒂文森","supply chain","供应链","six sigma","六西格玛","DMAIC","inventory","库存","EOQ","bullwhip","牛鞭效应","lean","精益","JIT","forecasting","预测","quality","质量"]
   },
   {
@@ -727,7 +727,7 @@ var BIZATOM_KB = [
     ["Credibility = Foundation of Leadership","Research finding: the two traits people most want in leaders are 'Competence' and 'Trustworthiness.' Without credibility, nothing else matters."],
     ["Real-World Case Studies","Hundreds of real leader cases: from front-line supervisors to CEOS, from non-profits to Fortune 500. Each maps to one or more of the Five Practices — making theory actionable."]]},
     kw:["leadership challenge","领导力挑战","kouzes","库泽斯","posner","波斯纳","five practices","五种习惯行为","model the way","以身作则","inspire vision","共启愿景","credibility","信誉","LPI","leadership practices inventory","领导力实务"]
-  }
+  },
 
   {
     id:"mba-accounting-dummies", cat:"mba", type:"textbook",
