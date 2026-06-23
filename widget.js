@@ -166,8 +166,8 @@
   function createDOM() {
     var lang = CONFIG.lang;
     var wel = CONFIG.welcome || (lang === 'zh'
-      ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题。'
-      : "Hello! I'm BizAtom AI Assistant 📚 Ask me anything about business classics.");
+      ? '你好！我是 BizAtom AI 书童 📚 已收录100本商业经典，你可以问我任何概念、框架和思想。'
+      : "Hello! I'm BizAtom AI Assistant 📚 I cover 100 business classics — ask me about any concept, framework, or idea.");
 
     var suggs = CONFIG.suggestions.length > 0 ? CONFIG.suggestions
       : (lang === 'zh'
@@ -684,8 +684,8 @@
     if (!msgs) return;
     msgs.innerHTML = '';
     var wel = CONFIG.welcome || (CONFIG.lang === 'zh'
-      ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题。'
-      : "Hello! I'm BizAtom AI Assistant 📚 Ask me anything about business classics.");
+      ? '你好！我是 BizAtom AI 书童 📚 已收录100本商业经典，你可以问我任何概念、框架和思想。'
+      : "Hello! I'm BizAtom AI Assistant 📚 I cover 100 business classics — ask me about any concept, framework, or idea.");
     addMsg(wel, 'bot');
     var suggs = document.getElementById('bzwSuggestions');
     if (suggs) suggs.style.display = '';

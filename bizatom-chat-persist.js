@@ -109,7 +109,7 @@
     if (msgs) msgs.innerHTML = '';
     var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
     if (typeof addMsg === 'function') {
-      addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题。' : 'Hello! I\'m BizAtom AI 书童 📚 Ask me anything about business classics.', 'bot');
+      addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 已收录100本商业经典，你可以问我任何概念、框架和思想。' : 'Hello! I\'m BizAtom AI 书童 📚 I cover 100 business classics — ask me about any concept and framework.', 'bot');
     }
   }
 
