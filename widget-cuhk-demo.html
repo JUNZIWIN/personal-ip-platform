@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUHK MBA — AI Admissions Assistant (Demo)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #333;
+    min-height: 100vh;
+  }
+  .hero {
+    background: linear-gradient(135deg, #4B1D8F, #7C3AED);
+    color: white;
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    padding: 6px 20px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin-bottom: 20px;
+  }
+  .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+  .hero p { font-size: 18px; opacity: 0.9; max-width: 650px; margin: 0 auto 24px; }
+  .hero .cta {
+    display: inline-block;
+    background: #F4731F;
+    color: white;
+    padding: 14px 36px;
+    border-radius: 99px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .hero .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,115,31,.4); }
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+  .section h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #4B1D8F;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .card {
+    background: #F8F7FF;
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+  }
+  .card .icon { font-size: 36px; margin-bottom: 12px; }
+  .card h3 { font-size: 18px; font-weight: 700; color: #2D1B69; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: #6B7280; line-height: 1.6; }
+  .programs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .prog {
+    background: white;
+    border: 2px solid #F3F4F6;
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color .2s;
+  }
+  .prog:hover { border-color: #7C3AED; }
+  .prog h3 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .prog .duration { font-size: 13px; color: #7C3AED; font-weight: 600; margin-bottom: 10px; }
+  .prog p { font-size: 14px; color: #6B7280; line-height: 1.6; }
+  footer {
+    background: #1a1a2e;
+    color: #9CA3AF;
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">🔮 AI-POWERED</div>
+  <h1>CUHK MBA</h1>
+  <p>Asia's premier MBA program, ranked Top 30 globally. Transform your career with a world-class business education in Hong Kong.</p>
+  <a href="#" class="cta">Apply Now</a>
+</div>
+
+<div class="section">
+  <h2>Why CUHK MBA?</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🌏</div>
+      <h3>Global Network</h3>
+      <p>40,000+ alumni across 50 countries. Strongest network in Greater China and Asia-Pacific.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📈</div>
+      <h3>Career Growth</h3>
+      <p>Average salary increase of 62% post-MBA. 89% employed within 3 months of graduation.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>Top Faculty</h3>
+      <p>Learn from world-renowned professors with deep industry experience in finance, strategy, and entrepreneurship.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Programs</h2>
+  <div class="programs">
+    <div class="prog">
+      <h3>Full-Time MBA</h3>
+      <div class="duration">16 months</div>
+      <p>Immersive full-time program with global exchange opportunities. Ideal for career switchers and accelerators.</p>
+    </div>
+    <div class="prog">
+      <h3>Part-Time MBA</h3>
+      <div class="duration">24 months</div>
+      <p>Continue working while earning your MBA. Classes on evenings and weekends.</p>
+    </div>
+    <div class="prog">
+      <h3>Executive MBA</h3>
+      <div class="duration">18 months</div>
+      <p>For senior executives with 10+ years of experience. Modular format with global study trips.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Frequently Asked Questions</h2>
+  <p style="text-align:center; color:#6B7280; margin-top:20px;">
+    💬 Click the orange button in the bottom-right corner to ask our AI assistant about admissions, programs, fees, and more.
+  </p>
+</div>
+
+<footer>
+  CUHK Business School &copy; 2026 | Demo Page for BizAtom AI Widget<br>
+  This is a demonstration of how the widget would integrate into the official website.
+</footer>
+
+<!-- BizAtom Widget for CUHK MBA -->
+<script>
+  var script = document.createElement('script');
+  script.src = 'widget.js';
+  script.setAttribute('data-site', 'CUHK MBA');
+  script.setAttribute('data-tagline', 'Ask me about programs, admissions & more');
+  script.setAttribute('data-theme', 'purple');
+  script.setAttribute('data-lang', 'en');
+  script.setAttribute('data-api', '/api/widget-chat');
+  script.setAttribute('data-welcome', "Hello! I'm the CUHK MBA Program Assistant. Ask me about our programs, admissions requirements, tuition fees, campus life, or career outcomes. How can I help you today?");
+  script.setAttribute('data-suggestions', 'What MBA programs are offered?,Admission requirements,Tuition fees and scholarships,Application deadlines,What is the GMAT score requirement?');
+  document.head.appendChild(script);
+</script>
+
+</body>
+</html>
