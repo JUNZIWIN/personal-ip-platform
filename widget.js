@@ -239,6 +239,37 @@
         hp.remove();
       }
     }, true);
+
+    // Scroll trapping: prevent scroll from leaking to host page
+    var msgEl = document.getElementById('bzwMessages');
+    if (msgEl) {
+      // Wheel events
+      msgEl.addEventListener('wheel', function (e) {
+        var atTop = msgEl.scrollTop <= 0;
+        var atBottom = msgEl.scrollTop + msgEl.clientHeight >= msgEl.scrollHeight - 1;
+        if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+          e.preventDefault();
+          return false;
+        }
+      }, { passive: false });
+
+      // Touch events (mobile)
+      var touchStartY = 0;
+      msgEl.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 1) touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      msgEl.addEventListener('touchmove', function (e) {
+        if (e.touches.length !== 1) return;
+        var dy = e.touches[0].clientY - touchStartY;
+        var atTop = msgEl.scrollTop <= 0;
+        var atBottom = msgEl.scrollTop + msgEl.clientHeight >= msgEl.scrollHeight - 1;
+        if ((atTop && dy > 0) || (atBottom && dy < 0)) {
+          e.preventDefault();
+          return false;
+        }
+      }, { passive: false });
+    }
   }
 
   function getAtomIcon() {
