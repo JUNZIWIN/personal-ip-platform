@@ -30,9 +30,6 @@
   --font-body: 'Inter','Noto Sans SC',system-ui,sans-serif;
   --space-xs:4px; --space-sm:8px; --space-md:16px; --space-lg:24px;
   --space-xl:32px; --space-2xl:48px; --space-3xl:64px; --space-4xl:96px;
-
-  --line: rgba(255,255,255,.08);
-  --white: #FFFFFF;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -227,7 +224,7 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 .lang-toggle button.active { background:var(--primary); color:#fff; box-shadow:none; }
 
 /* Language Toggle */
-
+.lang-toggle { display:flex; border:1px solid var(--line); border-radius:99px; overflow:hidden; background:var(--white); }
 .lang-toggle button { border:0; background:transparent; padding:6px 12px; font-size:12px; font-weight:600; color:var(--text-secondary); cursor:pointer; transition:all .2s; font-family:inherit; border-radius:0; }
 .lang-toggle button.active { background:var(--primary); color:#fff; box-shadow:none; }
 </style>
@@ -277,11 +274,11 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
         <button class="btn btn-primary" id="heroContactBtn">📬 联系我</button>
         <button class="btn btn-secondary" id="heroProductsBtn">💼 查看产品</button>
       </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item"><strong>2018</strong> 创业起点</div>
-        <div class="hero-meta-item"><strong>4</strong> 核心产品</div>
-        <div class="hero-meta-item"><strong>AI</strong> 品牌赋能</div>
-      </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><strong>2005</strong> 职业起点</div>
+          <div class="hero-meta-item"><strong>5</strong> 行业跨界</div>
+          <div class="hero-meta-item"><strong>MBA</strong> 港中文2026</div>
+        </div>
     </div>
     <div class="hero-visual">
       <div class="profile-card">
@@ -301,8 +298,8 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
             <span class="profile-tag gold">企培</span>
           </div>
           <div class="profile-stats">
-            <div class="profile-stat"><div class="num">2018</div><div class="lbl" id="hero-meta1">创业起点</div></div>
-            <div class="profile-stat"><div class="num">4</div><div class="lbl" id="hero-meta2">核心产品</div></div>
+            <div class="profile-stat"><div class="num">2005</div><div class="lbl" id="hero-meta1">职业起点</div></div>
+            <div class="profile-stat"><div class="num">5</div><div class="lbl" id="hero-meta2">行业跨界</div></div>
             <div class="profile-stat"><div class="num">2026</div><div class="lbl">港中文MBA</div></div>
           </div>
           <div class="profile-links">
@@ -401,49 +398,49 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
 
 <!-- TIMELINE -->
 <section class="section timeline-section" id="timeline">
-  <div class="container">
+ <div class="container">
     <p class="section-label fade-up" id="timeline-label">Journey</p>
     <h2 class="section-title fade-up" id="timeline-title">创业历程</h2>
-    <p class="section-desc fade-up" id="timeline-desc">从翻译到 AI，每一次转身都带着使命</p>
+    <p class="section-desc fade-up" id="timeline-desc">从外贸到 AI，每一次转身都带着使命</p>
     <div class="timeline">
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year" id="tl1-year">2018</div>
-          <div class="timeline-title" id="tl1-title">AIIPOWER® 品牌创立</div>
-          <div class="timeline-desc" id="tl1-desc">「AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。获美国著名投资人青睐，正式开启 AI 品牌赋能之路。</div>
+          <div class="timeline-year" id="tl1-year">2014—2017</div>
+          <div class="timeline-title" id="tl1-title">养老产业深耕</div>
+          <div class="timeline-desc" id="tl1-desc">香港上市公司花样年集团养老板块投资发展总监，主导"五感自然疗法"产品研发与政府项目落地；离职后创办爱健乐老年大学。</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot gold"></div>
         <div class="timeline-content">
-          <div class="timeline-year gold" id="tl2-year">2022</div>
-          <div class="timeline-title" id="tl2-title">君子闻文化公司 & 爱健乐老年大学</div>
-          <div class="timeline-desc" id="tl2-desc">创办君子闻文化公司，同时创办爱健乐老年大学，涉足短视频直播行业。跨界养老与传媒，积累内容运营与用户增长经验。</div>
+          <div class="timeline-year gold" id="tl2-year">2018</div>
+          <div class="timeline-title" id="tl2-title">AIIPOWER® 概念萌生</div>
+          <div class="timeline-desc" id="tl2-desc">思考并萌生"AI + IP + POWER"个人品牌赋能方法论；就任深圳市福田区民间文艺家协会副主席兼秘书长。</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year" id="tl3-year">2024</div>
-          <div class="timeline-title" id="tl3-title">AIP Studio 上线</div>
-          <div class="timeline-desc" id="tl3-desc">AIIPOWER® 核心先驱产品 AIP Studio 个人IP SaaS 平台正式发布，针对企业高管、自由职业者、OPC/公司创始人，提供 AI 原生网站开发能力。</div>
+          <div class="timeline-year" id="tl3-year">2019—2020</div>
+          <div class="timeline-title" id="tl3-title">君子闻文化与商标布局</div>
+          <div class="timeline-desc" id="tl3-desc">成立君子闻文化公司，递交 AIIPOWER® 商标申请；2020年商标全面获批（第35/38/41/42类），同期涉足 MCN 传媒行业。</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot gold"></div>
         <div class="timeline-content">
-          <div class="timeline-year gold" id="tl4-year">2025</div>
-          <div class="timeline-title" id="tl4-title">BizAtom & 企业服务双线并进</div>
-          <div class="timeline-desc" id="tl4-desc">BizAtom 商原子 AI 商业经典拆解平台上线，企业 AI 培训服务正式启动。品牌生态全面铺开，覆盖 To C 与 To B 双端市场。</div>
+          <div class="timeline-year gold" id="tl4-year">2021—2023</div>
+          <div class="timeline-title" id="tl4-title">跨学科商科训练</div>
+          <div class="timeline-desc" id="tl4-desc">以西安外国语大学英语本科背景准备雅思，赴英国考文垂大学攻读国际商务学士（荣誉二等甲级），完成跨文化商科系统训练。</div>
         </div>
       </div>
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-year" id="tl5-year">2026</div>
-          <div class="timeline-title" id="tl5-title">港中文全日制 MBA</div>
-          <div class="timeline-desc" id="tl5-desc">AIIPOWER® 品牌全面升级，创始人入读香港中文大学全日制 MBA，以更系统的商业认知支撑 AI 品牌赋能事业的下一个十年。</div>
+          <div class="timeline-year" id="tl5-year">2025—2026</div>
+          <div class="timeline-title" id="tl5-title">AI 品牌生态全面升级</div>
+          <div class="timeline-desc" id="tl5-desc">加入深圳 AI 破局俱乐部（破局行动家），获工信部 AIGC 高级工程师认证；香港中文大学全日制 MBA 录取（获奖学金约10万港币）；注册 AIIPOWER LIMITED（香港），计划入驻香港科学园。</div>
         </div>
       </div>
     </div>
@@ -475,7 +472,7 @@ button { cursor:pointer; font-family:inherit; border:none; outline:none; }
   <div class="container">
     <div class="footer-brand">AIIPOWER<span>®</span></div>
     <p>© 2026 AIIPOWER LIMITED. All rights reserved.</p>
-    <p id="footer-slogan">AI + IP + POWER = 人工智能重塑、赋能个人与企业品牌</p>
+    <pid="footer-slogan">AI + IP + POWER = 人工智能重塑、赋能个人与企业品牌</p>
     <p><a href="https://www.aiipower.me" target="_blank">AIP Studio</a> · <a href="https://www.Bizatom.ai" target="_blank">BizAtom</a> · <a href="https://aiipower.ai" target="_blank">AIIPOWER.ai</a></p>
   </div>
 </footer>
@@ -491,8 +488,8 @@ var i18n = {
     'hero-bio': 'AI 重塑、赋能个人与企业品牌。从翻译、外贸到智能养老，再到传媒MCN，每一次转型都在寻找更广阔的价值创造方式。2026年，带着 AIIPOWER® 走向更远的远方。',
     'heroContactBtn': '📬 联系我',
     'heroProductsBtn': '💼 查看产品',
-    'hero-meta1': '创业起点',
-    'hero-meta2': '核心产品',
+    'hero-meta1': '职业起点',
+    'hero-meta2': '行业跨界',
     'hero-meta3': 'AI 品牌赋能',
     'about-label': 'About & Brand Story',
     'about-title': '从翻译到 AI 品牌赋能<br>每一次转身都是进化',
@@ -524,21 +521,21 @@ var i18n = {
     'timeline-label': 'Journey',
     'timeline-title': '创业历程',
     'timeline-desc': '从翻译到 AI，每一次转身都带着使命',
-    'tl1-year': '2018',
-    'tl1-title': 'AIIPOWER® 品牌创立',
-    'tl1-desc': '「AIIPOWER」商标申请全面布局第35/38/41/42类服务，构建完整的品牌知识产权保护矩阵。获美国著名投资人青睐，正式开启 AI 品牌赋能之路。',
-    'tl2-year': '2022',
-    'tl2-title': '君子闻文化公司 & 爱健乐老年大学',
-    'tl2-desc': '创办君子闻文化公司，同时创办爱健乐老年大学，涉足短视频直播行业。跨界养老与传媒，积累内容运营与用户增长经验。',
-    'tl3-year': '2024',
-    'tl3-title': 'AIP Studio 上线',
-    'tl3-desc': 'AIIPOWER® 核心先驱产品 AIP Studio 个人IP SaaS 平台正式发布，针对企业高管、自由职业者、OPC/公司创始人，提供 AI 原生网站开发能力。',
-    'tl4-year': '2025',
-    'tl4-title': 'BizAtom & 企业服务双线并进',
-    'tl4-desc': 'BizAtom 商原子 AI 商业经典拆解平台上线，企业 AI 培训服务正式启动。品牌生态全面铺开，覆盖 To C 与 To B 双端市场。',
-    'tl5-year': '2026',
-    'tl5-title': '港中文全日制 MBA',
-    'tl5-desc': 'AIIPOWER® 品牌全面升级，创始人入读香港中文大学全日制 MBA，以更系统的商业认知支撑 AI 品牌赋能事业的下一个十年。',
+    'tl1-year': '2014—2017',
+    'tl1-title': '养老产业深耕',
+    'tl1-desc': '香港上市公司花样年集团养老板块投资发展总监，主导"五感自然疗法"产品研发与政府项目落地；离职后创办爱健乐老年大学。',
+    'tl2-year': '2018',
+    'tl2-title': 'AIIPOWER® 概念萌生',
+    'tl2-desc': '思考并萌生"AI + IP + POWER"个人品牌赋能方法论；就任深圳市福田区民间文艺家协会副主席兼秘书长。',
+    'tl3-year': '2019—2020',
+    'tl3-title': '君子闻文化与商标布局',
+    'tl3-desc': '成立君子闻文化公司，递交 AIIPOWER® 商标申请；2020年商标全面获批（第35/38/41/42类），同期涉足 MCN 传媒行业。',
+    'tl4-year': '2021—2023',
+    'tl4-title': '跨学科商科训练',
+    'tl4-desc': '以西安外国语大学英语本科背景准备雅思，赴英国考文垂大学攻读国际商务学士（荣誉二等甲级），完成跨文化商科系统训练。',
+    'tl5-year': '2025—2026',
+    'tl5-title': 'AI 品牌生态全面升级',
+    'tl5-desc': '加入深圳 AI 破局俱乐部（破局行动家），获工信部 AIGC 高级工程师认证；香港中文大学全日制 MBA 录取（获奖学金约10万港币）；注册 AIIPOWER LIMITED（香港），计划入驻香港科学园。',
     'contact-label': "Let's Connect",
     'contact-title': '想合作 or 想聊聊？<br><span class="text-gradient">随时找我</span>',
     'contact-desc': '无论是个人品牌建设、企业 AI 转型还是商业合作探讨，都可以在这里找到我',
@@ -558,8 +555,8 @@ var i18n = {
     'hero-bio': 'AI reshaping and empowering individual and enterprise brands. From translation & foreign trade to smart eldercare and media MCN — every pivot searches for greater value creation. In 2026, AIIPOWER® goes even further.',
     'heroContactBtn': '📬 Contact Me',
     'heroProductsBtn': '💼 View Products',
-    'hero-meta1': 'Startup Origin',
-    'hero-meta2': 'Core Products',
+    'hero-meta1': 'Career Start',
+    'hero-meta2': 'Cross-Industry',
     'hero-meta3': 'AI Brand Empowerment',
     'about-label': 'About & Brand Story',
     'about-title': 'From Translation to AI Brand Empowerment<br>Every Pivot is Evolution',
@@ -591,21 +588,21 @@ var i18n = {
     'timeline-label': 'Journey',
     'timeline-title': 'Entrepreneurial Journey',
     'timeline-desc': 'From Translation to AI: Every Pivot with Purpose',
-    'tl1-year': '2018',
-    'tl1-title': 'AIIPOWER® Brand Founded',
-    'tl1-desc': '「AIIPOWER」 trademark registered in Classes 35/38/41/42, building a complete IP protection matrix. Gained attention from a renowned US investor, officially starting the AI brand empowerment journey.',
-    'tl2-year': '2022',
-    'tl2-title': 'Junziwen Culture & Aijianle Senior University',
-    'tl2-desc': 'Founded Junziwen Culture Company and Aijianle Senior University, entering the short-video and live-streaming industry. Cross-industry eldercare and media experience, accumulating content ops and user growth expertise.',
-    'tl3-year': '2024',
-    'tl3-title': 'AIP Studio Launch',
-    'tl3-desc': 'AIIPOWER® core pioneering product AIP Studio personal IP SaaS platform officially launched, targeting corporate executives, freelancers, and OPC/corporate founders with AI-native website development capabilities.',
-    'tl4-year': '2025',
-    'tl4-title': 'BizAtom & Enterprise Services Dual Track',
-    'tl4-desc': 'BizAtom AI business classic deconstruction platform launched, enterprise AI training services officially started. Brand ecosystem fully expanded, covering both To C and To B markets.',
-    'tl5-year': '2026',
-    'tl5-title': 'CUHK Full-Time MBA',
-    'tl5-desc': 'AIIPOWER® brand fully upgraded — founder enrolled in CUHK full-time MBA, supporting the next decade of AI brand empowerment with more systematic commercial insight.',
+    'tl1-year': '2014—2017',
+    'tl1-title': 'Elderly Care Industry Deep Dive',
+    'tl1-desc': 'Investment & Development Director at Fantasia Holdings Group (HK:1777) elderly care division. Led R&D of "Five-Sense Nature Therapy" product and government project implementation. Founded Aijianle Elderly University after departure.',
+    'tl2-year': '2018',
+    'tl2-title': 'AIIPOWER® Concept Conceived',
+    'tl2-desc': 'Conceived the "AI + IP + POWER" personal brand empowerment methodology. Appointed Vice Chairman & Secretary-General of Shenzhen Futian District Folk Artists Association.',
+    'tl3-year': '2019—2020',
+    'tl3-title': 'Junziwen Culture & Trademark',
+    'tl3-desc': 'Founded Junziwen Culture Company and filed AIIPOWER® trademark application. Trademark fully approved in 2020 (Classes 35/38/41/42). Entered MCN media industry the same year.',
+    'tl4-year': '2021—2023',
+    'tl4-title': 'Cross-Disciplinary Business Training',
+    'tl4-desc': 'Prepared for IELTS from Xi\'an International Studies University English background, admitted to Coventry University BA International Business (Upper Second-Class Honours). Completed cross-cultural business training.',
+    'tl5-year': '2025—2026',
+    'tl5-title': 'AI Brand Ecosystem Upgrade',
+    'tl5-desc': 'Joined Shenzhen AI Breakthrough Club (Breakthrough Actionist). Obtained MIIT AIGC Senior Engineer certification. Admitted to CUHK full-time MBA with ~HK$100K scholarship. Incorporating AIIPOWER LIMITED (Hong Kong), planning HK Science Park application.',
     'contact-label': "Let's Connect",
     'contact-title': 'Want to Collaborate or Chat?<br><span class="text-gradient">I Am Always Here</span>',
     'contact-desc': 'Whether it is personal brand building, enterprise AI transformation, or business cooperation — you can find me here.',
