@@ -162,6 +162,58 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .foot-links{display:flex;gap:18px;align-items:center;font-size:13px}
 .foot-links a:hover{color:var(--orange)}
 
+/* ===== Workbenches Section ===== */
+.workbenches{background:var(--paper);border-top:1px solid var(--line)}
+.wb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:0}
+.wb-card{border:1.5px solid var(--line);border-radius:var(--radius);padding:24px 20px;background:var(--white);cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.wb-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(10,28,56,.1)}
+.wb-card.tier-free{border-top:3px solid #888780}
+.wb-card.tier-silver{border-top:3px solid #639922}
+.wb-card.tier-gold{border-top:3px solid #378ADD}
+.wb-card.tier-diamond{border-top:3px solid #7F77DD}
+.wb-card .wb-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:99px;padding:3px 10px;margin-bottom:14px}
+.wb-card.tier-free .wb-badge{background:var(--paper);color:var(--muted)}
+.wb-card.tier-silver .wb-badge{background:#EAF3DE;color:#3B6D11}
+.wb-card.tier-gold .wb-badge{background:#E6F1FB;color:#185FA5}
+.wb-card.tier-diamond .wb-badge{background:var(--purple-soft);color:var(--purple)}
+.wb-card .wb-icon{font-size:32px;margin-bottom:12px;display:block}
+.wb-card h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.wb-card p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.wb-card .wb-tasks{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.wb-card .wb-tasks li{font-size:12.5px;color:var(--muted);padding-left:16px;position:relative}
+.wb-card .wb-tasks li::before{content:"✓";position:absolute;left:0;color:var(--orange);font-weight:700;font-size:11px}
+.wb-card .wb-try{display:inline-block;margin-top:16px;font-size:12.5px;font-weight:600;color:var(--orange);cursor:pointer;text-decoration:none}
+.wb-card .wb-try:hover{text-decoration:underline}
+@media(max-width:840px){.wb-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.wb-grid{grid-template-columns:1fr}}
+
+/* ===== Pricing Section ===== */
+.pricing{background:var(--white);border-top:1px solid var(--line)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pricing-card{border:1.5px solid var(--line);border-radius:var(--radius);padding:28px 22px;background:var(--paper);display:flex;flex-direction:column;position:relative;transition:transform .2s}
+.pricing-card.featured{border-color:var(--orange);background:var(--white);transform:translateY(-6px);box-shadow:0 12px 36px rgba(244,115,31,.18)}
+.pricing-card .rec-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 14px;border-radius:99px;white-space:nowrap}
+.pricing-card .pc-tier{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pricing-card h3{font-family:var(--display);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.pricing-card .pc-price{font-size:28px;font-weight:700;color:var(--navy);line-height:1.1}
+.pricing-card .pc-price small{font-size:13px;font-weight:400;color:var(--muted)}
+.pricing-card .pc-coming{font-size:12px;color:var(--orange);font-weight:600;margin-top:2px}
+.pricing-card .pc-model{font-size:12.5px;color:var(--muted);margin:10px 0 16px;padding:8px 12px;background:var(--paper);border-radius:8px;border:1px solid var(--line)}
+.pricing-card .pc-features{list-style:none;display:flex;flex-direction:column;gap:8px;flex:1}
+.pricing-card .pc-features li{font-size:13px;color:var(--muted);padding-left:20px;position:relative;line-height:1.4}
+.pricing-card .pc-features li::before{content:"✓";position:absolute;left:0;color:#639922;font-weight:700;font-size:12px}
+.pricing-card .pc-features li.locked{color:#ccc}
+.pricing-card .pc-features li.locked::before{content:"—";color:#ddd}
+.pricing-card .pc-cta{margin-top:22px;width:100%;padding:11px;border-radius:99px;font-weight:600;font-size:14px;cursor:pointer;text-align:center;border:0;transition:.2s}
+.pricing-card .pc-cta.primary{background:var(--orange);color:#fff}
+.pricing-card .pc-cta.primary:hover{opacity:.9}
+.pricing-card .pc-cta.secondary{background:transparent;border:1.5px solid var(--line);color:var(--navy)}
+.pricing-card .pc-cta.secondary:hover{border-color:var(--navy)}
+.pricing-note{margin-top:24px;text-align:center;font-size:13px;color:var(--muted)}
+.pricing-note strong{color:var(--orange)}
+@media(max-width:960px){.pricing-grid{grid-template-columns:1fr 1fr};.pricing-card.featured{transform:none}}
+@media(max-width:540px){.pricing-grid{grid-template-columns:1fr}}
+
 /* ===== AI Chat Widget ===== */
 .chat-fab{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;border:0;cursor:pointer;box-shadow:0 6px 24px rgba(244,115,31,.38);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s,opacity .25s}
 .chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 30px rgba(244,115,31,.5)}
@@ -408,9 +460,10 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       </a>
       <a href="#how" data-en="How it works" data-zh="工作原理">How it works</a>
       <a href="#features" data-en="Features" data-zh="核心功能">Features</a>
-      <a href="#science" data-en="The science" data-zh="科学依据">The science</a>
-      <a href="#integrity" data-en="Integrity" data-zh="学术诚信">Integrity</a>
-      <a href="#who" data-en="Who it's for" data-zh="适用人群">Who it's for</a>
+      <a href="#workbenches" data-en="Workbenches" data-zh="工作台">工作台</a>
+      <a href="#pricing" data-en="Pricing" data-zh="会员方案">会员方案</a>
+      <a href="#integrity" data-en="Integrity" data-zh="学术诚信">学术诚信</a>
+      <a href="#who" data-en="Who it's for" data-zh="适用人群">适用人群</a>
     </div>
     <div class="nav-cta">
       <div class="lang-toggle" role="group" aria-label="Language">
@@ -626,6 +679,166 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
   </div>
 </section>
 
+<!-- ================= WORKBENCHES ================= -->
+<section id="workbenches" class="workbenches">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-en="Four workbenches" data-zh="四大工作台">Four workbenches</span>
+      <h2 data-en="One platform, four ways to get things done."
+          data-zh="一个平台，四种场景，各司其职。">One platform, four ways to get things done.</h2>
+      <p data-en="Each workbench is a curated toolkit matched to a real-world workflow — so you're not choosing between models, you're choosing what you want to accomplish."
+         data-zh="每个工作台都是专为真实工作场景打磨的工具包——你不需要选模型，你只需要选你想完成什么任务。">Each workbench is a curated toolkit matched to a real-world workflow — so you're not choosing between models, you're choosing what you want to accomplish.</p>
+    </div>
+    <div class="wb-grid">
+      <div class="wb-card tier-free" onclick="openChatWithPrompt('我想随便问个商业问题')">
+        <span class="wb-badge" data-en="Free" data-zh="免费">Free</span>
+        <span class="wb-icon">💡</span>
+        <h3 data-en="Ideas Studio" data-zh="灵感工坊">灵感工坊</h3>
+        <p data-en="Ask anything about 100+ business classics. Get instant insights, frameworks, and aha-moments."
+           data-zh="问任何商业经典问题。瞬间获得洞察、框架与灵感触发。">问任何商业经典问题。瞬间获得洞察、框架与灵感触发。</p>
+        <ul class="wb-tasks">
+          <li data-en="Daily Q&A (5 questions)" data-zh="每日 5 次问答">每日 5 次问答</li>
+          <li data-en="Powered by DeepSeek" data-zh="DeepSeek 驱动">DeepSeek 驱动</li>
+          <li data-en="Full book directory" data-zh="完整书籍目录">完整书籍目录</li>
+        </ul>
+        <a class="wb-try" onclick="toggleChat();event.stopPropagation()" data-en="Try it now →" data-zh="立即体验 →">立即体验 →</a>
+      </div>
+
+      <div class="wb-card tier-silver">
+        <span class="wb-badge" data-en="Silver" data-zh="银牌">银牌</span>
+        <span class="wb-icon">📄</span>
+        <h3 data-en="Document Assistant" data-zh="文档助手">文档助手</h3>
+        <p data-en="Turn any conversation into polished Word / PDF documents. Write business emails, meeting minutes, and briefs."
+           data-zh="将任何对话整理为精美的 Word / PDF 文档。撰写商业邮件、会议纪要与简报。">将对话整理为 Word / PDF 文档。撰写邮件、纪要与简报。</p>
+        <ul class="wb-tasks">
+          <li data-en="Unlimited AI Q&A" data-zh="无限次 AI 问答">无限次 AI 问答</li>
+          <li data-en="Export Word / PDF" data-zh="导出 Word / PDF">导出 Word / PDF</li>
+          <li data-en="Doubao Pro — Chinese writing specialist" data-zh="豆包 Pro — 中文写作专家">豆包 Pro — 中文写作专家</li>
+        </ul>
+        <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Silver →" data-zh="银牌会员开放 →">银牌会员开放 →</a>
+      </div>
+
+      <div class="wb-card tier-gold">
+        <span class="wb-badge" data-en="Gold" data-zh="金牌">金牌</span>
+        <span class="wb-icon">🔬</span>
+        <h3 data-en="Strategy Lab" data-zh="策略分析室">策略分析室</h3>
+        <p data-en="Upload PDFs, run SWOT analyses, compare competitors, and generate knowledge maps — all powered by long-context AI."
+           data-zh="上传 PDF 分析、运行 SWOT 分析、竞品对比，生成可下载的知识图谱。">上传 PDF 分析、运行 SWOT、竞品对比，生成可下载知识图谱。</p>
+        <ul class="wb-tasks">
+          <li data-en="Upload & analyse PDFs" data-zh="上传并分析 PDF">上传并分析 PDF</li>
+          <li data-en="Knowledge maps (download PNG/PDF)" data-zh="知识图谱（下载 PNG/PDF）">知识图谱（下载 PNG/PDF）</li>
+          <li data-en="Kimi 128k + ChatGPT" data-zh="Kimi 128k + ChatGPT">Kimi 128k + ChatGPT</li>
+        </ul>
+        <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Gold →" data-zh="金牌会员开放 →">金牌会员开放 →</a>
+      </div>
+
+      <div class="wb-card tier-diamond">
+        <span class="wb-badge" data-en="Diamond" data-zh="钻石">钻石</span>
+        <span class="wb-icon">🎨</span>
+        <h3 data-en="Creator Studio" data-zh="创作工坊">创作工坊</h3>
+        <p data-en="Generate code prototypes, long-form content, and branded PPTs. One-click publish to Xiaohongshu, WeChat, and more."
+           data-zh="生成代码原型、长文内容与品牌 PPT。一键发布到小红书、微信公众号等平台。">生成代码原型、长文与品牌 PPT。一键发布到小红书、公众号。</p>
+        <ul class="wb-tasks">
+          <li data-en="Code generation (Codex)" data-zh="代码生成（Codex）">代码生成（Codex）</li>
+          <li data-en="Export PPT with brand cover" data-zh="导出带品牌封面的 PPT">导出带品牌封面的 PPT</li>
+          <li data-en="Publish to social platforms" data-zh="发布到社交平台">发布到社交平台</li>
+        </ul>
+        <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Diamond →" data-zh="钻石会员开放 →">钻石会员开放 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow" data-en="Membership" data-zh="会员方案">会员方案</span>
+      <h2 data-en="Pay for what you can accomplish, not what model you run."
+          data-zh="为你能完成的任务付费，而不是为你用了哪个模型。">为你能完成的任务付费，而不是为你用了哪个模型。</h2>
+      <p data-en="Paid plans launch once our Hong Kong entity is registered. Sign up now to lock in founding-member pricing."
+         data-zh="付费方案将在香港公司注册完成后正式上线。现在注册候补名单，即可锁定创始会员优惠价格。">付费方案将在香港公司注册完成后正式上线。现在注册候补名单，即可锁定创始会员优惠价格。</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pc-tier" data-en="Free" data-zh="免费">免费</div>
+        <h3 data-en="Starter" data-zh="体验版">体验版</h3>
+        <div class="pc-price">HK$0 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-model" data-en="🧠 DeepSeek — fast, efficient, great Chinese" data-zh="🧠 DeepSeek — 快速高效，中文优秀">🧠 DeepSeek — 快速高效，中文优秀</div>
+        <ul class="pc-features">
+          <li data-en="100+ book directory" data-zh="100+ 本书籍目录">100+ 本书籍目录</li>
+          <li data-en="5 AI questions per day" data-zh="每日 5 次 AI 问答">每日 5 次 AI 问答</li>
+          <li data-en="Left sidebar book navigator" data-zh="左侧书籍导航栏">左侧书籍导航栏</li>
+          <li data-en="Basic book recommendations" data-zh="基础书籍推荐">基础书籍推荐</li>
+          <li class="locked" data-en="Document export" data-zh="文档导出">文档导出</li>
+          <li class="locked" data-en="Knowledge maps" data-zh="知识图谱">知识图谱</li>
+        </ul>
+        <button class="pc-cta secondary" onclick="toggleChat()" data-en="Start free" data-zh="免费开始">免费开始</button>
+      </div>
+
+      <!-- Silver -->
+      <div class="pricing-card">
+        <div class="pc-tier" data-en="Silver" data-zh="银牌">银牌</div>
+        <h3 data-en="Writer" data-zh="写作版">写作版</h3>
+        <div class="pc-price">~HK$78 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-model" data-en="🫘 Doubao Pro — Chinese writing specialist" data-zh="🫘 豆包 Pro — 中文写作专家">🫘 豆包 Pro — 中文写作专家</div>
+        <ul class="pc-features">
+          <li data-en="Everything in Free" data-zh="包含免费版全部功能">包含免费版全部功能</li>
+          <li data-en="Unlimited AI questions" data-zh="无限次 AI 问答">无限次 AI 问答</li>
+          <li data-en="Export chats as Word / PDF" data-zh="对话导出为 Word / PDF">对话导出为 Word / PDF</li>
+          <li data-en="Adaptive learning path" data-zh="自适应学习路径">自适应学习路径</li>
+          <li data-en="Progress tracking" data-zh="学习进度追踪">学习进度追踪</li>
+          <li class="locked" data-en="Knowledge maps" data-zh="知识图谱">知识图谱</li>
+        </ul>
+        <button class="pc-cta secondary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册 →">预注册 →</button>
+      </div>
+
+      <!-- Gold (Featured) -->
+      <div class="pricing-card featured">
+        <div class="rec-badge" data-en="Most Popular" data-zh="最受欢迎">最受欢迎</div>
+        <div class="pc-tier" data-en="Gold" data-zh="金牌">金牌</div>
+        <h3 data-en="Analyst" data-zh="分析版">分析版</h3>
+        <div class="pc-price">~HK$168 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-model" data-en="🌙 Kimi 128k + 💬 ChatGPT — deep research" data-zh="🌙 Kimi 128k + 💬 ChatGPT — 深度研究">🌙 Kimi 128k + 💬 ChatGPT — 深度研究</div>
+        <ul class="pc-features">
+          <li data-en="Everything in Silver" data-zh="包含银牌版全部功能">包含银牌版全部功能</li>
+          <li data-en="Upload PDFs for analysis" data-zh="上传 PDF 进行深度分析">上传 PDF 进行深度分析</li>
+          <li data-en="Full knowledge maps (download)" data-zh="完整知识图谱（可下载）">完整知识图谱（可下载）</li>
+          <li data-en="Export as PPT with images" data-zh="导出含图片的 PPT">导出含图片的 PPT</li>
+          <li data-en="SWOT / strategy templates" data-zh="SWOT / 策略分析模板">SWOT / 策略分析模板</li>
+          <li data-en="Try Gold free 3×/month" data-zh="每月 3 次免费尝鲜">每月 3 次免费尝鲜</li>
+        </ul>
+        <button class="pc-cta primary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册享折扣 →">预注册享折扣 →</button>
+      </div>
+
+      <!-- Diamond -->
+      <div class="pricing-card">
+        <div class="pc-tier" data-en="Diamond" data-zh="钻石">钻石</div>
+        <h3 data-en="Creator" data-zh="创作版">创作版</h3>
+        <div class="pc-price">~HK$298 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-model" data-en="🔧 Codex + 🎯 Claude — code &amp; long-form" data-zh="🔧 Codex + 🎯 Claude — 代码与长文创作">🔧 Codex + 🎯 Claude — 代码与长文创作</div>
+        <ul class="pc-features">
+          <li data-en="Everything in Gold" data-zh="包含金牌版全部功能">包含金牌版全部功能</li>
+          <li data-en="Code generation (Codex)" data-zh="代码生成（Codex）">代码生成（Codex）</li>
+          <li data-en="Long-form content creation" data-zh="长文内容创作">长文内容创作</li>
+          <li data-en="Branded PPT export" data-zh="品牌封面 PPT 导出">品牌封面 PPT 导出</li>
+          <li data-en="Publish to social platforms" data-zh="一键发布到社交平台">一键发布到社交平台</li>
+          <li data-en="API access + custom booklist" data-zh="API 接入 + 自定义书单">API 接入 + 自定义书单</li>
+        </ul>
+        <button class="pc-cta secondary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册 →">预注册 →</button>
+      </div>
+    </div>
+
+    <p class="pricing-note" data-en="⚠️ Academic integrity first: BizAtom never generates complete essays or submittable assignments. It coaches your thinking, not replaces it."
+       data-zh="⚠️ 学术诚信优先：BizAtom 不生成完整论文或任何可提交的作业内容。它是你思维的教练，而非替代者。">⚠️ 学术诚信优先：BizAtom 不生成完整论文或任何可提交的作业内容。它是你思维的教练，而非替代者。</p>
+  </div>
+</section>
+
 <!-- ================= SCIENCE ================= -->
 <section id="science" class="science">
   <div class="container">
@@ -785,6 +998,22 @@ function setLang(lang){
 
 /* ---------- Waitlist ---------- */
 var chatUserEmail = ''; // Store email for chat log association
+function scrollToPricing() {
+  var el = document.getElementById('pricing');
+  if (el) el.scrollIntoView({behavior:'smooth'});
+}
+function joinWaitlistScroll() {
+  var el = document.getElementById('waitlist');
+  if (el) el.scrollIntoView({behavior:'smooth'});
+  setTimeout(function(){ var inp = document.getElementById('wl-email'); if(inp) inp.focus(); }, 600);
+}
+function openChatWithPrompt(prompt) {
+  if (!chatOpen) toggleChat();
+  setTimeout(function(){
+    var inp = document.getElementById('chatInput');
+    if (inp) { inp.value = prompt; inp.focus(); }
+  }, 400);
+}
 function joinWaitlist(){
   var input = document.getElementById('wl-email');
   var msg = document.getElementById('wl-msg');
