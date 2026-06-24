@@ -173,7 +173,10 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-panel{position:fixed;bottom:100px;right:28px;z-index:999;width:380px;max-width:calc(100vw - 40px);height:560px;max-height:calc(100vh - 140px);background:var(--white);border-radius:18px;box-shadow:0 12px 48px rgba(10,28,56,.22);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .25s}
 .chat-panel.collapsed{transform:scale(.7);opacity:0;pointer-events:none}
 
-.chat-header{background:linear-gradient(135deg,var(--navy),var(--purple-deep));color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.chat-header{background:linear-gradient(135deg,var(--navy),var(--purple-deep));color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;cursor:grab;user-select:none;-webkit-user-select:none}
+.chat-header:active{cursor:grabbing}
+.chat-header.dragging{cursor:grabbing}
+.chat-panel.dragging{transition:none!important}
 .chat-header .h-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
 .chat-header .h-text{flex:1}
 .chat-header .h-text h4{font-family:var(--display);font-size:15px;font-weight:700;line-height:1.2}
@@ -277,6 +280,12 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-book-bar .book-ask-btn{padding:7px 14px;border-radius:8px;background:var(--orange);color:#fff;border:none;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;font-family:var(--body)}
 .chat-book-bar .book-ask-btn:hover:not(:disabled){opacity:.85}
 .chat-book-bar .book-ask-btn:disabled{opacity:.5;cursor:not-allowed}
+/* Model selector bar */
+.chat-model-bar{flex-shrink:0;padding:6px 12px;background:var(--navy-deep,#1a1f4e);display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.08)}
+.chat-model-bar .model-label{font-size:11px;color:rgba(255,255,255,.5);font-family:var(--body);white-space:nowrap}
+.chat-model-bar select{flex:1;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:11.5px;font-family:var(--body);outline:0;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
+.chat-model-bar select:hover{border-color:rgba(255,255,255,.3)}
+.chat-model-bar select option{background:#1a1f4e;color:#fff}
 /* Book shelf */
 .book-shelf{flex-shrink:0;max-height:170px;overflow-y:auto;background:#fff;border-bottom:1px solid var(--line);display:none}
 .book-shelf.open{display:block}
@@ -288,6 +297,84 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .book-shelf-empty{padding:24px 14px;text-align:center;color:var(--muted);font-size:12px;font-family:var(--body)}
 
 @media(max-width:500px){.chat-panel{right:8px;bottom:92px;width:calc(100vw - 16px);height:480px}}
+
+/* ───────── Sidebar Book Directory ───────── */
+.sidebar-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:none;background:transparent;cursor:pointer;border-radius:10px;color:var(--navy);margin-right:4px;transition:background .2s}
+.sidebar-toggle:hover{background:var(--line)}
+.sidebar-toggle svg{width:20px;height:20px}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(10,28,56,.4);z-index:60;backdrop-filter:blur(2px)}
+.sidebar-overlay.open{display:block}
+.sidebar{position:fixed;top:0;left:-360px;width:340px;height:100vh;background:var(--white);z-index:70;display:flex;flex-direction:column;transition:left .3s cubic-bezier(.4,0,.2,1);box-shadow:2px 0 24px rgba(10,28,56,.12);overflow:hidden}
+.sidebar.open{left:0}
+.sidebar-header{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);flex-shrink:0}
+.sidebar-header h3{flex:1;font-family:var(--display);font-size:17px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.sidebar-header .badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--orange-soft);color:var(--orange);font-family:var(--body)}
+.sidebar-close{width:32px;height:32px;border:none;background:transparent;cursor:pointer;border-radius:8px;font-size:20px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.sidebar-close:hover{background:var(--paper);color:var(--ink)}
+.sidebar-search-wrap{padding:12px 18px;border-bottom:1px solid var(--line);flex-shrink:0}
+.sidebar-search-input{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--body);font-size:13px;color:var(--ink);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6B85' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") 12px center no-repeat;outline:none;transition:border-color .2s}
+.sidebar-search-input:focus{border-color:var(--purple);background-color:var(--white)}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:8px 0;scroll-behavior:smooth}
+.sidebar-scroll::-webkit-scrollbar{width:5px}
+.sidebar-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.sidebar-section{margin-bottom:4px}
+.sidebar-section-title{display:flex;align-items:center;gap:8px;padding:14px 18px 8px;font-size:13px;font-weight:700;font-family:var(--body)}
+.sidebar-section-title.bestseller{color:var(--orange)}
+.sidebar-section-title.textbook{color:var(--purple)}
+.sidebar-section-title .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sidebar-section-title.bestseller .dot{background:var(--orange)}
+.sidebar-section-title.textbook .dot{background:var(--purple)}
+.sidebar-subcat-header{display:flex;align-items:center;gap:6px;padding:10px 18px;cursor:pointer;transition:background .15s;font-family:var(--body)}
+.sidebar-subcat-header:hover{background:var(--paper)}
+.sidebar-subcat-header .subcat-arrow{width:16px;height:16px;transition:transform .25s;color:var(--muted);flex-shrink:0}
+.sidebar-subcat-header.expanded .subcat-arrow{transform:rotate(90deg)}
+.sidebar-subcat-header .subcat-icon{font-size:14px;flex-shrink:0}
+.sidebar-subcat-header .subcat-name{font-size:12.5px;font-weight:600;color:var(--ink);flex:1}
+.sidebar-subcat-header .subcat-count{font-size:11px;color:var(--muted);background:var(--paper);padding:2px 7px;border-radius:99px}
+.sidebar-subcat-body{display:none}
+.sidebar-subcat-body.open{display:block}
+.sidebar-book-item{display:flex;align-items:flex-start;gap:8px;padding:9px 18px 9px 42px;cursor:pointer;transition:background .12s;font-family:var(--body)}
+.sidebar-book-item:hover{background:var(--paper)}
+.sidebar-book-item.active{background:var(--orange-soft);color:var(--navy);font-weight:600}
+.sidebar-book-item .sb-icon{font-size:14px;flex-shrink:0;margin-top:1px;line-height:1}
+.sidebar-book-item .sb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.sidebar-book-item .sb-title{font-size:13px;font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3}
+.sidebar-book-item .sb-author{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3}
+.sidebar-book-item:hover .sb-title{color:var(--purple)}
+.sidebar-book-item .sb-arrow{width:14px;height:14px;flex-shrink:0;color:var(--muted);opacity:0;transition:opacity .15s;margin-top:3px}
+.sidebar-book-item:hover .sb-arrow{opacity:1}
+
+/* Sidebar detail panel */
+.sidebar-detail{display:none;position:absolute;inset:0;background:var(--white);z-index:5;flex-direction:column;overflow-y:auto}
+.sidebar-detail.open{display:flex}
+.sidebar-detail .detail-back{display:flex;align-items:center;gap:6px;padding:14px 18px;border:none;background:transparent;cursor:pointer;font-family:var(--body);font-size:13px;font-weight:600;color:var(--purple);border-bottom:1px solid var(--line)}
+.sidebar-detail .detail-back:hover{background:var(--purple-soft)}
+.sidebar-detail .detail-content{padding:18px;flex:1}
+.sidebar-detail .dt-title{font-family:var(--display);font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.sidebar-detail .dt-author{font-size:13px;color:var(--muted);margin-bottom:16px}
+.sidebar-detail .dt-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.sidebar-detail .dt-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px}
+.sidebar-detail .dt-tag.cat{background:var(--purple-soft);color:var(--purple)}
+.sidebar-detail .dt-tag.type{background:var(--orange-soft);color:var(--orange)}
+.sidebar-detail .dt-desc{font-size:13px;color:var(--ink);line-height:1.7;margin-bottom:20px}
+.sidebar-detail .dt-concepts h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.sidebar-detail .dt-concept{display:flex;gap:10px;padding:12px;margin-bottom:8px;border-radius:10px;background:var(--paper);font-size:12.5px;line-height:1.6;cursor:pointer;transition:background .15s}
+.sidebar-detail .dt-concept:hover{background:var(--purple-soft)}
+.sidebar-detail .dt-concept strong{display:block;font-size:13px;color:var(--purple);margin-bottom:3px;min-width:80px}
+.sidebar-detail .dt-actions{display:flex;gap:8px;padding:16px 18px;border-top:1px solid var(--line)}
+.sidebar-detail .dt-btn{padding:9px 16px;border-radius:99px;border:none;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.sidebar-detail .dt-btn.primary{background:var(--orange);color:#fff;flex:1}
+.sidebar-detail .dt-btn.primary:hover{opacity:.9}
+.sidebar-detail .dt-btn.secondary{background:var(--paper);color:var(--navy)}
+.sidebar-detail .dt-btn.secondary:hover{background:var(--line)}
+.sidebar-empty-state{padding:32px 18px;text-align:center;color:var(--muted);font-size:13px;font-family:var(--body)}
+
+@media(max-width:768px){
+  .sidebar{width:100vw;left:-100vw}
+  .sidebar-book-item{padding:11px 18px 11px 42px}
+  .sidebar-book-item .sb-title{font-size:14px}
+  .sidebar-book-item .sb-author{font-size:12.5px}
+}
 </style>
 </head>
 <body>
@@ -295,6 +382,9 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 <!-- ================= NAV ================= -->
 <nav class="nav">
   <div class="container nav-inner">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Open book directory" title="书籍目录">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <a href="#" class="brand" aria-label="BizAtom home">
       <svg class="atom-mark" viewBox="0 0 40 40" aria-hidden="true">
         <defs>
@@ -350,6 +440,38 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
     </div>
   </div>
 </nav>
+
+<!-- ================= SIDEBAR BOOK DIRECTORY ================= -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="20" r="4.5" fill="#F4731F"/><ellipse cx="20" cy="20" rx="16" ry="7" fill="none" stroke="#8B5CF6" stroke-width="2"/><ellipse cx="20" cy="20" rx="16" ry="7" fill="none" stroke="#8B5CF6" stroke-width="2" transform="rotate(60 20 20)"/><ellipse cx="20" cy="20" rx="16" ry="7" fill="none" stroke="#8B5CF6" stroke-width="2" transform="rotate(120 20 20)"/></svg>
+      书籍目录
+      <span class="badge" id="sidebarBookCount">0</span>
+    </h3>
+    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="Close">&times;</button>
+  </div>
+  <div class="sidebar-search-wrap">
+    <input type="text" class="sidebar-search-input" id="sidebarSearch" placeholder="搜索书籍、作者或关键词..." oninput="filterSidebar()">
+  </div>
+  <div class="sidebar-scroll" id="sidebarScroll">
+    <!-- Dynamically rendered by JS -->
+    <div class="sidebar-empty-state">加载中...</div>
+  </div>
+  <!-- Detail panel (hidden by default) -->
+  <div class="sidebar-detail" id="sidebarDetail">
+    <button class="detail-back" onclick="sidebarBackToList()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      返回列表
+    </button>
+    <div class="detail-content" id="sidebarDetailContent"></div>
+    <div class="dt-actions">
+      <button class="dt-btn secondary" onclick="sidebarBackToList()">返回</button>
+      <button class="dt-btn primary" id="sidebarAskBtn" onclick="sidebarAskBook()">💬 向AI书童提问</button>
+    </div>
+  </div>
+</aside>
 
 <!-- ================= HERO ================= -->
 <header class="hero">
@@ -458,8 +580,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <span class="eyebrow" data-en="Core features" data-zh="核心功能">Core features</span>
       <h2 data-en="Everything you need to turn reading into knowledge."
           data-zh="将阅读转化为知识资产所需的一切。">Everything you need to turn reading into knowledge.</h2>
-      <p data-en="Launching with 50 hand-picked business classics — strategy, marketing, finance, operations, leadership — each deconstructed to teaching standard."
-         data-zh="首批精选 50 本商业经典——覆盖战略、营销、财务、运营与领导力——每本均拆解至商学院教学标准。">Launching with 50 hand-picked business classics — strategy, marketing, finance, operations, leadership — each deconstructed to teaching standard.</p>
+      <p data-en="Launching with 100+ hand-picked business classics — covering strategy, marketing, finance, operations, leadership, and law — each deconstructed to business-school teaching standard."
+         data-zh="首批精选 100+ 本商业经典——覆盖战略、营销、财务、运营、领导力与法律——每本均拆解至商学院教学标准。">Launching with 100+ hand-picked business classics — covering strategy, marketing, finance, operations, leadership, and law — each deconstructed to business-school teaching standard.</p>
     </div>
     <div class="feat-grid">
       <div class="feat">
@@ -607,8 +729,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         data-en='Be first in. <span style="color:#F4731F">Deep Dive in 15 Minutes.</span>'
         data-zh='抢先体验。<span style="color:#F4731F">Deep Dive in 15 Minutes.</span>'>
         Be first in. <span style="color:#F4731F">Deep Dive in 15 Minutes.</span></h2>
-    <p data-en="Join the waitlist for early access, founding-member pricing, and a say in which 50 books we deconstruct first."
-       data-zh="加入候补名单，获得早期体验资格、创始会员价格，并参与投票决定首批拆解的 50 本经典。">Join the waitlist for early access, founding-member pricing, and a say in which 50 books we deconstruct first.</p>
+    <p data-en="Join the waitlist for early access, founding-member pricing, and a say in which 100+ books we deconstruct first."
+       data-zh="加入候补名单，获得早期体验资格、创始会员价格，并参与投票决定首批拆解的 100+ 本经典。">Join the waitlist for early access, founding-member pricing, and a say in which 100+ books we deconstruct first.</p>
     <div class="wl-form">
       <input type="email" id="wl-email" data-ph-en="Your email address" data-ph-zh="输入你的邮箱地址" placeholder="Your email address" aria-label="Email address">
       <button class="btn btn-primary" onclick="joinWaitlist()" data-en="Join the waitlist" data-zh="加入候补名单">Join the waitlist</button>
@@ -705,7 +827,7 @@ function joinWaitlist(){
 
 <!-- Chat panel -->
 <div class="chat-panel collapsed" id="chatPanel">
-  <div class="chat-header">
+  <div class="chat-header" onmousedown="startDragChat(event)" ontouchstart="startDragChat(event)">
     <div class="h-icon">
       <svg width="28" height="28" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -741,6 +863,19 @@ function joinWaitlist(){
       <button class="chat-tab textbook-tab" id="tabBtnTextbook" onclick="toggleCatDropdown('textbook')" data-chat-en="Textbooks" data-chat-zh="经典教材">📘 经典教材 <span class="tab-arrow">▼</span></button>
       <div class="tab-dropdown textbook-dropdown" id="dropdown-textbook"></div>
     </div>
+  </div>
+  <!-- Model selector bar -->
+  <div class="chat-model-bar">
+    <span class="model-label">AI</span>
+    <select id="modelSelect" onchange="onModelChange()">
+      <option value="deepseek">🧠 DeepSeek (默认)</option>
+      <option value="chatgpt">💬 ChatGPT (GPT-4o)</option>
+      <option value="codex">🔧 Codex (o3-mini)</option>
+      <option value="gpt4o_mini">⚡ GPT-4o mini</option>
+      <option value="doubao">🫘 豆包 Pro</option>
+      <option value="kimi">🌙 Kimi</option>
+      <option value="claude">🎯 Claude</option>
+    </select>
   </div>
   <!-- Book search bar -->
   <div class="chat-book-bar">
@@ -797,7 +932,14 @@ var BIZATOM_SUBCATS = {
     { value: 'finance', zh: '💰 金融会计', en: '💰 Finance & Accounting' },
     { value: 'economics', zh: '📊 经济学', en: '📊 Economics' },
     { value: 'operations', zh: '🏭 运营管理', en: '🏭 Operations' },
-    { value: 'strategy,marketing,tech-future', zh: '🎯 战略营销', en: '🎯 Strategy & Marketing' }
+    { value: 'strategy,marketing,tech-future', zh: '🎯 战略营销', en: '🎯 Strategy & Marketing' },
+    { value: 'economic-law,contract-law,ip-law,corporate-law,international-commercial-law,labor-law', zh: '⚖️ 法律模块', en: '⚖️ Law Module' },
+    { value: 'economic-law', zh: '📐 经济法', en: '📐 Economic Law' },
+    { value: 'contract-law', zh: '📝 商业合同法', en: '📝 Commercial Contract Law' },
+    { value: 'ip-law', zh: '🔐 知识产权保护法', en: '🔐 Intellectual Property Law' },
+    { value: 'corporate-law', zh: '🏢 公司法与治理', en: '🏢 Corporate Law & Governance' },
+    { value: 'international-commercial-law', zh: '🌐 国际商法', en: '🌐 International Commercial Law' },
+    { value: 'labor-law', zh: '👥 劳动法与合规', en: '👥 Labor Law & Compliance' }
   ]
 };
 
@@ -1083,28 +1225,64 @@ function kbSearch(q, lang) {
   // Step 3: PRIORITY OUTPUT — if concept match is strong, answer the concept question directly
   // Threshold 6: works for short terms like "MVP", "Pivot", "刺猬"
   if (bestConcept && bestCS >= 6) {
-    var out = "💡 **" + bestConcept[0] + "**\n\n" + bestConcept[1] + "\n\n";
-    out += "📖 *出自：" + d.t + "*\n";
+    var out = "好问题！关于\"" + bestConcept[0] + "\"这个概念 ——\n\n";
+    out += bestConcept[1] + "\n\n";
+    out += "📖 这个观点来自 **" + d.t + "**，作者" + d.a + "。";
+    if (d.c && d.c.length > 2) {
+      out += "\n\n顺便一提，这本书还涵盖了这些重要思想：\n";
+      for (var ci = 0; ci < Math.min(d.c.length, 5); ci++) {
+        if (d.c[ci][0] !== bestConcept[0]) {
+          out += "• " + d.c[ci][0] + "\n";
+        }
+      }
+    }
+    out += "\n\n💬 想深入了解哪个概念？或者换一本书看看？";
     return out;
   }
 
   // Step 4: Otherwise, give full book overview
-  var out = "📚 **" + d.t + "**\n\n" + d.b + "\n\n";
+  var out = "很好的问题！让我为你拆解 **" + d.t + "**。\n\n";
+  out += d.b + "\n\n";
+  out += "✍️ 作者：" + d.a + "\n\n";
   // Show top matched concept first
   if (bestConcept && bestCS > 3) {
-    out += "💡 **" + bestConcept[0] + "**：" + bestConcept[1] + "\n\n";
+    out += "你问到的这个概念很关键：\n💡 **" + bestConcept[0] + "**：" + bestConcept[1] + "\n\n";
   }
-  out += "📋 **核心概念一览**：\n";
+  out += "📋 这本书涵盖的核心思想：\n";
   for (var k = 0; k < d.c.length; k++) {
-    out += "  • " + d.c[k][0] + "\n";
+    out += "• **" + d.c[k][0] + "**：" + d.c[k][1] + "\n";
   }
+  out += "\n💬 想深入了解哪个概念？或者换一本书探讨？";
   return out;
 }
 
 function fallbackText(lang) {
   return lang === 'zh'
-    ? '📚 我是 BizAtom AI 书童，可以回答商业经典的问题。试试问我：\n• 什么是蓝海战略？\n• 解释刺猬理念\n• 从0到1的核心思想\n• 五力模型是什么？\n• Explain disruptive innovation'
-    : '📚 I\'m the BizAtom AI Book Assistant. Try asking:\n• What is Blue Ocean Strategy?\n• Explain the Hedgehog Concept\n• Tell me about Zero to One\n• What are Porter\'s Five Forces?\n• 什么是颠覆性创新？';
+    ? '很高兴你问到这个问题！ 👋\n\n' +
+      '我是 BizAtom AI 书童，目前后端 AI 服务暂时离线（可能是 API 密钥未配置或在维护中），但我仍然可以帮你做很多事情：\n\n' +
+      '📖 浏览左侧书籍目录，点击任意书籍查看核心概念和框架\n' +
+      '🔍 在书童窗口上方的搜索框中搜索 100+ 本商业经典\n' +
+      '💡 选中一本书后点击"提问"，我可以为你生成结构化的书籍概览\n\n' +
+      '你不妨试试：\n' +
+      '• 什么是蓝海战略？\n' +
+      '• 解释刺猬理念\n' +
+      '• 从0到1的核心思想\n' +
+      '• 五力模型是什么？\n' +
+      '• 商业合同有哪些法律风险？\n' +
+      '• 知识产权如何保护？\n\n' +
+      '💬 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用 AI 对话功能。'
+    : 'Glad you asked! 👋\n\n' +
+      'I\'m the BizAtom AI Book Assistant. The backend AI service is currently offline (API key may not be configured), but I can still help:\n\n' +
+      '📖 Browse the book directory on the left to see core concepts\n' +
+      '🔍 Search 100+ business classics using the search bar above\n' +
+      '💡 Select a book and click "Ask" for a structured overview\n\n' +
+      'Try asking:\n' +
+      '• What is Blue Ocean Strategy?\n' +
+      '• Explain the Hedgehog Concept\n' +
+      '• Tell me about Zero to One\n' +
+      '• What are key contract law risks?\n' +
+      '• How to protect intellectual property?\n\n' +
+      '💬 Tip: Admin needs to configure DEEPSEEK_API_KEY in Vercel environment variables.';
 }
 
 /* ---- Chat UI ---- */
@@ -1118,9 +1296,11 @@ function toggleChat() {
     document.getElementById('chatInput').focus();
     updateChatLang();
     initBookSelect();
+    checkModelAvailability();
   } else {
     panel.classList.add('collapsed');
     fab.classList.remove('hidden');
+    resetChatPanelPosition(); // reset dragged position when closing
   }
 }
 
@@ -1132,10 +1312,75 @@ function toggleChatFullscreen() {
   var isFull = panel.classList.toggle('fullscreen');
   iconMax.style.display = isFull ? 'none' : 'block';
   iconRestore.style.display = isFull ? 'block' : 'none';
+  if (isFull) resetChatPanelPosition(); // reset dragged position when entering fullscreen
   // Scroll to bottom after resize
   var msgs = document.getElementById('chatMessages');
   if (msgs) msgs.scrollTop = msgs.scrollHeight;
 }
+
+/* ──────── Drag-to-move chat panel ──────── */
+var dragState = { active: false, startX: 0, startY: 0, panelX: 0, panelY: 0 };
+
+function startDragChat(e) {
+  // Don't start drag from close/fullscreen buttons
+  if (e.target.closest('.h-close') || e.target.closest('.h-fullscreen')) return;
+  if (e.type === 'touchstart') e = e.touches[0];
+  var panel = document.getElementById('chatPanel');
+  if (panel.classList.contains('fullscreen')) return; // no drag in fullscreen
+  var rect = panel.getBoundingClientRect();
+  dragState.active = true;
+  dragState.startX = e.clientX;
+  dragState.startY = e.clientY;
+  // Convert from bottom/right to top/left positioning
+  if (!panel.style.top || panel.style.top === 'auto') {
+    panel.style.top = rect.top + 'px';
+    panel.style.left = rect.left + 'px';
+    panel.style.bottom = 'auto';
+    panel.style.right = 'auto';
+  }
+  dragState.panelX = parseInt(panel.style.left) || rect.left;
+  dragState.panelY = parseInt(panel.style.top) || rect.top;
+  panel.classList.add('dragging');
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+  e.preventDefault();
+}
+
+function moveDragChat(e) {
+  if (!dragState.active) return;
+  if (e.type === 'touchmove') e = e.touches[0];
+  e.preventDefault();
+  var panel = document.getElementById('chatPanel');
+  var dx = e.clientX - dragState.startX;
+  var dy = e.clientY - dragState.startY;
+  var newLeft = Math.max(0, Math.min(dragState.panelX + dx, window.innerWidth - panel.offsetWidth));
+  var newTop = Math.max(0, Math.min(dragState.panelY + dy, window.innerHeight - 60));
+  panel.style.left = newLeft + 'px';
+  panel.style.top = newTop + 'px';
+}
+
+function stopDragChat() {
+  if (!dragState.active) return;
+  dragState.active = false;
+  var panel = document.getElementById('chatPanel');
+  panel.classList.remove('dragging');
+  document.body.style.userSelect = '';
+  document.body.style.webkitUserSelect = '';
+}
+
+// Reset panel position when entering fullscreen or closing
+function resetChatPanelPosition() {
+  var panel = document.getElementById('chatPanel');
+  panel.style.top = '';
+  panel.style.left = '';
+  panel.style.bottom = '';
+  panel.style.right = '';
+}
+
+document.addEventListener('mousemove', moveDragChat);
+document.addEventListener('mouseup', stopDragChat);
+document.addEventListener('touchmove', moveDragChat, {passive: false});
+document.addEventListener('touchend', stopDragChat);
 
 function updateChatLang() {
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
@@ -1155,13 +1400,10 @@ function askSuggested(q) {
 function stripMarkdown(text) {
   if (!text) return text;
   return text
-    .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove **bold**
-    .replace(/\*(.*?)\*/g, '$1')      // Remove *italic*
-    .replace(/__(.*?)__/g, '$1')      // Remove __bold__
-    .replace(/_(.*?)_/g, '$1')        // Remove _italic_
     .replace(/###\s?/g, '')            // Remove ### headers
     .replace(/##\s?/g, '')             // Remove ## headers
     .replace(/#\s?/g, '');             // Remove # headers
+  // NOTE: Keep **bold** and *italic* markers — formatAnswer converts them to HTML
 }
 
 function addMsg(text, type) {
@@ -1170,8 +1412,13 @@ function addMsg(text, type) {
   div.className = 'chat-msg ' + type;
   var b = document.createElement('div');
   b.className = 'bubble';
-  var cleanText = stripMarkdown(text);
-  b.innerHTML = formatAnswer(cleanText);
+  // If text is HTML (starts with <div), use it directly; otherwise format
+  if (text && text.trim().indexOf('<') === 0) {
+    b.innerHTML = text;
+  } else {
+    var cleanText = stripMarkdown(text);
+    b.innerHTML = formatAnswer(cleanText);
+  }
   div.appendChild(b);
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
@@ -1194,11 +1441,43 @@ function hideTyping() {
 }
 
 function formatAnswer(t) {
-  return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  if (!t) return t;
+  return t
+    // Bold: **text** → <strong>
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Italic: *text* → <em> (but not • bullet points)
+    .replace(/(^|[^•\w])\*(.+?)\*([^•\w]|$)/g, '$1<em>$2</em>$3')
+    // Bullet points: lines starting with • or -
+    .replace(/^[•]\s(.+)$/gm, '<span class="bullet">•</span> $1')
+    .replace(/^[-]\s(.+)$/gm, '<span class="bullet">-</span> $1')
+    // Numbered lists: preserve them
+    .replace(/^(\d+)[.)]\s(.+)$/gm, '<strong>$1.</strong> $2')
+    // Double newline → paragraph break
+    .replace(/\n\n/g, '</p><p>')
+    // Single newline → line break
+    .replace(/\n/g, '<br>');
 }
+
+// CSS for bullet points in chat
+var bulletStyle = document.createElement('style');
+bulletStyle.textContent = '.chat-msg .bubble .bullet{color:var(--orange);font-weight:700;margin-right:2px}.chat-msg .bubble p{margin:6px 0;line-height:1.7}.chat-msg .bubble p:first-child{margin-top:0}.chat-msg .bubble p:last-child{margin-bottom:0}';
+document.head.appendChild(bulletStyle);
 
 // Conversation history for multi-turn dialogue
 var conversationHistory = [];
+
+// Currently selected AI model (user can switch via dropdown)
+var currentModel = 'deepseek';
+function onModelChange() {
+  var sel = document.getElementById('modelSelect');
+  if (sel) currentModel = sel.value;
+}
+
+// API endpoint — change this to your deployed Vercel URL for local development
+// When deployed on Vercel, relative path '/api/chat' works automatically
+var API_BASE_URL = '';
+// Uncomment and set to your Vercel deployment URL if testing locally:
+// var API_BASE_URL = 'https://your-app.vercel.app';
 
 async function sendMessage(optBookId) {
   if (isWaiting) return;
@@ -1241,13 +1520,15 @@ async function sendMessage(optBookId) {
   // Priority 2: Call AI API (supports DeepSeek / OpenAI)
   if (!answer && q) {
     try {
-      var resp = await fetch('/api/chat', {
+      var apiUrl = (API_BASE_URL || '') + '/api/chat';
+      var resp = await fetch(apiUrl, {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
           question: q,
           lang: lang,
           bookId: optBookId || '',
+          model: currentModel,
           history: conversationHistory.slice(-6)  // last 6 messages for context
         })
       });
@@ -1312,6 +1593,339 @@ function clearChatHistory() {
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
   addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 Ask me anything about business classics, or select a book from the dropdown.', 'bot');
 }
+
+// Fetch available models from API and update the selector dropdown
+// Models without API keys will be marked as "(未配置)" / "(not configured)"
+async function checkModelAvailability() {
+  try {
+    var resp = await fetch((API_BASE_URL || '') + '/api/chat?action=models');
+    if (!resp.ok) return;
+    var data = await resp.json();
+    if (!data.models) return;
+    var sel = document.getElementById('modelSelect');
+    if (!sel) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      var opt = sel.options[i];
+      var modelId = opt.value;
+      var modelInfo = data.models.find(function(m){return m.id === modelId});
+      if (modelInfo && !modelInfo.available) {
+        opt.text = opt.text.replace(/\s*[(（].*?[)）]\s*$/, '') + ' (未配置)';
+        opt.style.color = '#888';
+      } else if (modelInfo && modelInfo.available) {
+        opt.text = opt.text.replace(/\s*[(（].*?[)）]\s*$/, '');
+        opt.style.color = '';
+      }
+    }
+  } catch(e) {
+    // Silent fail — not critical, models still work via backend fallback
+  }
+}
+
+/* ───────── Sidebar Book Directory ───────── */
+var sidebarOpen = false;
+var sidebarCurrentBook = null;
+
+var SIDEBAR_SUBCATS = {
+  bestseller: [
+    {cat:'entrepreneurship,innovation', icon:'🚀', zh:'创业创新', en:'Startup & Innovation'},
+    {cat:'finance,investing', icon:'💰', zh:'金融投资', en:'Finance & Investing'},
+    {cat:'marketing,growth', icon:'📣', zh:'市场营销', en:'Marketing & Growth'},
+    {cat:'strategy,leadership', icon:'🎯', zh:'领导战略', en:'Strategy & Leadership'},
+    {cat:'psychology,behavior', icon:'🧠', zh:'心理哲学', en:'Psychology & Behavior'},
+    {cat:'china-business', icon:'🇨🇳', zh:'中国商业', en:'China Business'},
+    {cat:'tech,economics', icon:'📊', zh:'科技经济', en:'Tech & Economics'},
+    {cat:'productivity,growth-mindset', icon:'⚡', zh:'个人成长', en:'Personal Growth'},
+  ],
+  textbook: [
+    {cat:'mba,accounting,corporate-finance,investments', icon:'📚', zh:'MBA核心', en:'MBA Core'},
+    {cat:'operations,supply-chain', icon:'🏭', zh:'运营管理', en:'Operations'},
+    {cat:'strategy-textbook,marketing-strategy', icon:'🎯', zh:'战略营销', en:'Strategy & Marketing'},
+    {cat:'organizational-behavior,leadership-textbook', icon:'👥', zh:'组织领导力', en:'Org & Leadership'},
+    {cat:'economics-textbook', icon:'📊', zh:'经济学', en:'Economics'},
+    {cat:'finance-accounting', icon:'💰', zh:'金融会计', en:'Finance & Accounting'},
+    {cat:'economic-law', icon:'📐', zh:'经济法', en:'Economic Law'},
+    {cat:'contract-law', icon:'📝', zh:'商业合同法', en:'Commercial Contract Law'},
+    {cat:'ip-law', icon:'🔐', zh:'知识产权保护法', en:'Intellectual Property Law'},
+    {cat:'corporate-law', icon:'🏢', zh:'公司法与治理', en:'Corporate Law & Governance'},
+    {cat:'international-commercial-law', icon:'🌐', zh:'国际商法', en:'International Commercial Law'},
+    {cat:'labor-law', icon:'⚖️', zh:'劳动法与合规', en:'Labor Law & Compliance'},
+  ]
+};
+
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('open', sidebarOpen);
+  document.getElementById('sidebarOverlay').classList.toggle('open', sidebarOpen);
+  if (sidebarOpen && !document.getElementById('sidebarScroll').querySelector('.sidebar-section')) {
+    initSidebarRender();
+  }
+}
+
+function initSidebarRender() {
+  if (typeof BIZATOM_KB === 'undefined' || !BIZATOM_KB || BIZATOM_KB.length === 0) {
+    setTimeout(initSidebarRender, 300);
+    return;
+  }
+  renderSidebar(BIZATOM_KB);
+}
+
+function renderSidebar(books) {
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var isZh = lang === 'zh';
+  var scrollEl = document.getElementById('sidebarScroll');
+  var html = '';
+  var totalCount = 0;
+
+  var types = ['bestseller', 'textbook'];
+  var typeNames = {bestseller: isZh ? '畅销书' : 'Bestsellers', textbook: isZh ? '经典教材' : 'Textbooks'};
+  var typeIcons = {bestseller: '📙', textbook: '📘'};
+
+  for (var ti = 0; ti < types.length; ti++) {
+    var type = types[ti];
+    var subcats = SIDEBAR_SUBCATS[type];
+    if (!subcats) continue;
+
+    html += '<div class="sidebar-section" data-type="' + type + '">';
+    html += '<div class="sidebar-section-title ' + type + '"><span class="dot"></span>' + typeIcons[type] + ' ' + typeNames[type] + '</div>';
+
+    for (var si = 0; si < subcats.length; si++) {
+      var sc = subcats[si];
+      var catKeys = sc.cat.split(',');
+      var subcatBooks = [];
+
+      for (var bi = 0; bi < books.length; bi++) {
+        var b = books[bi];
+        if (b.type !== type && b.type !== 'both') continue;
+        var matched = false;
+        for (var ci = 0; ci < catKeys.length; ci++) {
+          if (b.cat === catKeys[ci]) { matched = true; break; }
+          if (b.cat && b.cat.indexOf(',') >= 0) {
+            var bookCats = b.cat.split(',');
+            for (var bci = 0; bci < bookCats.length; bci++) {
+              if (bookCats[bci].trim() === catKeys[ci]) { matched = true; break; }
+            }
+          }
+          if (matched) break;
+        }
+        if (matched) subcatBooks.push(b);
+      }
+
+      if (subcatBooks.length === 0) continue;
+
+      html += '<div class="sidebar-subcat">';
+      html += '<div class="sidebar-subcat-header expanded" onclick="toggleSidebarSubcat(this)">';
+      html += '<svg class="subcat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+      html += '<span class="subcat-icon">' + sc.icon + '</span>';
+      html += '<span class="subcat-name">' + (isZh ? sc.zh : sc.en) + '</span>';
+      html += '<span class="subcat-count">' + subcatBooks.length + '</span>';
+      html += '</div>';
+      html += '<div class="sidebar-subcat-body open">';
+
+      for (var j = 0; j < subcatBooks.length; j++) {
+        var book = subcatBooks[j];
+        var title = (isZh && book.zh) ? (book.zh.t || book.t) : book.t;
+        var author = '';
+        if (isZh && book.zh && book.zh.a) {
+          author = book.zh.a;
+        } else if (book.en && book.en.a) {
+          author = book.en.a;
+        }
+        // Clean author string — remove parentheses with English names for cleaner display
+        // e.g. "吉姆·柯林斯 (Jim Collins)" → keep as is, it's informative
+        var bookId = book.id;
+        html += '<div class="sidebar-book-item" data-book-id="' + bookId + '" onclick="openSidebarBook(\'' + bookId + '\')">';
+        html += '<span class="sb-icon">📖</span>';
+        html += '<div class="sb-info">';
+        html += '<span class="sb-title" title="' + escHtml(title) + '">' + escHtml(title) + '</span>';
+        if (author) {
+          html += '<span class="sb-author">' + escHtml(author) + '</span>';
+        }
+        html += '</div>';
+        html += '<svg class="sb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+        html += '</div>';
+        totalCount++;
+      }
+
+      html += '</div></div>';
+    }
+    html += '</div>';
+  }
+
+  scrollEl.innerHTML = html;
+  document.getElementById('sidebarBookCount').textContent = totalCount;
+}
+
+function toggleSidebarSubcat(header) {
+  header.classList.toggle('expanded');
+  var body = header.nextElementSibling;
+  if (body) body.classList.toggle('open');
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function filterSidebar() {
+  var query = (document.getElementById('sidebarSearch').value || '').trim().toLowerCase();
+  var items = document.querySelectorAll('#sidebarScroll .sidebar-book-item');
+
+  if (!query) {
+    for (var i = 0; i < items.length; i++) items[i].style.display = '';
+    var hdrs = document.querySelectorAll('#sidebarScroll .sidebar-subcat-header');
+    for (var h = 0; h < hdrs.length; h++) {
+      hdrs[h].classList.add('expanded');
+      var body = hdrs[h].nextElementSibling;
+      if (body) body.classList.add('open');
+    }
+    document.querySelectorAll('#sidebarScroll .sidebar-section').forEach(function(s){s.style.display='';});
+    document.querySelectorAll('#sidebarScroll .sidebar-subcat').forEach(function(s){s.style.display='';});
+    return;
+  }
+
+  for (var i = 0; i < items.length; i++) {
+    var title = (items[i].querySelector('.sb-title') || {}).textContent || '';
+    var authorEl = items[i].querySelector('.sb-author');
+    var author = authorEl ? (authorEl.textContent || '') : '';
+    var bid = items[i].getAttribute('data-book-id') || '';
+    var match = title.toLowerCase().indexOf(query) >= 0 || bid.toLowerCase().indexOf(query) >= 0 || author.toLowerCase().indexOf(query) >= 0;
+    // Also search by keywords from KB
+    var book = findSidebarBook(bid);
+    if (!match && book) {
+      var author = (book.au || '').toLowerCase();
+      if (author.indexOf(query) >= 0) match = true;
+      if (!match && book.kw) {
+        var kwStr = Array.isArray(book.kw) ? book.kw.join(' ') : book.kw;
+        if (kwStr.toLowerCase().indexOf(query) >= 0) match = true;
+      }
+    }
+    items[i].style.display = match ? '' : 'none';
+  }
+
+  document.querySelectorAll('#sidebarScroll .sidebar-subcat').forEach(function(subcat){
+    var total = subcat.querySelectorAll('.sidebar-book-item').length;
+    var hidden = subcat.querySelectorAll('.sidebar-book-item[style*="display: none"]').length;
+    if (total > hidden) {
+      subcat.style.display = '';
+      var hdr = subcat.querySelector('.sidebar-subcat-header');
+      var bd = subcat.querySelector('.sidebar-subcat-body');
+      if (hdr) hdr.classList.add('expanded');
+      if (bd) bd.classList.add('open');
+    } else {
+      subcat.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('#sidebarScroll .sidebar-section').forEach(function(section){
+    var visible = section.querySelectorAll('.sidebar-book-item:not([style*="display: none"])').length > 0;
+    section.style.display = visible ? '' : 'none';
+  });
+}
+
+function findSidebarBook(id) {
+  if (typeof BIZATOM_KB === 'undefined') return null;
+  for (var i = 0; i < BIZATOM_KB.length; i++) {
+    if (BIZATOM_KB[i].id === id) return BIZATOM_KB[i];
+  }
+  return null;
+}
+
+function openSidebarBook(bookId) {
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var isZh = lang === 'zh';
+  var book = findSidebarBook(bookId);
+  if (!book) return;
+
+  sidebarCurrentBook = book;
+
+  document.querySelectorAll('#sidebarScroll .sidebar-book-item').forEach(function(item){
+    item.classList.toggle('active', item.getAttribute('data-book-id') === bookId);
+  });
+
+  var title = (isZh && book.zh) ? (book.zh.t || book.t) : book.t;
+  var author = book.au || '';
+  var desc = (isZh && book.zh) ? (book.zh.b || book.b) : (book.b || '');
+  var typeName = book.type === 'textbook' ? (isZh ? '经典教材' : 'Textbook') : (isZh ? '畅销书' : 'Bestseller');
+  var catName = book.cat || '';
+
+  var detailHtml = '';
+  detailHtml += '<div class="dt-title">' + escHtml(title) + '</div>';
+  detailHtml += '<div class="dt-author">' + escHtml(author) + '</div>';
+  detailHtml += '<div class="dt-meta">';
+  detailHtml += '<span class="dt-tag type">' + typeName + '</span>';
+  if (catName) detailHtml += '<span class="dt-tag cat">' + catName + '</span>';
+  detailHtml += '</div>';
+  if (desc) detailHtml += '<div class="dt-desc">' + escHtml(desc) + '</div>';
+
+  if (book.c && book.c.length > 0) {
+    detailHtml += '<div class="dt-concepts"><h4>' + (isZh ? '核心概念' : 'Core Concepts') + '</h4>';
+    var maxConcepts = Math.min(book.c.length, 8);
+    for (var i = 0; i < maxConcepts; i++) {
+      detailHtml += '<div class="dt-concept"><strong>' + escHtml(book.c[i][0]) + '</strong><span>' + escHtml(book.c[i][1] || '') + '</span></div>';
+    }
+    detailHtml += '</div>';
+  }
+
+  document.getElementById('sidebarDetailContent').innerHTML = detailHtml;
+  document.getElementById('sidebarAskBtn').setAttribute('data-book-id', bookId);
+
+  document.getElementById('sidebarDetail').classList.add('open');
+  document.getElementById('sidebarScroll').style.display = 'none';
+}
+
+function sidebarBackToList() {
+  document.getElementById('sidebarDetail').classList.remove('open');
+  document.getElementById('sidebarScroll').style.display = '';
+  document.querySelectorAll('#sidebarScroll .sidebar-book-item').forEach(function(item){
+    item.classList.remove('active');
+  });
+  sidebarCurrentBook = null;
+}
+
+function sidebarAskBook() {
+  var bookId = document.getElementById('sidebarAskBtn').getAttribute('data-book-id');
+  if (!bookId) return;
+
+  if (!chatOpen) toggleChat();
+
+  var book = findSidebarBook(bookId);
+  if (book) {
+    var tab = (book.type === 'textbook') ? 'textbook' : 'bestseller';
+    if (currentTab !== tab) switchKbTab(tab);
+    selectedBookId = bookId;
+    onBookSelect(bookId);
+
+    var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+    var t = (lang === 'zh' && book.zh) ? (book.zh.t || book.t) : book.t;
+    var q = lang === 'zh' ? '请介绍《' + t + '》的核心思想和关键概念' : 'Please introduce the key ideas and concepts of "' + t + '"';
+    var input = document.getElementById('chatInput');
+    if (input) {
+      input.value = q;
+      sendMsg();
+    }
+  }
+
+  if (window.innerWidth <= 768) toggleSidebar();
+}
+
+// Auto-init sidebar after KB loads
+(function(){
+  var tries = 0;
+  function tryRender() {
+    if (typeof BIZATOM_KB !== 'undefined' && BIZATOM_KB && BIZATOM_KB.length > 0) {
+      renderSidebar(BIZATOM_KB);
+    } else if (tries < 20) {
+      tries++;
+      setTimeout(tryRender, 300);
+    }
+  }
+  setTimeout(tryRender, 500);
+})();
+
+// Escape key closes sidebar
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && sidebarOpen) toggleSidebar();
+});
 </script>
 
 <script src="bizatom-chat-persist.js"></script>

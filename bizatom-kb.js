@@ -1047,6 +1047,55 @@ var BIZATOM_KB = [
     en:{t:"The Design of Everyday Things",a:"Don Norman",b:"The most classic design book. Introduces user-centered design, using everyday examples to show that good design should be discoverable, understandable, and provide effective feedback. Essential UX/product design reading.",c:["Affordances","Feedback","Constraints","Natural Mapping"]},
     kw:["设计心理学","诺曼","用户体验","产品设计","以用户为中心"]
   },
+  // ===== 法律模块 (Law Module) =====
+  {
+    id:"law-economic-law", cat:"economic-law", type:"textbook",
+    zh:{t:"经济法",a:"潘静成、刘文华",b:"中国经济法学科的权威教材，系统阐述经济法的基础理论、宏观调控法、市场规制法和经济监督法，涵盖反垄断、反不正当竞争、消费者权益保护、财税法等核心领域，是法学院和MBA经济法课程的标准教材。",c:["宏观调控法","反垄断法","反不正当竞争法","消费者权益保护法"], org:"中国人民大学出版社", year:2018},
+    en:{t:"Economic Law",a:"Pan Jingcheng, Liu Wenhua",b:"The authoritative Chinese economic law textbook, systematically covering foundational theory, macroeconomic regulation law, market regulation law, and economic supervision law, including antitrust, anti-unfair competition, consumer protection, and fiscal/tax law.",c:["Macro Regulation Law","Antitrust Law","Anti-Unfair Competition Law","Consumer Protection Law"]},
+    kw:["经济法","反垄断","宏观调控","市场规制","MBA"]
+  },
+  {
+    id:"law-contract-law", cat:"contract-law", type:"textbook",
+    zh:{t:"合同法",a:"王利明",b:"中国合同法领域的标杆教材，系统讲解合同的订立、效力、履行、变更、转让、终止和违约责任，结合大量真实案例和司法解释，帮助读者理解商业合同的法律逻辑和风险防范。",c:["合同订立","合同效力","违约责任","合同解除"], org:"中国人民大学出版社", year:2021},
+    en:{t:"Contract Law",a:"Wang Liming",b:"The benchmark Chinese contract law textbook, systematically covering contract formation, validity, performance, modification, assignment, termination, and breach of contract liability, with extensive case analysis and judicial interpretations.",c:["Contract Formation","Contract Validity","Breach Liability","Contract Termination"]},
+    kw:["合同法","商业合同","违约责任","合同风险","MBA"]
+  },
+  {
+    id:"law-ip-law", cat:"ip-law", type:"textbook",
+    zh:{t:"知识产权法",a:"吴汉东",b:"中国知识产权法学的领军教材，全面阐述著作权法、专利法、商标法和反不正当竞争法，结合数字时代的知识产权新挑战，讨论AI生成内容的版权、平台经济中的商标保护等前沿问题。",c:["著作权法","专利法","商标法","数字时代知识产权"], org:"北京大学出版社", year:2022},
+    en:{t:"Intellectual Property Law",a:"Wu Handong",b:"The leading Chinese IP law textbook, comprehensively covering copyright, patent, trademark, and anti-unfair competition law, addressing frontier issues like AI-generated content copyright and platform economy trademark protection.",c:["Copyright Law","Patent Law","Trademark Law","Digital IP Issues"]},
+    kw:["知识产权法","著作权","专利","商标","MBA"]
+  },
+  {
+    id:"law-corporate-law", cat:"corporate-law", type:"textbook",
+    zh:{t:"公司法学",a:"朱慈蕴",b:"公司法学领域的经典教材，系统讲解公司的设立、治理、股东权利、董事义务、股权转让、合并分立与清算，深入分析公司治理结构和中小股东保护机制，是MBA和法学院公司法的首选教材。",c:["公司治理","股东权利","董事信义义务","股权转让"], org:"法律出版社", year:2020},
+    en:{t:"Corporate Law",a:"Zhu Ciyun",b:"A classic corporate law textbook covering company formation, governance, shareholder rights, director duties, equity transfer, merger/dissolution, and liquidation, with in-depth analysis of governance structures and minority shareholder protection.",c:["Corporate Governance","Shareholder Rights","Fiduciary Duties","Equity Transfer"]},
+    kw:["公司法","公司治理","股东权利","董事义务","MBA"]
+  },
+  {
+    id:"law-international-commercial-law", cat:"international-commercial-law", type:"textbook",
+    zh:{t:"国际商法",a:"沈四宝、王军",b:"国际商法领域的权威教材，涵盖国际货物买卖、国际运输与保险、国际支付、国际商事仲裁和WTO规则，结合CISG和Incoterms等国际公约与惯例，帮助读者理解跨境商业交易的法律框架。",c:["CISG国际货物买卖","国际商事仲裁","信用证支付","WTO规则"], org:"对外经济贸易大学出版社", year:2019},
+    en:{t:"International Commercial Law",a:"Shen Sibao, Wang Jun",b:"An authoritative international commercial law textbook covering international sale of goods, transport and insurance, international payment, commercial arbitration, and WTO rules, incorporating CISG and Incoterms.",c:["CISG","International Arbitration","Letter of Credit","WTO Rules"]},
+    kw:["国际商法","CISG","国际仲裁","WTO","跨境贸易","MBA"]
+  },
+  {
+    id:"law-labor-law", cat:"labor-law", type:"textbook",
+    zh:{t:"劳动法与社会保障法",a:"林嘉",b:"劳动法领域的核心教材，系统讲解劳动合同的订立与解除、工资工时、社会保险、工伤认定和劳动争议处理，结合平台经济用工和灵活就业等新业态，帮助管理者构建合规的用工体系。",c:["劳动合同法","社会保险法","工伤认定","劳动争议仲裁"], org:"中国人民大学出版社", year:2021},
+    en:{t:"Labor Law and Social Security Law",a:"Lin Jia",b:"A core labor law textbook covering employment contract formation and termination, wages and working hours, social insurance, work injury, and labor dispute resolution, addressing new employment forms like platform work.",c:["Employment Contract Law","Social Insurance","Work Injury","Labor Dispute Arbitration"]},
+    kw:["劳动法","劳动合同","社会保险","劳动争议","用工合规","MBA"]
+  },
+  {
+    id:"law-business-law-today", cat:"economic-law", type:"textbook",
+    zh:{t:"商法今典",a:"罗杰·勒罗伊·米勒",b:"全球使用最广泛的商法教材之一，以清晰的案例驱动方式讲解合同法、代理法、企业组织法、证券法和反垄断法，适合MBA学生建立全面的商业法律框架认知。",c:["合同法基础","企业组织法","证券监管","反垄断法"], org:"Cengage Learning", year:2020},
+    en:{t:"Business Law Today",a:"Roger LeRoy Miller",b:"One of the world's most widely used business law textbooks, using a clear case-driven approach to cover contracts, agency, business organizations, securities regulation, and antitrust law. Ideal for MBA students.",c:["Contract Law Basics","Business Organizations","Securities Regulation","Antitrust Law"]},
+    kw:["商法","Business Law","合同法","证券法","反垄断","MBA"]
+  },
+  {
+    id:"law-securities-law", cat:"corporate-law", type:"textbook",
+    zh:{t:"证券法",a:"赵旭东",b:"中国证券法领域的权威教材，系统阐述证券发行、交易、信息披露、内幕交易防控和投资者保护制度，结合注册制改革和资本市场新规，帮助读者理解资本运作的法律边界。",c:["证券发行注册制","信息披露制度","内幕交易防控","投资者保护"], org:"中国政法大学出版社", year:2022},
+    en:{t:"Securities Law",a:"Zhao Xudong",b:"An authoritative Chinese securities law textbook covering issuance, trading, information disclosure, insider trading prevention, and investor protection, incorporating registration-based IPO reform.",c:["Registration-Based IPO","Information Disclosure","Insider Trading Prevention","Investor Protection"]},
+    kw:["证券法","注册制","信息披露","内幕交易","资本市场","MBA"]
+  },
 ];
 
 // ===== Helper: get all book IDs =====
