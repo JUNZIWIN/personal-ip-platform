@@ -346,6 +346,26 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-model-bar select{flex:1;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:11.5px;font-family:var(--body);outline:0;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
 .chat-model-bar select:hover{border-color:rgba(255,255,255,.3)}
 .chat-model-bar select option{background:#1a1f4e;color:#fff}
+/* Search toggle button */
+.chat-model-bar .search-toggle{flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;padding:0}
+.chat-model-bar .search-toggle:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.chat-model-bar .search-toggle.active{background:rgba(76,175,80,.2);border-color:rgba(76,175,80,.4);color:#66bb6a}
+.chat-model-bar .search-toggle.active:hover{background:rgba(76,175,80,.3)}
+/* Pro DB source selector */
+.chat-pro-bar{flex-shrink:0;padding:4px 12px;background:rgba(255,255,255,.03);display:none;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.05)}
+.chat-pro-bar.show{display:flex}
+.chat-pro-bar .pro-label{font-size:10.5px;color:rgba(255,255,255,.4);font-family:var(--body);white-space:nowrap}
+.chat-pro-bar select{flex:1;padding:3px 6px;border-radius:5px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.8);font-size:10.5px;font-family:var(--body);outline:0;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;padding-right:20px}
+.chat-pro-bar select:hover{border-color:rgba(255,255,255,.2)}
+.chat-pro-bar select option{background:#1a1f4e;color:#fff}
+/* Search status indicator in messages */
+.chat-msg .search-indicator{display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:3px 8px;border-radius:6px;font-size:10.5px;font-family:var(--body)}
+.chat-msg .search-indicator.searching{background:rgba(255,152,0,.1);color:#ff9800}
+.chat-msg .search-indicator.found{background:rgba(76,175,80,.1);color:#66bb6a}
+.chat-msg .search-indicator.not-found{background:rgba(255,255,255,.05);color:rgba(255,255,255,.4)}
+.chat-msg .search-indicator .dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.chat-msg .search-indicator .dot.pulse{animation:pulse-dot .8s ease-in-out infinite alternate}
+@keyframes pulse-dot{to{opacity:.3;transform:scale(.7)}}
 /* Book shelf */
 .book-shelf{flex-shrink:0;max-height:170px;overflow-y:auto;background:#fff;border-bottom:1px solid var(--line);display:none}
 .book-shelf.open{display:block}
@@ -847,12 +867,13 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <span class="wb-badge" data-en="Free" data-zh="免费">Free</span>
         <span class="wb-icon">💡</span>
         <h3 data-en="Ideas Studio" data-zh="灵感工坊">灵感工坊</h3>
-        <p data-en="Ask anything about 100+ business classics. Get instant insights, frameworks, and aha-moments."
-           data-zh="问任何商业经典问题。瞬间获得洞察、框架与灵感触发。">问任何商业经典问题。瞬间获得洞察、框架与灵感触发。</p>
+        <p data-en="Ask anything about 100+ business classics. Get instant insights and aha-moments. Basic web search included."
+           data-zh="问任何商业经典问题。瞬间获得洞察与灵感触发。含基础联网搜索。">问任何商业经典问题。瞬间获得洞察与灵感。含基础联网搜索。</p>
         <ul class="wb-tasks">
           <li data-en="Daily Q&A (5 questions)" data-zh="每日 5 次问答">每日 5 次问答</li>
           <li data-en="Powered by DeepSeek" data-zh="DeepSeek 驱动">DeepSeek 驱动</li>
           <li data-en="Full book directory" data-zh="完整书籍目录">完整书籍目录</li>
+          <li data-en="Basic web search" data-zh="基础联网搜索">基础联网搜索</li>
         </ul>
         <a class="wb-try" onclick="toggleChat();event.stopPropagation()" data-en="Try it now →" data-zh="立即体验 →">立即体验 →</a>
       </div>
@@ -861,12 +882,13 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <span class="wb-badge" data-en="Silver" data-zh="银牌">银牌</span>
         <span class="wb-icon">📄</span>
         <h3 data-en="Document Assistant" data-zh="文档助手">文档助手</h3>
-        <p data-en="Turn any conversation into polished Word / PDF documents. Write business emails, meeting minutes, and briefs."
-           data-zh="将任何对话整理为精美的 Word / PDF 文档。撰写商业邮件、会议纪要与简报。">将对话整理为 Word / PDF 文档。撰写邮件、纪要与简报。</p>
+        <p data-en="Turn any conversation into polished Word / PDF documents. Enhanced web search for real-time data. Write business emails, meeting minutes, and briefs."
+           data-zh="将任何对话整理为精美的 Word / PDF 文档。增强联网搜索获取实时数据。撰写商业邮件、会议纪要与简报。">将对话整理为 Word / PDF 文档。增强联网搜索 + 邮件、纪要与简报撰写。</p>
         <ul class="wb-tasks">
           <li data-en="Unlimited AI Q&A" data-zh="无限次 AI 问答">无限次 AI 问答</li>
           <li data-en="Export Word / PDF" data-zh="导出 Word / PDF">导出 Word / PDF</li>
           <li data-en="Doubao Pro — Chinese writing specialist" data-zh="豆包 Pro — 中文写作专家">豆包 Pro — 中文写作专家</li>
+          <li data-en="Enhanced web search" data-zh="增强联网搜索">增强联网搜索</li>
         </ul>
         <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Silver →" data-zh="银牌会员开放 →">银牌会员开放 →</a>
       </div>
@@ -875,12 +897,13 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <span class="wb-badge" data-en="Gold" data-zh="金牌">金牌</span>
         <span class="wb-icon">🔬</span>
         <h3 data-en="Strategy Lab" data-zh="策略分析室">策略分析室</h3>
-        <p data-en="Upload PDFs, run SWOT analyses, compare competitors, and generate knowledge maps — all powered by long-context AI."
-           data-zh="上传 PDF 分析、运行 SWOT 分析、竞品对比，生成可下载的知识图谱。">上传 PDF 分析、运行 SWOT、竞品对比，生成可下载知识图谱。</p>
+        <p data-en="Upload PDFs, run SWOT analyses, compare competitors, and search professional databases (finance, trade, legal) — all powered by long-context AI."
+           data-zh="上传 PDF 分析、运行 SWOT、竞品对比，接入同花顺/外贸/法律专业数据库。">上传 PDF 分析、运行 SWOT、竞品对比，接入金融/外贸/法律专业数据库。</p>
         <ul class="wb-tasks">
           <li data-en="Upload & analyse PDFs" data-zh="上传并分析 PDF">上传并分析 PDF</li>
           <li data-en="Knowledge maps (download PNG/PDF)" data-zh="知识图谱（下载 PNG/PDF）">知识图谱（下载 PNG/PDF）</li>
           <li data-en="Kimi 128k + ChatGPT" data-zh="Kimi 128k + ChatGPT">Kimi 128k + ChatGPT</li>
+          <li data-en="Professional DB: Finance/Trade/Legal" data-zh="专业数据库：金融/外贸/法律">专业数据库：金融/外贸/法律</li>
         </ul>
         <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Gold →" data-zh="金牌会员开放 →">金牌会员开放 →</a>
       </div>
@@ -889,12 +912,13 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <span class="wb-badge" data-en="Diamond" data-zh="钻石">钻石</span>
         <span class="wb-icon">🎨</span>
         <h3 data-en="Creator Studio" data-zh="创作工坊">创作工坊</h3>
-        <p data-en="Generate code prototypes, long-form content, and branded PPTs. One-click publish to Xiaohongshu, WeChat, and more."
-           data-zh="生成代码原型、长文内容与品牌 PPT。一键发布到小红书、微信公众号等平台。">生成代码原型、长文与品牌 PPT。一键发布到小红书、公众号。</p>
+        <p data-en="Generate code prototypes, long-form content, and branded PPTs. Access all professional databases. One-click publish to Xiaohongshu, WeChat, and more."
+           data-zh="生成代码原型、长文与品牌 PPT。接入全部专业数据库。一键发布到小红书、公众号。">生成代码原型、长文与品牌 PPT。全部专业数据库 + 一键发布。</p>
         <ul class="wb-tasks">
           <li data-en="Code generation (Codex)" data-zh="代码生成（Codex）">代码生成（Codex）</li>
           <li data-en="Export PPT with brand cover" data-zh="导出带品牌封面的 PPT">导出带品牌封面的 PPT</li>
           <li data-en="Publish to social platforms" data-zh="发布到社交平台">发布到社交平台</li>
+          <li data-en="All Pro DB: Finance + Trade + Legal" data-zh="全部专业数据库：金融+外贸+法律">全部专业数据库：金融+外贸+法律</li>
         </ul>
         <a class="wb-try" onclick="scrollToPricing()" data-en="Coming with Diamond →" data-zh="钻石会员开放 →">钻石会员开放 →</a>
       </div>
@@ -924,9 +948,10 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
           <li data-en="100+ book directory" data-zh="100+ 本书籍目录">100+ 本书籍目录</li>
           <li data-en="5 AI questions per day" data-zh="每日 5 次 AI 问答">每日 5 次 AI 问答</li>
           <li data-en="Left sidebar book navigator" data-zh="左侧书籍导航栏">左侧书籍导航栏</li>
+          <li data-en="Basic web search" data-zh="基础联网搜索">基础联网搜索</li>
           <li data-en="Basic book recommendations" data-zh="基础书籍推荐">基础书籍推荐</li>
           <li class="locked" data-en="Document export" data-zh="文档导出">文档导出</li>
-          <li class="locked" data-en="Knowledge maps" data-zh="知识图谱">知识图谱</li>
+          <li class="locked" data-en="Professional databases" data-zh="专业数据库">专业数据库</li>
         </ul>
         <button class="pc-cta secondary" onclick="toggleChat()" data-en="Start free" data-zh="免费开始">免费开始</button>
       </div>
@@ -944,7 +969,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
           <li data-en="Export chats as Word / PDF" data-zh="对话导出为 Word / PDF">对话导出为 Word / PDF</li>
           <li data-en="Adaptive learning path" data-zh="自适应学习路径">自适应学习路径</li>
           <li data-en="Progress tracking" data-zh="学习进度追踪">学习进度追踪</li>
-          <li class="locked" data-en="Knowledge maps" data-zh="知识图谱">知识图谱</li>
+          <li data-en="Enhanced web search" data-zh="增强联网搜索">增强联网搜索</li>
+          <li class="locked" data-en="Professional databases" data-zh="专业数据库">专业数据库</li>
         </ul>
         <button class="pc-cta secondary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册 →">预注册 →</button>
       </div>
@@ -956,13 +982,14 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <h3 data-en="Analyst" data-zh="分析版">分析版</h3>
         <div class="pc-price">$99 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
-        <div class="pc-model" data-en="🌙 Kimi 128k + 💬 ChatGPT — deep research" data-zh="🌙 Kimi 128k + 💬 ChatGPT — 深度研究">🌙 Kimi 128k + 💬 ChatGPT — 深度研究</div>
+        <div class="pc-model" data-en="🌙 Kimi 128k + 💬 ChatGPT + 📈 Professional DB" data-zh="🌙 Kimi 128k + 💬 ChatGPT + 📈 专业数据库">🌙 Kimi 128k + 💬 ChatGPT + 📈 专业数据库</div>
         <ul class="pc-features">
           <li data-en="Everything in Silver" data-zh="包含银牌版全部功能">包含银牌版全部功能</li>
           <li data-en="Upload PDFs for analysis" data-zh="上传 PDF 进行深度分析">上传 PDF 进行深度分析</li>
           <li data-en="Full knowledge maps (download)" data-zh="完整知识图谱（可下载）">完整知识图谱（可下载）</li>
           <li data-en="Export as PPT with images" data-zh="导出含图片的 PPT">导出含图片的 PPT</li>
           <li data-en="SWOT / strategy templates" data-zh="SWOT / 策略分析模板">SWOT / 策略分析模板</li>
+          <li data-en="🎯 Pro database: Finance, Trade, Legal" data-zh="🎯 专业数据库：金融+外贸+法律">🎯 专业数据库：金融+外贸+法律</li>
           <li data-en="Try Gold free 3×/month" data-zh="每月 3 次免费尝鲜">每月 3 次免费尝鲜</li>
         </ul>
         <button class="pc-cta primary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册享折扣 →">预注册享折扣 →</button>
@@ -974,13 +1001,14 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <h3 data-en="Creator" data-zh="创作版">创作版</h3>
         <div class="pc-price">$199 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
-        <div class="pc-model" data-en="🔧 Codex + 🎯 Claude — code &amp; long-form" data-zh="🔧 Codex + 🎯 Claude — 代码与长文创作">🔧 Codex + 🎯 Claude — 代码与长文创作</div>
+        <div class="pc-model" data-en="🔧 Codex + 🎯 Claude + 🔍 All Pro DB" data-zh="🔧 Codex + 🎯 Claude + 🔍 全部专业数据库">🔧 Codex + 🎯 Claude + 🔍 全部专业数据库</div>
         <ul class="pc-features">
           <li data-en="Everything in Gold" data-zh="包含金牌版全部功能">包含金牌版全部功能</li>
           <li data-en="Code generation (Codex)" data-zh="代码生成（Codex）">代码生成（Codex）</li>
           <li data-en="Long-form content creation" data-zh="长文内容创作">长文内容创作</li>
           <li data-en="Branded PPT export" data-zh="品牌封面 PPT 导出">品牌封面 PPT 导出</li>
           <li data-en="Publish to social platforms" data-zh="一键发布到社交平台">一键发布到社交平台</li>
+          <li data-en="🔍 All Pro DB: Finance+Trade+Legal" data-zh="🔍 综合专业数据库：金融+外贸+法律">🔍 综合专业数据库：金融+外贸+法律</li>
           <li data-en="API access + custom booklist" data-zh="API 接入 + 自定义书单">API 接入 + 自定义书单</li>
         </ul>
         <button class="pc-cta secondary" onclick="joinWaitlistScroll()" data-en="Pre-register →" data-zh="预注册 →">预注册 →</button>
@@ -1261,6 +1289,18 @@ function joinWaitlist(){
       <option value="kimi">🌙 Kimi</option>
       <option value="claude">🎯 Claude</option>
     </select>
+    <button class="search-toggle active" id="searchToggle" onclick="toggleSearch()" title="联网搜索">🔍</button>
+  </div>
+  <!-- Pro database source selector (visible when search is on) -->
+  <div class="chat-pro-bar show" id="proBar">
+    <span class="pro-label">数据</span>
+    <select id="proSourceSelect" onchange="onProSourceChange()">
+      <option value="">🌐 通用网络搜索</option>
+      <option value="tonghuashun">📈 同花顺金融数据</option>
+      <option value="trade">🚢 外贸海关数据</option>
+      <option value="legal">⚖️ 法律专业数据库</option>
+      <option value="general">🔍 综合专业搜索</option>
+    </select>
   </div>
   <!-- Book search bar -->
   <div class="chat-book-bar">
@@ -1269,7 +1309,7 @@ function joinWaitlist(){
   </div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-msg bot">
-      <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant. Browse 100+ business classics above, or ask me anything — concepts, frameworks, key ideas. What would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。搜索上方书籍，或直接问我任何概念、框架和思想。今天想了解什么？">👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。搜索上方书籍，或直接问我任何概念、框架和思想。今天想了解什么？</div>
+      <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant, powered by 100+ business classics. I can search the web for real-time data, or access professional databases for financial, trade, and legal info. Browse books above, or ask me anything — what would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。我已接入联网搜索，可以获取最新数据，也可以查询专业数据库（金融/外贸/法律）。搜索上方书籍，或直接问我任何问题——今天想了解什么？">👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。我已接入联网搜索，可获取最新数据，也支持专业数据库（金融/外贸/法律）。搜索上方书籍，或直接问我任何问题——今天想了解什么？</div>
     </div>
   </div>
   <div class="chat-input-wrap">
@@ -1621,12 +1661,13 @@ function fallbackText(lang) {
       '• 五力模型是什么？\n' +
       '• 商业合同有哪些法律风险？\n' +
       '• 知识产权如何保护？\n\n' +
-      '💬 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用 AI 对话功能。'
+      '💬 提示：管理员需要在 Vercel 配置 DEEPSEEK_API_KEY 环境变量来启用 AI 对话功能。🔍 联网搜索功能已就绪，配置 API Key 后自动运行。'
     : 'Glad you asked! 👋\n\n' +
       'I\'m the BizAtom AI Book Assistant. The backend AI service is currently offline (API key may not be configured), but I can still help:\n\n' +
       '📖 Browse the book directory on the left to see core concepts\n' +
       '🔍 Search 100+ business classics using the search bar above\n' +
-      '💡 Select a book and click "Ask" for a structured overview\n\n' +
+      '💡 Select a book and click "Ask" for a structured overview\n' +
+      '🌐 Web search is ready — will auto-activate with AI\n\n' +
       'Try asking:\n' +
       '• What is Blue Ocean Strategy?\n' +
       '• Explain the Hedgehog Concept\n' +
@@ -1861,6 +1902,28 @@ function onModelChange() {
   if (sel) currentModel = sel.value;
 }
 
+// Web search toggle (default: ON)
+var searchEnabled = true;
+function toggleSearch() {
+  searchEnabled = !searchEnabled;
+  var btn = document.getElementById('searchToggle');
+  var bar = document.getElementById('proBar');
+  if (searchEnabled) {
+    if (btn) btn.classList.add('active');
+    if (bar) bar.classList.add('show');
+  } else {
+    if (btn) btn.classList.remove('active');
+    if (bar) bar.classList.remove('show');
+  }
+}
+
+// Professional database source (default: empty = general web search)
+var proDataSource = '';
+function onProSourceChange() {
+  var sel = document.getElementById('proSourceSelect');
+  if (sel) proDataSource = sel.value;
+}
+
 // API endpoint — change this to your deployed Vercel URL for local development
 // When deployed on Vercel, relative path '/api/chat' works automatically
 var API_BASE_URL = '';
@@ -1917,15 +1980,26 @@ async function sendMessage(optBookId) {
           lang: lang,
           bookId: optBookId || '',
           model: currentModel,
+          enableSearch: searchEnabled,
+          proDataSource: searchEnabled ? proDataSource : '',
           history: conversationHistory.slice(-6)  // last 6 messages for context
         })
       });
       if (resp.ok) {
         var data = await resp.json();
         answer = data.answer;
-        // Save AI response to history
+        // Track search status for indicator
+        var searchInfo = '';
+        if (data.proDataSearched) {
+          searchInfo = '<div class="search-indicator found"><span class="dot"></span>' + (lang === 'zh' ? '专业数据库' + (data.proDataSource || '') + '搜索完成' : 'Pro DB ' + (data.proDataSource || '') + ' searched') + '</div>';
+        } else if (data.searched) {
+          searchInfo = '<div class="search-indicator found"><span class="dot"></span>' + (lang === 'zh' ? '联网搜索完成' : 'Web search complete') + '</div>';
+        }
+        if (searchInfo) answer = (answer || '') + searchInfo;
+        // Save AI response to history (without search indicator)
         if (answer && q) {
-          conversationHistory.push({ role: 'assistant', content: answer });
+          var cleanAnswer = (data.answer || answer).replace(/<div class="search-indicator[^>]*>[\s\S]*?<\/div>/g, '');
+          conversationHistory.push({ role: 'assistant', content: cleanAnswer });
         }
       }
     } catch(e) {
@@ -1979,7 +2053,7 @@ function clearChatHistory() {
   var msgs = document.getElementById('chatMessages');
   if (msgs) msgs.innerHTML = '';
   var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
-  addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 Ask me anything about business classics, or select a book from the dropdown.', 'bot');
+  addMsg(lang === 'zh' ? '你好！我是 BizAtom AI 书童 📚 我已接入联网搜索，支持查询最新数据。你可以问我任何商业经典的问题，或者从下拉菜单选择一本书深入了解。' : 'Hello! I\'m the BizAtom AI Book Assistant 📚 I have web search enabled and can access professional databases. Ask me anything about business classics, or select a book from the dropdown.', 'bot');
 }
 
 // Fetch available models from API and update the selector dropdown

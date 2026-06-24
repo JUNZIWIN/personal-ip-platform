@@ -152,17 +152,22 @@ export function classifyQuestion(question) {
     reasons.push('quantitative_query');
   }
 
-  // 2. Explicit data-seeking keywords
+  // 2. Explicit data-seeking keywords (expanded)
   const dataKeywords = [
     '数据', '多少', '几个', '多少吨', '多少亿', '多少万',
     '统计', '海关', '进出口', '出口量', '进口量', '贸易额',
     '最新', '最近', '今年', '去年', '近5年', '近几年', '近年',
     '增长率', '占比', '份额', '排名', '位列', '第几名',
     '产量', '产能', '销量', '价格', '报价', '行情',
+    '走势', '趋势', '同比', '环比', '增速',
+    '估值', '市值', '市盈率', '市净率', '股息率',
+    '财报', '营收', '净利润', '毛利率', '净利率',
     'data', 'statistics', 'how many', 'how much', 'latest',
     'export', 'import', 'customs', 'trade volume',
     'recent', 'current', 'in 202', 'last year', 'this year',
     'revenue', 'market share', 'ranking',
+    'stock price', 'index', 'exchange rate', 'inflation',
+    'gdp growth', 'interest rate',
   ];
   for (const kw of dataKeywords) {
     if (q.includes(kw)) {
@@ -171,14 +176,20 @@ export function classifyQuestion(question) {
     }
   }
 
-  // 3. Industry-specific queries that need current market data
+  // 3. Industry-specific queries that need current market data (expanded)
   const industryPatterns = [
     /不锈钢|钢管|钢铁|钢材|铝|铜|原油|石油|天然气|煤炭|稀土/,
     /芯片|半导体|集成电路|光伏|锂电池|新能源/,
     /汽车|电动车|新能源车|特斯拉|比亚迪/,
     /房地产|房价|楼市|成交/,
-    /GDP|ppi|cpi|通胀|利率|汇率|股市|a股|港股/,
+    /GDP|ppi|cpi|通胀|利率|汇率|股市|a股|港股|美股/,
     /不锈钢无缝钢管|无缝钢管|焊管/,
+    /外贸|进出口|跨境电商|出海|跨境/,
+    /法律|法规|条例|司法解释|判决|仲裁/,
+    /股票|基金|债券|期货|期权|数字货币|加密货币/,
+    /上证|深证|恒生|道琼斯|纳斯达克|标普/,
+    /同花顺|东方财富|雪球|Wind|彭博|Bloomberg/,
+    /供应链|物流|海运|空运|港口/,
   ];
   for (const pat of industryPatterns) {
     if (pat.test(q)) {
@@ -187,16 +198,39 @@ export function classifyQuestion(question) {
     }
   }
 
-  // 4. Questions about current events / news
+  // 4. Questions about current events / news (expanded)
   const newsKeywords = [
     '新闻', '最新消息', '发生了什么', '政策', '法规',
     'new regulation', 'policy change', 'announced', 'news',
     '今日', '今天', '本周', '本月',
+    '热点', '头条', '公告', '发布', '出台了',
+    '刚刚', '实时', '直播',
   ];
   for (const kw of newsKeywords) {
     if (q.includes(kw)) {
       reasons.push('news_intent');
       break;
+    }
+  }
+
+  // 5. Questions about specific companies/stocks/funds → need real-time financial data
+  const companyPatterns = [
+    /茅台|腾讯|阿里|华为|字节|美团|拼多多|京东|百度|网易/,
+    /苹果|微软|谷歌|亚马逊|Meta|英伟达|特斯拉/,
+    /平安|招行|工行|建行|农行|中行/,
+  ];
+  for (const pat of companyPatterns) {
+    if (pat.test(q)) {
+      reasons.push('company_financial');
+      break;
+    }
+  }
+
+  // 6. Quantitative questions with numbers → need stats
+  if (/\d+[万亿千百]?/.test(q) && !/[?？]/.test(q) === false) {
+    // Has numbers and is a question → likely needs data
+    if (reasons.length === 0 && q.length > 10) {
+      reasons.push('numeric_question');
     }
   }
 

@@ -14,6 +14,7 @@
 
 import { classifyQuestion, searchWeb, formatSearchResults } from './search.js';
 import { callModel, getAvailableModels } from './models.js';
+import { searchProDB, formatProResults } from './pro-db.js';
 
 // ─── System prompts ───
 const SYSTEM_PROMPTS = {
@@ -39,7 +40,7 @@ const SYSTEM_PROMPTS = {
 5. 自然收尾：结尾可以自然地邀请用户继续深入探讨，像真实的对话转折（不要机械地说"还有什么问题"）
 6. 重要：不要输出任何 Markdown 语法（不要用 **粗体**、### 标题、*斜体* 等）。用自然的语言文字表达强调即可。可以用 emoji 点缀
 7. 语言匹配：用户用什么语言提问，你就用什么语言回答，保持同样的对话感和详细度
-8. 搜索增强：如果附带了搜索引擎的最新数据，优先使用并引用具体数字
+8. 联网搜索：你已接入搜索引擎！当系统在下方附带了联网搜索结果时，优先使用其中的具体数据和最新信息来回答问题，并在回复中自然地提到"根据最新数据"或"搜索结果显示"。如果没有附带搜索结果，也请正常回答——不要主动说"我无法联网"或"联网功能未开启"。你完全可以回答，只是没有实时数据补充而已
 
 示例回答（一个关于"蓝海战略"的问题你应该这样回答）：
 
@@ -72,7 +73,7 @@ Your response style (critical — follow closely):
 5. Natural closing: End with a natural conversational turn, inviting deeper exploration (not mechanically asking "any other questions?")
 6. IMPORTANT: Do NOT use any Markdown formatting (no **bold**, ### headers, *italic*, etc.). Use natural language for emphasis. Emojis are OK sparingly
 7. Language matching: Reply in the same language the user used. Keep the same conversational depth and detail level
-8. Search-enhanced: If provided with latest search engine data, prioritize it and cite specific figures
+8. Web Search: You ARE connected to a search engine! When the system provides search results below, prioritize using the specific data and latest information in your response. Naturally mention "according to recent data" or "search results show." If no search results are provided, answer normally — do NOT say "I can't search the web" or "web search is not available." You can still answer — you just don't have real-time data supplementation
 
 Example response style (answering about Blue Ocean Strategy):
 
@@ -86,9 +87,18 @@ What area are you most interested in — entrepreneurship, strategy, or maybe ma
 };
 
 // ─── Build messages array for model call ───
-function buildMessages(question, lang, history, searchContext) {
-  const systemContent = (SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.zh)
-    + (searchContext || '');
+function buildMessages(question, lang, history, searchContext, proDataContext) {
+  var systemContent = (SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.zh);
+
+  // Inject professional database results (higher priority than web search)
+  if (proDataContext) {
+    systemContent += '\n\n' + proDataContext;
+  }
+
+  // Inject web search results
+  if (searchContext) {
+    systemContent += '\n\n' + searchContext;
+  }
 
   const messages = [
     { role: 'system', content: systemContent }
@@ -137,6 +147,8 @@ export default async function handler(req, res) {
     const lang = body.lang === 'en' ? 'en' : 'zh'; // default zh
     const history = Array.isArray(body.history) ? body.history : [];
     const modelId = body.model || 'deepseek';
+    const enableSearch = body.enableSearch !== false; // default: search enabled
+    const proDataSource = body.proDataSource || '';   // e.g. 'tonghuashun', 'trade', 'legal'
 
     if (!question) {
       return res.status(200).json({
@@ -148,9 +160,26 @@ export default async function handler(req, res) {
     const classification = classifyQuestion(question);
     console.log('[Chat] Question classification:', classification);
 
-    // ─── Step 2: If data-seeking, do web search first ───
+    // ─── Step 2a: Pro Database search (higher priority, for paid tiers) ───
+    let proDataContext = '';
+    let proDataSearched = false;
+    if (proDataSource && enableSearch) {
+      console.log('[Chat] Pro database search requested:', proDataSource);
+      try {
+        const proResults = await searchProDB(question, proDataSource, 5);
+        if (proResults && proResults.length > 0) {
+          proDataContext = formatProResults(proResults, proDataSource);
+          proDataSearched = true;
+          console.log('[Chat] Pro DB found', proResults.length, 'results from', proDataSource);
+        }
+      } catch (proErr) {
+        console.error('[Chat] Pro DB search failed:', proErr.message);
+      }
+    }
+
+    // ─── Step 2b: Web search (if enabled and data-seeking) ───
     let searchContext = '';
-    if (classification.needsSearch) {
+    if (enableSearch && classification.needsSearch) {
       console.log('[Chat] Data-seeking question detected, searching web...');
       try {
         const searchResults = await searchWeb(question, 5);
@@ -167,7 +196,7 @@ export default async function handler(req, res) {
     }
 
     // ─── Step 3: Call AI model (with search context if available) ───
-    const messages = buildMessages(question, lang, history, searchContext);
+    const messages = buildMessages(question, lang, history, searchContext, proDataContext);
     const aiResult = await callModel(modelId, messages, {
       maxTokens: 3000,
       temperature: 0.7,
@@ -176,15 +205,17 @@ export default async function handler(req, res) {
     if (aiResult && aiResult.answer) {
       return res.status(200).json({
         answer: aiResult.answer,
-        searched: !!searchContext,
+        searched: !!searchContext || proDataSearched,
+        proDataSearched: proDataSearched,
+        proDataSource: proDataSource || null,
         model: aiResult.modelUsed || modelId,
       });
     }
 
     // Fallback if no API key or API failed
     const fallbackMsg = lang === 'zh'
-      ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 浏览左侧书籍目录，查看核心概念与框架\n• 从书童窗口搜索书籍并查看详情\n• 使用本地知识库进行关键词搜索\n\n💡 提示：管理员需要在 Vercel 配置 API Key 环境变量\n支持模型：DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY'
-      : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Browse the book directory on the left\n• Search books from the chat window\n• Use local KB for keyword search\n\n💡 Tip: Admin needs to configure API key env vars in Vercel\nSupported: DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY";
+      ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 浏览左侧书籍目录，查看核心概念与框架\n• 从书童窗口搜索书籍并查看详情\n• 使用知识库进行关键词搜索\n\n💡 提示：管理员需要在 Vercel 配置 API Key 环境变量\n支持模型：DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY\n🔍 联网搜索功能：已就绪。一旦配置 API Key 即可自动启用搜索引擎增强回答'
+      : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Browse the book directory on the left\n• Search books from the chat window\n• Use KB for keyword search\n\n💡 Tip: Admin needs to configure API key env vars in Vercel\nSupported: DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY\n🔍 Web search: Ready. Once API keys are configured, search-enhanced answers will be automatic";
 
     return res.status(200).json({
       answer: fallbackMsg,
