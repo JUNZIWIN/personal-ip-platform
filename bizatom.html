@@ -31,6 +31,40 @@
   --display:"Fraunces","Noto Serif SC",serif;
   --body:"Inter","Noto Sans SC",sans-serif;
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] {
+  --paper: #0A0A0A;
+  --ink: #E0E0E0;
+  --white: #1A1A1A;
+  --navy: #E0E0E0;
+  --navy-2: #2A2A2A;
+  --muted: #999999;
+  --line: #333333;
+  --purple-soft: #2A2040;
+  --orange-soft: #3D2000;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+  margin-left: 8px;
+}
+.theme-toggle:hover {
+  border-color: var(--orange);
+  transform: rotate(15deg);
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -564,6 +598,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
         <button id="btn-zh" onclick="setLang('zh')">中文</button>
       </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        
       <a href="#waitlist" class="btn btn-primary" id="navWaitlistBtn" data-en="Join waitlist" data-zh="加入候补名单">Join waitlist</a>
       <button class="btn btn-primary" id="navLoginBtn" onclick="openLogin()" style="display:none">Sign in</button>
       <div class="nav-user-btn" id="navUserBtn" style="display:none" onclick="toggleUserMenu()">
@@ -932,7 +968,7 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
     <div class="sec-head">
       <span class="eyebrow" data-en="Membership" data-zh="会员方案">会员方案</span>
       <h2 data-en="Pay for what you can accomplish, not what model you run."
-          data-zh="为你能完成的任务付费，而不是为你用了哪个模型。">为你能完成的任务付费，而不是为你用了哪个模型。</h2>
+          data-zh="为你的成长付费，而不是为模型付费。学者版推荐 —— 最适合MBA/EMBA学生。">为你能完成的任务付费，而不是为你用了哪个模型。</h2>
       <p data-en="Pay in USD. Paid plans launch once our Hong Kong entity is registered. Pre-register now to lock in founding-member pricing (up to 50% off)."
          data-zh="美金结算。付费方案将在香港公司注册完成后正式上线。现在预注册，锁定创始会员价格（最高 5 折）。">美金结算。付费方案将在香港公司注册完成后正式上线。现在预注册，锁定创始会员价格（最高 5 折）。</p>
     </div>
@@ -941,7 +977,7 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <!-- Free -->
       <div class="pricing-card">
         <div class="pc-tier" data-en="Free" data-zh="免费">免费</div>
-        <h3 data-en="Starter" data-zh="体验版">体验版</h3>
+        <h3 data-en="Explorer" data-zh="探索版">探索版</h3>
         <div class="pc-price">$0 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-model" data-en="🧠 DeepSeek — fast, efficient, great Chinese" data-zh="🧠 DeepSeek — 快速高效，中文优秀">🧠 DeepSeek — 快速高效，中文优秀</div>
         <ul class="pc-features">
@@ -958,9 +994,9 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 
       <!-- Silver -->
       <div class="pricing-card">
-        <div class="pc-tier" data-en="Silver" data-zh="银牌">银牌</div>
+        <div class="pc-tier" data-en="Pro" data-zh="专业版">专业版</div>
         <h3 data-en="Writer" data-zh="写作版">写作版</h3>
-        <div class="pc-price">$29 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-price">$49 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🫘 Doubao Pro — Chinese writing specialist" data-zh="🫘 豆包 Pro — 中文写作专家">🫘 豆包 Pro — 中文写作专家</div>
         <ul class="pc-features">
@@ -978,9 +1014,9 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <!-- Gold (Featured) -->
       <div class="pricing-card featured">
         <div class="rec-badge" data-en="Most Popular" data-zh="最受欢迎">最受欢迎</div>
-        <div class="pc-tier" data-en="Gold" data-zh="金牌">金牌</div>
+        <div class="pc-tier" data-en="Scholar" data-zh="学者版">学者版</div>
         <h3 data-en="Analyst" data-zh="分析版">分析版</h3>
-        <div class="pc-price">$99 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-price">$149 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🌙 Kimi 128k + 💬 ChatGPT + 📈 Professional DB" data-zh="🌙 Kimi 128k + 💬 ChatGPT + 📈 专业数据库">🌙 Kimi 128k + 💬 ChatGPT + 📈 专业数据库</div>
         <ul class="pc-features">
@@ -997,9 +1033,9 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 
       <!-- Diamond -->
       <div class="pricing-card">
-        <div class="pc-tier" data-en="Diamond" data-zh="钻石">钻石</div>
+        <div class="pc-tier" data-en="Enterprise" data-zh="企业版">企业版</div>
         <h3 data-en="Creator" data-zh="创作版">创作版</h3>
-        <div class="pc-price">$199 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-price">$299 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🔧 Codex + 🎯 Claude + 🔍 All Pro DB" data-zh="🔧 Codex + 🎯 Claude + 🔍 全部专业数据库">🔧 Codex + 🎯 Claude + 🔍 全部专业数据库</div>
         <ul class="pc-features">
@@ -2614,5 +2650,30 @@ function kbPasteImport() {
 </script>
 
 <script src="bizatom-chat-persist.js"></script>
+
+  <script>
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '☀️';
+  }
+  
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      themeToggle.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+  </script>
+
 </body>
 </html>
