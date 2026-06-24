@@ -3,361 +3,673 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIP Studio · BIZATOM.AI · AIRankRocket | AIIPOWER LIMITED 企业服务</title>
-<meta name="description" content="AIIPOWER LIMITED 旗下产品：AIP Studio (个人IP SaaS平台 · aiipower.me)、BIZATOM.AI (商业经典AI拆解平台)、AIRankRocket (AI驱动GEO工具)。To B 企业服务：AI打造企业品牌 + AI企业培训 (aiipower.ai)。AIIPOWER®️ = 人工智能重塑、赋能个人与企业品牌。">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/sections.css">
-<link rel="stylesheet" href="css/content.css">
-<link rel="stylesheet" href="css/ai-social.css">
-<link rel="stylesheet" href="css/social-footer.css">
-<link rel="stylesheet" href="css/responsive.css">
+<title>AIP Studio — AI驱动的个人IP SaaS平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#7B68EE; --primary-dark:#6B58DD; --primary-glow:rgba(123,104,238,.4);
+  --accent-gold:#C9A84C; --accent-cyan:#00D4FF;
+  --bg-primary:#0A0A0A; --bg-secondary:#111111; --bg-card:#1A1A1A;
+  --bg-card-hover:#222222; --bg-card-border:#2A2A2A;
+  --text-primary:#FFFFFF; --text-secondary:#A0A0A0; --text-muted:#666666;
+  --success:#2ECC71;
+  --radius-sm:6px; --radius-md:12px; --radius-lg:20px; --radius-xl:28px; --radius-full:9999px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.4); --shadow-md:0 4px 20px rgba(0,0,0,.5); --shadow-lg:0 8px 40px rgba(0,0,0,.6);
+  --font-body:'Inter','Noto Sans SC',system-ui,sans-serif;
+  --sp-xs:4px; --sp-sm:8px; --sp-md:16px; --sp-lg:24px; --sp-xl:32px; --sp-2xl:48px; --sp-3xl:64px; --sp-4xl:96px;
+}
+* {margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--sp-lg)}
+.text-gradient{background:linear-gradient(135deg,var(--primary),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;background:rgba(10,10,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s,border-color .3s}
+.navbar.scrolled{background:rgba(10,10,10,.97);border-bottom-color:rgba(255,255,255,.1)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 var(--sp-lg);height:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--sp-xl)}
+.nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:var(--sp-sm);flex-shrink:0}
+.nav-logo .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-logo span{color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:var(--sp-lg);flex-wrap:nowrap}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-links a.active{color:var(--primary)}
+.nav-right{display:flex;align-items:center;gap:var(--sp-md);flex-shrink:0}
+.lang-switch{display:flex;border:1px solid var(--bg-card-border);border-radius:var(--radius-full);overflow:hidden;background:var(--bg-card)}
+.lang-switch button{padding:6px 12px;font-size:12px;font-weight:600;background:transparent;color:var(--text-secondary);transition:all .2s;border:none;cursor:pointer}
+.lang-switch button.active{background:var(--primary);color:#fff}
+.mobile-toggle{display:none;background:transparent;color:var(--text-primary);font-size:24px;padding:8px}
+.mobile-menu{position:fixed;top:68px;left:0;right:0;background:rgba(10,10,10,.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--bg-card-border);padding:var(--sp-lg);display:flex;flex-direction:column;gap:var(--sp-sm);z-index:99;transform:translateY(-100%);opacity:0;pointer-events:none;transition:all .3s}
+.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.mobile-menu a{padding:var(--sp-md);border-radius:var(--radius-md);font-size:15px;font-weight:600;color:var(--text-secondary);transition:all .2s}
+.mobile-menu a:hover{background:var(--bg-card);color:var(--text-primary)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-sm);padding:12px 24px;border-radius:var(--radius-full);font-size:14px;font-weight:600;transition:all .25s cubic-bezier(.4,0,.2,1);white-space:nowrap;border:none;cursor:pointer;font-family:inherit}
+.btn:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:3px}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 16px var(--primary-glow)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 24px var(--primary-glow)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{background:transparent;color:var(--text-primary);border:1.5px solid var(--bg-card-border)}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);background:rgba(123,104,238,.08)}
+.btn-lg{padding:16px 32px;font-size:15px}
+.btn-sm{padding:8px 16px;font-size:13px}
+.btn-icon{width:40px;height:40px;padding:0;border-radius:var(--radius-md);background:var(--bg-card);border:1px solid var(--bg-card-border);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s;flex-shrink:0}
+.btn-icon:hover{background:var(--bg-card-hover);color:var(--text-primary);border-color:var(--primary)}
+.section{padding:var(--sp-4xl) 0}
+.section-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:var(--sp-md)}
+.section-title{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:var(--sp-md)}
+.section-desc{font-size:17px;color:var(--text-secondary);max-width:540px;line-height:1.7}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(123,104,238,.25) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(0,212,255,.08) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(123,104,238,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(123,104,238,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-particles{position:absolute;inset:0;pointer-events:none}
+.hero-inner{position:relative;max-width:1200px;margin:0 auto;padding:var(--sp-3xl) var(--sp-lg);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3xl);align-items:center}
+.hero-content{max-width:560px}
+.hero-badge{display:inline-flex;align-items:center;gap:var(--sp-sm);padding:6px 14px;border-radius:var(--radius-full);background:rgba(123,104,238,.12);border:1px solid rgba(123,104,238,.25);font-size:13px;font-weight:600;color:var(--primary);margin-bottom:var(--sp-lg)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-size:clamp(36px,5.5vw,58px);font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:var(--sp-lg)}
+.hero-subtitle{font-size:18px;color:var(--text-secondary);line-height:1.7;margin-bottom:var(--sp-xl);max-width:480px}
+.hero-cta{display:flex;gap:var(--sp-md);flex-wrap:wrap;margin-bottom:var(--sp-2xl)}
+.hero-social-proof{display:flex;align-items:center;gap:var(--sp-md);font-size:13px;color:var(--text-muted);flex-wrap:wrap}
+.hero-avatars{display:flex}
+.hero-avatars span{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg-primary);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--bg-card);flex-shrink:0}
+.hero-avatars span:first-child{margin-left:0}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-mockup{position:relative;width:100%;max-width:500px;background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg),0 0 60px rgba(123,104,238,.15)}
+.mockup-toolbar{padding:12px 16px;background:var(--bg-secondary);border-bottom:1px solid var(--bg-card-border);display:flex;align-items:center;gap:var(--sp-sm)}
+.mockup-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.mockup-dot.r{background:#FF5F57}.mockup-dot.y{background:#FEBC2E}.mockup-dot.g{background:#28C840}
+.mockup-url{flex:1;margin:0 8px;background:var(--bg-primary);border-radius:var(--radius-sm);padding:5px 12px;font-size:11px;color:var(--text-muted);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mockup-content{padding:var(--sp-lg);overflow:hidden}
+.mockup-hero-bar{background:linear-gradient(135deg,rgba(123,104,238,.15),rgba(0,212,255,.08));border-radius:var(--radius-md);padding:var(--sp-md);margin-bottom:var(--sp-md);display:flex;align-items:center;gap:var(--sp-md)}
+.mockup-avatar-sm{width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--primary),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mockup-hero-info h4{font-size:14px;font-weight:700;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mockup-hero-info p{font-size:12px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mockup-hero-tags{display:flex;gap:var(--sp-sm);flex-wrap:wrap;margin-top:var(--sp-sm)}
+.tag{padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:rgba(123,104,238,.15);color:var(--primary);border:1px solid rgba(123,104,238,.2);white-space:nowrap}
+.mockup-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-sm);margin-bottom:var(--sp-md)}
+.mockup-stat{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:var(--sp-md);text-align:center}
+.mockup-stat .num{font-size:18px;font-weight:800;color:var(--primary)}
+.mockup-stat .lbl{font-size:10px;color:var(--text-muted);margin-top:2px}
+.mockup-actions{display:flex;gap:var(--sp-sm)}
+.mockup-btn{flex:1;padding:8px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-align:center;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mockup-btn.p{background:var(--primary);color:#fff}.mockup-btn.s{background:var(--bg-secondary);color:var(--text-secondary);border:1px solid var(--bg-card-border)}
+.mockup-float{position:absolute;background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-md);padding:12px 16px;box-shadow:var(--shadow-md);font-size:13px;animation:float 3s ease-in-out infinite;white-space:nowrap}
+.mockup-float.f1{top:-20px;right:-30px;display:flex;align-items:center;gap:var(--sp-sm)}
+.mockup-float.f2{bottom:40px;left:-40px;animation-delay:-1.5s}
+.mockup-float.f2 strong{color:var(--success)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.features{background:var(--bg-secondary)}
+.features-header{text-align:center;margin-bottom:var(--sp-3xl)}
+.features-header .section-desc{margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-lg)}
+.feature-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:var(--sp-xl);transition:all .3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary);transform:scaleY(0);transition:transform .3s}
+.feature-card:hover{background:var(--bg-card-hover);border-color:rgba(123,104,238,.3);transform:translateY(-4px);box-shadow:var(--shadow-md),0 0 30px rgba(123,104,238,.08)}
+.feature-card:hover::before{transform:scaleY(1)}
+.feature-icon{width:52px;height:52px;border-radius:var(--radius-md);background:rgba(123,104,238,.12);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:var(--sp-lg);transition:background .3s;flex-shrink:0}
+.feature-card:hover .feature-icon{background:rgba(123,104,238,.2)}
+.feature-card h3{font-size:18px;font-weight:700;margin-bottom:var(--sp-sm)}
+.feature-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+.templates-header{text-align:center;margin-bottom:var(--sp-2xl)}
+.templates-header .section-desc{margin:0 auto}
+.template-switcher{display:flex;align-items:center;justify-content:center;gap:var(--sp-sm);margin-bottom:var(--sp-2xl);flex-wrap:wrap}
+.tpl-btn{padding:8px 20px;border-radius:var(--radius-full);font-size:14px;font-weight:600;background:var(--bg-card);border:1px solid var(--bg-card-border);color:var(--text-secondary);transition:all .2s;cursor:pointer;white-space:nowrap}
+.tpl-btn:hover{border-color:var(--primary);color:var(--primary)}
+.tpl-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 2px 12px var(--primary-glow)}
+.template-preview{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);overflow:hidden;display:grid;grid-template-columns:280px 1fr}
+.tpl-sidebar{background:var(--bg-secondary);border-right:1px solid var(--bg-card-border);padding:var(--sp-lg);display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.tpl-sidebar-avatar{width:80px;height:80px;border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--primary),var(--accent-cyan));display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto var(--sp-lg);flex-shrink:0;transition:opacity .2s}
+.tpl-sidebar-info{text-align:center;width:100%;overflow:hidden}
+.tpl-sidebar-info h3{font-size:18px;font-weight:700;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tpl-sidebar-info p{font-size:13px;color:var(--text-secondary);margin-bottom:var(--sp-md);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tpl-tags{display:flex;flex-wrap:wrap;gap:var(--sp-xs);justify-content:center}
+.tpl-tag{padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:rgba(123,104,238,.12);color:var(--primary);border:1px solid rgba(123,104,238,.2);white-space:nowrap}
+.tpl-main{padding:var(--sp-xl);overflow:hidden}
+.tpl-main-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--sp-xl);gap:var(--sp-md);flex-wrap:wrap}
+.tpl-main-header>div:first-child{min-width:0;overflow:hidden}
+.tpl-main-header h2{font-size:24px;font-weight:800;margin-bottom:var(--sp-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tpl-main-header p{color:var(--text-secondary);font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tpl-main-header>div:last-child{flex-shrink:0;display:flex;gap:8px}
+.tpl-tabs{display:flex;border-bottom:1px solid var(--bg-card-border);margin-bottom:var(--sp-lg);overflow-x:auto;scrollbar-width:none}
+.tpl-tabs::-webkit-scrollbar{display:none}
+.tpl-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--text-secondary);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;background:transparent;border-left:none;border-right:none;border-top:none;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.tpl-tab:hover{color:var(--text-primary)}
+.tpl-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tpl-tab-content{display:none}
+.tpl-tab-content.active{display:block}
+.tpl-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-md);margin-bottom:var(--sp-xl);min-width:0}
+.tpl-stat-item{background:var(--bg-secondary);border-radius:var(--radius-md);padding:var(--sp-md);min-width:0;text-align:center}
+.tpl-stat-item .num{font-size:22px;font-weight:800;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tpl-stat-item .lbl{font-size:12px;color:var(--text-muted);margin-top:2px}
+.tpl-actions-row{display:flex;gap:var(--sp-sm);flex-wrap:wrap}
+.pricing{background:var(--bg-secondary)}
+.pricing-header{text-align:center;margin-bottom:var(--sp-3xl)}
+.pricing-header .section-desc{margin:0 auto}
+.pricing-toggle{display:flex;align-items:center;justify-content:center;gap:var(--sp-md);margin-bottom:var(--sp-2xl);flex-wrap:wrap}
+.pricing-toggle span{font-size:14px;font-weight:600;color:var(--text-secondary);transition:color .2s}
+.pricing-toggle span.active{color:var(--text-primary)}
+.toggle-switch{width:48px;height:26px;border-radius:13px;background:var(--bg-card-border);position:relative;cursor:pointer;transition:background .3s;border:none;flex-shrink:0}
+.toggle-switch.on{background:var(--primary)}
+.toggle-knob{width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.toggle-switch.on .toggle-knob{transform:translateX(22px)}
+.pricing-badge{font-size:11px;font-weight:700;background:rgba(46,204,113,.15);color:var(--success);padding:3px 8px;border-radius:var(--radius-full);vertical-align:middle;white-space:nowrap}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-lg);align-items:start}
+.price-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:var(--sp-xl);position:relative;transition:all .3s;overflow:hidden}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.price-card.popular{border-color:var(--primary);background:linear-gradient(180deg,rgba(123,104,238,.08) 0%,var(--bg-card) 40%);box-shadow:0 0 40px rgba(123,104,238,.12)}
+.price-card.popular::before{content:'';position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:100px;height:28px;background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:4px 16px;border-radius:var(--radius-full);white-space:nowrap;box-shadow:0 2px 12px var(--primary-glow);display:flex;align-items:center;justify-content:center;z-index:1}
+.popular-badge-text{position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:1}
+.price-tier{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:var(--sp-sm)}
+.price-name{font-size:22px;font-weight:800;margin-bottom:var(--sp-xs)}
+.price-desc{font-size:13px;color:var(--text-secondary);margin-bottom:var(--sp-lg);line-height:1.6}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:var(--sp-lg);flex-wrap:wrap}
+.price-currency{font-size:20px;font-weight:700;color:var(--text-secondary)}
+.price-value{font-size:48px;font-weight:800;line-height:1;transition:all .3s}
+.price-period{font-size:14px;color:var(--text-muted)}
+.annual-badge{display:none;font-size:11px;background:rgba(46,204,113,.15);color:var(--success);padding:2px 8px;border-radius:var(--radius-full);font-weight:700;margin-left:var(--sp-sm);white-space:nowrap}
+.annual-badge.show{display:inline}
+.price-divider{height:1px;background:var(--bg-card-border);margin:var(--sp-lg) 0}
+.price-features{display:flex;flex-direction:column;gap:var(--sp-md);margin-bottom:var(--sp-xl)}
+.price-feature{display:flex;align-items:flex-start;gap:var(--sp-sm);font-size:14px;color:var(--text-secondary)}
+.price-feature .check{color:var(--success);font-size:16px;flex-shrink:0;margin-top:1px}
+.price-feature.disabled{opacity:.4}
+.price-feature.disabled .check{color:var(--text-muted)}
+.price-card .btn{width:100%}
+.cta-section{padding:var(--sp-4xl) 0}
+.cta-box{background:linear-gradient(135deg,rgba(123,104,238,.2),rgba(0,212,255,.08));border:1px solid rgba(123,104,238,.3);border-radius:var(--radius-xl);padding:var(--sp-3xl) var(--sp-xl);text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 100%,rgba(123,104,238,.15),transparent);pointer-events:none}
+.cta-box h2{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:var(--sp-md);position:relative}
+.cta-box p{font-size:17px;color:var(--text-secondary);margin-bottom:var(--sp-xl);position:relative}
+.cta-row{display:flex;gap:var(--sp-md);justify-content:center;flex-wrap:wrap;position:relative}
+.footer{border-top:1px solid var(--bg-card-border);padding:var(--sp-3xl) 0 var(--sp-xl);background:var(--bg-secondary)}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--sp-3xl);margin-bottom:var(--sp-3xl)}
+.footer-logo{font-size:1.1rem;font-weight:800;letter-spacing:1px;margin-bottom:var(--sp-md);display:flex;align-items:center;gap:var(--sp-sm)}
+.footer-logo .logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.footer-logo span{color:var(--primary)}
+.footer-brand p{font-size:14px;color:var(--text-muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);margin-bottom:var(--sp-lg)}
+.footer-col a{display:block;font-size:14px;color:var(--text-muted);margin-bottom:var(--sp-sm);transition:color .2s}
+.footer-col a:hover{color:var(--text-primary)}
+.footer-bottom{border-top:1px solid var(--bg-card-border);padding-top:var(--sp-xl);display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--text-muted);flex-wrap:wrap;gap:var(--sp-md)}
+.footer-social{display:flex;gap:var(--sp-sm)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:var(--sp-lg)}
+.modal-overlay.show{display:flex}
+.modal{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:var(--sp-2xl);max-width:480px;width:100%;position:relative;box-shadow:var(--shadow-lg);animation:modal-in .25s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
+@keyframes modal-in{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-close{position:absolute;top:var(--sp-md);right:var(--sp-md);background:transparent;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);transition:all .2s;font-family:inherit}
+.modal-close:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+.modal h2{font-size:22px;font-weight:800;margin-bottom:var(--sp-xs)}
+.modal p{font-size:14px;color:var(--text-secondary);margin-bottom:var(--sp-xl)}
+.form-group{margin-bottom:var(--sp-md)}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:var(--sp-sm);color:var(--text-secondary)}
+.form-input{width:100%;padding:12px 16px;background:var(--bg-secondary);border:1px solid var(--bg-card-border);border-radius:var(--radius-md);color:var(--text-primary);font-size:15px;font-family:inherit;transition:all .2s}
+.form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(123,104,238,.15)}
+.form-input::placeholder{color:var(--text-muted)}
+.form-divider{display:flex;align-items:center;gap:var(--sp-md);margin:var(--sp-lg) 0;font-size:13px;color:var(--text-muted)}
+.form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:var(--bg-card-border)}
+.social-login{display:flex;gap:var(--sp-md)}
+.social-login-btn{flex:1;padding:12px;border-radius:var(--radius-md);background:var(--bg-secondary);border:1px solid var(--bg-card-border);color:var(--text-primary);font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:var(--sp-sm);cursor:pointer;transition:all .2s;font-family:inherit}
+.social-login-btn:hover{background:var(--bg-card-hover);border-color:var(--primary)}
+.modal .btn{width:100%;margin-top:var(--sp-sm)}
+.form-error{font-size:12px;color:#E74C3C;margin-top:4px;display:none}
+.form-error.show{display:block}
+.toast{position:fixed;bottom:var(--sp-xl);right:var(--sp-xl);background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:var(--sp-md) var(--sp-lg);box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:var(--sp-sm);font-size:14px;font-weight:600;z-index:300;transform:translateY(120px);opacity:0;transition:all .3s;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{font-size:18px;flex-shrink:0}
+.fade-up{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.btn.loading{pointer-events:none;opacity:.7;position:relative}
+.btn.loading::after{content:'';width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin-left:var(--sp-sm);display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:var(--sp-2xl)}
+  .hero-visual{order:-1;max-width:480px;margin:0 auto;width:100%}
+  .hero-content{text-align:center;max-width:100%}
+  .hero-subtitle{margin-left:auto;margin-right:auto}
+  .hero-cta{justify-content:center}
+  .hero-social-proof{justify-content:center}
+  .template-preview{grid-template-columns:1fr}
+  .tpl-sidebar{border-right:none;border-bottom:1px solid var(--bg-card-border)}
+  .tpl-stats-row{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:840px){
+  .nav-links{display:none}
+  .mobile-toggle{display:flex}
+  .features-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:var(--sp-md);text-align:center}
+  .form-divider{display:none}
+  .social-login{flex-direction:column}
+  .tpl-main-header{flex-direction:column}
+  .tpl-main-header>div:last-child{flex-direction:column;width:100%}
+  .tpl-main-header>div:last-child .btn{width:100%}
+  .pricing-toggle{flex-direction:column}
+  .tpl-stats-row{grid-template-columns:repeat(2,1fr)}
+  .tpl-tabs{flex-wrap:nowrap}
+  .mockup-float.f1{right:0;top:-10px}
+  .mockup-float.f2{left:0;bottom:20px}
+}
+</style>
 </head>
 <body>
-
-<!-- ===== 导航栏 ===== -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-      <a href="index.html" class="nav-logo">IP<span>Studio</span></a>
-      <div class="nav-links">
-        <a href="#home" class="nav-link active">首页</a>
-        <a href="#about" class="nav-link">关于</a>
-        <a href="#videos" class="nav-link">视频</a>
-        <a href="#ai" class="nav-link">AI数字人</a>
-        <a href="#products" class="nav-link">作品/产品</a>
-        <a href="bizatom.html" class="nav-link">BIZATOM.AI</a>
-        <a href="airankrocket.html" class="nav-link">AIRankRocket</a>
-        <a href="#social" class="nav-link">社交媒体</a>
-        <a href="https://www.bowentian.com" target="_blank" class="nav-link" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-radius:20px;font-weight:700;padding:6px 16px;">🌐 一键展示</a>
+    <a href="#" class="nav-logo"><div class="logo-icon">✨</div>AIP<span>Studio</span></a>
+    <div class="nav-links">
+      <a href="#features" id="nav-features" class="active">功能</a>
+      <a href="#templates" id="nav-templates">模板</a>
+      <a href="#pricing" id="nav-pricing">定价</a>
+      <a href="https://www.bowentian.com" target="_blank" id="nav-bowen">Bowen 主页</a>
     </div>
-    <select class="profession-switch" id="professionSwitch">
-      <option value="investor">📈 投资人</option>
-      <option value="painter">🎨 画家</option>
-      <option value="calligrapher">✒️ 书法家</option>
-      <option value="doctor">🏥 医生</option>
-      <option value="lawyer">⚖️ 律师</option>
-      <option value="founder">🚀 创始人</option>
-      <option value="freelancer">💼 自由职业者</option>
-    </select>
-    <button class="mobile-toggle" id="mobileToggle">☰</button>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="active" data-lang="zh" id="langBtnZh">中文</button>
+        <button data-lang="en" id="langBtnEn">EN</button>
+      </div>
+      <button class="btn btn-sm btn-secondary" id="loginBtn">登录</button>
+      <button class="btn btn-sm btn-primary" id="signupBtn">免费试用</button>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
   </div>
 </nav>
-
-<!-- 移动端菜单 -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home">首页</a>
-  <a href="#about">关于</a>
-  <a href="#videos">视频</a>
-  <a href="#ai">AI数字人</a>
-  <a href="#products">作品/产品</a>
-  <a href="#social">社交媒体</a>
+  <a href="#features" id="mob-features">功能</a>
+  <a href="#templates" id="mob-templates">模板</a>
+  <a href="#pricing" id="mob-pricing">定价</a>
+  <a href="https://www.bowentian.com" target="_blank">Bowen 主页</a>
 </div>
-
-<!-- ===== Hero区域 ===== -->
-<section class="hero" id="home">
-  <div class="hero-bg" id="heroBg"></div>
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <canvas class="hero-particles" id="particlesCanvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-text fade-in">
-      <div class="profession-badge" id="heroBadge">📈 投资人</div>
-      <h1 id="heroName">张明远</h1>
-      <p class="hero-title" id="heroTitle">独立投资人 / 财经博主</p>
-      <p class="hero-subtitle" id="heroSubtitle">专注科技赛道 · 10年投资经验 · 年化回报35%+</p>
-      <p class="hero-bio" id="heroBio">前高盛分析师，现为独立投资人。专注于AI、新能源、生物科技等前沿领域的早期投资与研究。</p>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span><span id="hero-badge-text">AI 驱动 · 5 分钟生成专属品牌官网</span></div>
+      <h1><span class="text-gradient" id="hero-h1-1">30 分钟</span><br><span id="hero-h1-2">建立你的 AI 数字人</span><br><span id="hero-h1-3">个人品牌官网</span></h1>
+      <p class="hero-subtitle" id="hero-subtitle">告别复杂建站流程。输入职业信息，AI 自动生成专属品牌页面，支持多语言、AI 数字人讲解、一键分享至社交平台。</p>
       <div class="hero-cta">
-        <a href="https://www.bowentian.com" target="_blank" class="btn-showcase">🌐 一键展示个人网页</a>
-        <a href="#ai" class="btn-primary">🤖 体验AI数字人</a>
-        <a href="#videos" class="btn-outline">🎬 观看视频</a>
-        <a href="#products" class="btn-outline">💎 查看产品</a>
+        <button class="btn btn-primary btn-lg" id="heroCtaBtn"><span id="cta-btn-text">立即免费开始</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <button class="btn btn-secondary btn-lg" id="demoBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> <span id="demo-btn-text">观看演示</span></button>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="num">10+</div><div class="label">年经验</div></div>
-        <div class="hero-stat"><div class="num">200+</div><div class="label">期视频</div></div>
-        <div class="hero-stat"><div class="num">50万+</div><div class="label">粉丝</div></div>
-        <div class="hero-stat"><div class="num">35%</div><div class="label">年化回报</div></div>
+      <div class="hero-social-proof">
+        <div class="hero-avatars"><span>👩‍💼</span><span>👨‍🎨</span><span>👩‍⚕️</span><span>👨‍💻</span><span>👩‍🏫</span></div>
+        <span><strong style="color:var(--text-primary)">12,480+</strong> <span id="hero-social-text">个人品牌已创建</span></span>
       </div>
     </div>
-    <div class="hero-visual fade-in">
-      <div class="hero-avatar-wrap">
-        <div class="hero-avatar-inner" id="heroAvatar">📈</div>
+    <div class="hero-visual">
+      <div class="hero-mockup">
+        <div class="mockup-toolbar"><span class="mockup-dot r"></span><span class="mockup-dot y"></span><span class="mockup-dot g"></span><span class="mockup-url">aip.studio/@张明远</span></div>
+        <div class="mockup-content">
+          <div class="mockup-hero-bar">
+            <div class="mockup-avatar-sm">📈</div>
+            <div class="mockup-hero-info"><h4>张明远 · Zhang Mingyuan</h4><p>独立投资人 / 财经博主</p><div class="mockup-hero-tags"><span class="tag">投资</span><span class="tag">AI</span><span class="tag">创业</span></div></div>
+          </div>
+          <div class="mockup-stats">
+            <div class="mockup-stat"><div class="num">10+</div><div class="lbl" id="mock-lbl1">年经验</div></div>
+            <div class="mockup-stat"><div class="num">200+</div><div class="lbl" id="mock-lbl2">期视频</div></div>
+            <div class="mockup-stat"><div class="num">50万+</div><div class="lbl" id="mock-lbl3">粉丝</div></div>
+          </div>
+          <div class="mockup-actions">
+            <div class="mockup-btn p" id="mock-btn1">📬 联系我</div>
+            <div class="mockup-btn s" id="mock-btn2">🎬 视频</div>
+            <div class="mockup-btn s" id="mock-btn3">💎 产品</div>
+          </div>
+        </div>
+        <div class="mockup-float f1"><span>🤖</span><span id="float1">AI 生成中...</span></div>
+        <div class="mockup-float f2"><span>✅ 发布成功！</span><strong>+1</strong></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ===== 关于我 ===== -->
-<section class="section" id="about">
+<section class="section features" id="features">
   <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">About</p>
-      <h2 class="section-title">关于我</h2>
-      <p class="section-desc">专业背景、经历与核心能力</p>
+    <div class="features-header fade-up">
+      <p class="section-label">Core Features</p>
+      <h2 class="section-title" id="feat-title">为什么选择 AIP Studio</h2>
+      <p class="section-desc" id="feat-desc">一站式解决个人品牌建设的所有技术需求，让你专注于内容创作本身</p>
     </div>
-    <div class="about-grid fade-in">
-      <div class="about-image" id="aboutIcon" style="display:flex;align-items:center;justify-content:center;font-size:6rem;background:var(--bg-card);">📈</div>
-      <div class="about-content">
-        <h3 id="aboutName">张明远</h3>
-        <p id="aboutBio">前高盛分析师，现为独立投资人。专注于AI、新能源、生物科技等前沿领域的早期投资与研究。通过深度行业分析，为投资者提供独到的市场洞察。</p>
-        <p>拥有CFA、FRM双证，曾主导超过$500M的科技投资组合。目前在各大平台分享投资心得，致力于让更多人掌握科学的投资方法。</p>
-        <div class="skills" id="aboutSkills">
-          <span class="skill-tag">投资分析</span>
-          <span class="skill-tag">行业研究</span>
-          <span class="skill-tag">资产配置</span>
-          <span class="skill-tag">风险控制</span>
-          <span class="skill-tag">量化分析</span>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🤖</div>
+        <h3 id="f1-title">AI 数字人讲解</h3>
+        <p id="f1-desc">上传照片或选择预设形象，AI 自动生成你的数字人分身，支持多语言实时讲解，让访客感受沉浸式品牌体验。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⚡</div>
+        <h3 id="f2-title">5 分钟极速建站</h3>
+        <p id="f2-desc">输入职业信息，AI 自动生成专属品牌页面。无需设计基础，无需写代码，一键发布，立即拥有专业级个人品牌网站。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🌐</div>
+        <h3 id="f3-title">多语言全球化</h3>
+        <p id="f3-desc">一键生成中英双语页面，AI 智能翻译保持专业度。内置 GEO 优化，帮助你在全球平台被精准发现。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📊</div>
+        <h3 id="f4-title">数据洞察面板</h3>
+        <p id="f4-desc">访客来源分析、页面停留时长、转化漏斗追踪。实时了解你的品牌影响力，数据驱动持续优化。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🔗</div>
+        <h3 id="f5-title">一键社交分发</h3>
+        <p id="f5-desc">自动生成适配各平台的分享卡片和简介，一站式管理全网品牌形象。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🎨</div>
+        <h3 id="f6-title">多行业模板库</h3>
+        <p id="f6-desc">覆盖投资人、画家、医生、律师、创始人等 20+ 职业模板。每个模板都经过行业专家验证，精准匹配职业特性。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section templates" id="templates">
+  <div class="container">
+    <div class="templates-header fade-up">
+      <p class="section-label">Templates</p>
+      <h2 class="section-title" id="tpl-sec-title">海量职业模板，即刻体验</h2>
+      <p class="section-desc" id="tpl-sec-desc">选择你的职业，看到专属品牌页面样式。切换模板，风格随之变化</p>
+    </div>
+    <div class="template-switcher fade-up" id="templateSwitcher">
+      <button class="tpl-btn active" data-tpl="investor">📈 <span id="tpl-investor">投资人</span></button>
+      <button class="tpl-btn" data-tpl="painter">🎨 <span id="tpl-painter">画家</span></button>
+      <button class="tpl-btn" data-tpl="doctor">🏥 <span id="tpl-doctor">医生</span></button>
+      <button class="tpl-btn" data-tpl="founder">🚀 <span id="tpl-founder">创始人</span></button>
+      <button class="tpl-btn" data-tpl="lawyer">⚖️ <span id="tpl-lawyer">律师</span></button>
+      <button class="tpl-btn" data-tpl="freelancer">💼 <span id="tpl-freelancer">自由职业</span></button>
+    </div>
+    <div class="template-preview fade-up" id="templatePreview">
+      <div class="tpl-sidebar">
+        <div class="tpl-sidebar-avatar" id="tplAvatar">📈</div>
+        <div class="tpl-sidebar-info">
+          <h3 id="tplName">张明远</h3>
+          <p id="tplTitle">独立投资人 / 财经博主</p>
+          <div class="tpl-tags" id="tplTags"><span class="tpl-tag">投资</span><span class="tpl-tag">AI</span><span class="tpl-tag">创业</span></div>
+        </div>
+      </div>
+      <div class="tpl-main">
+        <div class="tpl-main-header">
+          <div>
+            <h2 id="tplHeroName">张明远 · Zhang Mingyuan</h2>
+            <p id="tplHeroTitle">专注科技赛道 · 10年投资经验 · 年化回报35%+</p>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-secondary" id="tpl-copy">🔗 <span id="tpl-copy-text">复制链接</span></button>
+            <button class="btn btn-sm btn-primary" id="tpl-edit">编辑页面</button>
+          </div>
+        </div>
+        <div class="tpl-tabs">
+          <button class="tpl-tab active" data-tab="about" id="tab-about-btn">关于我</button>
+          <button class="tpl-tab" data-tab="portfolio" id="tab-portfolio-btn">作品/案例</button>
+          <button class="tpl-tab" data-tab="social" id="tab-social-btn">社交媒体</button>
+          <button class="tpl-tab" data-tab="contact" id="tab-contact-btn">联系方式</button>
+        </div>
+        <div class="tpl-tab-content active" id="tab-about">
+          <div class="tpl-stats-row">
+            <div class="tpl-stat-item"><div class="num">10+</div><div class="lbl" id="ts1">年经验</div></div>
+            <div class="tpl-stat-item"><div class="num">200+</div><div class="lbl" id="ts2">期视频</div></div>
+            <div class="tpl-stat-item"><div class="num">50万+</div><div class="lbl" id="ts3">粉丝</div></div>
+            <div class="tpl-stat-item"><div class="num">35%</div><div class="lbl" id="ts4">年化回报</div></div>
+          </div>
+          <div class="tpl-actions-row">
+            <button class="btn btn-sm btn-secondary" id="ts-act1">🎬 <span id="ts-act1-t">观看视频</span></button>
+            <button class="btn btn-sm btn-secondary" id="ts-act2">💎 <span id="ts-act2-t">产品</span></button>
+            <button class="btn btn-sm btn-secondary" id="ts-act3">📝 <span id="ts-act3-t">媒体报道</span></button>
+          </div>
+        </div>
+        <div class="tpl-tab-content" id="tab-portfolio">
+          <div style="color:var(--text-secondary);font-size:15px;line-height:1.7;overflow:hidden;">
+            <p>前高盛分析师，现为独立投资人。专注于 AI、新能源、生物科技等前沿领域的早期投资与研究。</p>
+            <p style="margin-top:12px;">代表投资案例：XXX 科技（Pre-A 轮）、YYY 新能源（A 轮）、ZZZ 生物（B 轮）</p>
+          </div>
+        </div>
+        <div class="tpl-tab-content" id="tab-social">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;overflow:hidden;">
+            <button class="btn btn-sm btn-secondary">🐦 Twitter/X</button>
+            <button class="btn btn-sm btn-secondary">💼 LinkedIn</button>
+            <button class="btn btn-sm btn-secondary">📺 Bilibili</button>
+            <button class="btn btn-sm btn-secondary">📝 微信公众号</button>
+          </div>
+        </div>
+        <div class="tpl-tab-content" id="tab-contact">
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:300px;overflow:hidden;">
+            <button class="btn btn-sm btn-secondary">📧 <span id="tc1">发送邮件</span></button>
+            <button class="btn btn-sm btn-secondary">💬 <span id="tc2">预约咨询</span></button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ===== 作品集/画廊 ===== -->
-<section class="section" id="gallery" style="background:var(--bg-secondary);">
+<section class="section pricing" id="pricing">
   <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Gallery</p>
-      <h2 class="section-title">作品展示</h2>
-      <p class="section-desc">精选作品与创作成果</p>
-    </div>
-    <div class="gallery-grid fade-in" id="galleryContainer"></div>
-  </div>
-</section>
-
-<!-- ===== 短视频 ===== -->
-<section class="section" id="videos">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Videos</p>
-      <h2 class="section-title">系列短视频</h2>
-      <p class="section-desc">深度内容，持续输出价值</p>
-    </div>
-    <div class="video-grid fade-in" id="videoContainer"></div>
-  </div>
-</section>
-
-<!-- ===== AI数字人 ===== -->
-<section class="section ai-section" id="ai">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">AI Digital Human</p>
-      <h2 class="section-title">AI数字人 🤖</h2>
-      <p class="section-desc">刻录您的形象和声音，用AI生成系列短视频讲解内容</p>
-    </div>
-    <div class="ai-demo-wrap fade-in">
-      <div class="ai-screen">
-        <div class="ai-avatar-placeholder" id="aiAvatarIcon">🤖</div>
-        <div class="ai-status">AI数字人在线</div>
-      </div>
-      <div>
-        <p style="font-size:1rem;margin-bottom:24px;color:var(--text-secondary);" id="aiDemoTitle">
-          用我的AI数字人讲解：如何分析投资热点
-        </p>
-        <div class="ai-topics" id="aiTopics"></div>
+    <div class="pricing-header fade-up">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title" id="price-title">简单透明的定价</h2>
+      <p class="section-desc" id="price-desc">选择适合你的计划，随时升级或取消</p>
+      <div class="pricing-toggle">
+        <span class="active" id="monthlyLabel">月付</span>
+        <button class="toggle-switch on" id="pricingToggle"><span class="toggle-knob"></span></button>
+        <span id="annualLabel">年付</span>
+        <span class="pricing-badge" id="price-badge">省 20%</span>
       </div>
     </div>
-    <div class="ai-features fade-in">
-      <div class="ai-feature">
-        <div class="ai-feature-icon">🎙️</div>
-        <h4>声音克隆</h4>
-        <p>上传5分钟语音样本，AI精准克隆您的声音特征，还原度高</p>
+    <div class="pricing-grid">
+      <div class="price-card fade-up">
+        <div class="price-tier">Free</div>
+        <div class="price-name" id="pname-free">免费版</div>
+        <div class="price-desc" id="pdesc-free">适合个人尝鲜体验，了解 AIP Studio 核心功能</div>
+        <div class="price-amount">
+          <span class="price-currency">¥</span>
+          <span class="price-value" data-monthly="0" data-annual="0">0</span>
+          <span class="price-period" id="pperiod">/月</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-features" id="pfeat-free">
+          <div class="price-feature"><span class="check">✓</span> <span id="pf1-1">1 个品牌页面</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf1-2">基础模板库（10个）</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf1-3">AI 数字人（1个）</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf1-4">基础数据分析</span></div>
+          <div class="price-feature disabled"><span class="check">✗</span> <span id="pf1-5">自定义域名</span></div>
+          <div class="price-feature disabled"><span class="check">✗</span> <span id="pf1-6">去除水印</span></div>
+        </div>
+        <button class="btn btn-secondary" id="pbtn-free"><span id="pbtn-free-t">免费开始</span></button>
       </div>
-      <div class="ai-feature">
-        <div class="ai-feature-icon">📸</div>
-        <h4>形象生成</h4>
-        <p>上传照片或短视频，生成您的专属数字人形象，表情自然流畅</p>
+      <div class="price-card popular fade-up">
+        <div class="popular-badge-text"><span id="pop-badge">最受欢迎</span></div>
+        <div class="price-tier">Pro</div>
+        <div class="price-name" id="pname-pro">专业版</div>
+        <div class="price-desc" id="pdesc-pro">适合有明确个人品牌建设需求的专业人士</div>
+        <div class="price-amount">
+          <span class="price-currency">¥</span>
+          <span class="price-value" data-monthly="99" data-annual="79">79</span>
+          <span class="price-period">/月</span>
+          <span class="annual-badge show" id="proBadgeText">省 ¥240/年</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-features" id="pfeat-pro">
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-1">5 个品牌页面</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-2">全部模板库（20+个）</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-3">AI 数字人（5个）</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-4">高级数据分析</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-5">自定义域名</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf2-6">去除水印</span></div>
+        </div>
+        <button class="btn btn-primary" id="pbtn-pro"><span id="pbtn-pro-t">立即升级</span></button>
       </div>
-      <div class="ai-feature">
-        <div class="ai-feature-icon">🎬</div>
-        <h4>视频生成</h4>
-        <p>输入文案即可自动生成讲解视频，一键分发至各大短视频平台</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 产品/作品销售 ===== -->
-<section class="section" id="products">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Products</p>
-      <h2 class="section-title">产品与作品</h2>
-      <p class="section-desc">精选产品，明码标价，直接购买，款项直达创作者账户</p>
-    </div>
-    <div class="product-grid fade-in" id="productContainer"></div>
-  </div>
-</section>
-
-<!-- ===== 线上课程 ===== -->
-<section class="section" id="courses" style="background:var(--bg-secondary);">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Courses</p>
-      <h2 class="section-title">线上虚拟课程</h2>
-      <p class="section-desc">系统化知识体系，随时随地学习</p>
-    </div>
-    <div class="course-grid fade-in" id="courseContainer"></div>
-  </div>
-</section>
-
-<!-- ===== 社交媒体 ===== -->
-<section class="section social-section" id="social">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Connect</p>
-      <h2 class="section-title">社交媒体链接</h2>
-      <p class="section-desc">一键连接国内外主流平台，拓展你的影响力</p>
-    </div>
-    <div class="social-groups fade-in">
-      <div class="social-group">
-        <h4>🇨🇳 国内平台</h4>
-        <div class="social-links" id="domesticSocial"></div>
-      </div>
-      <div class="social-group">
-        <h4>🌍 国际平台</h4>
-        <div class="social-links" id="internationalSocial"></div>
+      <div class="price-card fade-up">
+        <div class="price-tier">Team</div>
+        <div class="price-name" id="pname-team">团队版</div>
+        <div class="price-desc" id="pdesc-team">适合机构、MCN 公司或有多品牌管理需求的用户</div>
+        <div class="price-amount">
+          <span class="price-currency">¥</span>
+          <span class="price-value" data-monthly="299" data-annual="239">239</span>
+          <span class="price-period">/月</span>
+          <span class="annual-badge show" id="teamBadgeText">省 ¥720/年</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-features" id="pfeat-team">
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-1">无限品牌页面</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-2">全部模板库 + 定制模板</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-3">AI 数字人（无限）</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-4">团队协作管理</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-5">API 接入支持</span></div>
+          <div class="price-feature"><span class="check">✓</span> <span id="pf3-6">专属客户成功经理</span></div>
+        </div>
+        <button class="btn btn-secondary" id="pbtn-team"><span id="pbtn-team-t">联系我们</span></button>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ===== BIZATOM.AI ===== -->
-<section class="section" id="bizatom" style="background:var(--bg-secondary);">
+<section class="section cta-section">
   <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">BIZATOM.AI</p>
-      <h2 class="section-title">BIZATOM.AI · 商业经典AI拆解平台</h2>
-      <p class="section-desc">AIIPOWER LIMITED 旗下产品 · 十五分钟读透一本商业经典 · bizatom.ai</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;max-width:900px;margin:0 auto;">
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;">
-        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🎯 目标用户</h3>
-        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
-          国际知名商学院学生 · 商业精英 · 自由职业者 · 企业高管/创始人
-        </p>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;">
-        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🤖 AI OS架构</h3>
-        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
-          AI驱动的商业管理知识学习平台，提供个性化商业知识学习与企业管理赋能。AI OS架构，智能适配每位用户的学习需求。
-        </p>
+    <div class="cta-box fade-up">
+      <h2 id="cta-h2">准备好建立你的 <span class="text-gradient">个人品牌</span> 了吗？</h2>
+      <p id="cta-p">5 分钟快速上手，无需信用卡。立即开始你的 AI 个人品牌之旅。</p>
+      <div class="cta-row">
+        <button class="btn btn-primary btn-lg" id="ctaBtn"><span id="cta-final-text">立即免费创建</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <button class="btn btn-secondary btn-lg" id="cta-demo-btn"><span id="cta-demo-text">预约演示</span></button>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ===== AIRankRocket ===== -->
-<section class="section" id="airankrocket" style="background:var(--bg-card);">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">🚀 AIRankRocket</p>
-      <h2 class="section-title">AIRankRocket · AI驱动GEO工具</h2>
-      <p class="section-desc">AIIPOWER LIMITED 旗下产品 · 让AI搜索引擎读懂你的品牌 · airankrocket.ai</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;max-width:900px;margin:0 auto;">
-      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:32px;">
-        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🎯 GEO 生成引擎优化</h3>
-        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
-          针对ChatGPT、Perplexity、Google AI Overview等AI搜索引擎的品牌内容优化。自动生成结构化数据，提升品牌在AI回答中的权威排名。
-        </p>
-      </div>
-      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:32px;">
-        <h3 style="color:var(--primary);margin-bottom:16px;font-size:1.2rem;">🤖 AI驱动全自动</h3>
-        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
-          AIRankRocket 主要面向企业及一人公司（OPC），自动抓取品牌内容、生成Schema.org结构化数据、监控AI搜索排名、提供持续优化建议。让AI成为你的品牌代言人。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid">
+    <div class="footer-inner">
       <div class="footer-brand">
-        <h3>AIIPOWER<span>®️</span></h3>
-        <p>AIIPOWER LIMITED 旗下产品：AIP Studio (个人IP SaaS平台 · aiipower.me)、BIZATOM.AI (商业经典AI拆解平台 · bizatom.ai)、AIRankRocket (AI驱动GEO工具 · airankrocket.ai)。To B：AI打造企业品牌 + AI企业培训 (aiipower.ai)。<br>AIIPOWER®️ = 人工智能重塑、赋能个人与企业品牌。</p>
+        <div class="footer-logo"><div class="logo-icon">✨</div>AIP<span>Studio</span></div>
+        <p id="footer-brand-desc">AI 驱动的个人品牌 SaaS 平台，由 AIIPOWER LIMITED 出品。让人工智能成为你个人品牌建设最强大的助手。</p>
       </div>
       <div class="footer-col">
-        <h4>功能</h4>
-        <a href="#ai">AI数字人</a>
-        <a href="#videos">短视频</a>
-        <a href="#products">产品销售</a>
-        <a href="#courses">在线课程</a>
+        <h4 id="fcol1-title">产品</h4>
+        <a href="#" id="fcol1-a1">功能介绍</a>
+        <a href="#" id="fcol1-a2">模板库</a>
+        <a href="#" id="fcol1-a3">定价方案</a>
+        <a href="#" id="fcol1-a4">更新日志</a>
       </div>
       <div class="footer-col">
-        <h4>模板</h4>
-        <a href="javascript:void(0)" onclick="switchProfession('investor')">投资人模板</a>
-        <a href="javascript:void(0)" onclick="switchProfession('painter')">画家模板</a>
-        <a href="javascript:void(0)" onclick="switchProfession('doctor')">医生模板</a>
-        <a href="javascript:void(0)" onclick="switchProfession('lawyer')">律师模板</a>
+        <h4 id="fcol2-title">资源</h4>
+        <a href="#" id="fcol2-a1">帮助中心</a>
+        <a href="#" id="fcol2-a2">开发者文档</a>
+        <a href="#" id="fcol2-a3">博客</a>
+        <a href="#" id="fcol2-a4">案例展示</a>
       </div>
       <div class="footer-col">
-        <h4>关于</h4>
-        <a href="#about">关于我们</a>
-        <a href="privacy.html">隐私政策</a>
-        <a href="terms.html">服务条款</a>
-        <a href="mailto:bowen@bowentian.com">联系我们</a>
+        <h4 id="fcol3-title">公司</h4>
+        <a href="https://www.bowentian.com" target="_blank" id="fcol3-a1">关于 Bowen</a>
+        <a href="#" id="fcol3-a2">联系我们</a>
+        <a href="https://www.Bizatom.ai" target="_blank" id="fcol3-a3">Bizatom.AI</a>
+        <a href="#" id="fcol3-a4">隐私政策</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 AIIPOWER LIMITED. All rights reserved. AIP Studio、BIZATOM.AI、AIRankRocket 为旗下产品。</p>
-      <p style="color:var(--text-muted);font-size:0.8rem;">aiipower.me (AIP Studio) · aiipower.ai (企业服务) · bizatom.ai · airankrocket.ai · aiipower.com / aiipower.cn (国内市场筹备中)</p>
+      <span id="footer-copy">© 2026 AIIPOWER LIMITED. All rights reserved.</span>
+      <div class="footer-social">
+        <button class="btn-icon" title="Twitter">𝕏</button>
+        <button class="btn-icon" title="LinkedIn">💼</button>
+        <button class="btn-icon" title="Bilibili">📺</button>
+      </div>
     </div>
   </div>
 </footer>
-
-<!-- ===== 一键展示个人网页 入口横幅 ===== -->
-<div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:48px 24px;text-align:center;margin:0;">
-  <div class="container" style="max-width:800px;margin:0 auto;">
-    <p style="font-size:0.85rem;letter-spacing:3px;color:rgba(255,255,255,0.7);margin-bottom:12px;text-transform:uppercase;">AIP Studio · Personal Showcase</p>
-    <h3 style="font-size:1.8rem;color:#fff;margin-bottom:16px;font-weight:800;">🌐 查看您的个人品牌展示页</h3>
-    <p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.6;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto;">在 AIP Studio 完成内容上传和品牌配置后，点击下方按钮预览您的对外展示效果。支持自定义域名绑定。</p>
-    <a href="https://www.bowentian.com" target="_blank" style="display:inline-block;background:#fff;color:#667eea;padding:16px 40px;border-radius:50px;font-size:1.1rem;font-weight:800;text-decoration:none;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-      ✨ 一键展示个人网页 →
-    </a>
-    <p style="color:rgba(255,255,255,0.55);font-size:0.82rem;margin-top:20px;">示例：www.bowentian.com · 支持自定义域名如 www.yourbrand.com</p>
-  </div>
-</div>
-
-<!-- ===== 弹窗 ===== -->
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal-overlay" id="signupModal">
   <div class="modal">
-    <h3></h3>
-    <div class="modal-body"></div>
+    <button class="modal-close" id="modalClose">✕</button>
+    <h2 id="modal-title">创建你的免费账号</h2>
+    <p id="modal-sub">5 分钟开始建立个人品牌，无需信用卡</p>
+    <form id="signupForm" novalidate>
+      <div class="form-group">
+        <label id="label-email">邮箱地址</label>
+        <input type="email" class="form-input" placeholder="you@example.com" id="emailInput" autocomplete="email">
+        <div class="form-error" id="emailError"><span id="err-email">请输入有效的邮箱地址</span></div>
+      </div>
+      <div class="form-group">
+        <label id="label-pwd">设置密码</label>
+        <input type="password" class="form-input" placeholder="At least 8 characters" id="passwordInput" autocomplete="new-password">
+        <div class="form-error" id="pwdError"><span id="err-pwd">密码至少需要 8 位字符</span></div>
+      </div>
+      <div class="form-divider" id="or-divider">或</div>
+      <div class="social-login">
+        <button type="button" class="social-login-btn" id="social-google">🔵 <span id="s-google">Google</span></button>
+        <button type="button" class="social-login-btn" id="social-wechat">💬 <span id="s-wechat">微信</span></button>
+      </div>
+      <div class="form-divider"></div>
+      <button type="submit" class="btn btn-primary" id="submitBtn"><span id="submit-text">创建账号</span></button>
+    </form>
   </div>
 </div>
-
-<!-- ===== Toast ===== -->
-<div class="toast" id="toast"></div>
-
-<!-- ===== Scripts ===== -->
-<script src="data/config.js"></script>
-<script src="js/app.js"></script>
-<script src="js/utils.js"></script>
+<div class="toast" id="toast"><span class="toast-icon">✅</span><span id="toastMsg">账号创建成功！请查收验证邮件。</span></div>
 <script>
-// 初始化社交媒体链接
-function initSocialLinks() {
-  document.getElementById('domesticSocial').innerHTML = SOCIAL_PLATFORMS.domestic.map(p =>
-    '<a href="' + p.url + '" class="social-link" target="_blank">' +
-    '<span class="s-icon">' + p.icon + '</span>' +
-    '<span class="s-name">' + p.name + '</span></a>'
-  ).join('');
-  document.getElementById('internationalSocial').innerHTML = SOCIAL_PLATFORMS.international.map(p =>
-    '<a href="' + p.url + '" class="social-link" target="_blank">' +
-    '<span class="s-icon">' + p.icon + '</span>' +
-    '<span class="s-name">' + p.name + '</span></a>'
-  ).join('');
+(function(){
+var canvas=document.getElementById('particlesCanvas'),ctx=canvas.getContext('2d'),w,h,particles;
+function resize(){w=canvas.width=canvas.offsetWidth;h=canvas.height=canvas.offsetHeight}
+function createParticles(){var count=Math.floor((w*h)/14000);particles=[];for(var i=0;i<count;i++){particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+0.5,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,alpha:Math.random()*0.4+0.1})}}
+function draw(){ctx.clearRect(0,0,w,h);particles.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(123,104,238,'+p.alpha+')';ctx.fill()});requestAnimationFrame(draw)}
+resize();createParticles();draw();window.addEventListener('resize',function(){resize();createParticles()})})();
+var navbar=document.getElementById('navbar');
+window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>20)});
+var mobileToggle=document.getElementById('mobileToggle'),mobileMenu=document.getElementById('mobileMenu');
+mobileToggle.addEventListener('click',function(){mobileMenu.classList.toggle('open');mobileToggle.textContent=mobileMenu.classList.contains('open')?'✕':'☰'});
+document.querySelectorAll('.mobile-menu a').forEach(function(link){link.addEventListener('click',function(){mobileMenu.classList.remove('open');mobileToggle.textContent='☰'})});
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry,i){if(entry.isIntersecting){setTimeout(function(){entry.target.classList.add('visible')},i*80);observer.unobserve(entry.target)}})},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(function(el){observer.observe(el)});
+var templateData={investor:{avatar:'📈',name:'张明远',title:'独立投资人 / 财经博主',tags:['投资','AI','创业'],heroName:'张明远 · Zhang Mingyuan',heroTitle:'专注科技赛道 · 10年投资经验 · 年化回报35%+'},painter:{avatar:'🎨',name:'林墨白',title:'当代艺术家 / 画廊主理',tags:['油画','当代艺术','策展'],heroName:'林墨白 · Lin Mobai',heroTitle:'当代艺术家 · 作品收藏于苏富比 · 20年创作生涯'},doctor:{avatar:'🏥',name:'陈医疗',title:'心内科主任医师 / 医学科普博主',tags:['心内科','慢病管理','科普'],heroName:'陈医疗 · Dr. Chen',heroTitle:'三甲医院心内科主任 · 专注慢病管理与健康科普'},founder:{avatar:'🚀',name:'王创业',title:'连续创业者 / 天使投资人',tags:['创业','融资','战略'],heroName:'王创业 · Wang Chuangye',heroTitle:'连续创业者 · 3次从0到1 · 帮助50+项目融资'},lawyer:{avatar:'⚖️',name:'李律师',title:'股权合伙人 / 跨境投资律师',tags:['股权','跨境','合规'],heroName:'李律师 · Li Lawyer',heroTitle:'15年法律从业经验 · 处理过100+跨境投融资案件'},freelancer:{avatar:'💼',name:'陈自由',title:'独立品牌设计师 / 创意顾问',tags:['品牌设计','创意','咨询'],heroName:'陈自由 · Chen Ziyou',heroTitle:'服务过50+品牌客户 · 曾任职奥美/阳狮创意总监'}};
+document.querySelectorAll('.tpl-btn').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.tpl-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');var tpl=templateData[btn.dataset.tpl];var avatar=document.getElementById('tplAvatar');avatar.style.opacity='0';setTimeout(function(){avatar.textContent=tpl.avatar;avatar.style.opacity='1'},200);document.getElementById('tplName').textContent=tpl.name;document.getElementById('tplTitle').textContent=tpl.title;document.getElementById('tplHeroName').textContent=tpl.heroName;document.getElementById('tplHeroTitle').textContent=tpl.heroTitle;document.getElementById('tplTags').innerHTML=tpl.tags.map(function(t){return'<span class="tpl-tag">'+t+'</span>'}).join('')})});
+document.querySelectorAll('.tpl-tab').forEach(function(tab){tab.addEventListener('click',function(){document.querySelectorAll('.tpl-tab').forEach(function(t){t.classList.remove('active')});document.querySelectorAll('.tpl-tab-content').forEach(function(c){c.classList.remove('active')});tab.classList.add('active');document.getElementById('tab-'+tab.dataset.tab).classList.add('active')})});
+var isAnnual=true;var toggle=document.getElementById('pricingToggle'),monthlyLabel=document.getElementById('monthlyLabel'),annualLabel=document.getElementById('annualLabel'),proBadge=document.getElementById('proBadgeText'),teamBadge=document.getElementById('teamBadgeText');
+toggle.addEventListener('click',function(){isAnnual=!isAnnual;toggle.classList.toggle('on',isAnnual);monthlyLabel.classList.toggle('active',!isAnnual);annualLabel.classList.toggle('active',isAnnual);proBadge.classList.toggle('show',isAnnual);teamBadge.classList.toggle('show',isAnnual);document.querySelectorAll('.price-value').forEach(function(el){el.textContent=isAnnual?el.dataset.annual:el.dataset.monthly})});
+var signupModal=document.getElementById('signupModal'),signupBtn=document.getElementById('signupBtn'),heroCtaBtn=document.getElementById('heroCtaBtn'),ctaBtn=document.getElementById('ctaBtn'),modalClose=document.getElementById('modalClose');
+function openModal(){signupModal.classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(){signupModal.classList.remove('show');document.body.style.overflow='';document.getElementById('emailError').classList.remove('show');document.getElementById('pwdError').classList.remove('show')}
+[signupBtn,heroCtaBtn,ctaBtn].forEach(function(btn){if(btn)btn.addEventListener('click',openModal)});
+modalClose.addEventListener('click',closeModal);
+signupModal.addEventListener('click',function(e){if(e.target===signupModal)closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&signupModal.classList.contains('show'))closeModal()});
+function showToast(msg,icon){document.querySelector('.toast-icon').textContent=icon||'✅';document.getElementById('toastMsg').textContent=msg;var toast=document.getElementById('toast');toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},3500)}
+function isValidEmail(email){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)}
+document.getElementById('signupForm').addEventListener('submit',function(e){e.preventDefault();var email=document.getElementById('emailInput').value.trim(),password=document.getElementById('passwordInput').value,emailError=document.getElementById('emailError'),pwdError=document.getElementById('pwdError'),valid=true;emailError.classList.remove('show');pwdError.classList.remove('show');if(!email||!isValidEmail(email)){emailError.classList.add('show');valid=false}if(!password||password.length<8){pwdError.classList.add('show');valid=false}if(!valid)return;var btn=document.getElementById('submitBtn');btn.classList.add('loading');document.getElementById('submit-text').textContent=lang==='zh'?'创建中...':'Creating...';setTimeout(function(){btn.classList.remove('loading');document.getElementById('submit-text').textContent=lang==='zh'?'创建账号':'Create Account';closeModal();showToast(lang==='zh'?'账号创建成功！请查收验证邮件。':'Account created! Check your inbox for verification.');document.getElementById('signupForm').reset()},1500)});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var target=document.querySelector(this.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}})});
+var sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){var scrollY=window.scrollY+100;sections.forEach(function(sec){var top=sec.offsetTop-80,bottom=top+sec.offsetHeight,id=sec.getAttribute('id'),link=document.querySelector('.nav-links a[href="#'+id+'"]');if(link&&scrollY>=top&&scrollY<bottom){document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active')});link.classList.add('active')}})});
+var lang='zh';
+var currentLang = 'zh';
+var i18n={zh:{},en:{}};
+i18n.zh={'nav-features':'功能','nav-templates':'模板','nav-pricing':'定价','nav-bowen':'Bowen 主页','hero-badge-text':'AI 驱动 · 5 分钟生成专属品牌官网','hero-h1-1':'30 分钟','hero-h1-2':'建立你的 AI 数字人','hero-h1-3':'个人品牌官网','hero-subtitle':'告别复杂建站流程。输入职业信息，AI 自动生成专属品牌页面，支持多语言、AI 数字人讲解、一键分享至社交平台。','cta-btn-text':'立即免费开始','demo-btn-text':'观看演示','hero-social-text':'个人品牌已创建','feat-title':'为什么选择 AIP Studio','feat-desc':'一站式解决个人品牌建设的所有技术需求，让你专注于内容创作本身','f1-title':'AI 数字人讲解','f1-desc':'上传照片或选择预设形象，AI 自动生成你的数字人分身，支持多语言实时讲解，让访客感受沉浸式品牌体验。','f2-title':'5 分钟极速建站','f2-desc':'输入职业信息，AI 自动生成专属品牌页面。无需设计基础，无需写代码，一键发布，立即拥有专业级个人品牌网站。','f3-title':'多语言全球化','f3-desc':'一键生成中英双语页面，AI 智能翻译保持专业度。内置 GEO 优化，帮助你在全球平台被精准发现。','f4-title':'数据洞察面板','f4-desc':'访客来源分析、页面停留时长、转化漏斗追踪。实时了解你的品牌影响力，数据驱动持续优化。','f5-title':'一键社交分发','f5-desc':'自动生成适配各平台的分享卡片和简介，一站式管理全网品牌形象。','f6-title':'多行业模板库','f6-desc':'覆盖投资人、画家、医生、律师、创始人等 20+ 职业模板。每个模板都经过行业专家验证，精准匹配职业特性。','tpl-sec-title':'海量职业模板，即刻体验','tpl-sec-desc':'选择你的职业，看到专属品牌页面样式。切换模板，风格随之变化','tpl-investor':'投资人','tpl-painter':'画家','tpl-doctor':'医生','tpl-founder':'创始人','tpl-lawyer':'律师','tpl-freelancer':'自由职业','tab-about-btn':'关于我','tab-portfolio-btn':'作品/案例','tab-social-btn':'社交媒体','tab-contact-btn':'联系方式','tpl-copy-text':'复制链接','ts1':'年经验','ts2':'期视频','ts3':'粉丝','ts4':'年化回报','ts-act1-t':'观看视频','ts-act2-t':'产品','ts-act3-t':'媒体报道','tc1':'发送邮件','tc2':'预约咨询','mock-lbl1':'年经验','mock-lbl2':'期视频','mock-lbl3':'粉丝','float1':'AI 生成中...','price-title':'简单透明的定价','price-desc':'选择适合你的计划，随时升级或取消','monthlyLabel':'月付','annualLabel':'年付','price-badge':'省 20%','pname-free':'免费版','pdesc-free':'适合个人尝鲜体验，了解 AIP Studio 核心功能','pf1-1':'1 个品牌页面','pf1-2':'基础模板库（10个）','pf1-3':'AI 数字人（1个）','pf1-4':'基础数据分析','pf1-5':'自定义域名','pf1-6':'去除水印','pbtn-free-t':'免费开始','pop-badge':'最受欢迎','pname-pro':'专业版','pdesc-pro':'适合有明确个人品牌建设需求的专业人士','pf2-1':'5 个品牌页面','pf2-2':'全部模板库（20+个）','pf2-3':'AI 数字人（5个）','pf2-4':'高级数据分析','pf2-5':'自定义域名','pf2-6':'去除水印','pbtn-pro-t':'立即升级','proBadgeText':'省 ¥240/年','pname-team':'团队版','pdesc-team':'适合机构、MCN 公司或有多品牌管理需求的用户','pf3-1':'无限品牌页面','pf3-2':'全部模板库 + 定制模板','pf3-3':'AI 数字人（无限）','pf3-4':'团队协作管理','pf3-5':'API 接入支持','pf3-6':'专属客户成功经理','pbtn-team-t':'联系我们','teamBadgeText':'省 ¥720/年','cta-h2':'准备好建立你的 <span class="text-gradient">个人品牌</span> 了吗？','cta-p':'5 分钟快速上手，无需信用卡。立即开始你的 AI 个人品牌之旅。','cta-final-text':'立即免费创建','cta-demo-text':'预约演示','footer-brand-desc':'AI 驱动的个人品牌 SaaS 平台，由 AIIPOWER LIMITED 出品。让人工智能成为你个人品牌建设最强大的助手。','fcol1-title':'产品','fcol1-a1':'功能介绍','fcol1-a2':'模板库','fcol1-a3':'定价方案','fcol1-a4':'更新日志','fcol2-title':'资源','fcol2-a1':'帮助中心','fcol2-a2':'开发者文档','fcol2-a3':'博客','fcol2-a4':'案例展示','fcol3-title':'公司','fcol3-a1':'关于 Bowen','fcol3-a2':'联系我们','fcol3-a3':'Bizatom.AI','fcol3-a4':'隐私政策','footer-copy':'© 2026 AIIPOWER LIMITED. All rights reserved.','modal-title':'创建你的免费账号','modal-sub':'5 分钟开始建立个人品牌，无需信用卡','label-email':'邮箱地址','err-email':'请输入有效的邮箱地址','label-pwd':'设置密码','err-pwd':'密码至少需要 8 位字符','or-divider':'或','s-google':'Google','s-wechat':'微信','submit-text':'创建账号','toast-success':'账号创建成功！请查收验证邮件。','mob-features':'功能','mob-templates':'模板','mob-pricing':'定价','loginBtn':'登录','signupBtn':'免费试用','tplName':'张明远','tplTitle':'独立投资人 / 财经博主','tplHeroName':'张明远 · Zhang Mingyuan','tplHeroTitle':'专注科技赛道 · 10年投资经验 · 年化回报35%+','tpl-edit':'编辑页面','pperiod':'/月'};
+i18n.en={'nav-features':'Features','nav-templates':'Templates','nav-pricing':'Pricing','nav-bowen':'Bowen\'s Page','hero-badge-text':'AI-Powered · Generate Your Brand Site in 5 Minutes','hero-h1-1':'30 Minutes','hero-h1-2':'Build Your AI Avatar','hero-h1-3':'Personal Brand Website','hero-subtitle':'No complex setup. Enter your profession, AI generates your exclusive brand page — multilingual, AI avatar narration, one-click social sharing.','cta-btn-text':'Start Free Now','demo-btn-text':'Watch Demo','hero-social-text':'personal brands created','feat-title':'Why Choose AIP Studio','feat-desc':'One-stop solution for all your personal brand technical needs, so you can focus on creating content','f1-title':'AI Avatar Narration','f1-desc':'Upload a photo or pick a preset, AI generates your digital avatar with multilingual narration, giving visitors an immersive brand experience.','f2-title':'5-Minute Site Builder','f2-desc':'Enter your profession, AI generates your exclusive brand page. No design skills, no code — publish instantly with a professional personal brand website.','f3-title':'Multilingual Global','f3-desc':'One-click Chinese & English pages, AI translation maintains professional quality. Built-in GEO optimization helps you get discovered globally.','f4-title':'Analytics Dashboard','f4-desc':'Visitor source analysis, dwell time, conversion funnel tracking. Real-time insights into your brand influence, data-driven optimization.','f5-title':'One-Click Social Distribution','f5-desc':'Auto-generate share cards and bios for all platforms, manage your full online brand presence in one place.','f6-title':'Multi-Industry Template Library','f6-desc':'20+ profession templates for investors, painters, doctors, lawyers, founders and more. Each validated by industry experts, precisely matched to your profession.','tpl-sec-title':'Explore Profession Templates','tpl-sec-desc':'Pick your profession, see your exclusive brand page style. Switching templates changes everything instantly.','tpl-investor':'Investor','tpl-painter':'Painter','tpl-doctor':'Doctor','tpl-founder':'Founder','tpl-lawyer':'Lawyer','tpl-freelancer':'Freelancer','tab-about-btn':'About Me','tab-portfolio-btn':'Portfolio','tab-social-btn':'Social Media','tab-contact-btn':'Contact','tpl-copy-text':'Copy Link','ts1':'Years Exp.','ts2':'Videos','ts3':'Followers','ts4':'Annual Return','ts-act1-t':'Watch Videos','ts-act2-t':'Products','ts-act3-t':'Press','tc1':'Send Email','tc2':'Book Consult','mock-lbl1':'Years Exp.','mock-lbl2':'Videos','mock-lbl3':'Followers','float1':'AI Generating...','price-title':'Simple, Transparent Pricing','price-desc':'Choose your plan, upgrade or cancel anytime','monthlyLabel':'Monthly','annualLabel':'Annual','price-badge':'Save 20%','pname-free':'Free','pdesc-free':'Perfect for personal trial — explore core AIP Studio features','pf1-1':'1 brand page','pf1-2':'Basic templates (10)','pf1-3':'AI avatars (1)','pf1-4':'Basic analytics','pf1-5':'Custom domain','pf1-6':'Remove watermark','pbtn-free-t':'Start Free','pop-badge':'Most Popular','pname-pro':'Pro','pdesc-pro':'For professionals with clear personal branding goals','pf2-1':'5 brand pages','pf2-2':'All templates (20+)','pf2-3':'AI avatars (5)','pf2-4':'Advanced analytics','pf2-5':'Custom domain','pf2-6':'Remove watermark','pbtn-pro-t':'Upgrade Now','proBadgeText':'Save ¥240/yr','pname-team':'Team','pdesc-team':'For agencies, MCNs, and multi-brand managers','pf3-1':'Unlimited brand pages','pf3-2':'All templates + custom templates','pf3-3':'AI avatars (unlimited)','pf3-4':'Team collaboration','pf3-5':'API access','pf3-6':'Dedicated CSM','pbtn-team-t':'Contact Us','teamBadgeText':'Save ¥720/yr','cta-h2':'Ready to Build Your <span class="text-gradient">Personal Brand</span>?','cta-p':'Start in 5 minutes, no credit card required. Begin your AI personal brand journey today.','cta-final-text':'Create Free Account','cta-demo-text':'Book Demo','footer-brand-desc':'AI-powered personal brand SaaS platform by AIIPOWER LIMITED. Making AI your most powerful personal brand-building assistant.','fcol1-title':'Product','fcol1-a1':'Features','fcol1-a2':'Templates','fcol1-a3':'Pricing','fcol1-a4':'Changelog','fcol2-title':'Resources','fcol2-a1':'Help Center','fcol2-a2':'Docs','fcol2-a3':'Blog','fcol2-a4':'Case Studies','fcol3-title':'Company','fcol3-a1':'About Bowen','fcol3-a2':'Contact','fcol3-a3':'Bizatom.AI','fcol3-a4':'Privacy','footer-copy':'© 2026 AIIPOWER LIMITED. All rights reserved.','modal-title':'Create Your Free Account','modal-sub':'Start building your personal brand in 5 minutes, no credit card required.','label-email':'Email address','err-email':'Please enter a valid email address','label-pwd':'Create password','err-pwd':'Password must be at least 8 characters','or-divider':'or','s-google':'Google','s-wechat':'WeChat','submit-text':'Create Account','toast-success':'Account created! Check your inbox for verification.','mob-features':'Features','mob-templates':'Templates','mob-pricing':'Pricing','loginBtn':'Log In','signupBtn':'Try Free','tplName':'Zhang Mingyuan','tplTitle':'Independent Investor / Finance Blogger','tplHeroName':'Zhang Mingyuan','tplHeroTitle':'Tech Investment · 10yr Exp. · 35%+ Annual Returns','tpl-edit':'Edit Page','pperiod':'/mo'};
+function setLang(lang){
+  currentLang = lang;
+  var t = i18n[lang];
+  
+  Object.keys(t).forEach(function(id){
+    var els = document.querySelectorAll('[id="'+id+'"]');
+    els.forEach(function(el){ 
+      // FIX: Only update text nodes, preserve child elements (icons/emoji)
+      var textSpan = el.querySelector('.i18n-text');
+      if(textSpan) {
+        textSpan.textContent = t[id];
+      } else if(el.children.length === 0) {
+        // No children, safe to use textContent
+        el.textContent = t[id];
+      } else {
+        // Has children, wrap text in span or use innerHTML carefully
+        el.innerHTML = t[id]; 
+      }
+    });
+  });
+  document.querySelectorAll('#langBtnZh, #langBtnEn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
 }
-
-function switchProfession(id) {
-  document.getElementById('professionSwitch').value = id;
-  document.getElementById('professionSwitch').dispatchEvent(new Event('change'));
-}
-
-document.addEventListener('DOMContentLoaded', initSocialLinks);
+document.getElementById('langBtnZh').addEventListener('click',function(){setLang('zh')});
+setLang('zh');
+document.getElementById('langBtnEn').addEventListener('click',function(){setLang('en')});
 </script>
-
 </body>
 </html>
