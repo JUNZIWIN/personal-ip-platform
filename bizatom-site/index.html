@@ -266,6 +266,14 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
 .chat-msg .bubble strong{color:var(--purple)}
 .chat-msg.user .bubble strong{color:#FFF3E0}
 
+/* Chat message action buttons (copy/share/save) */
+.chat-msg-actions{display:flex;gap:4px;margin-top:6px;opacity:0;transition:opacity .2s;justify-content:flex-end}
+.chat-msg:hover .chat-msg-actions{opacity:1}
+.chat-msg-action{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0}
+.chat-msg-action:hover{background:var(--orange-soft);color:var(--orange)}
+.chat-msg-action.copied{background:#E8F5E9;color:#2E7D32}
+.chat-msg.user .chat-msg-actions{display:none}
+
 .chat-typing{align-self:flex-start;padding:14px 18px;background:var(--white);border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:5px}
 .chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:bounce .7s infinite alternate}
 .chat-typing span:nth-child(2){animation-delay:.15s}
@@ -427,6 +435,72 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
   .sidebar-book-item .sb-title{font-size:14px}
   .sidebar-book-item .sb-author{font-size:12.5px}
 }
+
+/* ───────── Knowledge Base Panel (右侧) ───────── */
+.h-kb-btn{width:34px;height:34px;border:none;background:rgba(255,255,255,.2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s;margin-left:4px}
+.h-kb-btn:hover{background:rgba(255,255,255,.35)}
+.kb-overlay{display:none;position:fixed;inset:0;background:rgba(10,28,56,.4);z-index:65;backdrop-filter:blur(2px)}
+.kb-overlay.open{display:block}
+.kb-panel{position:fixed;top:0;right:-360px;width:340px;height:100vh;background:var(--white);z-index:70;display:flex;flex-direction:column;transition:right .3s cubic-bezier(.4,0,.2,1);box-shadow:-2px 0 24px rgba(10,28,56,.12);overflow:hidden}
+.kb-panel.open{right:0}
+.kb-header{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);flex-shrink:0}
+.kb-header h3{flex:1;font-family:var(--display);font-size:17px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.kb-header .badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--purple-soft);color:var(--purple);font-family:var(--body)}
+.kb-close{width:32px;height:32px;border:none;background:transparent;cursor:pointer;border-radius:8px;font-size:20px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.kb-close:hover{background:var(--paper);color:var(--ink)}
+.kb-import-bar{display:flex;gap:8px;padding:10px 18px;border-bottom:1px solid var(--line);flex-shrink:0}
+.kb-import-btn{padding:7px 14px;border-radius:8px;border:1.5px dashed var(--purple);background:transparent;color:var(--purple);font-family:var(--body);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.kb-import-btn:hover{background:var(--purple-soft)}
+.kb-cat-select{flex:1;padding:7px 10px;border-radius:8px;border:1.5px solid var(--line);font-family:var(--body);font-size:12.5px;color:var(--ink);background:var(--white);outline:none;min-width:0}
+.kb-cat-select:focus{border-color:var(--purple)}
+.kb-cats{display:flex;gap:6px;padding:10px 18px;flex-wrap:wrap;flex-shrink:0;border-bottom:1px solid var(--line)}
+.kb-cat-chip{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:all .15s;border:1.5px solid var(--line);background:var(--white);color:var(--muted);font-family:var(--body)}
+.kb-cat-chip:hover{border-color:var(--purple);color:var(--purple)}
+.kb-cat-chip.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.kb-cat-chip.manage{background:var(--paper);color:var(--muted);font-style:italic;font-size:11px}
+.kb-scroll{flex:1;overflow-y:auto;padding:8px 0}
+.kb-scroll::-webkit-scrollbar{width:5px}
+.kb-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.kb-note-item{display:flex;flex-direction:column;gap:4px;padding:11px 18px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--paper);font-family:var(--body)}
+.kb-note-item:hover{background:var(--purple-soft)}
+.kb-note-item .ni-title{font-size:13.5px;font-weight:600;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kb-note-item .ni-preview{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kb-note-item .ni-meta{display:flex;gap:8px;font-size:11px;color:var(--muted);align-items:center}
+.kb-note-item .ni-cat{font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:99px;background:var(--purple-soft);color:var(--purple)}
+.kb-empty-state{padding:40px 18px;text-align:center;color:var(--muted);font-size:13px;font-family:var(--body);line-height:1.8}
+.kb-empty-state small{font-size:11.5px;color:#bbb}
+.kb-detail{display:none;position:absolute;inset:0;background:var(--white);z-index:5;flex-direction:column;overflow-y:auto}
+.kb-detail.open{display:flex}
+.kb-detail .detail-back{display:flex;align-items:center;gap:6px;padding:14px 18px;border:none;background:transparent;cursor:pointer;font-family:var(--body);font-size:13px;font-weight:600;color:var(--purple);border-bottom:1px solid var(--line)}
+.kb-detail .detail-back:hover{background:var(--purple-soft)}
+.kb-detail-meta{padding:12px 18px;display:flex;gap:8px;align-items:center;font-size:11.5px;color:var(--muted);border-bottom:1px solid var(--paper);flex-wrap:wrap}
+.kb-detail-content{padding:18px;flex:1;font-size:13.5px;line-height:1.8;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.kb-detail .dt-actions{display:flex;gap:8px;padding:16px 18px;border-top:1px solid var(--line)}
+.kb-detail .dt-btn{padding:9px 16px;border-radius:99px;border:none;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.kb-detail .dt-btn.primary{background:var(--purple);color:#fff;flex:1}
+.kb-detail .dt-btn.primary:hover{opacity:.9}
+.kb-detail .dt-btn.secondary{background:var(--paper);color:var(--ink)}
+.kb-detail .dt-btn.secondary:hover{background:var(--line)}
+.kb-import-dialog{position:absolute;inset:0;background:rgba(255,255,255,.97);z-index:10;display:flex;align-items:center;justify-content:center;padding:24px}
+.kb-import-inner{width:100%;max-width:300px;text-align:center}
+.kb-import-inner h4{font-family:var(--display);font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.kb-import-hint{font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:18px}
+.kb-import-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.kb-import-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--paper);text-align:left;font-family:var(--body)}
+.kb-import-opt span{font-size:18px;flex-shrink:0}
+.kb-import-opt strong{font-size:13px;color:var(--navy);flex:1}
+.kb-import-opt small{font-size:11px;color:var(--muted);cursor:pointer;font-weight:600}
+.kb-import-opt small:hover{color:var(--purple)}
+.kb-import-close{width:100%;padding:10px;border-radius:99px;border:none;background:var(--line);color:var(--ink);font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer}
+.kb-import-close:hover{background:var(--muted);color:#fff}
+.kb-brain-teaser{margin-top:auto;flex-shrink:0;padding:14px 18px;border-top:1px solid var(--line);background:linear-gradient(135deg,var(--purple-soft),var(--paper));text-align:center;font-family:var(--body)}
+.kb-brain-teaser .brain-icon{font-size:24px;margin-bottom:6px}
+.kb-brain-teaser p{font-size:12px;color:var(--navy);line-height:1.6}
+.kb-brain-teaser p strong{color:var(--purple)}
+.kb-brain-teaser small{font-size:11px;color:var(--muted)}
+@media(max-width:768px){
+  .kb-panel{width:100vw;right:-100vw}
+}
 </style>
 </head>
 <body>
@@ -523,6 +597,85 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <button class="dt-btn secondary" onclick="sidebarBackToList()">返回</button>
       <button class="dt-btn primary" id="sidebarAskBtn" onclick="sidebarAskBook()">💬 向AI书童提问</button>
     </div>
+  </div>
+</aside>
+
+<!-- ================= KNOWLEDGE BASE PANEL ================= -->
+<div class="kb-overlay" id="kbOverlay" onclick="toggleKBPanel()"></div>
+<aside class="kb-panel" id="kbPanel">
+  <div class="kb-header">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      <span data-en="Knowledge Base" data-zh="知识库">知识库</span>
+      <span class="badge" id="kbCount">0</span>
+    </h3>
+    <button class="kb-close" onclick="toggleKBPanel()" aria-label="Close">&times;</button>
+  </div>
+
+  <!-- Import section -->
+  <div class="kb-import-bar">
+    <button class="kb-import-btn" onclick="showKBImportDialog()" title="导入笔记" data-en="+ Import" data-zh="+ 导入">+ 导入</button>
+    <select class="kb-cat-select" id="kbCatFilter" onchange="renderKBList()">
+      <option value="all">全部笔记</option>
+    </select>
+  </div>
+
+  <!-- Category management -->
+  <div class="kb-cats" id="kbCats"></div>
+
+  <!-- Notes list -->
+  <div class="kb-scroll" id="kbScroll">
+    <div class="kb-empty-state">
+      📝 还没有保存任何笔记<br>
+      <small>在书童对话中点击 💾 保存按钮即可收藏</small>
+    </div>
+  </div>
+
+  <!-- Detail view -->
+  <div class="kb-detail" id="kbDetail">
+    <button class="detail-back" onclick="kbBackToList()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      返回列表
+    </button>
+    <div class="kb-detail-meta" id="kbDetailMeta"></div>
+    <div class="kb-detail-content" id="kbDetailContent"></div>
+    <div class="dt-actions">
+      <button class="dt-btn secondary" onclick="kbDeleteNote()">🗑 删除</button>
+      <button class="dt-btn primary" onclick="kbExportNote()">📋 导出</button>
+    </div>
+  </div>
+
+  <!-- Import dialog -->
+  <div class="kb-import-dialog" id="kbImportDialog" style="display:none">
+    <div class="kb-import-inner">
+      <h4>导入外部笔记</h4>
+      <p class="kb-import-hint" data-en="Coming soon: import from Dedao Brain (得到大脑), IMA notes, and other platforms. Your notes will be migrated to BizAtom backend when launched."
+         data-zh="即将支持：从 得到大脑、IMA 笔记等平台导入。上线后笔记将迁移至 BizAtom 后台数据库。">即将支持：从 得到大脑、IMA 笔记等平台导入。上线后笔记将迁移至 BizAtom 后台数据库。</p>
+      <div class="kb-import-options">
+        <div class="kb-import-opt">
+          <span>🧠</span>
+          <strong>得到大脑</strong>
+          <small>即将支持</small>
+        </div>
+        <div class="kb-import-opt">
+          <span>📒</span>
+          <strong>IMA 笔记</strong>
+          <small>即将支持</small>
+        </div>
+        <div class="kb-import-opt">
+          <span>📋</span>
+          <strong>粘贴文本</strong>
+          <small onclick="kbPasteImport()">点击粘贴</small>
+        </div>
+      </div>
+      <button class="kb-import-close" onclick="document.getElementById('kbImportDialog').style.display='none'">关闭</button>
+    </div>
+  </div>
+
+  <!-- Digital Brain teaser at bottom -->
+  <div class="kb-brain-teaser">
+    <div class="brain-icon">🧬</div>
+    <p>你的 <strong>AI 数字人大脑</strong> 即将上线<br><small>定制专属知识分身，自动写文章发布</small></p>
   </div>
 </aside>
 
@@ -756,8 +909,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <span class="eyebrow" data-en="Membership" data-zh="会员方案">会员方案</span>
       <h2 data-en="Pay for what you can accomplish, not what model you run."
           data-zh="为你能完成的任务付费，而不是为你用了哪个模型。">为你能完成的任务付费，而不是为你用了哪个模型。</h2>
-      <p data-en="Paid plans launch once our Hong Kong entity is registered. Sign up now to lock in founding-member pricing."
-         data-zh="付费方案将在香港公司注册完成后正式上线。现在注册候补名单，即可锁定创始会员优惠价格。">付费方案将在香港公司注册完成后正式上线。现在注册候补名单，即可锁定创始会员优惠价格。</p>
+      <p data-en="Pay in USD. Paid plans launch once our Hong Kong entity is registered. Pre-register now to lock in founding-member pricing (up to 50% off)."
+         data-zh="美金结算。付费方案将在香港公司注册完成后正式上线。现在预注册，锁定创始会员价格（最高 5 折）。">美金结算。付费方案将在香港公司注册完成后正式上线。现在预注册，锁定创始会员价格（最高 5 折）。</p>
     </div>
     <div class="pricing-grid">
 
@@ -765,7 +918,7 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <div class="pricing-card">
         <div class="pc-tier" data-en="Free" data-zh="免费">免费</div>
         <h3 data-en="Starter" data-zh="体验版">体验版</h3>
-        <div class="pc-price">HK$0 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-price">$0 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
         <div class="pc-model" data-en="🧠 DeepSeek — fast, efficient, great Chinese" data-zh="🧠 DeepSeek — 快速高效，中文优秀">🧠 DeepSeek — 快速高效，中文优秀</div>
         <ul class="pc-features">
           <li data-en="100+ book directory" data-zh="100+ 本书籍目录">100+ 本书籍目录</li>
@@ -782,8 +935,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <div class="pricing-card">
         <div class="pc-tier" data-en="Silver" data-zh="银牌">银牌</div>
         <h3 data-en="Writer" data-zh="写作版">写作版</h3>
-        <div class="pc-price">~HK$78 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
-        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-price">$29 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🫘 Doubao Pro — Chinese writing specialist" data-zh="🫘 豆包 Pro — 中文写作专家">🫘 豆包 Pro — 中文写作专家</div>
         <ul class="pc-features">
           <li data-en="Everything in Free" data-zh="包含免费版全部功能">包含免费版全部功能</li>
@@ -801,8 +954,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
         <div class="rec-badge" data-en="Most Popular" data-zh="最受欢迎">最受欢迎</div>
         <div class="pc-tier" data-en="Gold" data-zh="金牌">金牌</div>
         <h3 data-en="Analyst" data-zh="分析版">分析版</h3>
-        <div class="pc-price">~HK$168 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
-        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-price">$99 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🌙 Kimi 128k + 💬 ChatGPT — deep research" data-zh="🌙 Kimi 128k + 💬 ChatGPT — 深度研究">🌙 Kimi 128k + 💬 ChatGPT — 深度研究</div>
         <ul class="pc-features">
           <li data-en="Everything in Silver" data-zh="包含银牌版全部功能">包含银牌版全部功能</li>
@@ -819,8 +972,8 @@ footer{padding:44px 0;border-top:1px solid var(--line);background:var(--paper)}
       <div class="pricing-card">
         <div class="pc-tier" data-en="Diamond" data-zh="钻石">钻石</div>
         <h3 data-en="Creator" data-zh="创作版">创作版</h3>
-        <div class="pc-price">~HK$298 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
-        <div class="pc-coming" data-en="Launching soon — pre-register for 40% off" data-zh="即将上线 — 预注册享 40% 折扣">即将上线 — 预注册享 40% 折扣</div>
+        <div class="pc-price">$199 <small data-en="/ month" data-zh="/ 月">/ 月</small></div>
+        <div class="pc-coming" data-en="Launching soon — pre-register for 50% off" data-zh="即将上线 — 预注册享 5 折">即将上线 — 预注册享 5 折</div>
         <div class="pc-model" data-en="🔧 Codex + 🎯 Claude — code &amp; long-form" data-zh="🔧 Codex + 🎯 Claude — 代码与长文创作">🔧 Codex + 🎯 Claude — 代码与长文创作</div>
         <ul class="pc-features">
           <li data-en="Everything in Gold" data-zh="包含金牌版全部功能">包含金牌版全部功能</li>
@@ -1081,6 +1234,9 @@ function joinWaitlist(){
       <svg class="icon-restore" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none"><path d="M5 2v4H1M11 2v4h4M5 14v-4H1M11 14v-4h4"/></svg>
     </button>
     <button class="h-close" onclick="toggleChat()" aria-label="Close chat">&times;</button>
+    <button class="h-kb-btn" id="hKBBtn" onclick="toggleKBPanel()" title="知识库" aria-label="Open knowledge base">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+    </button>
   </div>
   <!-- Category tabs -->
   <div class="chat-tabs" id="chatTabs">
@@ -1108,20 +1264,13 @@ function joinWaitlist(){
   </div>
   <!-- Book search bar -->
   <div class="chat-book-bar">
-    <input type="text" class="book-search-input" id="bookSearchInput" data-chat-ph-en="🔍 Search books..." data-chat-ph-zh="🔍 搜索书籍..." placeholder="🔍 搜索书籍..." oninput="onBookSearch()" onfocus="openBookShelf()" aria-label="Search books">
+    <input type="text" class="book-search-input" id="bookSearchInput" data-chat-ph-en="🔍 Search books..." data-chat-ph-zh="🔍 搜索书籍..." placeholder="🔍 搜索书籍..." oninput="onBookSearch()" aria-label="Search books">
     <button class="book-ask-btn" id="bookAskBtn" onclick="askAboutSelectedBook()" data-chat-en="Ask" data-chat-zh="提问" disabled>提问</button>
   </div>
-  <div class="book-shelf" id="bookShelf"></div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-msg bot">
       <div class="bubble" data-chat-en="👋 Hi! I'm BizAtom's AI book assistant. Browse 100+ business classics above, or ask me anything — concepts, frameworks, key ideas. What would you like to learn today?" data-chat-zh="👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。搜索上方书籍，或直接问我任何概念、框架和思想。今天想了解什么？">👋 你好！我是 BizAtom AI 书童，支持100+本商业经典。搜索上方书籍，或直接问我任何概念、框架和思想。今天想了解什么？</div>
     </div>
-  </div>
-  <div class="chat-suggestions" id="chatSuggestions">
-    <button onclick="askSuggested('什么是蓝海战略？')" data-chat-zh="什么是蓝海战略？" data-chat-en="What is Blue Ocean Strategy?">什么是蓝海战略？</button>
-    <button onclick="askSuggested('解释第一性原理')" data-chat-zh="解释第一性原理" data-chat-en="Explain First Principles">解释第一性原理</button>
-    <button onclick="askSuggested('从0到1的核心思想')" data-chat-zh="从0到1的核心思想" data-chat-en="Zero to One key ideas">从0到1的核心思想</button>
-    <button onclick="askSuggested('穷查理宝典的智慧')" data-chat-zh="穷查理宝典的智慧" data-chat-en="Poor Charlie insights">穷查理宝典的智慧</button>
   </div>
   <div class="chat-input-wrap">
     <input type="text" id="chatInput" data-chat-ph-en="Ask about a business book..." data-chat-ph-zh="输入你的问题..." placeholder="输入你的问题..." onkeydown="if(event.key==='Enter')sendMessage()" aria-label="Chat message input">
@@ -1280,62 +1429,35 @@ document.addEventListener('click', function(e) {
 });
 
 function onBookSearch() {
+  // Search filters the left sidebar when open, or just filters selected book list
   var query = document.getElementById('bookSearchInput').value.toLowerCase().trim();
-  if (query === '') {
-    renderBookShelf(currentFilteredBooks);
+  if (query === '' || query.length < 2) {
+    currentFilteredBooks = getBooksForCurrentTab();
     return;
   }
-  var filtered = currentFilteredBooks.filter(function(b) {
+  var allBooks = getBooksForCurrentTab();
+  currentFilteredBooks = allBooks.filter(function(b) {
     var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
     var d = b[lang] || b.en;
     return (d.t && d.t.toLowerCase().indexOf(query) !== -1) ||
            (d.a && d.a.toLowerCase().indexOf(query) !== -1) ||
            (b.kw && b.kw.some(function(k) { return k.toLowerCase().indexOf(query) !== -1; }));
   });
-  renderBookShelf(filtered);
-}
-
-function openBookShelf() {
-  var shelf = document.getElementById('bookShelf');
-  if (shelf) shelf.classList.add('open');
-  // If shelf empty, make sure we have books rendered
-  if (!shelf || shelf.children.length === 0) {
-    renderBookShelf(currentFilteredBooks);
+  // Also update sidebar search if sidebar is open
+  if (sidebarOpen) {
+    var sidebarInput = document.getElementById('sidebarSearch');
+    if (sidebarInput) sidebarInput.value = query;
+    filterSidebar();
   }
 }
 
-function renderBookShelf(books) {
-  var shelf = document.getElementById('bookShelf');
-  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
-  if (!books || books.length === 0) {
-    shelf.innerHTML = '<div class="book-shelf-empty">' + (lang === 'zh' ? '没有找到匹配的书籍' : 'No matching books found') + '</div>';
-  } else {
-    var html = '';
-    for (var i = 0; i < books.length; i++) {
-      var b = books[i];
-      var d = b[lang] || b.en;
-      var activeClass = (selectedBookId === b.id) ? ' active' : '';
-      html += '<div class="book-shelf-item' + activeClass + '" onclick="onBookSelect(\'' + b.id + '\')" data-book-id="' + b.id + '">';
-      html += '<span class="shelf-title">' + d.t + '</span>';
-      html += '<span class="shelf-author">' + d.a + '</span>';
-      html += '</div>';
-    }
-    shelf.innerHTML = html;
-  }
-  shelf.classList.add('open');
-}
+function openBookShelf() { /* shelf removed – search now uses left sidebar */ }
+
+function renderBookShelf(books) { /* shelf removed – search now uses left sidebar */ }
 
 function onBookSelect(bookId) {
   selectedBookId = bookId;
   document.getElementById('bookAskBtn').disabled = false;
-  // Update shelf highlighting
-  var items = document.querySelectorAll('.book-shelf-item');
-  for (var i = 0; i < items.length; i++) {
-    items[i].classList.remove('active');
-    if (items[i].getAttribute('data-book-id') === bookId) {
-      items[i].classList.add('active');
-    }
-  }
   // Show book preview in chat
   for (var i = 0; i < BIZATOM_KB.length; i++) {
     if (BIZATOM_KB[i].id === bookId) {
@@ -1649,9 +1771,46 @@ function addMsg(text, type) {
     b.innerHTML = formatAnswer(cleanText);
   }
   div.appendChild(b);
+  // Add copy/share/save action buttons for bot messages
+  if (type === 'bot') {
+    var actions = document.createElement('div');
+    actions.className = 'chat-msg-actions';
+    actions.innerHTML =
+      '<button class="chat-msg-action" title="复制" onclick="copyMsg(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>' +
+      '<button class="chat-msg-action" title="分享" onclick="shareMsg(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>' +
+      '<button class="chat-msg-action" title="保存到知识库" onclick="saveMsgToKB(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>';
+    div.appendChild(actions);
+  }
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return b;
+}
+
+function copyMsg(btn) {
+  var bubble = btn.parentElement.parentElement.querySelector('.bubble');
+  var text = bubble.textContent || bubble.innerText;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      btn.classList.add('copied');
+      setTimeout(function() { btn.classList.remove('copied'); }, 2000);
+    });
+  }
+}
+function shareMsg(btn) {
+  var bubble = btn.parentElement.parentElement.querySelector('.bubble');
+  var text = bubble.textContent || bubble.innerText;
+  var shareText = text.slice(0, 280) + (text.length > 280 ? '...' : '');
+  var url = window.location.href.split('#')[0];
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(shareText + '\n\n— 来自 BizAtom AI 书童 ' + url).then(function() {
+      alert('内容已复制到剪贴板，可直接粘贴分享！');
+    });
+  }
+}
+function saveMsgToKB(btn) {
+  var bubble = btn.parentElement.parentElement.querySelector('.bubble');
+  var text = bubble.textContent || bubble.innerText;
+  saveToKnowledgeBase(text);
 }
 
 function showTyping() {
@@ -2151,10 +2310,233 @@ function sidebarAskBook() {
   setTimeout(tryRender, 500);
 })();
 
-// Escape key closes sidebar
+// Escape key closes sidebar + KB panel
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && sidebarOpen) toggleSidebar();
+  if (e.key === 'Escape') {
+    if (kbPanelOpen) toggleKBPanel();
+    else if (sidebarOpen) toggleSidebar();
+  }
 });
+
+/* ===== Knowledge Base ===== */
+var kbPanelOpen = false;
+var kbData = { cats: ['学习笔记', '灵感碎片', '文章草稿', '案例分析', '待整理'], notes: [] };
+var kbCurrentNoteId = null;
+
+// Load from localStorage
+(function initKB() {
+  try {
+    var saved = localStorage.getItem('bizatom_kb');
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      if (parsed.cats) kbData.cats = parsed.cats;
+      if (parsed.notes) kbData.notes = parsed.notes;
+    }
+  } catch(e) {}
+  updateKBCatSelect();
+  updateKBCats();
+  renderKBList();
+  updateKBCount();
+})();
+
+function saveKBData() {
+  try { localStorage.setItem('bizatom_kb', JSON.stringify(kbData)); } catch(e) {}
+}
+
+function updateKBCount() {
+  var el = document.getElementById('kbCount');
+  if (el) el.textContent = kbData.notes.length;
+}
+
+function toggleKBPanel() {
+  kbPanelOpen = !kbPanelOpen;
+  var panel = document.getElementById('kbPanel');
+  var overlay = document.getElementById('kbOverlay');
+  if (kbPanelOpen) {
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderKBList();
+    updateKBCount();
+  } else {
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    // close detail view
+    document.getElementById('kbDetail').classList.remove('open');
+  }
+}
+
+function saveToKnowledgeBase(text) {
+  var title = text.replace(/\n/g, ' ').slice(0, 40) + (text.length > 40 ? '...' : '');
+  var note = {
+    id: 'kb_' + Date.now(),
+    title: title,
+    content: text,
+    cat: '待整理',
+    createdAt: new Date().toISOString()
+  };
+  kbData.notes.unshift(note);
+  saveKBData();
+  updateKBCount();
+  alert('已保存到知识库！点击右侧 📝 按钮查看');
+}
+
+function updateKBCatSelect() {
+  var sel = document.getElementById('kbCatFilter');
+  if (!sel) return;
+  sel.innerHTML = '<option value="all">全部笔记</option>';
+  kbData.cats.forEach(function(c) {
+    sel.innerHTML += '<option value="' + c + '">' + c + '</option>';
+  });
+}
+
+function updateKBCats() {
+  var container = document.getElementById('kbCats');
+  if (!container) return;
+  var html = '';
+  kbData.cats.forEach(function(c) {
+    html += '<span class="kb-cat-chip" onclick="filterKBByCat(\'' + c.replace(/'/g, "\\'") + '\')">' + c + '</span>';
+  });
+  html += '<span class="kb-cat-chip manage" onclick="addKBCat()">+ 管理分类</span>';
+  container.innerHTML = html;
+}
+
+function addKBCat() {
+  var name = prompt('输入新分类名称：');
+  if (name && name.trim()) {
+    if (kbData.cats.indexOf(name.trim()) >= 0) {
+      alert('该分类已存在');
+      return;
+    }
+    kbData.cats.push(name.trim());
+    saveKBData();
+    updateKBCatSelect();
+    updateKBCats();
+  }
+}
+
+function filterKBByCat(cat) {
+  document.getElementById('kbCatFilter').value = cat;
+  // Highlight active chip
+  var chips = document.querySelectorAll('.kb-cat-chip');
+  chips.forEach(function(ch) {
+    ch.classList.toggle('active', ch.textContent === cat);
+  });
+  renderKBList();
+}
+
+function renderKBList() {
+  var scroll = document.getElementById('kbScroll');
+  var filter = document.getElementById('kbCatFilter');
+  var selCat = filter ? filter.value : 'all';
+
+  var filtered = kbData.notes;
+  if (selCat !== 'all') {
+    filtered = kbData.notes.filter(function(n) { return n.cat === selCat; });
+  }
+
+  if (filtered.length === 0) {
+    scroll.innerHTML = '<div class="kb-empty-state">📝 该分类暂无笔记<br><small>在书童对话中点击 💾 按钮即可收藏</small></div>';
+    return;
+  }
+
+  var html = '';
+  filtered.forEach(function(n) {
+    var title = n.title || '无标题';
+    var preview = (n.content || '').replace(/\n/g, ' ').slice(0, 60);
+    var date = n.createdAt ? new Date(n.createdAt).toLocaleDateString('zh-CN') : '';
+    html += '<div class="kb-note-item" onclick="kbOpenNote(\'' + n.id + '\')">';
+    html += '<div class="ni-title">' + escHtmlT(title) + '</div>';
+    html += '<div class="ni-preview">' + escHtmlT(preview) + '</div>';
+    html += '<div class="ni-meta"><span>' + date + '</span><span class="ni-cat">' + escHtmlT(n.cat) + '</span></div>';
+    html += '</div>';
+  });
+  scroll.innerHTML = html;
+}
+
+function escHtmlT(s) {
+  if (!s) return '';
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function kbOpenNote(id) {
+  var note = null;
+  for (var i = 0; i < kbData.notes.length; i++) {
+    if (kbData.notes[i].id === id) { note = kbData.notes[i]; break; }
+  }
+  if (!note) return;
+  kbCurrentNoteId = id;
+
+  document.getElementById('kbDetailMeta').innerHTML =
+    '<span class="ni-cat" style="cursor:pointer" onclick="kbChangeCat(\'' + id + '\')">' + escHtmlT(note.cat) + ' ▼</span>' +
+    '<span>' + (note.createdAt ? new Date(note.createdAt).toLocaleString('zh-CN') : '') + '</span>';
+  document.getElementById('kbDetailContent').textContent = note.content;
+  document.getElementById('kbDetail').classList.add('open');
+}
+
+function kbBackToList() {
+  document.getElementById('kbDetail').classList.remove('open');
+  kbCurrentNoteId = null;
+}
+
+function kbDeleteNote() {
+  if (!confirm('确定删除这条笔记？')) return;
+  kbData.notes = kbData.notes.filter(function(n) { return n.id !== kbCurrentNoteId; });
+  saveKBData();
+  updateKBCount();
+  kbBackToList();
+  renderKBList();
+}
+
+function kbExportNote() {
+  var note = null;
+  for (var i = 0; i < kbData.notes.length; i++) {
+    if (kbData.notes[i].id === kbCurrentNoteId) { note = kbData.notes[i]; break; }
+  }
+  if (!note) return;
+  var text = note.title + '\n\n' + note.content;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert('笔记已复制到剪贴板！');
+    });
+  }
+}
+
+function kbChangeCat(id) {
+  var cats = kbData.cats.join('\n');
+  var newCat = prompt('选择分类（输入名称或当前分类之一）：\n\n' + cats, '');
+  if (newCat && newCat.trim()) {
+    for (var i = 0; i < kbData.notes.length; i++) {
+      if (kbData.notes[i].id === id) {
+        kbData.notes[i].cat = newCat.trim();
+        break;
+      }
+    }
+    if (kbData.cats.indexOf(newCat.trim()) < 0) {
+      kbData.cats.push(newCat.trim());
+      updateKBCatSelect();
+      updateKBCats();
+    }
+    saveKBData();
+    kbBackToList();
+    renderKBList();
+  }
+}
+
+function showKBImportDialog() {
+  document.getElementById('kbImportDialog').style.display = 'flex';
+}
+
+function kbPasteImport() {
+  document.getElementById('kbImportDialog').style.display = 'none';
+  var text = prompt('粘贴文本内容，或从其他平台复制后粘贴到这里：');
+  if (text && text.trim()) {
+    saveToKnowledgeBase(text.trim());
+    renderKBList();
+    updateKBCount();
+  }
+}
 </script>
 
 <script src="bizatom-chat-persist.js"></script>
