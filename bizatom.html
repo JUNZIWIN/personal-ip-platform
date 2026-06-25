@@ -2229,15 +2229,16 @@ function renderSidebar(books) {
 
       for (var j = 0; j < subcatBooks.length; j++) {
         var book = subcatBooks[j];
-        var title = (isZh && book.zh) ? (book.zh.t || book.t) : book.t;
-        var author = '';
-        if (isZh && book.zh && book.zh.a) {
-          author = book.zh.a;
-        } else if (book.en && book.en.a) {
-          author = book.en.a;
+        // Fix: Properly extract title from zh/en nested structure
+        // Fallback chain: zh.t → en.t → book.id (last resort)
+        var title = '';
+        if (isZh && book.zh && book.zh.t) {
+          title = book.zh.t;
+        } else if (book.en && book.en.t) {
+          title = book.en.t;
+        } else {
+          title = book.id || 'Unknown';
         }
-        // Clean author string — remove parentheses with English names for cleaner display
-        // e.g. "吉姆·柯林斯 (Jim Collins)" → keep as is, it's informative
         var bookId = book.id;
         html += '<div class="sidebar-book-item" data-book-id="' + bookId + '" onclick="openSidebarBook(\'' + bookId + '\')">';
         html += '<span class="sb-icon">📖</span>';
@@ -2345,15 +2346,21 @@ function openSidebarBook(bookId) {
     item.classList.toggle('active', item.getAttribute('data-book-id') === bookId);
   });
 
-  var title = (isZh && book.zh) ? (book.zh.t || book.t) : book.t;
-  var author = book.au || '';
-  var desc = (isZh && book.zh) ? (book.zh.b || book.b) : (book.b || '');
+  // Fix: Properly extract title from zh/en nested structure
+  var title = '';
+  if (isZh && book.zh && book.zh.t) {
+    title = book.zh.t;
+  } else if (book.en && book.en.t) {
+    title = book.en.t;
+  } else {
+    title = bookId || 'Unknown';
+  }
+  var desc = (isZh && book.zh && book.zh.b) ? book.zh.b : (book.en && book.en.b) ? book.en.b : '';
   var typeName = book.type === 'textbook' ? (isZh ? '经典教材' : 'Textbook') : (isZh ? '畅销书' : 'Bestseller');
   var catName = book.cat || '';
 
   var detailHtml = '';
   detailHtml += '<div class="dt-title">' + escHtml(title) + '</div>';
-  detailHtml += '<div class="dt-author">' + escHtml(author) + '</div>';
   detailHtml += '<div class="dt-meta">';
   detailHtml += '<span class="dt-tag type">' + typeName + '</span>';
   if (catName) detailHtml += '<span class="dt-tag cat">' + catName + '</span>';
