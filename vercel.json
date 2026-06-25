@@ -77,6 +77,26 @@
       "has": [
         {
           "type": "host",
+          "value": "airankrocket.net"
+        }
+      ],
+      "destination": "/airankrocket.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.airankrocket.net"
+        }
+      ],
+      "destination": "/airankrocket.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "aiipower.ai"
         }
       ],
