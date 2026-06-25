@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BizAtom 商原子 — Deep Dive in 15 Minutes</title>
+
+<!-- PWA Meta -->
+<meta name="theme-color" content="#0A1C38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BizAtom">
+<link rel="apple-touch-icon" href="/bizatom-icon-180.png">
+<link rel="manifest" href="/manifest.json">
 <meta name="description" content="BizAtom turns landmark business books into structured knowledge atoms — AI mind maps, core concepts, and real cases — so you build a complete cognitive framework in 15 minutes.">
 <meta name="keywords" content="BizAtom, 商原子, business books, AI, knowledge platform, MBA, AIIPOWER">
 <meta property="og:title" content="BizAtom 商原子 — Deep Dive in 15 Minutes">
@@ -2671,6 +2679,17 @@ function kbPasteImport() {
     }
   });
   </script>
+
+<!-- PWA: Register Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
+    console.log('BizAtom PWA: SW registered', reg.scope);
+  }).catch(function(err) {
+    console.log('BizAtom PWA: SW registration failed', err);
+  });
+}
+</script>
 
 </body>
 </html>

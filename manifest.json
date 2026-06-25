@@ -1,0 +1,27 @@
+{
+  "name": "BizAtom - 商原子",
+  "short_name": "BizAtom",
+  "description": "AI-powered business book deconstruction. Master a business classic in 15 minutes.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A1C38",
+  "theme_color": "#0A1C38",
+  "categories": ["education", "books", "business"],
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/bizatom-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/bizatom-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
