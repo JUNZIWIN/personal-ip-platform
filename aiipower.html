@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIIPOWER LIMITED — Enterprise AI-Native SaaS & Training</title>
-<meta name="description" content="AIIPOWER LIMITED is a Hong Kong-based AI company delivering custom enterprise AI-native SaaS platform development and offline AI training. GBA-headquartered, HK Science Park incoming.">
+<title>AIIPOWER LIMITED — 企业AI原生SaaS开发与培训 | Enterprise AI-Native SaaS &amp; Training</title>
+<meta name="description" content="AIIPOWER LIMITED 是香港注册的AI科技公司，专注企业AI原生SaaS平台定制开发与AI线下培训。总部位于粤港澳大湾区，即将入驻香港科学园。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -32,6 +32,9 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color .2s}
 .nav-links a:hover{color:var(--text-primary)}
+.lang-switch{display:flex;align-items:center;gap:4px;background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-full);padding:3px;cursor:pointer;font-size:12px;font-weight:600}
+.lang-switch span{padding:4px 10px;border-radius:var(--radius-full);transition:all .2s;color:var(--text-muted)}
+.lang-switch span.active{background:var(--primary);color:#fff}
 
 /* Hero */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
@@ -164,10 +167,13 @@ a{color:inherit;text-decoration:none}
       AIIPOWER<span style="color:var(--primary)">.ai</span>
     </a>
     <div class="nav-links">
-      <a href="#products">Products</a>
-      <a href="#services">Services</a>
-      <a href="#company">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#products" data-i18n="nav-products">产品生态</a>
+      <a href="#services" data-i18n="nav-services">核心服务</a>
+      <a href="#company" data-i18n="nav-about">关于我们</a>
+      <a href="#contact" data-i18n="nav-contact">联系我们</a>
+    </div>
+    <div class="lang-switch" id="langSwitch" onclick="setLang(document.documentElement.lang==='zh-CN'?'en':'zh')">
+      <span id="langZh">中</span><span id="langEn">EN</span>
     </div>
   </div>
 </nav>
@@ -178,35 +184,35 @@ a{color:inherit;text-decoration:none}
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Hong Kong Science Park · Incoming</div>
-      <h1>We Build <span>AI-Native SaaS</span> for Your Enterprise</h1>
-      <p class="hero-subtitle">Custom AI-powered SaaS platforms + enterprise AI training. AIIPOWER LIMITED delivers end-to-end AI transformation — from strategy to deployment, online to offline.</p>
+      <div class="hero-badge"><span class="dot"></span> <span data-i18n="hero-badge">香港科学园 · 即将入驻</span></div>
+      <h1 data-i18n="hero-title">为企业打造<span>AI原生SaaS</span>平台</h1>
+      <p class="hero-subtitle" data-i18n="hero-subtitle">定制AI驱动SaaS平台 + 企业AI培训。AIIPOWER LIMITED 提供端到端AI转型服务——从战略规划到部署落地，线上到线下全覆盖。</p>
       <div class="hero-cta">
-        <a href="#services" class="btn btn-primary">Explore Services</a>
-        <a href="#products" class="btn btn-outline">View Products</a>
+        <a href="#services" class="btn btn-primary" data-i18n="hero-cta1">了解服务</a>
+        <a href="#products" class="btn btn-outline" data-i18n="hero-cta2">查看产品</a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card">
-        <div class="hk-badge">🇭🇰 Hong Kong Registered</div>
+        <div class="hk-badge">🇭🇰 <span data-i18n="hero-card-badge">香港注册企业</span></div>
         <h3>AIIPOWER LIMITED</h3>
-        <p>A Hong Kong-registered AI technology company applying for admission to Hong Kong Science Park. We build custom AI-native SaaS platforms and deliver enterprise AI training — bridging capability with real-world results.</p>
+        <p data-i18n="hero-card-desc">香港注册AI科技公司，正申请入驻香港科学园。我们为企业定制AI原生SaaS平台并提供AI培训——将技术能力转化为真实商业成果。</p>
         <div class="meta-grid">
           <div class="meta-item">
             <div class="val">2026</div>
-            <div class="lbl">Established</div>
+            <div class="lbl" data-i18n="hero-meta1">成立年份</div>
           </div>
           <div class="meta-item">
             <div class="val">2</div>
-            <div class="lbl">Core Services</div>
+            <div class="lbl" data-i18n="hero-meta2">核心服务</div>
           </div>
           <div class="meta-item">
             <div class="val">3+</div>
-            <div class="lbl">Product Lines</div>
+            <div class="lbl" data-i18n="hero-meta3">产品线</div>
           </div>
           <div class="meta-item">
             <div class="val">GBA</div>
-            <div class="lbl">Headquarters</div>
+            <div class="lbl" data-i18n="hero-meta4">总部所在地</div>
           </div>
         </div>
       </div>
@@ -217,29 +223,29 @@ a{color:inherit;text-decoration:none}
 <!-- Products -->
 <section class="products-section" id="products">
   <div class="container">
-    <p class="product-label">Product Ecosystem</p>
-    <h2 class="product-title">Our Product Ecosystem</h2>
+    <p class="product-label" data-i18n="products-label">产品生态</p>
+    <h2 class="product-title" data-i18n="products-title">我们的产品生态</h2>
     <div class="product-grid">
       <div class="product-card">
         <div class="product-icon">🎓</div>
-        <span class="product-status status-live">Live</span>
+        <span class="product-status status-live" data-i18n="p1-status">已上线</span>
         <h4>AIP Studio</h4>
-        <p>AI-powered personal IP SaaS platform for executives, freelancers, and founders to build AI-native websites and brand assets in minutes.</p>
-        <a href="https://aiipower.me" class="product-link" target="_blank">Visit aiipower.me →</a>
+        <p data-i18n="p1-desc">AI驱动的个人IP SaaS平台，面向企业高管、自由职业者和创始人，数分钟内即可搭建AI原生网站和品牌资产。</p>
+        <a href="https://aiipower.me" class="product-link" target="_blank" data-i18n="p1-link">访问 aiipower.me →</a>
       </div>
       <div class="product-card">
         <div class="product-icon">📚</div>
-        <span class="product-status status-live">Live</span>
+        <span class="product-status status-live" data-i18n="p2-status">已上线</span>
         <h4>BizAtom</h4>
-        <p>AI business classics deconstruction platform. Deep-dive into timeless business principles through AI-powered analysis and learning.</p>
-        <a href="https://bizatom.ai" class="product-link" target="_blank">Visit bizatom.ai →</a>
+        <p data-i18n="p2-desc">AI商业经典拆解平台。通过AI驱动的分析和学习，深度解读经久不衰的商业原理。</p>
+        <a href="https://bizatom.ai" class="product-link" target="_blank" data-i18n="p2-link">访问 bizatom.ai →</a>
       </div>
       <div class="product-card">
         <div class="product-icon">🚀</div>
-        <span class="product-status status-soon">Coming Soon</span>
+        <span class="product-status status-soon" data-i18n="p3-status">即将上线</span>
         <h4>AIRankRocket</h4>
-        <p>GEO optimization tool for the AI search era. Ensure your brand stands out and ranks in AI-generated content and search results.</p>
-        <a href="https://airankrocket.ai" class="product-link" target="_blank">Learn More →</a>
+        <p data-i18n="p3-desc">面向AI搜索时代的GEO优化工具。确保您的品牌在AI生成内容和搜索结果中脱颖而出。</p>
+        <a href="https://airankrocket.ai" class="product-link" target="_blank" data-i18n="p3-link">了解更多 →</a>
       </div>
     </div>
   </div>
@@ -248,8 +254,8 @@ a{color:inherit;text-decoration:none}
 <!-- Services -->
 <section class="services-section" id="services">
   <div class="container">
-    <p class="product-label">Core Services</p>
-    <h2 class="product-title">Enterprise AI Transformation,<br>End-to-End</h2>
+    <p class="product-label" data-i18n="services-label">核心服务</p>
+    <h2 class="product-title" data-i18n="services-title">企业AI转型，<br>端到端交付</h2>
     <div class="service-grid">
 
       <!-- Service 1: AI-Native SaaS Platform Development -->
@@ -257,20 +263,20 @@ a{color:inherit;text-decoration:none}
         <div class="service-header">
           <div class="service-icon">⚙️</div>
           <div>
-            <h4>AI-Native SaaS Platform Development</h4>
-            <div class="service-subtitle">Flagship Service · Custom Build</div>
+            <h4 data-i18n="s1-title">AI原生SaaS平台定制开发</h4>
+            <div class="service-subtitle" data-i18n="s1-subtitle">旗舰服务 · 全定制开发</div>
           </div>
         </div>
-        <p class="service-desc">We design and build custom AI-powered SaaS platforms tailored to your enterprise workflows. Not templates — fully bespoke solutions that integrate AI agents, automation pipelines, and brand-native interfaces.</p>
+        <p class="service-desc" data-i18n="s1-desc">我们为您的企业设计和构建定制化AI驱动的SaaS平台。非模板方案——全定制架构，集成AI智能体、自动化流程和品牌原生界面。</p>
         <ul class="service-features">
-          <li><span class="check">✓</span> Custom AI agent-driven platform architecture</li>
-          <li><span class="check">✓</span> Brand-native UI/UX design system</li>
-          <li><span class="check">✓</span> Multi-tenant SaaS infrastructure</li>
-          <li><span class="check">✓</span> Integration with enterprise data & APIs</li>
-          <li><span class="check">✓</span> Real-time AI analytics dashboard</li>
-          <li><span class="check">✓</span> Continuous iteration & maintenance</li>
-          <li><span class="check">✓</span> Scalable deployment (HK/GBA/Global)</li>
-          <li><span class="check">✓</span> IP & data sovereignty compliance</li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f1">定制AI智能体驱动平台架构</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f2">品牌原生UI/UX设计系统</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f3">多租户SaaS基础设施</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f4">企业数据与API深度集成</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f5">实时AI分析仪表盘</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f6">持续迭代与运维</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f7">可扩展部署（香港/GBA/全球）</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s1-f8">IP与数据主权合规</span></li>
         </ul>
       </div>
 
@@ -279,44 +285,44 @@ a{color:inherit;text-decoration:none}
         <div class="service-header">
           <div class="service-icon">🎓</div>
           <div>
-            <h4>AI Enterprise Training</h4>
-            <div class="service-subtitle">Offline Workshops · Synergy with Platform Dev</div>
+            <h4 data-i18n="s2-title">AI企业培训</h4>
+            <div class="service-subtitle" data-i18n="s2-subtitle">线下工作坊 · 与开发服务优势互补</div>
           </div>
         </div>
-        <p class="service-desc">On-site AI training programs designed for corporate teams — from C-suite strategy sessions to hands-on engineering workshops. Training and platform development feed each other: what we teach informs what we build, and vice versa.</p>
+        <p class="service-desc" data-i18n="s2-desc">面向企业团队的线下AI培训项目——从高管战略研讨会到技术团队实操训练营。培训与平台开发互为支撑：培训内容指导产品设计，产品实践反哺教学内容。</p>
         <ul class="service-features">
-          <li><span class="check">✓</span> Executive AI strategy workshops</li>
-          <li><span class="check">✓</span> Team AI literacy bootcamps</li>
-          <li><span class="check">✓</span> Hands-on AI tool & agent training</li>
-          <li><span class="check">✓</span> Custom curriculum per industry vertical</li>
-          <li><span class="check">✓</span> Post-training implementation support</li>
-          <li><span class="check">✓</span> Cross-border case studies (GBA focus)</li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f1">高管AI战略研讨会</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f2">团队AI素养集训营</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f3">AI工具与智能体实操培训</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f4">按行业定制课程体系</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f5">培训后落地支持</span></li>
+          <li><span class="check">✓</span> <span data-i18n="s2-f6">跨境案例教学（大湾区专题）</span></li>
         </ul>
-        <div class="service-coming">📸 Instructor team photos coming soon</div>
+        <div class="service-coming" data-i18n="s2-photos">📸 讲师团队照片即将上线</div>
       </div>
 
     </div>
 
     <!-- AI Agent Platform teaser -->
     <div class="agent-card">
-      <div class="agent-badge">🤖 Platform Evolution</div>
-      <h4>aiipower.ai <span>→ AI Agent SaaS</span></h4>
-      <p class="agent-desc">This very platform is evolving into an AI agent — a self-service SaaS that autonomously develops, deploys, and iterates enterprise AI-native websites. Powered by a robot engineering team working around the clock. Technical specifications and live team visuals coming soon.</p>
+      <div class="agent-badge">🤖 <span data-i18n="agent-badge">平台进化</span></div>
+      <h4 data-i18n="agent-title">aiipower.ai <span>→ AI Agent SaaS</span></h4>
+      <p class="agent-desc" data-i18n="agent-desc">本平台正进化为AI智能体——自助式SaaS服务，可自主开发、部署和迭代企业AI原生网站。由机器人工程团队全天候驱动。技术规格和实时团队可视化即将上线。</p>
       <div class="agent-preview">
         <div class="agent-preview-item">
           <div class="preview-icon">🧠</div>
-          <div class="preview-label">AI Agent Core</div>
-          <div class="preview-hint">Autonomous development engine</div>
+          <div class="preview-label" data-i18n="agent-p1-label">AI Agent 核心</div>
+          <div class="preview-hint" data-i18n="agent-p1-hint">自主开发引擎</div>
         </div>
         <div class="agent-preview-item">
           <div class="preview-icon">🤖</div>
-          <div class="preview-label">Robot Team</div>
-          <div class="preview-hint">24/7 automated workflows</div>
+          <div class="preview-label" data-i18n="agent-p2-label">机器人团队</div>
+          <div class="preview-hint" data-i18n="agent-p2-hint">7x24 自动化工作流</div>
         </div>
         <div class="agent-preview-item">
           <div class="preview-icon">📊</div>
-          <div class="preview-label">Live Dashboard</div>
-          <div class="preview-hint">Real-time build progress</div>
+          <div class="preview-label" data-i18n="agent-p3-label">实时仪表盘</div>
+          <div class="preview-hint" data-i18n="agent-p3-hint">构建进度实时可见</div>
         </div>
       </div>
     </div>
@@ -329,28 +335,28 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <div class="company-content">
       <div class="company-info">
-        <p class="product-label">About Us</p>
-        <h2>Born in Hong Kong,<br>Built for the World</h2>
-        <div class="hk-highlight">🇭🇰 Applying for Hong Kong Science Park Admission</div>
-        <p>AIIPOWER LIMITED is incorporated in Hong Kong as a technology company focused on AI-native SaaS platform development and enterprise AI training. We build custom AI solutions that transform how enterprises operate — from intelligent internal platforms to customer-facing AI agents. Our offline training programs ensure teams are equipped to fully leverage the technology we deploy.</p>
-        <p>With the Greater Bay Area as our home base and a globally-minded engineering team, we combine deep AI development capability with cross-cultural business delivery.</p>
+        <p class="product-label" data-i18n="about-label">关于我们</p>
+        <h2 data-i18n="about-title">生于香港，<br>服务全球</h2>
+        <div class="hk-highlight">🇭🇰 <span data-i18n="about-badge">正申请入驻香港科学园</span></div>
+        <p data-i18n="about-p1">AIIPOWER LIMITED 是香港注册的科技公司，专注于AI原生SaaS平台开发与企业AI培训。我们构建定制化AI解决方案，帮助企业转型——从智能内部平台到面向客户的AI智能体。我们的线下培训项目确保团队能充分发挥所部署技术的价值。</p>
+        <p data-i18n="about-p2">以粤港澳大湾区为总部基地，拥有一支全球化视野的工程团队，我们将深厚的AI开发能力与跨文化商业交付融为一体。</p>
       </div>
       <div class="company-stats">
         <div class="stat-card">
           <div class="stat-num">HK</div>
-          <div class="stat-lbl">Registered Company</div>
+          <div class="stat-lbl" data-i18n="about-stat1">香港注册公司</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">2</div>
-          <div class="stat-lbl">Core Services</div>
+          <div class="stat-lbl" data-i18n="about-stat2">核心服务</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">AIIPOWER<sup>®</sup></div>
-          <div class="stat-lbl">Registered Trademark</div>
+          <div class="stat-lbl" data-i18n="about-stat3">注册商标</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">Global</div>
-          <div class="stat-lbl">Target Market</div>
+          <div class="stat-num" data-i18n="about-stat4-val">全球</div>
+          <div class="stat-lbl" data-i18n="about-stat4">目标市场</div>
         </div>
       </div>
     </div>
@@ -360,22 +366,22 @@ a{color:inherit;text-decoration:none}
 <!-- Contact -->
 <section class="contact-section" id="contact">
   <div class="container">
-    <p class="product-label">Get in Touch</p>
-    <h2>Let's Build Together</h2>
-    <p class="contact-desc">Whether you need a custom AI-native SaaS platform, enterprise team training, or both — we'd love to discuss how AIIPOWER can accelerate your AI transformation.</p>
+    <p class="product-label" data-i18n="contact-label">联系我们</p>
+    <h2 data-i18n="contact-title">携手共创</h2>
+    <p class="contact-desc" data-i18n="contact-desc">无论您需要定制AI原生SaaS平台、企业团队培训，还是两者兼具兼具——我们期待与您探讨AIIPOWER如何加速您的AI转型之旅。</p>
     <div class="contact-cards">
       <a href="mailto:contact@aiipower.ai" class="contact-card">
         <div class="c-icon">✉️</div>
         <div class="c-info">
-          <div class="c-lbl">Email</div>
+          <div class="c-lbl" data-i18n="contact-email-lbl">邮箱</div>
           <div class="c-val">contact@aiipower.ai</div>
         </div>
       </a>
       <div class="contact-card">
         <div class="c-icon">📍</div>
         <div class="c-info">
-          <div class="c-lbl">Location</div>
-          <div class="c-val">Hong Kong SAR, China</div>
+          <div class="c-lbl" data-i18n="contact-loc-lbl">地址</div>
+          <div class="c-val" data-i18n="contact-loc">中国香港特别行政区</div>
         </div>
       </div>
     </div>
@@ -385,9 +391,114 @@ a{color:inherit;text-decoration:none}
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2026 AIIPOWER LIMITED. All rights reserved. AIIPOWER<sup>&reg;</sup> is a registered trademark.</p>
+    <p data-i18n="footer-text">&copy; 2026 AIIPOWER LIMITED. 保留所有权利。AIIPOWER<sup>&reg;</sup> 为注册商标。</p>
   </div>
 </footer>
+
+<script>
+var i18n = {
+  zh: {
+    'nav-products':'产品生态','nav-services':'核心服务','nav-about':'关于我们','nav-contact':'联系我们',
+    'hero-badge':'香港科学园 · 即将入驻',
+    'hero-title':'为企业打造<span>AI原生SaaS</span>平台',
+    'hero-subtitle':'定制AI驱动SaaS平台 + 企业AI培训。AIIPOWER LIMITED 提供端到端AI转型服务——从战略规划到部署落地，线上到线下全覆盖。',
+    'hero-cta1':'了解服务','hero-cta2':'查看产品',
+    'hero-card-badge':'香港注册企业',
+    'hero-card-desc':'香港注册AI科技公司，正申请入驻香港科学园。我们为企业定制AI原生SaaS平台并提供AI培训——将技术能力转化为真实商业成果。',
+    'hero-meta1':'成立年份','hero-meta2':'核心服务','hero-meta3':'产品线','hero-meta4':'总部所在地',
+    'products-label':'产品生态','products-title':'我们的产品生态',
+    'p1-status':'已上线','p1-desc':'AI驱动的个人IP SaaS平台，面向企业高管、自由职业者和创始人，数分钟内即可搭建AI原生网站和品牌资产。','p1-link':'访问 aiipower.me →',
+    'p2-status':'已上线','p2-desc':'AI商业经典拆解平台。通过AI驱动的分析和学习，深度解读经久不衰的商业原理。','p2-link':'访问 bizatom.ai →',
+    'p3-status':'即将上线','p3-desc':'面向AI搜索时代的GEO优化工具。确保您的品牌在AI生成内容和搜索结果中脱颖而出。','p3-link':'了解更多 →',
+    'services-label':'核心服务','services-title':'企业AI转型，<br>端到端交付',
+    's1-title':'AI原生SaaS平台定制开发','s1-subtitle':'旗舰服务 · 全定制开发',
+    's1-desc':'我们为您的企业设计和构建定制化AI驱动的SaaS平台。非模板方案——全定制架构，集成AI智能体、自动化流程和品牌原生界面。',
+    's1-f1':'定制AI智能体驱动平台架构','s1-f2':'品牌原生UI/UX设计系统','s1-f3':'多租户SaaS基础设施','s1-f4':'企业数据与API深度集成',
+    's1-f5':'实时AI分析仪表盘','s1-f6':'持续迭代与运维','s1-f7':'可扩展部署（香港/GBA/全球）','s1-f8':'IP与数据主权合规',
+    's2-title':'AI企业培训','s2-subtitle':'线下工作坊 · 与开发服务优势互补',
+    's2-desc':'面向企业团队的线下AI培训项目——从高管战略研讨会到技术团队实操训练营。培训与平台开发互为支撑：培训内容指导产品设计，产品实践反哺教学内容。',
+    's2-f1':'高管AI战略研讨会','s2-f2':'团队AI素养集训营','s2-f3':'AI工具与智能体实操培训',
+    's2-f4':'按行业定制课程体系','s2-f5':'培训后落地支持','s2-f6':'跨境案例教学（大湾区专题）',
+    's2-photos':'📸 讲师团队照片即将上线',
+    'agent-badge':'平台进化','agent-title':'aiipower.ai <span>→ AI Agent SaaS</span>',
+    'agent-desc':'本平台正进化为AI智能体——自助式SaaS服务，可自主开发、部署和迭代企业AI原生网站。由机器人工程团队全天候驱动。技术规格和实时团队可视化即将上线。',
+    'agent-p1-label':'AI Agent 核心','agent-p1-hint':'自主开发引擎',
+    'agent-p2-label':'机器人团队','agent-p2-hint':'7x24 自动化工作流',
+    'agent-p3-label':'实时仪表盘','agent-p3-hint':'构建进度实时可见',
+    'about-label':'关于我们','about-title':'生于香港，<br>服务全球','about-badge':'正申请入驻香港科学园',
+    'about-p1':'AIIPOWER LIMITED 是香港注册的科技公司，专注于AI原生SaaS平台开发与企业AI培训。我们构建定制化AI解决方案，帮助企业转型——从智能内部平台到面向客户的AI智能体。我们的线下培训项目确保团队能充分发挥所部署技术的价值。',
+    'about-p2':'以粤港澳大湾区为总部基地，拥有一支全球化视野的工程团队，我们将深厚的AI开发能力与跨文化商业交付融为一体。',
+    'about-stat1':'香港注册公司','about-stat2':'核心服务','about-stat3':'注册商标','about-stat4-val':'全球','about-stat4':'目标市场',
+    'contact-label':'联系我们','contact-title':'携手共创',
+    'contact-desc':'无论您需要定制AI原生SaaS平台、企业团队培训，还是两者兼具——我们期待与您探讨AIIPOWER如何加速您的AI转型之旅。',
+    'contact-email-lbl':'邮箱','contact-loc-lbl':'地址','contact-loc':'中国香港特别行政区',
+    'footer-text':'&copy; 2026 AIIPOWER LIMITED. 保留所有权利。AIIPOWER<sup>&reg;</sup> 为注册商标。'
+  },
+  en: {
+    'nav-products':'Products','nav-services':'Services','nav-about':'About','nav-contact':'Contact',
+    'hero-badge':'Hong Kong Science Park · Incoming',
+    'hero-title':'We Build <span>AI-Native SaaS</span> for Your Enterprise',
+    'hero-subtitle':'Custom AI-powered SaaS platforms + enterprise AI training. AIIPOWER LIMITED delivers end-to-end AI transformation — from strategy to deployment, online to offline.',
+    'hero-cta1':'Explore Services','hero-cta2':'View Products',
+    'hero-card-badge':'Hong Kong Registered',
+    'hero-card-desc':'A Hong Kong-registered AI technology company applying for admission to Hong Kong Science Park. We build custom AI-native SaaS platforms and deliver enterprise AI training — bridging capability with real-world results.',
+    'hero-meta1':'Established','hero-meta2':'Core Services','hero-meta3':'Product Lines','hero-meta4':'Headquarters',
+    'products-label':'Product Ecosystem','products-title':'Our Product Ecosystem',
+    'p1-status':'Live','p1-desc':'AI-powered personal IP SaaS platform for executives, freelancers, and founders to build AI-native websites and brand assets in minutes.','p1-link':'Visit aiipower.me →',
+    'p2-status':'Live','p2-desc':'AI business classics deconstruction platform. Deep-dive into timeless business principles through AI-powered analysis and learning.','p2-link':'Visit bizatom.ai →',
+    'p3-status':'Coming Soon','p3-desc':'GEO optimization tool for the AI search era. Ensure your brand stands out and ranks in AI-generated content and search results.','p3-link':'Learn More →',
+    'services-label':'Core Services','services-title':'Enterprise AI Transformation,<br>End-to-End',
+    's1-title':'AI-Native SaaS Platform Development','s1-subtitle':'Flagship Service · Custom Build',
+    's1-desc':'We design and build custom AI-powered SaaS platforms tailored to your enterprise workflows. Not templates — fully bespoke solutions that integrate AI agents, automation pipelines, and brand-native interfaces.',
+    's1-f1':'Custom AI agent-driven platform architecture','s1-f2':'Brand-native UI/UX design system','s1-f3':'Multi-tenant SaaS infrastructure','s1-f4':'Integration with enterprise data & APIs',
+    's1-f5':'Real-time AI analytics dashboard','s1-f6':'Continuous iteration & maintenance','s1-f7':'Scalable deployment (HK/GBA/Global)','s1-f8':'IP & data sovereignty compliance',
+    's2-title':'AI Enterprise Training','s2-subtitle':'Offline Workshops · Synergy with Platform Dev',
+    's2-desc':'On-site AI training programs designed for corporate teams — from C-suite strategy sessions to hands-on engineering workshops. Training and platform development feed each other: what we teach informs what we build, and vice versa.',
+    's2-f1':'Executive AI strategy workshops','s2-f2':'Team AI literacy bootcamps','s2-f3':'Hands-on AI tool & agent training',
+    's2-f4':'Custom curriculum per industry vertical','s2-f5':'Post-training implementation support','s2-f6':'Cross-border case studies (GBA focus)',
+    's2-photos':'📸 Instructor team photos coming soon',
+    'agent-badge':'Platform Evolution','agent-title':'aiipower.ai <span>→ AI Agent SaaS</span>',
+    'agent-desc':'This very platform is evolving into an AI agent — a self-service SaaS that autonomously develops, deploys, and iterates enterprise AI-native websites. Powered by a robot engineering team working around the clock. Technical specifications and live team visuals coming soon.',
+    'agent-p1-label':'AI Agent Core','agent-p1-hint':'Autonomous development engine',
+    'agent-p2-label':'Robot Team','agent-p2-hint':'24/7 automated workflows',
+    'agent-p3-label':'Live Dashboard','agent-p3-hint':'Real-time build progress',
+    'about-label':'About Us','about-title':'Born in Hong Kong,<br>Built for the World','about-badge':'Applying for Hong Kong Science Park Admission',
+    'about-p1':'AIIPOWER LIMITED is incorporated in Hong Kong as a technology company focused on AI-native SaaS platform development and enterprise AI training. We build custom AI solutions that transform how enterprises operate — from intelligent internal platforms to customer-facing AI agents. Our offline training programs ensure teams are equipped to fully leverage the technology we deploy.',
+    'about-p2':'With the Greater Bay Area as our home base and a globally-minded engineering team, we combine deep AI development capability with cross-cultural business delivery.',
+    'about-stat1':'Registered Company','about-stat2':'Core Services','about-stat3':'Registered Trademark','about-stat4-val':'Global','about-stat4':'Target Market',
+    'contact-label':'Get in Touch','contact-title':'Let\'s Build Together',
+    'contact-desc':'Whether you need a custom AI-native SaaS platform, enterprise team training, or both — we\'d love to discuss how AIIPOWER can accelerate your AI transformation.',
+    'contact-email-lbl':'Email','contact-loc-lbl':'Location','contact-loc':'Hong Kong SAR, China',
+    'footer-text':'&copy; 2026 AIIPOWER LIMITED. All rights reserved. AIIPOWER<sup>&reg;</sup> is a registered trademark.'
+  }
+};
+
+function setLang(lang) {
+  var l = lang === 'en' ? 'en' : 'zh';
+  var dict = l === 'en' ? i18n.en : i18n.zh;
+  document.documentElement.lang = l === 'en' ? 'en' : 'zh-CN';
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key]) {
+      if (key === 'hero-title' || key === 'agent-title') {
+        el.innerHTML = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    }
+  });
+  // Update lang switch pills
+  document.getElementById('langZh').className = l === 'zh' ? 'active' : '';
+  document.getElementById('langEn').className = l === 'en' ? 'active' : '';
+  localStorage.setItem('aiipower-lang', l);
+}
+
+// Init
+(function() {
+  var saved = localStorage.getItem('aiipower-lang') || 'zh';
+  setLang(saved);
+})();
+</script>
 
 </body>
 </html>
