@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIIPOWER LIMITED — AI Brand Empowerment</title>
-<meta name="description" content="AIIPOWER LIMITED is a Hong Kong-based AI company empowering individuals and enterprises through AI-driven brand solutions.">
+<title>AIIPOWER LIMITED — Enterprise AI-Native SaaS & Training</title>
+<meta name="description" content="AIIPOWER LIMITED is a Hong Kong-based AI company delivering custom enterprise AI-native SaaS platform development and offline AI training. GBA-headquartered, HK Science Park incoming.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -80,13 +80,39 @@ a{color:inherit;text-decoration:none}
 .status-soon{background:rgba(201,168,76,.12);color:var(--accent-gold)}
 
 /* Services */
-.services-section{padding:100px 0;background:var(--bg-secondary)}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.service-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:32px;text-align:center;transition:all .3s}
-.service-card:hover{background:var(--bg-card-hover);border-color:var(--primary)}
-.service-card .service-icon{font-size:32px;margin-bottom:16px}
-.service-card h4{font-size:17px;font-weight:700;margin-bottom:8px}
-.service-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+.services-section{padding:100px 0;background:var(--bg-secondary);position:relative}
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:80px}
+.service-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:40px;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.service-card:nth-child(1)::before{background:linear-gradient(90deg,var(--primary),var(--accent-cyan))}
+.service-card:nth-child(2)::before{background:linear-gradient(90deg,var(--accent-gold),#FF6B35)}
+.service-card:hover{background:var(--bg-card-hover);border-color:var(--primary);transform:translateY(-4px)}
+.service-card .service-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.service-card .service-icon{width:52px;height:52px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.service-card:nth-child(1) .service-icon{background:rgba(123,104,238,.15);color:var(--primary)}
+.service-card:nth-child(2) .service-icon{background:rgba(201,168,76,.15);color:var(--accent-gold)}
+.service-card h4{font-size:22px;font-weight:700;margin-bottom:4px}
+.service-card .service-subtitle{font-size:13px;color:var(--text-muted);font-weight:500}
+.service-card .service-desc{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:24px}
+.service-card .service-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.service-card .service-features li{font-size:13px;color:var(--text-secondary);display:flex;align-items:flex-start;gap:8px;line-height:1.6}
+.service-card .service-features li .check{color:var(--primary);font-weight:700;flex-shrink:0}
+.service-card .service-coming{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--radius-full);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);font-size:11px;color:var(--accent-gold);margin-top:20px}
+
+/* AI Agent Platform */
+.agent-section{padding:80px 0 100px;position:relative}
+.agent-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--bg-card-border),transparent)}
+.agent-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:48px;text-align:center;position:relative;overflow:hidden}
+.agent-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(123,104,238,.08) 0%,transparent 60%);pointer-events:none}
+.agent-card .agent-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--radius-full);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);font-size:12px;font-weight:600;color:var(--accent-cyan);margin-bottom:20px}
+.agent-card h4{font-size:24px;font-weight:800;margin-bottom:12px}
+.agent-card h4 span{background:linear-gradient(135deg,var(--primary),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.agent-card .agent-desc{font-size:15px;color:var(--text-secondary);line-height:1.8;max-width:640px;margin:0 auto 28px}
+.agent-card .agent-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto}
+.agent-card .agent-preview-item{padding:16px;border-radius:var(--radius-md);background:var(--bg-secondary);border:1px dashed var(--bg-card-border)}
+.agent-card .agent-preview-item .preview-icon{font-size:24px;margin-bottom:8px}
+.agent-card .agent-preview-item .preview-label{font-size:13px;font-weight:600;margin-bottom:4px}
+.agent-card .agent-preview-item .preview-hint{font-size:11px;color:var(--text-muted)}
 
 /* Company */
 .company-section{padding:100px 0}
@@ -120,6 +146,8 @@ a{color:inherit;text-decoration:none}
 @media(max-width:768px){
   .hero-inner,.company-content{grid-template-columns:1fr;gap:40px}
   .product-grid,.service-grid{grid-template-columns:1fr}
+  .service-card .service-features{grid-template-columns:1fr}
+  .agent-card .agent-preview{grid-template-columns:1fr}
   .hero-visual{order:-1}
   .hero h1{font-size:32px}
   .nav-links{display:none}
@@ -151,30 +179,30 @@ a{color:inherit;text-decoration:none}
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badge"><span class="dot"></span> Hong Kong Science Park · Incoming</div>
-      <h1>AI <span>Brand Empowerment</span> for the Next Decade</h1>
-      <p class="hero-subtitle">AIIPOWER LIMITED builds AI-native tools that help individuals and enterprises create, optimize, and scale their brand presence in the age of artificial intelligence.</p>
+      <h1>We Build <span>AI-Native SaaS</span> for Your Enterprise</h1>
+      <p class="hero-subtitle">Custom AI-powered SaaS platforms + enterprise AI training. AIIPOWER LIMITED delivers end-to-end AI transformation — from strategy to deployment, online to offline.</p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Partner With Us</a>
-        <a href="#products" class="btn btn-outline">Explore Products</a>
+        <a href="#services" class="btn btn-primary">Explore Services</a>
+        <a href="#products" class="btn btn-outline">View Products</a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card">
         <div class="hk-badge">🇭🇰 Hong Kong Registered</div>
         <h3>AIIPOWER LIMITED</h3>
-        <p>A Hong Kong-registered AI technology company applying for admission to Hong Kong Science Park. Building the bridge between AI capability and brand value.</p>
+        <p>A Hong Kong-registered AI technology company applying for admission to Hong Kong Science Park. We build custom AI-native SaaS platforms and deliver enterprise AI training — bridging capability with real-world results.</p>
         <div class="meta-grid">
           <div class="meta-item">
             <div class="val">2026</div>
             <div class="lbl">Established</div>
           </div>
           <div class="meta-item">
-            <div class="val">3+</div>
-            <div class="lbl">Core Products</div>
+            <div class="val">2</div>
+            <div class="lbl">Core Services</div>
           </div>
           <div class="meta-item">
-            <div class="val">Global</div>
-            <div class="lbl">Market Focus</div>
+            <div class="val">3+</div>
+            <div class="lbl">Product Lines</div>
           </div>
           <div class="meta-item">
             <div class="val">GBA</div>
@@ -190,7 +218,7 @@ a{color:inherit;text-decoration:none}
 <section class="products-section" id="products">
   <div class="container">
     <p class="product-label">Product Ecosystem</p>
-    <h2 class="product-title">Three Products, One Mission</h2>
+    <h2 class="product-title">Our Product Ecosystem</h2>
     <div class="product-grid">
       <div class="product-card">
         <div class="product-icon">🎓</div>
@@ -220,25 +248,79 @@ a{color:inherit;text-decoration:none}
 <!-- Services -->
 <section class="services-section" id="services">
   <div class="container">
-    <p class="product-label">Enterprise Services</p>
-    <h2 class="product-title">Beyond Products</h2>
+    <p class="product-label">Core Services</p>
+    <h2 class="product-title">Enterprise AI Transformation,<br>End-to-End</h2>
     <div class="service-grid">
+
+      <!-- Service 1: AI-Native SaaS Platform Development -->
       <div class="service-card">
-        <div class="service-icon">🏢</div>
-        <h4>AI Enterprise Training</h4>
-        <p>Customized AI literacy and implementation workshops for corporate teams. From executives to frontline, we build your AI capability.</p>
+        <div class="service-header">
+          <div class="service-icon">⚙️</div>
+          <div>
+            <h4>AI-Native SaaS Platform Development</h4>
+            <div class="service-subtitle">Flagship Service · Custom Build</div>
+          </div>
+        </div>
+        <p class="service-desc">We design and build custom AI-powered SaaS platforms tailored to your enterprise workflows. Not templates — fully bespoke solutions that integrate AI agents, automation pipelines, and brand-native interfaces.</p>
+        <ul class="service-features">
+          <li><span class="check">✓</span> Custom AI agent-driven platform architecture</li>
+          <li><span class="check">✓</span> Brand-native UI/UX design system</li>
+          <li><span class="check">✓</span> Multi-tenant SaaS infrastructure</li>
+          <li><span class="check">✓</span> Integration with enterprise data & APIs</li>
+          <li><span class="check">✓</span> Real-time AI analytics dashboard</li>
+          <li><span class="check">✓</span> Continuous iteration & maintenance</li>
+          <li><span class="check">✓</span> Scalable deployment (HK/GBA/Global)</li>
+          <li><span class="check">✓</span> IP & data sovereignty compliance</li>
+        </ul>
       </div>
+
+      <!-- Service 2: AI Enterprise Training -->
       <div class="service-card">
-        <div class="service-icon">🎯</div>
-        <h4>Brand AI Strategy</h4>
-        <p>End-to-end AI brand strategy consulting: audit your digital presence, design your AI-native brand architecture, and execute.</p>
+        <div class="service-header">
+          <div class="service-icon">🎓</div>
+          <div>
+            <h4>AI Enterprise Training</h4>
+            <div class="service-subtitle">Offline Workshops · Synergy with Platform Dev</div>
+          </div>
+        </div>
+        <p class="service-desc">On-site AI training programs designed for corporate teams — from C-suite strategy sessions to hands-on engineering workshops. Training and platform development feed each other: what we teach informs what we build, and vice versa.</p>
+        <ul class="service-features">
+          <li><span class="check">✓</span> Executive AI strategy workshops</li>
+          <li><span class="check">✓</span> Team AI literacy bootcamps</li>
+          <li><span class="check">✓</span> Hands-on AI tool & agent training</li>
+          <li><span class="check">✓</span> Custom curriculum per industry vertical</li>
+          <li><span class="check">✓</span> Post-training implementation support</li>
+          <li><span class="check">✓</span> Cross-border case studies (GBA focus)</li>
+        </ul>
+        <div class="service-coming">📸 Instructor team photos coming soon</div>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🌐</div>
-        <h4>Cross-Border GBA Solutions</h4>
-        <p>Leverage our Hong Kong base and Greater Bay Area network for cross-border market entry, IP protection, and business development.</p>
+
+    </div>
+
+    <!-- AI Agent Platform teaser -->
+    <div class="agent-card">
+      <div class="agent-badge">🤖 Platform Evolution</div>
+      <h4>aiipower.ai <span>→ AI Agent SaaS</span></h4>
+      <p class="agent-desc">This very platform is evolving into an AI agent — a self-service SaaS that autonomously develops, deploys, and iterates enterprise AI-native websites. Powered by a robot engineering team working around the clock. Technical specifications and live team visuals coming soon.</p>
+      <div class="agent-preview">
+        <div class="agent-preview-item">
+          <div class="preview-icon">🧠</div>
+          <div class="preview-label">AI Agent Core</div>
+          <div class="preview-hint">Autonomous development engine</div>
+        </div>
+        <div class="agent-preview-item">
+          <div class="preview-icon">🤖</div>
+          <div class="preview-label">Robot Team</div>
+          <div class="preview-hint">24/7 automated workflows</div>
+        </div>
+        <div class="agent-preview-item">
+          <div class="preview-icon">📊</div>
+          <div class="preview-label">Live Dashboard</div>
+          <div class="preview-hint">Real-time build progress</div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -250,8 +332,8 @@ a{color:inherit;text-decoration:none}
         <p class="product-label">About Us</p>
         <h2>Born in Hong Kong,<br>Built for the World</h2>
         <div class="hk-highlight">🇭🇰 Applying for Hong Kong Science Park Admission</div>
-        <p>AIIPOWER LIMITED is incorporated in Hong Kong as a technology company focused on AI-driven brand empowerment. Our mission is to democratize brand-building in the AI era — making professional-grade brand tools accessible to individuals and enterprises worldwide.</p>
-        <p>With the Greater Bay Area as our home base and a globally-minded team, we combine deep AI engineering capability with cross-cultural business insight.</p>
+        <p>AIIPOWER LIMITED is incorporated in Hong Kong as a technology company focused on AI-native SaaS platform development and enterprise AI training. We build custom AI solutions that transform how enterprises operate — from intelligent internal platforms to customer-facing AI agents. Our offline training programs ensure teams are equipped to fully leverage the technology we deploy.</p>
+        <p>With the Greater Bay Area as our home base and a globally-minded engineering team, we combine deep AI development capability with cross-cultural business delivery.</p>
       </div>
       <div class="company-stats">
         <div class="stat-card">
@@ -259,8 +341,8 @@ a{color:inherit;text-decoration:none}
           <div class="stat-lbl">Registered Company</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-lbl">Product Lines</div>
+          <div class="stat-num">2</div>
+          <div class="stat-lbl">Core Services</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">AIIPOWER<sup>®</sup></div>
@@ -280,7 +362,7 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <p class="product-label">Get in Touch</p>
     <h2>Let's Build Together</h2>
-    <p class="contact-desc">Whether you're an investor, enterprise partner, or potential team member — we'd love to hear from you.</p>
+    <p class="contact-desc">Whether you need a custom AI-native SaaS platform, enterprise team training, or both — we'd love to discuss how AIIPOWER can accelerate your AI transformation.</p>
     <div class="contact-cards">
       <a href="mailto:contact@aiipower.ai" class="contact-card">
         <div class="c-icon">✉️</div>
