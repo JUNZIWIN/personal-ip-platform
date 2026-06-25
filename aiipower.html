@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIIPOWER LIMITED — AI Brand Empowerment</title>
+<meta name="description" content="AIIPOWER LIMITED is a Hong Kong-based AI company empowering individuals and enterprises through AI-driven brand solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #7B68EE; --primary-dark: #6B58DD;
+  --accent-gold: #C9A84C; --accent-cyan: #00D4FF;
+  --bg-primary: #0A0A0A; --bg-secondary: #111111;
+  --bg-card: #1A1A1A; --bg-card-hover: #222222; --bg-card-border: #2A2A2A;
+  --text-primary: #FFFFFF; --text-secondary: #A0A0A0; --text-muted: #666666;
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-full: 9999px;
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.6);
+  --font-body: 'Inter','Noto Sans SC',system-ui,sans-serif;
+}
+* {margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;background:rgba(10,10,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.nav-logo .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--primary),var(--accent-cyan));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color .2s}
+.nav-links a:hover{color:var(--text-primary)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% -10%,rgba(123,104,238,.2) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(0,212,255,.06) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(123,104,238,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(123,104,238,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-inner{position:relative;max-width:1200px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--radius-full);background:rgba(123,104,238,.12);border:1px solid rgba(123,104,238,.25);font-size:13px;font-weight:600;color:var(--primary);margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#2ECC71;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-size:clamp(36px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:18px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px;max-width:480px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:var(--radius-full);font-size:15px;font-weight:600;transition:all .25s;white-space:nowrap;border:none;cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(123,104,238,.4)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(123,104,238,.4)}
+.btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--bg-card-border)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:32px;width:100%;max-width:440px;box-shadow:var(--shadow-lg),0 0 60px rgba(123,104,238,.1)}
+.hero-card .hk-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--radius-full);background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);font-size:12px;font-weight:600;color:var(--accent-gold);margin-bottom:20px}
+.hero-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.hero-card p{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px}
+.hero-card .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero-card .meta-item{background:var(--bg-secondary);border-radius:var(--radius-md);padding:12px 16px}
+.hero-card .meta-item .val{font-size:18px;font-weight:700;color:var(--primary)}
+.hero-card .meta-item .lbl{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* Products */
+.products-section{padding:100px 0;position:relative}
+.product-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:16px}
+.product-title{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.15;margin-bottom:48px}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:28px;transition:all .3s}
+.product-card:hover{background:var(--bg-card-hover);border-color:var(--primary);transform:translateY(-4px)}
+.product-card .product-icon{width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.product-card:nth-child(1) .product-icon{background:rgba(123,104,238,.15);color:var(--primary)}
+.product-card:nth-child(2) .product-icon{background:rgba(201,168,76,.15);color:var(--accent-gold)}
+.product-card:nth-child(3) .product-icon{background:rgba(0,212,255,.15);color:var(--accent-cyan)}
+.product-card h4{font-size:18px;font-weight:700;margin-bottom:8px}
+.product-card p{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px}
+.product-card .product-link{font-size:13px;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
+.product-card .product-link:hover{gap:8px}
+.product-card .product-status{display:inline-block;padding:2px 8px;border-radius:var(--radius-full);font-size:10px;font-weight:600;margin-bottom:8px}
+.status-live{background:rgba(46,204,113,.12);color:#2ECC71}
+.status-soon{background:rgba(201,168,76,.12);color:var(--accent-gold)}
+
+/* Services */
+.services-section{padding:100px 0;background:var(--bg-secondary)}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.service-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:32px;text-align:center;transition:all .3s}
+.service-card:hover{background:var(--bg-card-hover);border-color:var(--primary)}
+.service-card .service-icon{font-size:32px;margin-bottom:16px}
+.service-card h4{font-size:17px;font-weight:700;margin-bottom:8px}
+.service-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+/* Company */
+.company-section{padding:100px 0}
+.company-content{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.company-info h2{font-size:clamp(28px,4vw,36px);font-weight:800;line-height:1.2;margin-bottom:20px}
+.company-info p{font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:16px}
+.company-info .hk-highlight{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--radius-md);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);font-size:14px;font-weight:600;color:var(--accent-gold);margin-bottom:24px}
+.company-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:24px}
+.stat-card .stat-num{font-size:28px;font-weight:800;color:var(--primary);margin-bottom:4px}
+.stat-card .stat-lbl{font-size:13px;color:var(--text-muted)}
+
+/* Contact */
+.contact-section{padding:100px 0;background:var(--bg-secondary);text-align:center}
+.contact-section h2{font-size:clamp(28px,4vw,36px);font-weight:800;margin-bottom:16px}
+.contact-section .contact-desc{font-size:16px;color:var(--text-secondary);margin-bottom:32px}
+.contact-cards{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.contact-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:24px 32px;display:flex;align-items:center;gap:16px;transition:all .3s}
+.contact-card:hover{background:var(--bg-card-hover);border-color:var(--primary)}
+.contact-card .c-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-card:nth-child(1) .c-icon{background:rgba(123,104,238,.15)}
+.contact-card:nth-child(2) .c-icon{background:rgba(0,212,255,.15)}
+.contact-card .c-info{text-align:left}
+.contact-card .c-lbl{font-size:12px;color:var(--text-muted);margin-bottom:2px}
+.contact-card .c-val{font-size:15px;font-weight:600}
+
+/* Footer */
+.footer{padding:32px 0;border-top:1px solid var(--bg-card-border);text-align:center}
+.footer p{font-size:13px;color:var(--text-muted)}
+
+@media(max-width:768px){
+  .hero-inner,.company-content{grid-template-columns:1fr;gap:40px}
+  .product-grid,.service-grid{grid-template-columns:1fr}
+  .hero-visual{order:-1}
+  .hero h1{font-size:32px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">AI</div>
+      AIIPOWER<span style="color:var(--primary)">.ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#company">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Hong Kong Science Park · Incoming</div>
+      <h1>AI <span>Brand Empowerment</span> for the Next Decade</h1>
+      <p class="hero-subtitle">AIIPOWER LIMITED builds AI-native tools that help individuals and enterprises create, optimize, and scale their brand presence in the age of artificial intelligence.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Partner With Us</a>
+        <a href="#products" class="btn btn-outline">Explore Products</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hk-badge">🇭🇰 Hong Kong Registered</div>
+        <h3>AIIPOWER LIMITED</h3>
+        <p>A Hong Kong-registered AI technology company applying for admission to Hong Kong Science Park. Building the bridge between AI capability and brand value.</p>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="val">2026</div>
+            <div class="lbl">Established</div>
+          </div>
+          <div class="meta-item">
+            <div class="val">3+</div>
+            <div class="lbl">Core Products</div>
+          </div>
+          <div class="meta-item">
+            <div class="val">Global</div>
+            <div class="lbl">Market Focus</div>
+          </div>
+          <div class="meta-item">
+            <div class="val">GBA</div>
+            <div class="lbl">Headquarters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products-section" id="products">
+  <div class="container">
+    <p class="product-label">Product Ecosystem</p>
+    <h2 class="product-title">Three Products, One Mission</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-icon">🎓</div>
+        <span class="product-status status-live">Live</span>
+        <h4>AIP Studio</h4>
+        <p>AI-powered personal IP SaaS platform for executives, freelancers, and founders to build AI-native websites and brand assets in minutes.</p>
+        <a href="https://aiipower.me" class="product-link" target="_blank">Visit aiipower.me →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📚</div>
+        <span class="product-status status-live">Live</span>
+        <h4>BizAtom</h4>
+        <p>AI business classics deconstruction platform. Deep-dive into timeless business principles through AI-powered analysis and learning.</p>
+        <a href="https://bizatom.ai" class="product-link" target="_blank">Visit bizatom.ai →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🚀</div>
+        <span class="product-status status-soon">Coming Soon</span>
+        <h4>AIRankRocket</h4>
+        <p>GEO optimization tool for the AI search era. Ensure your brand stands out and ranks in AI-generated content and search results.</p>
+        <a href="https://airankrocket.ai" class="product-link" target="_blank">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services-section" id="services">
+  <div class="container">
+    <p class="product-label">Enterprise Services</p>
+    <h2 class="product-title">Beyond Products</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h4>AI Enterprise Training</h4>
+        <p>Customized AI literacy and implementation workshops for corporate teams. From executives to frontline, we build your AI capability.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h4>Brand AI Strategy</h4>
+        <p>End-to-end AI brand strategy consulting: audit your digital presence, design your AI-native brand architecture, and execute.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h4>Cross-Border GBA Solutions</h4>
+        <p>Leverage our Hong Kong base and Greater Bay Area network for cross-border market entry, IP protection, and business development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Company -->
+<section class="company-section" id="company">
+  <div class="container">
+    <div class="company-content">
+      <div class="company-info">
+        <p class="product-label">About Us</p>
+        <h2>Born in Hong Kong,<br>Built for the World</h2>
+        <div class="hk-highlight">🇭🇰 Applying for Hong Kong Science Park Admission</div>
+        <p>AIIPOWER LIMITED is incorporated in Hong Kong as a technology company focused on AI-driven brand empowerment. Our mission is to democratize brand-building in the AI era — making professional-grade brand tools accessible to individuals and enterprises worldwide.</p>
+        <p>With the Greater Bay Area as our home base and a globally-minded team, we combine deep AI engineering capability with cross-cultural business insight.</p>
+      </div>
+      <div class="company-stats">
+        <div class="stat-card">
+          <div class="stat-num">HK</div>
+          <div class="stat-lbl">Registered Company</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-lbl">Product Lines</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">AIIPOWER<sup>®</sup></div>
+          <div class="stat-lbl">Registered Trademark</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Global</div>
+          <div class="stat-lbl">Target Market</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="product-label">Get in Touch</p>
+    <h2>Let's Build Together</h2>
+    <p class="contact-desc">Whether you're an investor, enterprise partner, or potential team member — we'd love to hear from you.</p>
+    <div class="contact-cards">
+      <a href="mailto:contact@aiipower.ai" class="contact-card">
+        <div class="c-icon">✉️</div>
+        <div class="c-info">
+          <div class="c-lbl">Email</div>
+          <div class="c-val">contact@aiipower.ai</div>
+        </div>
+      </a>
+      <div class="contact-card">
+        <div class="c-icon">📍</div>
+        <div class="c-info">
+          <div class="c-lbl">Location</div>
+          <div class="c-val">Hong Kong SAR, China</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 AIIPOWER LIMITED. All rights reserved. AIIPOWER<sup>&reg;</sup> is a registered trademark.</p>
+  </div>
+</footer>
+
+</body>
+</html>

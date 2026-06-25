@@ -71,6 +71,26 @@
         }
       ],
       "destination": "/airankrocket.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "aiipower.ai"
+        }
+      ],
+      "destination": "/aiipower.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.aiipower.ai"
+        }
+      ],
+      "destination": "/aiipower.html"
     }
   ]
 }
