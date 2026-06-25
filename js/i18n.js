@@ -73,7 +73,7 @@ var I18N_DATA = {
     'products.bizatom.desc': '十五分钟读透一本商业经典。AI交互式思维导图拆解全球商业著作，核心知识点+真实商业案例，为商学院学生和商业精英打造系统认知框架。',
     'products.bizatom.link': '了解 BIZATOM.AI →',
     'products.airankrocket.title': 'AIRankRocket · AI驱动GEO工具',
-    'products.airankrocket.domain': '🌐 airankrocket.ai',
+    'products.airankrocket.domain': '🌐 airankrocket.net',
     'products.airankrocket.desc': 'AI驱动的生成引擎优化（GEO）工具，主要面向企业及一人公司（OPC），帮助品牌在 ChatGPT、Perplexity、Google AI Overview 等AI搜索引擎中获得更高可见度与权威度。',
     'products.airankrocket.link': '了解 AIRankRocket →',
     'products.ai_brand.title': 'AI打造企业品牌',
@@ -113,7 +113,7 @@ var I18N_DATA = {
     'domain.card.2.label': 'BIZATOM.AI',
     'domain.card.2.name': 'bizatom.ai',
     'domain.card.3.label': 'AIRankRocket',
-    'domain.card.3.name': 'airankrocket.ai',
+    'domain.card.3.name': 'airankrocket.net',
     'domain.card.4.label': '企业服务',
     'domain.card.4.name': 'aiipower.ai',
     'domain.ip.1.title': 'AIIPOWER 注册商标',
@@ -206,7 +206,7 @@ var I18N_DATA = {
     'footer.nav': '导航',
     'footer.products': '产品',
     'footer.copyright': '© 2026 Vanessa TIAN (田卜文), TIAN,Bowen · AIIPOWER LIMITED · 版权所有',
-    'footer.domains': 'aiipower.me · aiipower.ai · bizatom.ai · airankrocket.ai · aiipower.com/cn (筹备中)',
+    'footer.domains': 'aiipower.me · aiipower.ai · bizatom.ai · airankrocket.net · aiipower.com/cn (筹备中)',
 
     // Toast 提示
     'toast.pending': '💬 请咨询功能即将上线',
@@ -296,7 +296,7 @@ var I18N_DATA = {
     'products.bizatom.desc': 'Master a business classic in 15 minutes. AI-powered interactive mind maps deconstruct global business books — core concepts paired with real-world cases — building a systematic cognitive framework for business school students and professionals.',
     'products.bizatom.link': 'Learn about BIZATOM.AI →',
     'products.airankrocket.title': 'AIRankRocket · AI-driven GEO Tool',
-    'products.airankrocket.domain': '🌐 airankrocket.ai',
+    'products.airankrocket.domain': '🌐 airankrocket.net',
     'products.airankrocket.desc': 'AI-driven Generative Engine Optimization (GEO) tool, mainly for enterprises and one-person companies (OPC), helping brands gain higher visibility and authority in AI search engines such as ChatGPT, Perplexity, and Google AI Overview.',
     'products.airankrocket.link': 'Learn about AIRankRocket →',
     'products.ai_brand.title': 'AI Enterprise Branding',
@@ -336,7 +336,7 @@ var I18N_DATA = {
     'domain.card.2.label': 'BIZATOM.AI',
     'domain.card.2.name': 'bizatom.ai',
     'domain.card.3.label': 'AIRankRocket',
-    'domain.card.3.name': 'airankrocket.ai',
+    'domain.card.3.name': 'airankrocket.net',
     'domain.card.4.label': 'Enterprise Services',
     'domain.card.4.name': 'aiipower.ai',
     'domain.ip.1.title': 'AIIPOWER Registered Trademark',
@@ -429,7 +429,7 @@ var I18N_DATA = {
     'footer.nav': 'Navigation',
     'footer.products': 'Products',
     'footer.copyright': '© 2026 Vanessa TIAN (田卜文), TIAN,Bowen · AIIPOWER LIMITED · All Rights Reserved',
-    'footer.domains': 'aiipower.me · aiipower.ai · bizatom.ai · airankrocket.ai · aiipower.com/cn (Preparing)',
+    'footer.domains': 'aiipower.me · aiipower.ai · bizatom.ai · airankrocket.net · aiipower.com/cn (Preparing)',
 
     // Toast Messages
     'toast.pending': '💬 Consultation feature coming soon',
