@@ -1,189 +1,376 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIRankRocket · AI驱动GEO工具 | AIIPOWER LIMITED</title>
-  <meta name="description" content="AIRankRocket —— AIIPOWER LIMITED 旗下 AI 驱动 GEO 工具，帮助品牌在 ChatGPT、Perplexity、Google AI Overview 等 AI 搜索引擎中获得更高可见度与权威度。面向企业及一人公司（OPC）。">
-  <meta name="keywords" content="AIRankRocket, GEO, 生成引擎优化, AI搜索, ChatGPT SEO, Perplexity, Google AI Overview, AIIPOWER">
-  <meta property="og:title" content="AIRankRocket · AI驱动GEO工具">
-  <meta property="og:description" content="让品牌在 AI 搜索引擎中脱颖而出。">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🚀</text></svg>">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/sections.css">
-  <style>
-    /* AIRankRocket 专属配色 — 火箭橙红 */
-    .navbar { background: rgba(10,10,10,0.92); }
-    .hero {
-      background: linear-gradient(135deg, #1a0a00 0%, #2d0f00 40%, #1a0800 70%, #0d0500 100%) !important;
-    }
-    .hero-title-strong { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; line-height: 1.15; }
-    .hero-subtle { font-size: 0.95rem; letter-spacing: 3px; color: #ff6b35; margin-bottom: 6px; }
-    .profession-badge {
-      background: rgba(255,107,53,0.12); border-color: rgba(255,107,53,0.3); color: #ff6b35;
-      width: fit-content; padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; margin-bottom: 16px;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #ff6b35, #ff2e63); color: #fff;
-      padding: 12px 28px; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,53,0.3); }
-    .btn-outline {
-      border: 1.5px solid rgba(255,107,53,0.4); color: #ff6b35; padding: 12px 28px;
-      border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s;
-    }
-    .btn-outline:hover { background: rgba(255,107,53,0.08); }
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; margin-top: 32px; }
-    .feature-card {
-      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px 24px;
-      transition: all 0.3s;
-    }
-    .feature-card:hover { border-color: rgba(255,107,53,0.4); transform: translateY(-4px); }
-    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
-    .feature-card h4 { font-size: 1rem; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
-    .section-label { font-size: 0.78rem; letter-spacing: 3px; color: #ff6b35; text-transform: uppercase; margin-bottom: 8px; }
-    .section-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 700; margin-bottom: 12px; }
-    .section-desc { color: var(--text-secondary); margin-bottom: 32px; }
-    .geo-engines { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 32px 0; }
-    .geo-engine {
-      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;
-      padding: 16px 24px; font-weight: 600; font-size: 0.95rem;
-      transition: all 0.3s;
-    }
-    .geo-engine:hover { border-color: rgba(255,107,53,0.4); }
-    .footer { background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 48px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
-    .footer a { color: #ff6b35; text-decoration: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRankRocket — AI驱动GEO工具 | 让品牌在AI搜索中脱颖而出</title>
+<meta name="description" content="AIRankRocket 是 AIIPOWER LIMITED 旗下AI驱动GEO（生成引擎优化）工具，帮助品牌在ChatGPT、Perplexity、Google AI Overview等AI搜索引擎中获得更高可见度与权威度。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #FF6B35; --primary-dark: #E55A2B; --primary-glow: rgba(255,107,53,.3);
+  --accent: #FF2E63; --accent-cyan: #00D4FF;
+  --bg-primary: #0A0A0A; --bg-secondary: #111111;
+  --bg-card: #1A1A1A; --bg-card-hover: #222222; --bg-card-border: #2A2A2A;
+  --text-primary: #FFFFFF; --text-secondary: #A0A0A0; --text-muted: #666666;
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-full: 9999px;
+  --font-body: 'Inter','Noto Sans SC',system-ui,sans-serif;
+}
+* {margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;background:rgba(10,10,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.nav-logo .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color .2s}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.nav-cta a{font-size:13px;font-weight:600;padding:6px 14px;border-radius:var(--radius-full);border:1.5px solid var(--bg-card-border);color:var(--text-secondary);transition:all .2s}
+.nav-cta a:hover{border-color:var(--primary);color:var(--primary)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(255,107,53,.12) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(255,46,99,.06) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,53,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,53,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-inner{position:relative;max-width:1200px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--radius-full);background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.25);font-size:13px;font-weight:600;color:var(--primary);margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-size:clamp(36px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:18px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;max-width:480px}
+.hero-desc{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:32px;max-width:480px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:var(--radius-full);font-size:15px;font-weight:600;transition:all .25s;white-space:nowrap;border:none;cursor:pointer;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 4px 20px var(--primary-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--primary-glow)}
+.btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--bg-card-border)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:32px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 60px rgba(255,107,53,.08)}
+.hero-card .stat-row{display:flex;align-items:flex-end;gap:24px;margin-bottom:20px}
+.hero-card .big-stat{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hero-card .big-stat-label{font-size:13px;color:var(--text-muted);margin-top:4px}
+.hero-card .ai-list{display:flex;flex-direction:column;gap:8px}
+.hero-card .ai-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-secondary);border-radius:var(--radius-md);font-size:14px;font-weight:500}
+.hero-card .ai-item .ai-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.hero-card .ai-item:nth-child(1) .ai-dot{background:#10A37F}
+.hero-card .ai-item:nth-child(2) .ai-dot{background:#4F46E5}
+.hero-card .ai-item:nth-child(3) .ai-dot{background:#4285F4}
+.hero-card .ai-item:nth-child(4) .ai-dot{background:#D97706}
+
+/* Section */
+section{padding:100px 0;position:relative}
+.section-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:16px}
+.section-title{font-size:clamp(28px,4vw,38px);font-weight:800;line-height:1.15;margin-bottom:16px}
+.section-desc{font-size:16px;color:var(--text-secondary);line-height:1.8;max-width:640px}
+
+/* SEO vs GEO */
+.compare-section{background:var(--bg-secondary);position:relative}
+.compare-table{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.compare-col{padding:36px;border-radius:var(--radius-xl);border:1px solid var(--bg-card-border);position:relative}
+.compare-col:first-child{background:rgba(100,100,100,.04)}
+.compare-col:last-child{background:rgba(255,107,53,.04);border-color:rgba(255,107,53,.2)}
+.compare-col h4{font-size:20px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.compare-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.compare-col ul li{font-size:14px;color:var(--text-secondary);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.compare-col ul li .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.compare-col:first-child .dot{background:var(--text-muted)}
+.compare-col:last-child .dot{background:var(--primary)}
+
+/* How It Works */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.step-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:32px 28px;position:relative;transition:all .3s}
+.step-card:hover{background:var(--bg-card-hover);border-color:var(--primary);transform:translateY(-4px)}
+.step-card .step-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:16px;opacity:.15}
+.step-card .step-icon{font-size:28px;margin-bottom:12px}
+.step-card h4{font-size:18px;font-weight:700;margin-bottom:8px}
+.step-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+/* Features */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px}
+.feature-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-lg);padding:28px;transition:all .3s}
+.feature-card:hover{background:var(--bg-card-hover);border-color:var(--primary);transform:translateY(-3px)}
+.feature-card .f-icon{font-size:28px;margin-bottom:14px}
+.feature-card h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.feature-card p{font-size:13px;color:var(--text-secondary);line-height:1.7}
+
+/* Engines */
+.engines-section{background:var(--bg-secondary)}
+.engine-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:32px}
+.engine-badge{display:flex;align-items:center;gap:10px;padding:14px 22px;background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-full);font-size:15px;font-weight:600;transition:all .3s}
+.engine-badge:hover{border-color:var(--primary);background:var(--bg-card-hover)}
+.engine-badge .e-icon{font-size:20px}
+
+/* Use Cases */
+.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.audience-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:36px 28px;text-align:center;transition:all .3s}
+.audience-card:hover{background:var(--bg-card-hover);border-color:var(--primary);transform:translateY(-4px)}
+.audience-card .a-icon{font-size:40px;margin-bottom:16px}
+.audience-card h4{font-size:18px;font-weight:700;margin-bottom:8px}
+.audience-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+/* CTA */
+.cta-section{position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(255,107,53,.06) 0%,transparent 60%);pointer-events:none}
+.cta-card{background:var(--bg-card);border:1px solid var(--bg-card-border);border-radius:var(--radius-xl);padding:48px;text-align:center;max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta-card h3{font-size:24px;font-weight:800;margin-bottom:12px}
+.cta-card p{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:24px}
+
+/* Footer */
+.footer{padding:32px 0;border-top:1px solid var(--bg-card-border);text-align:center}
+.footer p{font-size:13px;color:var(--text-muted)}
+.footer a{color:var(--primary);transition:color .2s}
+.footer a:hover{color:var(--accent)}
+.footer .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-visual{order:-1}
+  .hero h1{font-size:32px}
+  .steps-grid,.audience-grid{grid-template-columns:1fr}
+  .compare-table{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+</style>
 </head>
 <body>
 
-<!-- 导航栏 -->
-<nav class="navbar" id="navbar">
+<!-- Nav -->
+<nav class="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">AI<span>IPOWER</span></a>
-    <div class="nav-links" style="margin-left:32px;">
-      <a href="index.html" class="nav-link">AIP Studio</a>
-      <a href="bizatom.html" class="nav-link">BIZATOM.AI</a>
-      <a href="airankrocket.html" class="nav-link active">AIRankRocket</a>
-      <a href="https://aiipower.ai" target="_blank" class="nav-link">企业服务</a>
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">🚀</div>
+      AIRank<span style="color:var(--primary)">Rocket</span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">为什么需要GEO</a>
+      <a href="#how">工作原理</a>
+      <a href="#features">核心功能</a>
+      <a href="#cta">抢先体验</a>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <a href="bowen.html" class="btn-outline" style="font-size:0.8rem;padding:6px 14px;">🌐 创始人</a>
+    <div class="nav-cta">
+      <a href="https://aiipower.ai" target="_blank">AIIPOWER.ai</a>
     </div>
   </div>
 </nav>
 
 <!-- Hero -->
-<section class="hero" id="home" style="min-height:100vh;display:flex;align-items:center;">
-  <div class="container" style="position:relative;z-index:1;padding-top:80px;">
-    <div class="profession-badge">🚀 AIIPOWER LIMITED 旗下产品</div>
-    <h1 class="hero-title-strong" style="color:#fff;">
-      AIRank<span style="color:#ff6b35;">Rocket</span>
-    </h1>
-    <p class="hero-subtle">AI-Driven Generative Engine Optimization</p>
-    <p style="font-size:1.1rem;color:var(--text-secondary);max-width:560px;line-height:1.8;margin-bottom:28px;">
-      让品牌在 <strong style="color:#ff6b35;">AI 搜索引擎</strong>中脱颖而出。<br>
-      帮助企业在 ChatGPT、Perplexity、Google AI Overview 中获得更高<strong style="color:#ff6b35;">可见度与权威度</strong>。
-    </p>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="#how-it-works" class="btn-primary">🚀 了解 GEO 原理</a>
-      <a href="#pricing" class="btn-outline">💰 查看方案</a>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> AIIPOWER LIMITED · GEO 工具</div>
+      <h1>让你的品牌<br>被 <span>AI 搜索引擎</span> 看见</h1>
+      <p class="hero-subtitle">当用户向 ChatGPT、Perplexity、Google AI Overview 提问时——你的品牌是第一个被推荐的吗？</p>
+      <p class="hero-desc">AIRankRocket 是面向 AI 搜索时代的生成引擎优化（GEO）工具。我们帮助企业在 AI 驱动的搜索结果中提升可见度、建立权威度，将品牌置于每次 AI 对话的中心。</p>
+      <div class="hero-cta">
+        <a href="#how" class="btn btn-primary">了解 GEO 原理</a>
+        <a href="#cta" class="btn btn-outline">抢先体验</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="stat-row">
+          <div>
+            <div class="big-stat">85%</div>
+            <div class="big-stat-label">消费者已使用<br>AI 搜索辅助决策</div>
+          </div>
+        </div>
+        <div class="ai-list">
+          <div class="ai-item"><span class="ai-dot"></span> ChatGPT</div>
+          <div class="ai-item"><span class="ai-dot"></span> Perplexity AI</div>
+          <div class="ai-item"><span class="ai-dot"></span> Google AI Overview</div>
+          <div class="ai-item"><span class="ai-dot"></span> Claude / Bing Copilot</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- AI 搜索引擎覆盖 -->
-<section class="section" style="background:var(--bg-primary);">
-  <div class="container" style="text-align:center;">
-    <div class="section-header fade-in">
-      <p class="section-label">AI Search Engines</p>
-      <h2 class="section-title">覆盖主流 AI 搜索引擎</h2>
-      <p class="section-desc">让品牌在用户问 AI 时，成为首选答案</p>
-    </div>
-    <div class="geo-engines">
-      <div class="geo-engine">🤖 ChatGPT</div>
-      <div class="geo-engine">🔍 Perplexity</div>
-      <div class="geo-engine">🟢 Google AI Overview</div>
-      <div class="geo-engine">✨ Claude</div>
-      <div class="geo-engine">📱 Bing Copilot</div>
-    </div>
-  </div>
-</section>
-
-<!-- 核心功能 -->
-<section class="section" id="how-it-works" style="background:var(--bg-secondary);">
+<!-- Why GEO Matters -->
+<section id="why" class="compare-section">
   <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">How It Works</p>
-      <h2 class="section-title">GEO 三步工作流</h2>
-      <p class="section-desc">AI 驱动，让品牌被 AI 搜索引擎主动推荐</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🔍</div>
-        <h4>Step 1 · AI 搜索诊断</h4>
-        <p>AI 分析你的品牌在各大 AI 搜索引擎中的当前可见度，生成诊断报告，找出优化机会。</p>
+    <p class="section-label">Why GEO Matters</p>
+    <h2 class="section-title">2026 年，搜索规则已经改变</h2>
+    <p class="section-desc">AI 搜索引擎正在重塑信息获取方式。传统的 SEO 策略无法确保品牌在 AI 生成答案中获得可见度。GEO（生成引擎优化）是面向 AI 时代的新型品牌优化范式。</p>
+
+    <div class="compare-table">
+      <div class="compare-col">
+        <h4>🔍 传统 SEO</h4>
+        <ul>
+          <li><span class="dot"></span> 优化关键词排名，争取搜索引擎结果页（SERP）靠前位置</li>
+          <li><span class="dot"></span> 依赖外链建设、技术 SEO、关键词密度优化</li>
+          <li><span class="dot"></span> 用户仍需逐一点击链接获取信息</li>
+          <li><span class="dot"></span> 与海量网页内容竞争，流量碎片化</li>
+          <li><span class="dot"></span> 难以直接衡量 AI 搜索中的品牌影响力</li>
+        </ul>
       </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">✍️</div>
-        <h4>Step 2 · 内容优化</h4>
-        <p>基于 GEO 最佳实践，AI 自动优化你的网页内容、结构化数据和语义标签，提升 AI 可读性。</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📈</div>
-        <h4>Step 3 · 持续监测</h4>
-        <p>实时监测品牌在 AI 搜索引擎中的排名变化，AI 自动调整优化策略，保持竞争优势。</p>
+      <div class="compare-col">
+        <h4>🚀 新一代 GEO</h4>
+        <ul>
+          <li><span class="dot"></span> 优化品牌在 AI 生成答案中的引用率、推荐率和权威评分</li>
+          <li><span class="dot"></span> 结构化数据 + 语义标签 + 实体权威度三位一体</li>
+          <li><span class="dot"></span> AI 直接引用品牌作为答案来源，零点击即可传递价值</li>
+          <li><span class="dot"></span> 精准触达高意向用户，每次 AI 回答都是一次品牌曝光</li>
+          <li><span class="dot"></span> 量化追踪品牌在 ChatGPT、Perplexity 等平台中的可见度得分</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 适用对象 -->
-<section class="section" style="background:var(--bg-primary);">
+<!-- How It Works -->
+<section id="how">
   <div class="container">
-    <div class="section-header fade-in">
-      <p class="section-label">Who It's For</p>
-      <h2 class="section-title">为谁而生</h2>
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">GEO 三步工作流</h2>
+    <p class="section-desc">从诊断到优化再到监测——AI 驱动，持续迭代，让你的品牌成为 AI 搜索引擎的首选引用源。</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔍</div>
+        <h4>AI 搜索诊断</h4>
+        <p>输入你的品牌关键词，AIRankRocket 自动扫描 ChatGPT、Perplexity、Google AI Overview 等主流 AI 搜索引擎，生成当前可见度诊断报告——包括引用率、情感倾向、竞品对比和优化机会图谱。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">✍️</div>
+        <h4>内容与结构优化</h4>
+        <p>基于诊断结果，AI 自动生成内容优化方案：包括语义结构化标记、实体关联强化、权威引用引导和 FAQ 知识图谱构建。支持一键导出优化清单，交给你的团队或由我们代为执行。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">📈</div>
+        <h4>持续监测与迭代</h4>
+        <p>建立 GEO 评分基线后，实时追踪品牌在各大 AI 搜索引擎中的排名和引用变化。当竞品超越你的排名或有新的优化机会出现时，系统自动推送预警和策略建议。</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" style="background:var(--bg-secondary)">
+  <div class="container">
+    <p class="section-label">Core Features</p>
+    <h2 class="section-title">核心功能矩阵</h2>
+    <p class="section-desc">不只是监测——从多平台诊断、智能优化建议到竞品对比，AIRankRocket 覆盖 GEO 全链路。</p>
     <div class="feature-grid">
-      <div class="feature-card fade-in" style="text-align:center;">
-        <div style="font-size:3rem;margin-bottom:12px;">🏢</div>
-        <h4>企业</h4>
-        <p>提升品牌在 AI 搜索中的权威度，获取更多高质量引流与转化。</p>
+      <div class="feature-card">
+        <div class="f-icon">🌐</div>
+        <h4>多平台 AI 搜索覆盖</h4>
+        <p>同时监测 ChatGPT、Perplexity、Google AI Overview、Claude、Bing Copilot、Grok 等主流 AI 搜索引擎中的品牌表现。</p>
       </div>
-      <div class="feature-card fade-in" style="text-align:center;">
-        <div style="font-size:3rem;margin-bottom:12px;">👤</div>
-        <h4>一人公司（OPC）</h4>
-        <p>用 AI 放大个人品牌影响力，让潜在客户通过 AI 搜索找到你。</p>
+      <div class="feature-card">
+        <div class="f-icon">📊</div>
+        <h4>GEO 可视化仪表盘</h4>
+        <p>直观展示品牌 GEO 得分趋势、各平台引用率热力图、情感分析和竞品排名变化——一站式掌握全局。</p>
       </div>
-      <div class="feature-card fade-in" style="text-align:center;">
-        <div style="font-size:3rem;margin-bottom:12px;">🌐</div>
-        <h4>内容创作者</h4>
-        <p>优化内容结构，让 AI 搜索引擎更愿意引用和推荐你的内容。</p>
+      <div class="feature-card">
+        <div class="f-icon">🧠</div>
+        <h4>AI 优化引擎</h4>
+        <p>基于大语言模型分析 AI 搜索引擎的偏好模式，自动生成针对性优化策略——包括内容改写、语义标注和新话题发现。</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon">⚔️</div>
+        <h4>竞品 GEO 对标</h4>
+        <p>输入竞品品牌，实时对比双方在各 AI 搜索引擎中的可见度、引用频率和推荐倾向，发现差异化机会。</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon">🔔</div>
+        <h4>智能预警与日报</h4>
+        <p>当品牌 AI 可见度出现显著波动、或竞品在关键搜索词中超越你的排名时，系统自动推送预警和一键日报。</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon">📋</div>
+        <h4>优化清单导出</h4>
+        <p>一键导出结构化优化任务清单，支持按优先级排序、分配给团队成员、追踪执行进度——从诊断到落地闭环管理。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Engines Coverage -->
+<section class="engines-section">
+  <div class="container" style="text-align:center">
+    <p class="section-label">Global Coverage</p>
+    <h2 class="section-title">覆盖全球主流 AI 搜索引擎</h2>
+    <p class="section-desc" style="margin:0 auto">你的品牌在哪里被讨论，我们就监测到哪里</p>
+    <div class="engine-grid">
+      <div class="engine-badge"><span class="e-icon">🤖</span> ChatGPT</div>
+      <div class="engine-badge"><span class="e-icon">🔍</span> Perplexity AI</div>
+      <div class="engine-badge"><span class="e-icon">🟢</span> Google AI Overview</div>
+      <div class="engine-badge"><span class="e-icon">✨</span> Claude</div>
+      <div class="engine-badge"><span class="e-icon">📱</span> Bing Copilot</div>
+      <div class="engine-badge"><span class="e-icon">🧙</span> Grok</div>
+      <div class="engine-badge"><span class="e-icon">🔮</span> 更多接入中</div>
+    </div>
+  </div>
+</section>
+
+<!-- Audience -->
+<section>
+  <div class="container" style="text-align:center">
+    <p class="section-label">Who It's For</p>
+    <h2 class="section-title">为谁而生</h2>
+    <p class="section-desc" style="margin:0 auto">从一人公司到跨国企业，AI 搜索时代的品牌可见度关乎每一个市场参与者</p>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="a-icon">🏢</div>
+        <h4>品牌企业</h4>
+        <p>维护品牌在 AI 搜索中的权威形象，防止误导性 AI 答案损害品牌声誉。定期监测、主动优化，牢牢掌控 AI 时代的品牌叙事权。</p>
+      </div>
+      <div class="audience-card">
+        <div class="a-icon">👤</div>
+        <h4>创始人 / 一人公司</h4>
+        <p>用 AI 放大个人品牌影响力。当目标客户向 ChatGPT 询问"谁是这个领域最好的 XX？"，你的名字应该出现在答案里。</p>
+      </div>
+      <div class="audience-card">
+        <div class="a-icon">🌐</div>
+        <h4>内容创作者 & 媒体</h4>
+        <p>你的内容是否被 AI 引用？被引用时的归属是否准确？GEO 让创作者的内容价值在 AI 时代得到应有的认可和传播。</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section style="background:linear-gradient(135deg,rgba(255,107,53,0.08),rgba(255,46,99,0.08));border-top:1px solid rgba(255,107,53,0.15);border-bottom:1px solid rgba(255,107,53,0.15);padding:80px 0;text-align:center;">
+<section class="cta-section" id="cta">
   <div class="container">
-    <h2 style="font-size:1.8rem;font-weight:700;margin-bottom:16px;">让 AI 成为你的品牌传播引擎</h2>
-    <p style="color:var(--text-secondary);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;">AIRankRocket 正在筹备中，填写表单获取早期访问权限。</p>
-    <a href="mailto:hello@airankrocket.ai" class="btn-primary" style="font-size:1rem;padding:14px 36px;">📬 联系我们</a>
+    <div class="cta-card">
+      <p class="section-label" style="text-align:center">Coming Soon</p>
+      <h3>AIRankRocket 正在筹备中</h3>
+      <p>我们正在构建面向 AI 搜索时代的 GEO 全链路工具。填写表单获取早期访问权限、产品更新动态和 GEO 行业洞察——以及早期用户专属优惠。</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="mailto:hello@airankrocket.ai" class="btn btn-primary">📬 联系我们 · 抢先体验</a>
+        <a href="https://aiipower.ai" target="_blank" class="btn btn-outline">🏢 了解更多 AIIPOWER</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <p>© 2026 <a href="index.html">AIIPOWER LIMITED</a>. All rights reserved. <a href="bizatom.html">BIZATOM.AI</a> · <a href="airankrocket.html">AIRankRocket</a></p>
-    <p style="margin-top:8px;font-size:0.78rem;"><a href="https://aiipower.ai" target="_blank">aiipower.ai</a> · <a href="bowen.html">bowentian.com</a></p>
+    <div class="footer-links">
+      <a href="https://aiipower.ai" target="_blank">aiipower.ai</a>
+      <span style="color:var(--text-muted)">·</span>
+      <a href="https://bizatom.ai" target="_blank">bizatom.ai</a>
+      <span style="color:var(--text-muted)">·</span>
+      <a href="https://bowentian.com" target="_blank">bowentian.com</a>
+    </div>
+    <p>&copy; 2026 AIIPOWER LIMITED. All rights reserved. AIRankRocket is a product of AIIPOWER LIMITED.</p>
   </div>
 </footer>
+
 </body>
 </html>
