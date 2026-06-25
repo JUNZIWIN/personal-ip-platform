@@ -480,7 +480,7 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');
     if (dict[key]) {
-      if (key === 'hero-title' || key === 'agent-title' || key === 'footer-text') {
+      if (key === 'hero-title' || key === 'agent-title' || key === 'footer-text' || key === 'services-title' || key === 'about-title') {
         el.innerHTML = dict[key];
       } else {
         el.textContent = dict[key];
