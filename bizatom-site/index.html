@@ -1453,7 +1453,32 @@ function onBookSearch() {
 
 function openBookShelf() { /* shelf removed – search now uses left sidebar */ }
 
-function renderBookShelf(books) { /* shelf removed – search now uses left sidebar */ }
+function getBooksForCurrentTab() {
+  var typeFilter = (currentTab === 'textbook') ? ['textbook', 'both'] : ['bestseller', 'both'];
+  var books = BIZATOM_KB.filter(function(b) { return typeFilter.indexOf(b.type) >= 0; });
+  if (currentSubCat !== 'all') {
+    var cats = currentSubCat.split(',');
+    books = books.filter(function(b) { return cats.indexOf(b.cat) >= 0; });
+  }
+  return books;
+}
+
+function renderBookShelf(books) {
+  // Open sidebar and render filtered books into it
+  if (!sidebarOpen) toggleSidebar();
+  // Use requestAnimationFrame to avoid blocking INP
+  requestAnimationFrame(function() {
+    renderSidebar(books);
+    // Highlight active subcat in sidebar
+    var sections = document.querySelectorAll('.sidebar-subcat');
+    for (var i = 0; i < sections.length; i++) {
+      var header = sections[i].querySelector('.sidebar-subcat-header');
+      if (header) header.classList.add('expanded');
+      var body = sections[i].querySelector('.sidebar-subcat-body');
+      if (body) body.classList.add('open');
+    }
+  });
+}
 
 function onBookSelect(bookId) {
   selectedBookId = bookId;
