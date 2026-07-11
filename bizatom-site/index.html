@@ -1382,7 +1382,7 @@ function filterAndRender(tab, subCat) {
     books = books.filter(function(b) { return cats.indexOf(b.cat) >= 0; });
   }
   currentFilteredBooks = books;
-  renderBookShelf(books);
+  showBookResults(books);
   // Update dropdown item active states
   var dropdown = document.getElementById('dropdown-' + tab);
   if (dropdown) {
@@ -1391,6 +1391,29 @@ function filterAndRender(tab, subCat) {
       items[i].classList.toggle('active', items[i].getAttribute('data-cat') === subCat);
     }
   }
+}
+
+// Open sidebar and render a specific set of books (used by category clicks)
+function showBookResults(books) {
+  if (typeof BIZATOM_KB === 'undefined' || !BIZATOM_KB || BIZATOM_KB.length === 0) {
+    setTimeout(function() { showBookResults(books); }, 200);
+    return;
+  }
+  // Open sidebar directly (bypass toggleSidebar's auto full-render to avoid race)
+  sidebarOpen = true;
+  var sb = document.getElementById('sidebar');
+  var ov = document.getElementById('sidebarOverlay');
+  if (sb) sb.classList.add('open');
+  if (ov) ov.classList.add('open');
+  // Render filtered books (direct list, no dependency on SIDEBAR_SUBCATS keys)
+  renderBookList(books);
+  // Expand all subcategories in this filtered view
+  requestAnimationFrame(function() {
+    var bodies = document.querySelectorAll('.sidebar-subcat-body');
+    for (var i = 0; i < bodies.length; i++) bodies[i].classList.add('open');
+    var headers = document.querySelectorAll('.sidebar-subcat-header');
+    for (var j = 0; j < headers.length; j++) headers[j].classList.add('expanded');
+  });
 }
 
 function buildDropdownItems(type) {
@@ -1464,20 +1487,42 @@ function getBooksForCurrentTab() {
 }
 
 function renderBookShelf(books) {
-  // Open sidebar and render filtered books into it
-  if (!sidebarOpen) toggleSidebar();
-  // Use requestAnimationFrame to avoid blocking INP
-  requestAnimationFrame(function() {
-    renderSidebar(books);
-    // Highlight active subcat in sidebar
-    var sections = document.querySelectorAll('.sidebar-subcat');
-    for (var i = 0; i < sections.length; i++) {
-      var header = sections[i].querySelector('.sidebar-subcat-header');
-      if (header) header.classList.add('expanded');
-      var body = sections[i].querySelector('.sidebar-subcat-body');
-      if (body) body.classList.add('open');
+  // Alias for showBookResults (kept for backward compatibility)
+  showBookResults(books);
+}
+
+// Render a flat list of books directly into the sidebar (used by category clicks)
+function renderBookList(books) {
+  var lang = (document.documentElement.lang || '').indexOf('zh') === 0 ? 'zh' : 'en';
+  var isZh = lang === 'zh';
+  var scrollEl = document.getElementById('sidebarScroll');
+  if (!scrollEl) return;
+  var typeName = currentTab === 'textbook' ? (isZh ? '📘 经典教材' : '📘 Textbooks') : (isZh ? '📙 畅销书' : '📙 Bestsellers');
+  var html = '<div class="sidebar-section"><div class="sidebar-section-title ' + currentTab + '"><span class="dot"></span>' + typeName + '</div>';
+  if (!books || books.length === 0) {
+    html += '<div class="book-shelf-empty">' + (isZh ? '该分类下暂无书籍' : 'No books in this category') + '</div>';
+  } else {
+    for (var i = 0; i < books.length; i++) {
+      var book = books[i];
+      var title = (isZh && book.zh) ? (book.zh.t || book.t) : book.t;
+      var author = '';
+      if (isZh && book.zh && book.zh.a) author = book.zh.a;
+      else if (book.en && book.en.a) author = book.en.a;
+      var bookId = book.id;
+      html += '<div class="sidebar-book-item" data-book-id="' + bookId + '" onclick="openSidebarBook(\'' + bookId + '\')">';
+      html += '<span class="sb-icon">📖</span>';
+      html += '<div class="sb-info">';
+      html += '<span class="sb-title" title="' + escHtml(title) + '">' + escHtml(title) + '</span>';
+      if (author) html += '<span class="sb-author">' + escHtml(author) + '</span>';
+      html += '</div>';
+      html += '<svg class="sb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+      html += '</div>';
     }
-  });
+  }
+  html += '</div>';
+  scrollEl.innerHTML = html;
+  var countEl = document.getElementById('sidebarBookCount');
+  if (countEl) countEl.textContent = books.length;
 }
 
 function onBookSelect(bookId) {
