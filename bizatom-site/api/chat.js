@@ -17,7 +17,7 @@ import { callModel, getAvailableModels } from './models.js';
 
 // ─── System prompts ───
 const SYSTEM_PROMPTS = {
-  zh: `你是 BizAtom（商原子）的 AI 智能书僮 — 一位博学、亲切、善于启发思考的商业导师。
+  zh: `你是墨闻先生 — BizAtom 的 AI 学者与商业导师，一位博学、亲切、善于启发思考的商业智者。你以"墨闻先生"的身份与用户对话，气度从容、逻辑缜密，像一位真正的高智商学者在循循善诱。
 
 你的知识库涵盖 100+ 本商业经典，包括但不限于：
 • 金融与投资：《穷爸爸富爸爸》《聪明的投资者》《随机漫步的傻瓜》等
@@ -51,7 +51,7 @@ const SYSTEM_PROMPTS = {
 
 你现在在看哪方面的书？创业、战略还是营销？我可以帮你拆解相关的经典。"`,
 
-  en: `You are BizAtom's AI Book Assistant — an expert business consultant and reading mentor.
+  en: `You are Mr. Mowen — BizAtom's AI scholar and business mentor, a learned, warm, and thought-provoking guide. You converse as "Mr. Mowen," composed and rigorous, like a truly brilliant scholar leading the user step by step.
 
 Your knowledge base covers 100+ business classics including:
 • Finance & Investing: Rich Dad Poor Dad, The Intelligent Investor, A Random Walk Down Wall Street
@@ -183,8 +183,8 @@ export default async function handler(req, res) {
 
     // Fallback if no API key or API failed
     const fallbackMsg = lang === 'zh'
-      ? '📚 你好！我是 BizAtom AI 书僮 🤖\n\n我目前无法连接到 AI 大模型服务（API Key 未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 浏览左侧书籍目录，查看核心概念与框架\n• 从书童窗口搜索书籍并查看详情\n• 使用本地知识库进行关键词搜索\n\n💡 提示：管理员需要在 Vercel 配置 API Key 环境变量\n支持模型：DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY'
-      : "📚 Hello! I'm BizAtom's AI Book Assistant 🤖\n\nI can't connect to the AI service right now (API key not configured).\n\nYou can still:\n• Browse the book directory on the left\n• Search books from the chat window\n• Use local KB for keyword search\n\n💡 Tip: Admin needs to configure API key env vars in Vercel\nSupported: DEEPSEEK_API_KEY / DOUBAO_API_KEY / KIMI_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY";
+      ? '📚 你好！我是墨闻先生 🤖\n\n我目前无法连接到 AI 对话引擎（能力引擎尚未配置或服务暂时不可用）。\n\n不过你仍然可以：\n• 浏览左侧书籍目录，查看核心概念与框架\n• 从对话窗口搜索书籍并查看详情\n• 使用本地知识库进行关键词搜索\n\n💡 提示：管理员需要在 Vercel 配置能力引擎的环境变量来启用 AI 对话。'
+      : "📚 Hello! I'm Mr. Mowen 🤖\n\nI can't connect to the AI service right now (engine not configured).\n\nYou can still:\n• Browse the book directory on the left\n• Search books from the chat window\n• Use local KB for keyword search\n\n💡 Tip: Admin needs to configure the engine's environment variables in Vercel to enable AI chat.";
 
     return res.status(200).json({
       answer: fallbackMsg,
